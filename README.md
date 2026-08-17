@@ -1,7 +1,6 @@
 # SIH 2025 (SIH25071) — Master Technical Report & Architecture Repository
 ## AI-Based Rockfall Prediction and Alert System for Open-Pit Mines
-**Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-**Principal Investigator / Author:** Angel Verman & Team  
+**Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management    
 **Repository Path:** `/Users/angle/.gemini/antigravity/scratch/SIH25071-Rockfall-Prediction-System`
 
 ---
