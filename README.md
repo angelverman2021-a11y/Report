@@ -1,7 +1,7 @@
 # SIH 2025 (SIH25071) — Master Technical Report & Architecture Repository
 ## AI-Based Rockfall Prediction and Alert System for Open-Pit Mines
 **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management    
-**Repository Path:** `/Users/angle/.gemini/antigravity/scratch/SIH25071-Rockfall-Prediction-System`
+
 
 ---
 
@@ -452,13 +452,3 @@ To enable engineers and judges to practically inspect, test, run, and evaluate t
 
 ---
 
-## 11. Instructions to Push Updates to GitHub
-
-To push the complete, enhanced repository with **MINE-SAFE AI**, zero emojis, embedded project visualizations, and active working links to GitHub:
-
-```bash
-cd /Users/angle/.gemini/antigravity/scratch/SIH25071-Rockfall-Prediction-System
-git add .
-git commit -m "feat: Add comprehensive MINE-SAFE AI architecture, 11 core features, and 26-tech integration synthesis"
-git push https://PASTE_YOUR_TOKEN_HERE@github.com/angelverman2021-a11y/Report.git main
-```
