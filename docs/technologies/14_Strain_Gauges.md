@@ -67,7 +67,7 @@ flowchart TD
  S6 --> S7[7. Thermistor Data Compensates Apparent Thermal Expansion]
  S7 --> S8[8. Computes Microstrain ε, Strain Rate dε/dt & Strain Acceleration]
  S8 --> S9[9. Anomaly Detector Flags Yield Stress Inelastic Runaway]
- S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
+ S9 --> S10[10. TARP Early-Warning Trigger: TARP Sirens & Radio Dispatch]
 ```
 *Figure 2.1: End-to-end signal processing and early-warning pipeline for geotechnical strain gauges.*
 
@@ -360,7 +360,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 13.1: Master multi-sensor data fusion architecture incorporating microstrain metrics.*
 

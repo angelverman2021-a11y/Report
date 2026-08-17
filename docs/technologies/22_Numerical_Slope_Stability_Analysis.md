@@ -243,12 +243,12 @@ flowchart TD
  PINN_INF --> DYN_FOS[Computes Dynamic Real-Time Factor of Safety FoS_t]
  PINN_INF --> TIME_FAIL[Saito Inverse Velocity Failure Horizon tf ± σ]
  PINN_INF --> RUNOUT[3D Kinetic Rockfall Bounce Hazard Cone]
- DYN_FOS & TIME_FAIL & RUNOUT --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ DYN_FOS & TIME_FAIL & RUNOUT --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
  end
 ```
 *Figure 10.1: Hybrid Physics-Informed Neural Network (PINN) surrogate architecture bridging heavy numerical modeling and sub-second real-time early warning.*
 
-### Why PINN Surrogates are Revolutionary for Open-Cast Mines:
+### Why PINN Surrogates are Significant Advantage for Open-Cast Mines:
 1. **Solves the Latency Bottleneck:** A full 3D FEM solve takes $45\text{ minutes}$. Our trained PINN neural surrogate computes the exact same stress-strain field and Factor of Safety in **$<30\text{ milliseconds}$**.
 2. **Eliminates "Unphysical" AI Hallucinations:** Because the loss function explicitly penalizes violations of mechanical equilibrium ($\nabla \cdot \boldsymbol{\sigma} + \mathbf{b} = \mathbf{0}$) and Mohr-Coulomb yield criteria ($\tau \le c' + \sigma_n \tan\phi'$), the model cannot predict physically impossible collapse states.
 
@@ -295,7 +295,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 12.1: Master multi-sensor data fusion architecture incorporating numerical geomechanical modeling.*
 

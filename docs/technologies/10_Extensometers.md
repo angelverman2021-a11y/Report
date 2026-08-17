@@ -61,8 +61,8 @@ flowchart TD
  S5 --> S6[6. Wireless LoRa / SDI-12 Telemetry Streams Value to Edge Gateway]
  S6 --> S7[7. Calculates Dilation Velocity v_ext = dL/dt & Acceleration a_ext]
  S7 --> S8[8. Computes Saito Inverse Velocity: IV = 1 / v_ext]
- S8 --> S9[9. Linear Regression Intercept Predicts Exact Failure Window tf]
- S9 --> S10[10. Autonomous TARP Trigger: Sirens & Dispatch in <1.0s]
+ S8 --> S9[9. Linear Regression Intercept Estimates Forecast Horizon tf]
+ S9 --> S10[10. TARP Early-Warning Trigger: Sirens & Dispatch in <1.0s]
 ```
 *Figure 2.1: Step-by-step operational workflow from physical crack dilation to autonomous early warning.*
 
@@ -184,7 +184,7 @@ flowchart TD
  SAITO_ENG --> FUSION[Multi-Modal Feature Synchronization Engine]
  FUSION --> AI[XGBoost & PINN AI Risk Core]
  AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ AI --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
  end
 ```
 *Figure 6.1: Hardware, telemetry, and compute architecture of an automated open-pit extensometer network.*
@@ -378,7 +378,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 14.1: Master multi-sensor data fusion architecture incorporating extensometer crack dilation metrics.*
 

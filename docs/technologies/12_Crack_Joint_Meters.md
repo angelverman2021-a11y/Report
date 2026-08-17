@@ -63,7 +63,7 @@ flowchart TD
  S6 --> S7[7. Calculates Dilation Velocity v = dC/dt & Acceleration a = dv/dt]
  S7 --> S8[8. Saito Inverse Velocity Method Applied: IV = 1 / v]
  S8 --> S9[9. Kinematic Threshold Surge Triggers AI Risk Engine]
- S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
+ S9 --> S10[10. TARP Early-Warning Trigger: TARP Sirens & Radio Dispatch]
 ```
 *Figure 2.1: Step-by-step operational workflow from physical crack dilation to autonomous early warning.*
 
@@ -211,7 +211,7 @@ flowchart TD
  LORA -->|Wireless Radio Packet Stream| GW[Mine Central Base Station Gateway]
  GW -->|MQTT JSON Stream| SVR[Edge AI Processing Server & Database]
  SVR --> AI[XGBoost & PINN Rockfall Risk Core]
- AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ AI --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 8.1: Complete field installation and telemetry architecture of a highwall crackmeter.*
 
@@ -229,7 +229,7 @@ flowchart TD
 | **Measurement Method** | Manual visual inspection with caliper. | Electronic logger storing readings on internal SD card. | **Automated Wireless LoRa Transceiver streaming 24/7**. |
 | **Sampling Frequency** | Weekly or monthly manual rounds. | Hourly or daily logging. | **Continuous (Every 1 minute to 1 second)**. |
 | **Personnel Safety** | [REJECTED] High risk (Staff walk active crests). | Moderate risk (Staff visit logger to pull data). | **100% Non-Contact (Zero pit personnel risk)**. |
-| **Immediate Early Warning**| [REJECTED] Impossible (Days to weeks delay). | [REJECTED] Impossible (Data downloaded retrospectively). | **[CONFIRMED] Sub-Second Autonomous TARP Dispatch (<1.0s)**. |
+| **Immediate Early Warning**| [REJECTED] Impossible (Days to weeks delay). | [REJECTED] Impossible (Data downloaded retrospectively). | **[CONFIRMED] Sub-Second TARP Early-Warning Dispatch (<1.0s)**. |
 | **Unit Hardware Cost** | ₹500 – ₹2,000 | ₹25,000 – ₹60,000 | **₹8,000 – ₹18,000 per wireless node (Ultra-Low Cost)**. |
 
 ---
@@ -358,7 +358,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 16.1: Master multi-sensor data fusion architecture incorporating crackmeter kinematics.*
 

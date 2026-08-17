@@ -476,7 +476,7 @@ flowchart TD
 1. **Interactive 3D Pit Mesh:** Georeferenced digital elevation model color-coded by real-time risk probability.
 2. **Time-Series Analytics Panel:** Synchronized plots showing displacement, velocity surge, and inverse velocity linear regression.
 3. **Dynamic Rockfall Runout Simulator:** Visualizes simulated bouncing boulder paths and impact envelopes across lower haul roads.
-4. **Autonomous TARP Dispatch Center:** Single-click or automated emergency broadcast triggers.
+4. **TARP Early-Warning Dispatch Center:** Single-click or automated emergency broadcast triggers.
 
 ---
 

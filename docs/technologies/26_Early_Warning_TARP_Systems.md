@@ -420,7 +420,7 @@ flowchart TD
 
 Early-Warning and Trigger Action Response Plan (TARP) systems represent the **ultimate operational bridge between geotechnical science and human life safety**.
 
-By combining deterministic statutory engineering rules with **Physics-Informed Neural Networks (PINNs), Saito inverse velocity kinematics, SHAP explainable diagnostics, and sub-second multi-channel broadcast infrastructure**, our proposed **SIH25071 platform** delivers a revolutionary, reliable, and affordable early-warning ecosystem that prevents catastrophic slope fatalities across open-pit mines for the Ministry of Mines.
+By combining deterministic statutory engineering rules with **Physics-Informed Neural Networks (PINNs), Saito inverse velocity kinematics, SHAP explainable diagnostics, and sub-second multi-channel broadcast infrastructure**, our proposed **SIH25071 platform** delivers a advanced, reliable, and affordable early-warning ecosystem that prevents catastrophic slope fatalities across open-pit mines for the Ministry of Mines.
 
 ---
 

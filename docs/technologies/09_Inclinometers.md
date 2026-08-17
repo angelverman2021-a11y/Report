@@ -188,7 +188,7 @@ flowchart TD
  SHEAR_ENG --> FUSION[Multi-Modal Feature Synchronization Engine]
  FUSION --> AI[XGBoost & Physics-Informed Neural Network PINN Core]
  AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ AI --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
  end
 ```
 *Figure 6.1: Hardware, telemetry, and compute architecture of an automated In-Place Inclinometer (IPI) slope monitoring system.*
@@ -360,7 +360,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 14.1: Master multi-sensor data fusion architecture incorporating subsurface inclinometer metrics.*
 

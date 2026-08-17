@@ -94,7 +94,7 @@ mindmap
 6. **Explainable Risk `[PROTOTYPE]`:** Local **SHAP (SHapley Additive exPlanations)** diagnostic cards decomposing risk into physical causal percentages.
 7. **Prediction Confidence Index `[PROTOTYPE]`:** Reliability metric ($\mathcal{C}_{\text{pred}} \in [0\%, 100\%]$) based on sensor density, telemetry freshness ($<60\text{ s}$), and packet delivery ratio ($PDR$).
 8. **Predictive Risk Field `[PROTOTYPE]`:** Continuous 3D dynamic scalar risk layer $\mathcal{R}(x, y, z, t)$ mapped across highwalls and intersecting active haul roads.
-9. **Smart Alerts & Autonomous TARP `[PROTOTYPE]`:** Automated 4-tier Trigger Action Response Plan with sub-second ($<1.0\text{ s}$) siren, VHF radio, and SMS dispatch.
+9. **Smart Alerts & TARP Early-Warning `[PROTOTYPE]`:** Automated 4-tier Trigger Action Response Plan with sub-second ($<1.0\text{ s}$) siren, VHF radio, and SMS dispatch.
 10. **Zone Intelligence `[PROTOTYPE]`:** 1-click smooth camera zoom into any Zone ID opening deep telemetry charts, live camera crops, joint dip/strike, and a **[Back to Full Mine]** overview button.
 11. **Unified Risk Filter Bar `[PROTOTYPE]`:** Global toolbar toggle to filter the 3D Digital Twin by status: **[All]**, **[Safe]**, **[Moderate]**, **[High]**, and **[Critical]**.
 

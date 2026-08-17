@@ -109,7 +109,7 @@ To maintain technical realism and prevent overpromising, we explicitly state our
 |  WHAT WE ARE NOT DOING:                                                                           |
 |  - We are NOT manufacturing industrial radar hardware or satellite constellations.               |
 |  - We are NOT replacing certified geotechnical engineers or statutory Mine Managers.             |
-|  - We are NOT guaranteeing 100% infallible rockfall prediction or exact collapse times.           |
+|  - We are NOT guaranteeing infallible rockfall prediction or exact collapse times.           |
 |  - We are NOT automatically executing pit evacuations without authorized human sign-off.          |
 |  - We are NOT claiming to physically install all 26 technologies across real mine sites.          |
 |                                                                                                   |

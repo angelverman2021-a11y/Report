@@ -12,7 +12,7 @@
 ## 1. Transparency in System Boundaries
 
 > **Mandatory Scientific Disclosure:**  
-> *"No slope stability monitoring system—regardless of whether it uses multi-crore radars or cutting-edge AI—can guarantee 100% infallible prediction of every individual rock detachment. Geotechnical rock masses are inherently non-linear, heterogeneous, and fractured. Acknowledging operational boundaries is essential for safe mine engineering."*
+> *"No slope stability monitoring system—regardless of whether it uses multi-crore radars or cutting-edge AI—can guarantee infallible prediction of every individual rock detachment. Geotechnical rock masses are inherently non-linear, heterogeneous, and fractured. Acknowledging operational boundaries is essential for safe mine engineering."*
 
 ---
 

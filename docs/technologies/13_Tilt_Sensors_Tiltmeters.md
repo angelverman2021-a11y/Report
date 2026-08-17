@@ -60,7 +60,7 @@ flowchart TD
  S6 --> S7[7. Calculates Angular Tilt Rate ω = dθ/dt & Angular Acceleration α]
  S7 --> S8[8. Kinematic Threshold & Anomaly Surge Evaluated]
  S8 --> S9[9. Multi-Sensor AI Risk Model Synchronizes Tilt with Vision & Rain]
- S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
+ S9 --> S10[10. TARP Early-Warning Trigger: TARP Sirens & Radio Dispatch]
 ```
 *Figure 2.1: Step-by-step operational workflow from gravity vector sensing to autonomous early warning.*
 
@@ -365,7 +365,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 15.1: Master multi-sensor data fusion architecture incorporating tiltmeter rotational kinematics.*
 

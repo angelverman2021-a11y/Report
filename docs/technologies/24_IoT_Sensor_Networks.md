@@ -75,7 +75,7 @@ flowchart TD
  B2[InfluxDB / TimescaleDB Time-Series Engine]
  B3[XGBoost & Physics-Informed Neural Network PINN Core]
  B4[WebGPU 3D Digital Twin Mine Safety Dashboard]
- B5[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ B5[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
  end
 
  S1 & S2 & S3 & S4 & S5 & S7 --> E1

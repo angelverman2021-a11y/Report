@@ -78,7 +78,7 @@ flowchart TD
  RISK_SCORE --> FUSION[9. Multi-Modal Fusion Engine: Synchronizes with Weather, Tilt & Piezometers]
  FUSION --> ALARM[10. Autonomous Sub-Second Siren, VHF Radio & TARP Alert]
 ```
-*Figure 3.1: End-to-end computer vision processing pipeline from 4K video capture to autonomous TARP alert.*
+*Figure 3.1: End-to-end computer vision processing pipeline from 4K video capture to TARP early-warning alert.*
 
 ---
 
@@ -308,7 +308,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 14.1: Master multi-sensor data fusion architecture incorporating real-time computer vision.*
 

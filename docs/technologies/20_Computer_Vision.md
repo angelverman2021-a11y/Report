@@ -60,7 +60,7 @@ flowchart TD
 
  IN1 & IN2 & IN3 & IN4 & IN5 --> CV_ENG[Edge & Cloud Computer Vision Processing Engine]
  CV_ENG --> DET[Feature Detection: Cracks, Creep, Rock Boulders & Scars]
- DET --> RISK[Geotechnical Hazard Index & Autonomous TARP Alert]
+ DET --> RISK[Geotechnical Hazard Index & TARP Early-Warning Alert]
 ```
 *Figure 2.1: Multi-modal optical input sources feeding the computer vision analytics pipeline.*
 
@@ -306,7 +306,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 14.1: Master multi-sensor data fusion architecture incorporating computer vision.*
 

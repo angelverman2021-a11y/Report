@@ -54,7 +54,7 @@ flowchart TD
  S6 --> S7[7. Automated Barometric Pressure & Temperature Correction]
  S7 --> S8[8. Computes Pore Pressure Ratio ru & Effective Stress σ']
  S8 --> S9[9. Hydrodynamic Threshold Surge Triggers AI Alert Engine]
- S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
+ S9 --> S10[10. TARP Early-Warning Trigger: TARP Sirens & Radio Dispatch]
 ```
 *Figure 2.1: Step-by-step operational workflow from borehole water pressure measurement to automated alert.*
 
@@ -186,7 +186,7 @@ flowchart TD
  RU_CALC --> FUSION[Multi-Modal Feature Synchronization Engine]
  FUSION --> AI[XGBoost & Physics-Informed Neural Network PINN Core]
  AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ AI --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
  end
 ```
 *Figure 6.1: Hardware, telemetry, and compute architecture of an automated open-pit piezometer network.*
@@ -348,7 +348,7 @@ flowchart TD
 
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 13.1: Master multi-sensor data fusion architecture incorporating causative hydrogeological piezometer metrics.*
 

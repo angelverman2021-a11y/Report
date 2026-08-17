@@ -587,7 +587,7 @@ flowchart TD
  
  OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Breakdown]
  XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
- OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P --> TARP[Sub-Second TARP Early-Warning Siren & Radio Dispatch]
 ```
 *Figure 21.1: Complete data flow architecture integrating satellite InSAR with real-time terrestrial monitoring.*
 
@@ -614,7 +614,7 @@ Satellite InSAR solves the **spatial blindness** of point sensors, while terrest
 +---------------------------------------------------------------------------------------------------+
 | [ SATELLITE InSAR ] + [ TERRESTRIAL EDGE AI & IoT ] = [ COMPLETE GEOSHIELD AI ] |
 | - Broad Spatial Coverage (100km) - High-Frequency Real-Time (30 FPS)- 24/7 Total Pit Safety |
-| - Historical 10-Year Baseline - Sub-Second Siren Dispatch (<1.0s)- Macro + Tactical Warning |
+| - Historical 10-Year Baseline - Rapid TARP Early-Warning Alert- Macro + Tactical Warning |
 | - Zero In-Pit Hardware Footprint - Direct Subsurface Awareness (Pore)- Physics-Grounded Accuracy |
 +---------------------------------------------------------------------------------------------------+
 ```
