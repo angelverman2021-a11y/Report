@@ -1,10 +1,10 @@
 # Existing Technology 26: Early-Warning & Trigger Action Response Plan (TARP) Systems
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/26_Early_Warning_TARP_Systems.md`
 
 ---
@@ -26,15 +26,18 @@ An **Early-Warning System (EWS)** is an integrated socio-technical chain of moni
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                     MONITORING vs. EARLY WARNING vs. EMERGENCY RESPONSE                           |
+| MONITORING vs. EARLY WARNING vs. EMERGENCY RESPONSE |
 +---------------------------------------------------------------------------------------------------+
-|  [ 1. SENSOR MONITORING ]      │  [ 2. EARLY WARNING (TARP) ]   │  [ 3. EMERGENCY RESPONSE ]     |
-|  - Continuous measurement      │  - Threshold & AI evaluation   │  - Immediate physical actions  |
-|  - Raw numbers (mm, kPa, °)    │  - Identifies elevated risk    │  - Full pit floor evacuation   |
-|  - Passive data collection     │  - Triggers standardized tiers │  - Relocating shovels & trucks |
-|  - "What is the ground doing?" │  - "When will it collapse?"    │  - "Sound sirens & clear area!"|
+| [ 1. SENSOR MONITORING ] [ 2. EARLY WARNING (TARP) ] [ 3. EMERGENCY RESPONSE ] |
+| - Continuous measurement - Threshold & AI evaluation - Immediate physical actions |
+| - Raw numbers (mm, kPa, °) - Identifies elevated risk - Full pit floor evacuation |
+| - Passive data collection - Triggers standardized tiers - Relocating shovels & trucks |
+| - "What is the ground doing?" - "When will it collapse?" - "Sound sirens & clear area!"|
 +---------------------------------------------------------------------------------------------------+
 ```
+
+![Pit-Rim Autonomous Monitoring Station](assets/pit_rim_monitoring_station.jpg)
+*Figure 1.1: Autonomous pit-rim monitoring station overlooking an active multi-tier open-cast pit. Integrated with a high-zoom PTZ optical camera, long-range LoRaWAN antenna mast, automatic weather sensor, industrial solar power array, and high-decibel (>120 dB) sirens for sub-second (<1.0 s) emergency evacuation dispatch.*
 
 ---
 
@@ -42,13 +45,13 @@ An **Early-Warning System (EWS)** is an integrated socio-technical chain of moni
 
 ```mermaid
 flowchart LR
-    HAZARD[1. Physical Hazard: Highwall Creep / Heavy Rainfall] --> SENSORS[2. 14 Multi-Modal Sensors: InSAR, Radar, IoT & 4K CCTV]
-    SENSORS --> DATA[3. Ingestion Backbone: LoRaWAN, MQTT & InfluxDB]
-    DATA --> ANALYTICS[4. AI & PINN Engine: Computes P_fail, Saito tf & FoS]
-    ANALYTICS --> TRIGGER[5. Dynamic Trigger Engine: Multi-Sensor & Rate Check]
-    TRIGGER --> TARP[6. TARP Warning Classifier: Level 1 Green to Level 4 Red]
-    TARP --> DISPATCH[7. Multi-Channel Alert: Sirens, VHF Radio, SMS & 3D Twin]
-    DISPATCH --> ACTION[8. Statutory Safety Action: Evacuation & Berm Reinforcement]
+ HAZARD[1. Physical Hazard: Highwall Creep / Heavy Rainfall] --> SENSORS[2. 14 Multi-Modal Sensors: InSAR, Radar, IoT & 4K CCTV]
+ SENSORS --> DATA[3. Ingestion Backbone: LoRaWAN, MQTT & InfluxDB]
+ DATA --> ANALYTICS[4. AI & PINN Engine: Computes P_fail, Saito tf & FoS]
+ ANALYTICS --> TRIGGER[5. Dynamic Trigger Engine: Multi-Sensor & Rate Check]
+ TRIGGER --> TARP[6. TARP Warning Classifier: Level 1 Green to Level 4 Red]
+ TARP --> DISPATCH[7. Multi-Channel Alert: Sirens, VHF Radio, SMS & 3D Twin]
+ DISPATCH --> ACTION[8. Statutory Safety Action: Evacuation & Berm Reinforcement]
 ```
 *Figure 2.1: The end-to-end mining early-warning and life-safety chain.*
 
@@ -60,22 +63,22 @@ A **Trigger Action Response Plan (TARP)** is a formalized, matrix-based operatio
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                  THE 4-TIER TARP PYRAMID                                          |
+| THE 4-TIER TARP PYRAMID |
 +---------------------------------------------------------------------------------------------------+
-|                                 ▲                                                                 |
-|                                / \                                                                |
-|                               /   \   🔴 LEVEL 4: CRITICAL (IMMEDIATE PIT EVACUATION)             |
-|                              /     \  - Saito tf < 1 hr | Sirens (<1.0s) | Mine Manager Action     |
-|                             /───────\                                                             |
-|                            /         \  🟠 LEVEL 3: WARNING (RESTRICTED ACCESS)                   |
-|                           /           \ - Heavy shovels relocated | Haul roads closed             |
-|                          /─────────────\                                                          |
-|                         /               \  🟡 LEVEL 2: ADVISORY (GEOTECHNICAL AUDIT)              |
-|                        /                 \ - Increased sampling | Inspection within 2 hours       |
-|                       /───────────────────\                                                       |
-|                      /                     \  🟢 LEVEL 1: NORMAL (BASELINE OPERATION)             |
-|                     /                       \ - Routine mining | Continuous data logging          |
-|                    └─────────────────────────┘                                                    |
+| |
+| / \ |
+| / \ [CRITICAL / RED] LEVEL 4: CRITICAL (IMMEDIATE PIT EVACUATION) |
+| / \ - Saito tf < 1 hr | Sirens (<1.0s) | Mine Manager Action |
+| /\ |
+| / \ [WARNING / ORANGE] LEVEL 3: WARNING (RESTRICTED ACCESS) |
+| / \ - Heavy shovels relocated | Haul roads closed |
+| /\ |
+| / \ [ADVISORY / YELLOW] LEVEL 2: ADVISORY (GEOTECHNICAL AUDIT) |
+| / \ - Increased sampling | Inspection within 2 hours |
+| /\ |
+| / \ [NORMAL / GREEN] LEVEL 1: NORMAL (BASELINE OPERATION) |
+| / \ - Routine mining | Continuous data logging |
+| |
 +---------------------------------------------------------------------------------------------------+
 ```
 *Figure 3.1: Standardized 4-tier geotechnical TARP escalation pyramid.*
@@ -104,12 +107,12 @@ Traditional single-sensor displacement thresholds ($\Delta d > 50\text{ mm}$) fa
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                        SINGLE-SENSOR VULNERABILITY vs. MULTI-SENSOR FUSION                        |
+| SINGLE-SENSOR VULNERABILITY vs. MULTI-SENSOR FUSION |
 +---------------------------------------------------------------------------------------------------+
-|  [ SINGLE-SENSOR TRIGGER (FRAGILE) ]     │  [ MULTI-SENSOR FUSED TARP (ROBUST) ]                  |
-|  - GNSS antenna struck by bird ──► ALARM │  - GNSS movement + 4K Optical Flow surge + LoRa Crack  |
-|  - High false positive rate (Alarm fatigue)│  dilation + Piezometer pressure rise = 99.8% CERTAINTY|
-|  - Sensor cable breaks ──► MISSED FAILURE│  - Survives individual sensor dropouts with zero panic |
+| [ SINGLE-SENSOR TRIGGER (FRAGILE) ] [ MULTI-SENSOR FUSED TARP (ROBUST) ] |
+| - GNSS antenna struck by bird ALARM - GNSS movement + 4K Optical Flow surge + LoRa Crack |
+| - High false positive rate (Alarm fatigue) dilation + Piezometer pressure rise = 99.8% CERTAINTY|
+| - Sensor cable breaks MISSED FAILURE - Survives individual sensor dropouts with zero panic |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -119,31 +122,31 @@ Traditional single-sensor displacement thresholds ($\Delta d > 50\text{ mm}$) fa
 
 ```mermaid
 flowchart TD
-    subgraph Multi-Modal Sensor Stream Ingestion
-        S1[Highwall GNSS RTK Stations]
-        S2[Edge 4K Cameras: 30 FPS Optical Flow]
-        S3[Wireless LoRa Potentiometric Crackmeters]
-        S4[Borehole Vibrating-Wire Piezometers]
-        S5[Pit-Rim Automatic Weather Station]
-        S6[Triaxial Seismic Geophone Array]
-    end
+ subgraph Multi-Modal Sensor Stream Ingestion
+ S1[Highwall GNSS RTK Stations]
+ S2[Edge 4K Cameras: 30 FPS Optical Flow]
+ S3[Wireless LoRa Potentiometric Crackmeters]
+ S4[Borehole Vibrating-Wire Piezometers]
+ S5[Pit-Rim Automatic Weather Station]
+ S6[Triaxial Seismic Geophone Array]
+ end
 
-    S1 & S2 & S3 & S4 & S5 & S6 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ S1 & S2 & S3 & S4 & S5 & S6 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    subgraph Hybrid Analytical Core
-        FUSION --> AI_MOD[XGBoost & PINN AI Failure Probability: P_fail in 0.0 - 1.0]
-        FUSION --> SAITO[Saito Inverse Velocity Solver: Predicts Failure Window tf]
-        FUSION --> STAT_RULE[Deterministic Statutory Engineering Threshold Engine]
-    end
+ subgraph Hybrid Analytical Core
+ FUSION --> AI_MOD[XGBoost & PINN AI Failure Probability: P_fail in 0.0 - 1.0]
+ FUSION --> SAITO[Saito Inverse Velocity Solver: Predicts Failure Window tf]
+ FUSION --> STAT_RULE[Deterministic Statutory Engineering Threshold Engine]
+ end
 
-    AI_MOD & SAITO & STAT_RULE --> TARP_CORE{Master Dynamic TARP Engine}
+ AI_MOD & SAITO & STAT_RULE --> TARP_CORE{Master Dynamic TARP Engine}
 
-    TARP_CORE -->|Level 1: Green| T1[Log Baseline Metrics]
-    TARP_CORE -->|Level 2: Yellow| T2[Dispatch Advisory Notification to Geologist App]
-    TARP_CORE -->|Level 3: Warning| T3[Flash Warning on 3D Twin & Relocate Heavy Shovels]
-    TARP_CORE -->|Level 4: Critical| T4[AUTONOMOUS DISPATCH: Sirens + VHF Radio + SMS in <1.0s]
+ TARP_CORE -->|Level 1: Green| T1[Log Baseline Metrics]
+ TARP_CORE -->|Level 2: Yellow| T2[Dispatch Advisory Notification to Geologist App]
+ TARP_CORE -->|Level 3: Warning| T3[Flash Warning on 3D Twin & Relocate Heavy Shovels]
+ TARP_CORE -->|Level 4: Critical| T4[AUTONOMOUS DISPATCH: Sirens + VHF Radio + SMS in <1.0s]
 
-    T1 & T2 & T3 & T4 --> AUDIT[Immutable Digital Audit Log & DGMS Compliance Register]
+ T1 & T2 & T3 & T4 --> AUDIT[Immutable Digital Audit Log & DGMS Compliance Register]
 ```
 *Figure 6.1: Comprehensive multi-sensor hybrid TARP decision-making and dispatch workflow.*
 
@@ -151,7 +154,7 @@ flowchart TD
 
 ## 7. Standardized Action & Statutory Responsibility Matrix
 
-> **Statutory Notice:**  
+> **Statutory Notice:** 
 > *The following matrix illustrates the operational TARP structure. Specific numerical threshold triggers must be calibrated site-specifically by the certified Geotechnical Officer in accordance with DGMS regulations.*
 
 ### Geotechnical TARP Action Matrix
@@ -171,13 +174,13 @@ In a high-noise, distributed open-pit mine, a single SMS or email is completely 
 
 ```mermaid
 flowchart TD
-    TARP_RED[🔴 LEVEL 4 CRITICAL TRIGGER: P_fail > 0.85, tf < 60 min] --> BROADCAST{Sub-Second Multi-Channel Broadcast Broker}
+ TARP_RED[[CRITICAL / RED] LEVEL 4 CRITICAL TRIGGER: P_fail > 0.85, tf < 60 min] --> BROADCAST{Sub-Second Multi-Channel Broadcast Broker}
 
-    BROADCAST -->|Relay Pulse <100ms| SIREN[1. High-Decibel Pit-Rim Sirens >120dB & Rotating Strobes]
-    BROADCAST -->|Text-to-Speech Engine| VHF[2. Pit Two-Way VHF Emergency Radio Voice Broadcast]
-    BROADCAST -->|SMPP / Twilio Gateway| SMS[3. Instant SMS & WhatsApp Alerts to 500+ Registered Miners]
-    BROADCAST -->|WebSockets Stream| DASH[4. Full-Screen Red Flashing Lockdown on 3D Digital Twin]
-    BROADCAST -->|FCM Push Notification| MOBILE[5. Geotechnical Officer & Manager Mobile Field Apps]
+ BROADCAST -->|Relay Pulse <100ms| SIREN[1. High-Decibel Pit-Rim Sirens >120dB & Rotating Strobes]
+ BROADCAST -->|Text-to-Speech Engine| VHF[2. Pit Two-Way VHF Emergency Radio Voice Broadcast]
+ BROADCAST -->|SMPP / Twilio Gateway| SMS[3. Instant SMS & WhatsApp Alerts to 500+ Registered Miners]
+ BROADCAST -->|WebSockets Stream| DASH[4. Full-Screen Red Flashing Lockdown on 3D Digital Twin]
+ BROADCAST -->|FCM Push Notification| MOBILE[5. Geotechnical Officer & Manager Mobile Field Apps]
 ```
 *Figure 8.1: Multi-channel broadcast infrastructure ensuring 100% warning receipt across the pit.*
 
@@ -189,18 +192,18 @@ To eliminate confusion and ensure rapid engineering comprehension, every Level 4
 
 ```mermaid
 graph TD
-    subgraph Autonomous Level 4 Emergency Alert Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL COLLAPSE ALARM (Certainty: 98.9%)"]
-        B["📍 Location: Bench 4 - East Highwall Spur (Sector B4-E / CAM-02)"]
-        C["⏱️ Predicted Saito Collapse Window: 14 ± 3 minutes"]
-        D["📊 Real-Time Causal Factors (SHAP Feature Attribution Breakdown):"]
-        D1["• 4K Optical Flow Surface Creep Acceleration Surge (38.5 mm/hr): +45% contribution"]
-        D2["• Vibrating-Wire Borehole Pore-Water Pressure (u = 240 kPa): +25% contribution"]
-        D3["• Crest Wireless Crackmeter Rapid Dilation (dw/dt = 22.0 mm/day): +15% contribution"]
-        D4["• Cloudburst Rainfall Infiltration Rate (48.0 mm/hr): +10% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-        E["🚨 MANDATORY STATUTORY ACTION: EVACUATE BENCHES 3 & 4 IMMEDIATELY!"]
-    end
+ subgraph Autonomous Level 4 Emergency Alert Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL COLLAPSE ALARM (Certainty: 98.9%)"]
+ B[" Location: Bench 4 - East Highwall Spur (Sector B4-E / CAM-02)"]
+ C[" Predicted Saito Collapse Window: 14 ± 3 minutes"]
+ D[" Real-Time Causal Factors (SHAP Feature Attribution Breakdown):"]
+ D1["• 4K Optical Flow Surface Creep Acceleration Surge (38.5 mm/hr): +45% contribution"]
+ D2["• Vibrating-Wire Borehole Pore-Water Pressure (u = 240 kPa): +25% contribution"]
+ D3["• Crest Wireless Crackmeter Rapid Dilation (dw/dt = 22.0 mm/day): +15% contribution"]
+ D4["• Cloudburst Rainfall Infiltration Rate (48.0 mm/hr): +10% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ E["[EMERGENCY] MANDATORY STATUTORY ACTION: EVACUATE BENCHES 3 & 4 IMMEDIATELY!"]
+ end
 ```
 *Figure 9.1: Automated SHAP explainability diagnostic card accompanying Level 4 emergency alerts.*
 
@@ -210,16 +213,16 @@ graph TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                FALSE-ALARM SUPPRESSION STRATEGIES                                 |
+| FALSE-ALARM SUPPRESSION STRATEGIES |
 +---------------------------------------------------------------------------------------------------+
-|  1. BLAST-WINDOW BLANKING: The system automatically suspends seismic and optical displacement     |
-|     alarms during scheduled production blast windows (e.g. 13:00–14:00), logging data as blast.   |
-|  2. PERSISTENCE FILTER: Dynamic triggers require an anomaly to persist for ≥3 consecutive         |
-|     60-second sampling epochs before elevating from Level 1 to Level 2.                           |
-|  3. SPATIAL CLUSTERING: A single isolated sensor spike is cross-validated against neighboring     |
-|     sensors within a 50m radius before triggering Level 3 or 4.                                   |
-|  4. ACTIVE LEARNING REJECTION: If a false positive occurs (e.g., heavy dust storm), the           |
-|     Geotechnical Officer can reject it in the app, saving a hard negative for model retraining.  |
+| 1. BLAST-WINDOW BLANKING: The system automatically suspends seismic and optical displacement |
+| alarms during scheduled production blast windows (e.g. 13:00–14:00), logging data as blast. |
+| 2. PERSISTENCE FILTER: Dynamic triggers require an anomaly to persist for ≥3 consecutive |
+| 60-second sampling epochs before elevating from Level 1 to Level 2. |
+| 3. SPATIAL CLUSTERING: A single isolated sensor spike is cross-validated against neighboring |
+| sensors within a 50m radius before triggering Level 3 or 4. |
+| 4. ACTIVE LEARNING REJECTION: If a false positive occurs (e.g., heavy dust storm), the |
+| Geotechnical Officer can reject it in the app, saving a hard negative for model retraining. |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -233,20 +236,20 @@ Under DGMS regulations, all safety incidents, warnings, and evacuations must be 
 
 ```json
 {
-  "event_id": "EVT_20260817_142205_B4E",
-  "utc_timestamp": "2026-08-17T14:22:05.112Z",
-  "sector_id": "BENCH_04_EAST",
-  "tarp_level": "LEVEL_4_CRITICAL",
-  "ai_risk_probability": 0.989,
-  "predicted_saito_tf_minutes": 14.2,
-  "active_triggers": ["OPTICAL_FLOW_ACCEL", "PORE_PRESSURE_SURGE", "CRACK_DILATION"],
-  "dispatch_latency_ms": 340,
-  "dispatched_channels": ["PIT_SIRENS", "VHF_RADIO", "SMS_GATEWAY", "3D_DASHBOARD"],
-  "personnel_notified_count": 142,
-  "statutory_authority_acknowledged": "ER_K_SHARMA_MINE_MGR",
-  "acknowledgment_timestamp": "2026-08-17T14:23:10.000Z",
-  "response_action_taken": "FULL_PIT_EVACUATION_SUCCESSFUL_ZERO_CASUALTIES",
-  "sha256_audit_hash": "a4f8c9b3e21074d9e681234bcfae19034871239abcef192837461928374a"
+ "event_id": "EVT_20260817_142205_B4E",
+ "utc_timestamp": "2026-08-17T14:22:05.112Z",
+ "sector_id": "BENCH_04_EAST",
+ "tarp_level": "LEVEL_4_CRITICAL",
+ "ai_risk_probability": 0.989,
+ "predicted_saito_tf_minutes": 14.2,
+ "active_triggers": ["OPTICAL_FLOW_ACCEL", "PORE_PRESSURE_SURGE", "CRACK_DILATION"],
+ "dispatch_latency_ms": 340,
+ "dispatched_channels": ["PIT_SIRENS", "VHF_RADIO", "SMS_GATEWAY", "3D_DASHBOARD"],
+ "personnel_notified_count": 142,
+ "statutory_authority_acknowledged": "ER_K_SHARMA_MINE_MGR",
+ "acknowledgment_timestamp": "2026-08-17T14:23:10.000Z",
+ "response_action_taken": "FULL_PIT_EVACUATION_SUCCESSFUL_ZERO_CASUALTIES",
+ "sha256_audit_hash": "a4f8c9b3e21074d9e681234bcfae19034871239abcef192837461928374a"
 }
 ```
 
@@ -254,7 +257,7 @@ Under DGMS regulations, all safety incidents, warnings, and evacuations must be 
 
 ## 12. Illustrative Synthetic TARP Performance Graphs
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to demonstrate multi-sensor threshold transitions leading to a Level 4 TARP alert. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Multi-Sensor TARP Transition Dataset
@@ -265,23 +268,23 @@ Under DGMS regulations, all safety incidents, warnings, and evacuations must be 
 | **30** | 1.8 | 90 | 0.6 | 0.28 | **Level 2 (YELLOW)**| Advisory Issued |
 | **60** | 6.5 | 160 | 2.4 | 0.68 | **Level 3 (ORANGE)**| Shovels Relocated |
 | **75** | 18.2 | 220 | 5.8 | 0.88 | **Level 4 (RED)** | Sirens Sounded |
-| **85** | **45.0** | **245** | **14.2** | **0.99** | **Level 4 (RED)** | 🔴 **HIGHWALL COLLAPSE** |
+| **85** | **45.0** | **245** | **14.2** | **0.99** | **Level 4 (RED)** | [CRITICAL / RED] **HIGHWALL COLLAPSE** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Optical Creep Velocity Accelerating into Level 4 Red TARP (Synthetic Data)"
-    x-axis "Elapsed Time (Minutes)" [0, 30, 60, 75, 85]
-    y-axis "Deformation Velocity (mm/hr)" 0 --> 50
-    line [0.2, 1.8, 6.5, 18.2, 45.0]
+ title "Illustrative Example: Optical Creep Velocity Accelerating into Level 4 Red TARP (Synthetic Data)"
+ x-axis "Elapsed Time (Minutes)" [0, 30, 60, 75, 85]
+ y-axis "Deformation Velocity (mm/hr)" 0 --> 50
+ line [0.2, 1.8, 6.5, 18.2, 45.0]
 ```
 *Figure 12.1: Illustrative velocity surging through TARP levels into catastrophic highwall collapse.*
 
@@ -315,15 +318,15 @@ To build our SIH25071 prototype, we evaluated verified open-source alerting tool
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ RIGID STATIC THRESHOLDS ]           ──► Traditional TARPs rely on fixed numbers, triggering     |
-|                                            hundreds of false alarms during heavy blasting.        |
-|  [ LACK OF EXPLAINABILITY ]            ──► Operators receive "Red Alert" without understanding    |
-|                                            the underlying physical causal mechanism.              |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses statutory engineering rules with Physics-Informed|
-|                                            AI, Saito velocity kinematics, and SHAP diagnostic     |
-|                                            cards into a sub-second, multi-channel TARP engine!    |
+| [ RIGID STATIC THRESHOLDS ] Traditional TARPs rely on fixed numbers, triggering |
+| hundreds of false alarms during heavy blasting. |
+| [ LACK OF EXPLAINABILITY ] Operators receive "Red Alert" without understanding |
+| the underlying physical causal mechanism. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses statutory engineering rules with Physics-Informed|
+| AI, Saito velocity kinematics, and SHAP diagnostic |
+| cards into a sub-second, multi-channel TARP engine! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -344,46 +347,46 @@ To build our SIH25071 prototype, we evaluated verified open-source alerting tool
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer (14 Modalities)"]
-        S1[Satellite InSAR & Slope Radar]
-        S2[GNSS RTK & Robotic Prisms]
-        S3[Edge 4K Cameras: 30 FPS Optical Flow]
-        S4[LoRa Wireless Crackmeters & Tiltmeters]
-        S5[Borehole Piezometers & TDR Cables]
-        S6[Seismic Geophones & Weather Stations]
-        S7[Mobile Geological Inspection App]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer (14 Modalities)"]
+ S1[Satellite InSAR & Slope Radar]
+ S2[GNSS RTK & Robotic Prisms]
+ S3[Edge 4K Cameras: 30 FPS Optical Flow]
+ S4[LoRa Wireless Crackmeters & Tiltmeters]
+ S5[Borehole Piezometers & TDR Cables]
+ S6[Seismic Geophones & Weather Stations]
+ S7[Mobile Geological Inspection App]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Synchronization"]
-        S1 & S2 & S3 & S4 & S5 & S6 & S7 --> P1[Eclipse Mosquitto MQTT & InfluxDB Storage]
-        P1 --> P2[Precision Time Synchronization & Blast Window Blanking]
-        P2 --> P3[Kinematic Derivatives: Velocity v, Acceleration a, Inverse Velocity IV]
-        P3 --> P4[Hydro-Mechanical Coupling: Effective Stress & Pore Pressure Ratio ru]
-    end
+ subgraph PREPROCESSING["2. Edge Preprocessing & Synchronization"]
+ S1 & S2 & S3 & S4 & S5 & S6 & S7 --> P1[Eclipse Mosquitto MQTT & InfluxDB Storage]
+ P1 --> P2[Precision Time Synchronization & Blast Window Blanking]
+ P2 --> P3[Kinematic Derivatives: Velocity v, Acceleration a, Inverse Velocity IV]
+ P3 --> P4[Hydro-Mechanical Coupling: Effective Stress & Pore Pressure Ratio ru]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        P4 --> ML_ENG[XGBoost Classifier & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Saito Inverse Velocity Collapse Horizon: tf ± σ]
-        ML_ENG --> OUT_R[Yade DEM 3D Kinetic Rockfall Bounce & Runout Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ P4 --> ML_ENG[XGBoost Classifier & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Saito Inverse Velocity Collapse Horizon: tf ± σ]
+ ML_ENG --> OUT_R[Yade DEM 3D Kinetic Rockfall Bounce & Runout Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Real-Time Causal Attribution Diagnostic Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Real-Time Causal Attribution Diagnostic Card]
+ end
 
-    subgraph TARP_LAYER["4. Dynamic TARP & Sub-Second Early Warning"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> TARP_DEC{Dynamic 4-Tier TARP Classifier}
+ subgraph TARP_LAYER["4. Dynamic TARP & Sub-Second Early Warning"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> TARP_DEC{Dynamic 4-Tier TARP Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory Push to Geotechnical Officer App]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation & Haul Road Closure]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS in <1.0s]
-    end
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory Push to Geotechnical Officer App]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation & Haul Road Closure]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS in <1.0s]
+ end
 
-    subgraph DASHBOARD["5. Interactive Command & Control"]
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH[WebGPU 3D Digital Twin Mine Safety Dashboard]
-        DASH --> AUDIT[Immutable SHA-256 DGMS Compliance Audit Register]
-    end
+ subgraph DASHBOARD["5. Interactive Command & Control"]
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH[WebGPU 3D Digital Twin Mine Safety Dashboard]
+ DASH --> AUDIT[Immutable SHA-256 DGMS Compliance Audit Register]
+ end
 ```
 *Figure 17.1: Master end-to-end system architecture synthesizing all 26 monitored technologies into the unified SIH25071 disaster management platform.*
 

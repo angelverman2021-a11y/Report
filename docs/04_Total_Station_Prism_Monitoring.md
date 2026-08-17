@@ -1,10 +1,10 @@
 # Existing Technology 04: Robotic Total Station & Prism Monitoring (RTS / AMTS)
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/04_Total_Station_Prism_Monitoring.md`
 
 ---
@@ -26,14 +26,14 @@ A **Robotic Total Station** is an automated, electro-optical geodetic surveying 
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                        PHYSICAL PRISM RTS vs. PROPOSED VIRTUAL OPTICAL AI                         |
+| PHYSICAL PRISM RTS vs. PROPOSED VIRTUAL OPTICAL AI |
 +---------------------------------------------------------------------------------------------------+
-|  [ PHYSICAL ROBOTIC TOTAL STATION ]      │  [ PROPOSED SIH25071 VIRTUAL OPTICAL AI ]              |
-|  - Discrete physical glass prisms (50 pts)│ - Full-field dense virtual tracking (100,000+ keypoints)|
-|  - High unit cost (₹35L instrument + ₹10k/pt)│- Low-cost 4K optical edge cameras (₹25k/node)         |
-|  - Prisms shattered by blasting flyrock  │ - Non-contact stand-off cameras outside danger zone    |
-|  - 30 to 60 minute sequential cycle time │ - Real-time 30 FPS continuous optical flow (<33 ms)    |
-|  - Beam blocked by pit dust & fog        │ - Bi-spectrum thermal + multi-modal sensor fusion      |
+| [ PHYSICAL ROBOTIC TOTAL STATION ] [ PROPOSED SIH25071 VIRTUAL OPTICAL AI ] |
+| - Discrete physical glass prisms (50 pts) - Full-field dense virtual tracking (100,000+ keypoints)|
+| - High unit cost (₹35L instrument + ₹10k/pt)- Low-cost 4K optical edge cameras (₹25k/node) |
+| - Prisms shattered by blasting flyrock - Non-contact stand-off cameras outside danger zone |
+| - 30 to 60 minute sequential cycle time - Real-time 30 FPS continuous optical flow (<33 ms) |
+| - Beam blocked by pit dust & fog - Bi-spectrum thermal + multi-modal sensor fusion |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -42,17 +42,17 @@ A **Robotic Total Station** is an automated, electro-optical geodetic surveying 
 ## 2. Geodetic Operating Principle & Coordinate Mathematics
 
 ```
-                      Stable Reference Pillar (RTS Location)
-                                    ┌─────────┐
-                                    │  [RTS]  │
-                                    └────┬────┘
-                                         │
-                   Pulsed Infrared Laser │ Distance d
-                   Zenith Angle α, Az θ  │
-                                         ▼
-                             ┌───────────────────────┐
-                             │ Glass Cube Prism 1 📍 │ (Bench 2 Crest)
-                             └───────────────────────┘
+ Stable Reference Pillar (RTS Location)
+ 
+ [RTS] 
+ 
+ 
+ Pulsed Infrared Laser Distance d
+ Zenith Angle α, Az θ 
+ 
+ 
+ Glass Cube Prism 1 (Bench 2 Crest)
+ 
 ```
 *Figure 2.1: Optical line-of-sight measurement geometry between RTS reference pillar and bench target prism.*
 
@@ -88,14 +88,14 @@ $$n = 1 + \left( \frac{273.15}{1013.25} \cdot \frac{P}{T} \cdot (n_0 - 1) \right
 
 ```mermaid
 flowchart TD
-    INIT[1. RTS Powers On at Scheduled Epoch: 30-min Cycle] --> CALIB[2. Sight 3 to 5 Fixed Stable Control Network Prisms Outside Pit]
-    CALIB --> ATMOS[3. Apply Atmospheric Pressure & Temperature Compensation]
-    ATMOS --> SIGHT[4. Sequential Automated Target Recognition ATR: Sights 50 Highwall Prisms]
-    SIGHT --> MEASURE[5. EDM Phase-Shift Laser Distance & Angle Recording]
-    MEASURE --> VECTOR[6. Compute 3D Cartesian Vectors ΔX, ΔY, ΔZ and Velocity v_3D]
-    VECTOR --> CHECK{Velocity v_3D > Threshold?}
-    CHECK -->|YES: Abnormal Movement| ALARM[7. Trigger Geotechnical TARP Alert]
-    CHECK -->|NO: Stable| SLEEP[8. Sleep Until Next Scheduled Epoch]
+ INIT[1. RTS Powers On at Scheduled Epoch: 30-min Cycle] --> CALIB[2. Sight 3 to 5 Fixed Stable Control Network Prisms Outside Pit]
+ CALIB --> ATMOS[3. Apply Atmospheric Pressure & Temperature Compensation]
+ ATMOS --> SIGHT[4. Sequential Automated Target Recognition ATR: Sights 50 Highwall Prisms]
+ SIGHT --> MEASURE[5. EDM Phase-Shift Laser Distance & Angle Recording]
+ MEASURE --> VECTOR[6. Compute 3D Cartesian Vectors ΔX, ΔY, ΔZ and Velocity v_3D]
+ VECTOR --> CHECK{Velocity v_3D > Threshold?}
+ CHECK -->|YES: Abnormal Movement| ALARM[7. Trigger Geotechnical TARP Alert]
+ CHECK -->|NO: Stable| SLEEP[8. Sleep Until Next Scheduled Epoch]
 ```
 *Figure 4.1: Automated measurement and calibration cycle of an AMTS monitoring network.*
 
@@ -105,17 +105,17 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                            CORE LIMITATIONS OF PRISM MONITORING                                   |
+| CORE LIMITATIONS OF PRISM MONITORING |
 +---------------------------------------------------------------------------------------------------+
-|  1. DISCRETE SPATIAL BLINDNESS: An RTS only measures the exact spot where a prism is bolted.      |
-|     A 50,000-ton bench collapse between prisms occurs with ZERO prior warning.                    |
-|  2. FLYROCK DESTRUCTION & SAFETY HAZARD: Blasting flyrock regularly destroys prisms. Surveyors    |
-|     must manually climb active, hazardous highwalls to install replacements.                       |
-|  3. ATMOSPHERIC ATTENUATION: Heavy mineral dust, shovel exhaust, and fog scatter infrared laser   |
-|     beams, causing up to 40% data loss during critical winter mornings.                           |
-|  4. CYCLE TIME LATENCY (30–60 MIN): Sequential mechanical slewing across 50+ prisms is too slow   |
-|     to capture rapid brittle rockfall detachments occurring within seconds.                       |
-|  5. PROHIBITIVE COST: Automated RTS units cost ₹35–50 Lakhs each, limiting deployment to 1 unit.  |
+| 1. DISCRETE SPATIAL BLINDNESS: An RTS only measures the exact spot where a prism is bolted. |
+| A 50,000-ton bench collapse between prisms occurs with ZERO prior warning. |
+| 2. FLYROCK DESTRUCTION & SAFETY HAZARD: Blasting flyrock regularly destroys prisms. Surveyors |
+| must manually climb active, hazardous highwalls to install replacements. |
+| 3. ATMOSPHERIC ATTENUATION: Heavy mineral dust, shovel exhaust, and fog scatter infrared laser |
+| beams, causing up to 40% data loss during critical winter mornings. |
+| 4. CYCLE TIME LATENCY (30–60 MIN): Sequential mechanical slewing across 50+ prisms is too slow |
+| to capture rapid brittle rockfall detachments occurring within seconds. |
+| 5. PROHIBITIVE COST: Automated RTS units cost ₹35–50 Lakhs each, limiting deployment to 1 unit. |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -137,10 +137,10 @@ To eliminate the extreme cost and point-blindness of physical prisms, our propos
 
 ```mermaid
 flowchart LR
-    CAM[Fixed 4K Optical PTZ Camera: Non-Contact Stand-Off] --> CORNERS[Shi-Tomasi & SIFT: Extracts 100,000+ Natural Rock Texture Keypoints]
-    CORNERS --> FLOW[Sub-Pixel Lucas-Kanade Optical Flow: Tracks 2D Sub-Pixel Pixel Shifts]
-    FLOW --> RAYCAST[2D-to-3D Ray Casting onto Drone DEM Mesh P = K R|t]
-    RAYCAST --> VIRTUAL_VEC[Generates Continuous 3D True Displacement Vectors ΔX, ΔY, ΔZ at 30 FPS]
+ CAM[Fixed 4K Optical PTZ Camera: Non-Contact Stand-Off] --> CORNERS[Shi-Tomasi & SIFT: Extracts 100,000+ Natural Rock Texture Keypoints]
+ CORNERS --> FLOW[Sub-Pixel Lucas-Kanade Optical Flow: Tracks 2D Sub-Pixel Pixel Shifts]
+ FLOW --> RAYCAST[2D-to-3D Ray Casting onto Drone DEM Mesh P = K R|t]
+ RAYCAST --> VIRTUAL_VEC[Generates Continuous 3D True Displacement Vectors ΔX, ΔY, ΔZ at 30 FPS]
 ```
 *Figure 7.1: Transformation of raw 2D video into 100,000+ virtual 3D geodetic monitoring points.*
 
@@ -159,7 +159,7 @@ flowchart LR
 
 ## 8. Illustrative Synthetic RTS Benchmark Dataset
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to explain RTS 3D coordinate vector calculations. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic RTS 3D Coordinate Displacement Log
@@ -171,23 +171,23 @@ flowchart LR
 | **$E_2$** | 24 | +1.8 | -0.9 | -0.4 | 2.05 | 0.13 | Stable (Green) |
 | **$E_3$** | 36 | +8.4 | -4.2 | -1.8 | 9.56 | 0.63 | Advisory (Yellow) |
 | **$E_4$** | 48 | +28.5 | -14.1 | -6.2 | 32.38 | 1.90 | Warning (Orange) |
-| **$E_5$** | 54 | **+78.0** | **-38.5** | **-18.4** | **88.88** | **9.42** | 🔴 **CRITICAL (RED)** |
+| **$E_5$** | 54 | **+78.0** | **-38.5** | **-18.4** | **88.88** | **9.42** | [CRITICAL / RED] **CRITICAL (RED)** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: RTS 3D Vector Displacement vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (Hours)" [0, 12, 24, 36, 48, 54]
-    y-axis "True 3D Vector Displacement (mm)" 0 --> 100
-    line [0.0, 0.46, 2.05, 9.56, 32.38, 88.88]
+ title "Illustrative Example: RTS 3D Vector Displacement vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (Hours)" [0, 12, 24, 36, 48, 54]
+ y-axis "True 3D Vector Displacement (mm)" 0 --> 100
+ line [0.0, 0.46, 2.05, 9.56, 32.38, 88.88]
 ```
 *Figure 8.1: Illustrative RTS 3D true vector displacement accelerating into tertiary failure.*
 
@@ -197,31 +197,31 @@ xychart-beta
 
 ```mermaid
 flowchart TD
-    subgraph Geodetic & Optical Surface Monitoring
-        A1[Robotic Total Station / Prismless Optical Flow: True 3D Vectors]
-        A2[Edge 4K Cameras: 30 FPS YOLOv8 & Lucas-Kanade Flow]
-        A3[Highwall GNSS RTK Stations: 3D Geodetic Points]
-        A4[Satellite InSAR Sentinel-1: Regional Subsidence Prior]
-    end
+ subgraph Geodetic & Optical Surface Monitoring
+ A1[Robotic Total Station / Prismless Optical Flow: True 3D Vectors]
+ A2[Edge 4K Cameras: 30 FPS YOLOv8 & Lucas-Kanade Flow]
+ A3[Highwall GNSS RTK Stations: 3D Geodetic Points]
+ A4[Satellite InSAR Sentinel-1: Regional Subsidence Prior]
+ end
 
-    subgraph Subsurface Geotechnical Instrumentation
-        B1[Wireless LoRa Potentiometric Crackmeters on Crests]
-        B2[Wireless LoRa MEMS Biaxial Tiltmeters]
-        B3[Vibrating-Wire Borehole Piezometers: Pore Pressure u]
-        B4[Triaxial Seismic Geophones: PPV & Blast Monitoring]
-    end
+ subgraph Subsurface Geotechnical Instrumentation
+ B1[Wireless LoRa Potentiometric Crackmeters on Crests]
+ B2[Wireless LoRa MEMS Biaxial Tiltmeters]
+ B3[Vibrating-Wire Borehole Piezometers: Pore Pressure u]
+ B4[Triaxial Seismic Geophones: PPV & Blast Monitoring]
+ end
 
-    A1 & A2 & A3 & A4 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A1 & A2 & A3 & A4 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 9.1: Master multi-sensor data fusion architecture integrating RTS geodetic vectors.*
 
@@ -231,17 +231,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.6%)"]
-        B["📍 Location: Bench 2 - North Wall (Prism Array PR-04 / Sector B2-N)"]
-        C["⏱️ Predicted Collapse Window: 18 ± 3 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance Breakdown):"]
-        D1["• RTS 3D True Vector Acceleration Surge (9.42 mm/hr): +44% contribution"]
-        D2["• 4K Optical Flow Surface Bulging Rate: +26% contribution"]
-        D3["• Subsurface Borehole Pore Pressure (u = 210 kPa): +18% contribution"]
-        D4["• Crest Crackmeter Dilation Velocity (16.2 mm/day): +8% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +4% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.6%)"]
+ B[" Location: Bench 2 - North Wall (Prism Array PR-04 / Sector B2-N)"]
+ C[" Predicted Collapse Window: 18 ± 3 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance Breakdown):"]
+ D1["• RTS 3D True Vector Acceleration Surge (9.42 mm/hr): +44% contribution"]
+ D2["• 4K Optical Flow Surface Bulging Rate: +26% contribution"]
+ D3["• Subsurface Borehole Pore Pressure (u = 210 kPa): +18% contribution"]
+ D4["• Crest Crackmeter Dilation Velocity (16.2 mm/day): +8% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +4% contribution"]
+ end
 ```
 *Figure 10.1: Automated SHAP explainability diagnostic card for geodetic vector alerts.*
 
@@ -251,13 +251,13 @@ graph TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ TRADITIONAL RTS LIMITATIONS ]       ──► Extreme cost (₹40L+), point blindness between prisms,  |
-|                                            frequent flyrock damage, and 60-minute cycle latency.  |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Deploys Virtual Prismless Optical Flow via 4K Edge AI  |
-|                                            cameras, providing 100,000+ continuous 3D points at    |
-|                                            30 FPS for <₹25,000/node with zero danger to crews!    |
+| [ TRADITIONAL RTS LIMITATIONS ] Extreme cost (₹40L+), point blindness between prisms, |
+| frequent flyrock damage, and 60-minute cycle latency. |
+| [ PROPOSED SIH25071 INNOVATION ] Deploys Virtual Prismless Optical Flow via 4K Edge AI |
+| cameras, providing 100,000+ continuous 3D points at |
+| 30 FPS for <₹25,000/node with zero danger to crews! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -278,50 +278,50 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Virtual Prismless Optical Flow & Legacy RTS Ingestion]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Virtual Prismless Optical Flow & Legacy RTS Ingestion]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[3D Cartesian Vector Inversion & Velocity Calculation]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P5[Rainfall Intensity, 24h Rain & Infiltration Index]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[3D Cartesian Vector Inversion & Velocity Calculation]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P5[Rainfall Intensity, 24h Rain & Infiltration Index]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_GEO[3D Geodetic Vectors, Velocity & Acceleration]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_HYDRO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_GEO[3D Geodetic Vectors, Velocity & Acceleration]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_HYDRO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_GEO & F_KIN & F_HYDRO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_GEO & F_KIN & F_HYDRO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 13.1: Complete end-to-end system architecture incorporating geodetic vector monitoring.*
 

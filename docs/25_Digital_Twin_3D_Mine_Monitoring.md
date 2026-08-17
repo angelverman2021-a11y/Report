@@ -1,10 +1,10 @@
 # Existing Technology 25: Digital Twin & 3D Mine Slope Monitoring
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/25_Digital_Twin_3D_Mine_Monitoring.md`
 
 ---
@@ -26,16 +26,19 @@ A **Digital Twin** is a dynamic software representation of a physical asset, sys
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                            STATIC 3D CAD MODEL vs. ACTIVE DIGITAL TWIN                            |
+| STATIC 3D CAD MODEL vs. ACTIVE DIGITAL TWIN |
 +---------------------------------------------------------------------------------------------------+
-|  [ STATIC 3D MINE CAD MODEL ]            │  [ PROPOSED SIH25071 4D DIGITAL TWIN ]                 |
-|  - Survey snapshot updated monthly/yearly│  - Continuous real-time IoT & 30 FPS vision streaming  |
-|  - Disconnected from real-time sensors   │  - Live 3D sensor pins with millisecond telemetry popups|
-|  - Zero predictive capability            │  - Dynamic PINN Factor of Safety & rockfall runout cone|
-|  - Pure geometric visualization          │  - Autonomous sub-second (<1.0s) TARP siren dispatch   |
-|  - Requires heavy desktop workstation    │  - Browser-native WebGPU / CesiumJS 3D interface       |
+| [ STATIC 3D MINE CAD MODEL ] [ PROPOSED SIH25071 4D DIGITAL TWIN ] |
+| - Survey snapshot updated monthly/yearly - Continuous real-time IoT & 30 FPS vision streaming |
+| - Disconnected from real-time sensors - Live 3D sensor pins with millisecond telemetry popups|
+| - Zero predictive capability - Dynamic PINN Factor of Safety & rockfall runout cone|
+| - Pure geometric visualization - Autonomous sub-second (<1.0s) TARP siren dispatch |
+| - Requires heavy desktop workstation - Browser-native WebGPU / CesiumJS 3D interface |
 +---------------------------------------------------------------------------------------------------+
 ```
+
+![Geo-Shield Digital Twin 3D Dashboard](assets/digital_twin_dashboard.jpg)
+*Figure 1.1: WebGPU-powered 3D Digital Twin Interface showing textured highwall terrain mesh, real-time displacement heatmap contours, live in-situ sensor pins, time-series pore-water pressure telemetry, and SHAP explainable TARP Level 4 hazard cards.*
 
 ---
 
@@ -43,35 +46,35 @@ A **Digital Twin** is a dynamic software representation of a physical asset, sys
 
 ```mermaid
 flowchart TD
-    subgraph PHYSICAL_MINE["1. Physical Open-Cast Mine"]
-        P1[Highwall Benches, Pit Floor, Haul Roads & Tailings Dams]
-        P2[Multi-Modal Sensors: GNSS, LoRa Tilt, Piezometers & Cameras]
-        P3[Heavy Machinery: Excavators, Shovels & Haul Trucks]
-    end
+ subgraph PHYSICAL_MINE["1. Physical Open-Cast Mine"]
+ P1[Highwall Benches, Pit Floor, Haul Roads & Tailings Dams]
+ P2[Multi-Modal Sensors: GNSS, LoRa Tilt, Piezometers & Cameras]
+ P3[Heavy Machinery: Excavators, Shovels & Haul Trucks]
+ end
 
-    subgraph DATA_BACKBONE["2. IoT Mesh & Edge Ingestion Backbone"]
-        D1[LoRaWAN Gateways, 4G LTE Modems & PoE Gigabit Switches]
-        D2[Eclipse Mosquitto MQTT Broker & InfluxDB Time-Series DB]
-    end
+ subgraph DATA_BACKBONE["2. IoT Mesh & Edge Ingestion Backbone"]
+ D1[LoRaWAN Gateways, 4G LTE Modems & PoE Gigabit Switches]
+ D2[Eclipse Mosquitto MQTT Broker & InfluxDB Time-Series DB]
+ end
 
-    subgraph DIGITAL_TWIN["3. 4D Digital Twin Core (SIH25071)"]
-        T1[3D Highwall Geometry: Photogrammetry & LiDAR 3D Tiles]
-        T2[Geological Discontinuity Planes & Fault Network Mesh]
-        T3[Real-Time Deformation Heatmap & Vector Field Overlay]
-        T4[PINN Neural Surrogate: Sub-Second Dynamic FoS Solver]
-        T5[Yade DEM 3D Kinetic Rockfall Bounce & Runout Cone Engine]
-    end
+ subgraph DIGITAL_TWIN["3. 4D Digital Twin Core (SIH25071)"]
+ T1[3D Highwall Geometry: Photogrammetry & LiDAR 3D Tiles]
+ T2[Geological Discontinuity Planes & Fault Network Mesh]
+ T3[Real-Time Deformation Heatmap & Vector Field Overlay]
+ T4[PINN Neural Surrogate: Sub-Second Dynamic FoS Solver]
+ T5[Yade DEM 3D Kinetic Rockfall Bounce & Runout Cone Engine]
+ end
 
-    subgraph DECISION_ACTION["4. Visualization, Human & Automated Action"]
-        A1[WebGPU 3D Browser Dashboard with 4K Video Projection]
-        A2[Geotechnical Officer Mobile App (Active Learning HITL)]
-        A3[Sub-Second Autonomous Sirens & VHF Radio Dispatch in <1.0s]
-    end
+ subgraph DECISION_ACTION["4. Visualization, Human & Automated Action"]
+ A1[WebGPU 3D Browser Dashboard with 4K Video Projection]
+ A2[Geotechnical Officer Mobile App (Active Learning HITL)]
+ A3[Sub-Second Autonomous Sirens & VHF Radio Dispatch in <1.0s]
+ end
 
-    P1 & P2 & P3 -->|Continuous Telemetry & Video| D1 --> D2
-    D2 -->|Live Stream Synchronization| DIGITAL_TWIN
-    DIGITAL_TWIN --> A1 & A2 & A3
-    A2 & A3 -->|Evacuation & Blast Optimization Commands| P1 & P3
+ P1 & P2 & P3 -->|Continuous Telemetry & Video| D1 --> D2
+ D2 -->|Live Stream Synchronization| DIGITAL_TWIN
+ DIGITAL_TWIN --> A1 & A2 & A3
+ A2 & A3 -->|Evacuation & Blast Optimization Commands| P1 & P3
 ```
 *Figure 2.1: Master bidirectional digital twin feedback loop between physical mine and software twin.*
 
@@ -80,19 +83,19 @@ flowchart TD
 ## 3. 3D Mine Spatial Representation & Geometric Entities
 
 ```
-                         Pit-Rim Crest (Ground Surface)
-                         [AWS Weather Station Pin 📍]
-                                ┌─────────────┐
-                                │             │ ◄─── Bench 1 (LoRa Crackmeter Pin 📍)
-                                ├─────────────┴────────┐
-                                │  [Haul Road Corridor]│
-                                │   (Exclusion Zone 🟡)│   Bench 2 (LoRa Tiltmeter Pin 📍)
-                                ├──────────────────────┴──────────────┐
-                                │   🔴 ACTIVE TERTIARY SLIP ZONE      │
-                                │   [3D Rockfall Bounce Hazard Cone]  │   Bench 3 (Piezometer Pin 📍)
-                                ├─────────────────────────────────────┴────────────┐
-                                │   [4K PTZ Camera 3D View Frustum 🎥]             │
-                                └──────────────────────────────────────────────────┴───── Pit Floor
+ Pit-Rim Crest (Ground Surface)
+ [AWS Weather Station Pin ]
+ 
+ Bench 1 (LoRa Crackmeter Pin )
+ 
+ [Haul Road Corridor]
+ (Exclusion Zone [ADVISORY / YELLOW]) Bench 2 (LoRa Tiltmeter Pin )
+ 
+ [CRITICAL / RED] ACTIVE TERTIARY SLIP ZONE 
+ [3D Rockfall Bounce Hazard Cone] Bench 3 (Piezometer Pin )
+ 
+ [4K PTZ Camera 3D View Frustum ] 
+ Pit Floor
 ```
 *Figure 3.1: Integrated 3D spatial entities within the open-cast mine digital twin.*
 
@@ -109,20 +112,20 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                     ELEVATION MODEL TAXONOMY                                      |
+| ELEVATION MODEL TAXONOMY |
 +---------------------------------------------------------------------------------------------------+
-|  [ DIGITAL SURFACE MODEL (DSM) ]         │  [ DIGITAL TERRAIN MODEL (DTM) ]                       |
-|  - Captures the outermost surface        │  - Bare-earth surface model with all vegetation,       |
-|  - Includes excavators, trucks & trees   │    haul trucks, and temporary berms filtered out       |
-|  - Direct output of raw photogrammetry   │  - MANDATORY for accurate geotechnical slope stability |
+| [ DIGITAL SURFACE MODEL (DSM) ] [ DIGITAL TERRAIN MODEL (DTM) ] |
+| - Captures the outermost surface - Bare-earth surface model with all vegetation, |
+| - Includes excavators, trucks & trees haul trucks, and temporary berms filtered out |
+| - Direct output of raw photogrammetry - MANDATORY for accurate geotechnical slope stability |
 +---------------------------------------------------------------------------------------------------+
 ```
 
 ```mermaid
 flowchart LR
-    DRONE[UAV Drone 4K Images / LiDAR Point Cloud] --> PDAL_CSF[PDAL Cloth Simulation Ground Filter CSF]
-    PDAL_CSF --> DTM[Bare-Earth Digital Terrain Model DTM Mesh]
-    DTM --> WEBGPU[CesiumJS / Three.js 3D Tiles Streaming]
+ DRONE[UAV Drone 4K Images / LiDAR Point Cloud] --> PDAL_CSF[PDAL Cloth Simulation Ground Filter CSF]
+ PDAL_CSF --> DTM[Bare-Earth Digital Terrain Model DTM Mesh]
+ DTM --> WEBGPU[CesiumJS / Three.js 3D Tiles Streaming]
 ```
 *Figure 4.1: Automated point cloud classification pipeline generating bare-earth DTM meshes.*
 
@@ -132,14 +135,14 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    SRC[1. Multi-View Drone Images / TLS LiDAR Scans] --> SFM[2. Structure-from-Motion SfM: SIFT Keypoint Feature Matching]
-    SFM --> BUNDLE[3. Bundle Adjustment: Solves Camera Poses & Sparse Point Cloud]
-    BUNDLE --> MVS[4. Multi-View Stereo MVS: Generates Dense 3D Point Cloud 50M Points]
-    MVS --> CLOUD_COMP[5. CloudCompare M3C2: Change Detection & Normal Vector Extraction]
-    CLOUD_COMP --> POISSON[6. Screened Poisson Surface Reconstruction: Generates Watertight 3D Mesh]
-    POISSON --> SIMPLIFY[7. Quadric Error Metric Mesh Decimation: Optimizes Polygon Count]
-    SIMPLIFY --> TILES[8. OGC 3D Tiles 1.1 Hierarchical LOD Tree Generation]
-    TILES --> BROWSER[9. Sub-Second Streaming in WebGPU Browser Dashboard]
+ SRC[1. Multi-View Drone Images / TLS LiDAR Scans] --> SFM[2. Structure-from-Motion SfM: SIFT Keypoint Feature Matching]
+ SFM --> BUNDLE[3. Bundle Adjustment: Solves Camera Poses & Sparse Point Cloud]
+ BUNDLE --> MVS[4. Multi-View Stereo MVS: Generates Dense 3D Point Cloud 50M Points]
+ MVS --> CLOUD_COMP[5. CloudCompare M3C2: Change Detection & Normal Vector Extraction]
+ CLOUD_COMP --> POISSON[6. Screened Poisson Surface Reconstruction: Generates Watertight 3D Mesh]
+ POISSON --> SIMPLIFY[7. Quadric Error Metric Mesh Decimation: Optimizes Polygon Count]
+ SIMPLIFY --> TILES[8. OGC 3D Tiles 1.1 Hierarchical LOD Tree Generation]
+ TILES --> BROWSER[9. Sub-Second Streaming in WebGPU Browser Dashboard]
 ```
 *Figure 5.1: End-to-end 3D reconstruction pipeline from raw imagery to hierarchical 3D Tiles.*
 
@@ -152,7 +155,7 @@ To display 2D optical camera bounding boxes (e.g., a detached rock detected by Y
 $$\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} \sim K \begin{bmatrix} R & \mathbf{t} \end{bmatrix} \begin{bmatrix} X_w \\ Y_w \\ Z_w \\ 1 \end{bmatrix}$$
 
 ```
-[2D Pixel (u, v) in Camera] ──► Ray-Cast 3D Vector ──► Intersects 3D Highwall DTM Mesh ──► [World Coordinates (Xw, Yw, Zw)]
+[2D Pixel (u, v) in Camera] Ray-Cast 3D Vector Intersects 3D Highwall DTM Mesh [World Coordinates (Xw, Yw, Zw)]
 ```
 
 * This enables the system to calculate the **exact metric world coordinates ($X_w, Y_w, Z_w$)** of falling boulders, tension cracks, and water seepage lines detected on 2D video feeds.
@@ -163,12 +166,12 @@ $$\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} \sim K \begin{bmatrix} R & \mathbf{t
 
 ```mermaid
 timeline
-    title 4D Spatiotemporal Highwall Failure Progression Timeline
-    Epoch T0 (Baseline) : Static 3D Mesh Baseline Setup : FoS = 1.45 (Stable Green)
-    Epoch T1 (Excavation) : Toe Undercutting & Surcharge Loading : Minor Creep 0.5 mm/hr
-    Epoch T2 (Cloudburst) : Monsoon Rain Infiltration : Pore Pressure u = 180 kPa
-    Epoch T3 (Tertiary Creep) : Rapid Tension Crack Dilation : FoS Drops to 0.92 (Red TARP)
-    Epoch T4 (Collapse) : Rockfall Detachment & Runout : Sirens Sounded in <1.0s
+ title 4D Spatiotemporal Highwall Failure Progression Timeline
+ Epoch T0 (Baseline) : Static 3D Mesh Baseline Setup : FoS = 1.45 (Stable Green)
+ Epoch T1 (Excavation) : Toe Undercutting & Surcharge Loading : Minor Creep 0.5 mm/hr
+ Epoch T2 (Cloudburst) : Monsoon Rain Infiltration : Pore Pressure u = 180 kPa
+ Epoch T3 (Tertiary Creep) : Rapid Tension Crack Dilation : FoS Drops to 0.92 (Red TARP)
+ Epoch T4 (Collapse) : Rockfall Detachment & Runout : Sirens Sounded in <1.0s
 ```
 *Figure 7.1: 4D spatiotemporal timeline tracking the digital twin from baseline setup to collapse.*
 
@@ -179,18 +182,18 @@ timeline
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Digital Twin Highwall Maximum Displacement vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
-    y-axis "Cumulative Displacement (mm)" 0 --> 120
-    line [2.0, 5.5, 14.2, 32.0, 68.5, 115.0]
+ title "Illustrative Example: Digital Twin Highwall Maximum Displacement vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
+ y-axis "Cumulative Displacement (mm)" 0 --> 120
+ line [2.0, 5.5, 14.2, 32.0, 68.5, 115.0]
 ```
 *Figure 8.1: Illustrative 3D digital twin maximum highwall displacement curve accelerating into tertiary failure.*
 
@@ -202,12 +205,12 @@ Under DGMS and international geotechnical standards, the 3D Digital Twin color-c
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                             STANDARDIZED 3D HAZARD ZONING MATRIX                                  |
+| STANDARDIZED 3D HAZARD ZONING MATRIX |
 +---------------------------------------------------------------------------------------------------+
-|  🟢 GREEN ZONE (STABLE):        FoS ≥ 1.30  | Velocity < 1.0 mm/day   | Normal mining operations  |
-|  🟡 YELLOW ZONE (ADVISORY):     1.15 ≤ FoS < 1.30 | 1.0–5.0 mm/day    | Geologist inspection req. |
-|  🟠 ORANGE ZONE (WARNING):      1.00 ≤ FoS < 1.15 | 5.0–20.0 mm/day   | Heavy machinery relocated |
-|  🔴 RED ZONE (CRITICAL HAZARD): FoS < 1.00  | Velocity > 20.0 mm/day  | IMMEDIATE SITE EVACUATION |
+| [NORMAL / GREEN] GREEN ZONE (STABLE): FoS ≥ 1.30 | Velocity < 1.0 mm/day | Normal mining operations |
+| [ADVISORY / YELLOW] YELLOW ZONE (ADVISORY): 1.15 ≤ FoS < 1.30 | 1.0–5.0 mm/day | Geologist inspection req. |
+| [WARNING / ORANGE] ORANGE ZONE (WARNING): 1.00 ≤ FoS < 1.15 | 5.0–20.0 mm/day | Heavy machinery relocated |
+| [CRITICAL / RED] RED ZONE (CRITICAL HAZARD): FoS < 1.00 | Velocity > 20.0 mm/day | IMMEDIATE SITE EVACUATION |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -243,30 +246,30 @@ To build our SIH25071 prototype, we evaluated verified open-source 3D visualizat
 
 ```mermaid
 flowchart TD
-    subgraph Geospatial 3D Modeling Layer
-        A1[WebODM Drone Photogrammetry & LiDAR Point Clouds] --> A2[PDAL Ground Filtering & Screened Poisson Meshing]
-        A2 --> A3[Hierarchical OGC 3D Tiles 1.1 Stream]
-    end
+ subgraph Geospatial 3D Modeling Layer
+ A1[WebODM Drone Photogrammetry & LiDAR Point Clouds] --> A2[PDAL Ground Filtering & Screened Poisson Meshing]
+ A2 --> A3[Hierarchical OGC 3D Tiles 1.1 Stream]
+ end
 
-    subgraph Real-Time In-Situ & Optical Telemetry Layer
-        B1[Edge 4K Optical PTZ CCTV Cameras: 30 FPS YOLO & Optical Flow]
-        B2[Wireless LoRa Potentiometric Crackmeters & Tiltmeters]
-        B3[Vibrating-Wire Borehole Piezometers: Pore Pressure u]
-        B4[Pit-Rim Automatic Weather Station: Rain Intensity]
-        B5[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
-    end
+ subgraph Real-Time In-Situ & Optical Telemetry Layer
+ B1[Edge 4K Optical PTZ CCTV Cameras: 30 FPS YOLO & Optical Flow]
+ B2[Wireless LoRa Potentiometric Crackmeters & Tiltmeters]
+ B3[Vibrating-Wire Borehole Piezometers: Pore Pressure u]
+ B4[Pit-Rim Automatic Weather Station: Rain Intensity]
+ B5[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
+ end
 
-    A3 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A3 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 12.1: Master multi-sensor data fusion architecture incorporating the 3D digital twin.*
 
@@ -276,14 +279,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard UI Layout
-        D1[Interactive 3D WebGPU Viewport: 3D Highwall Mesh, Deformation Heatmaps & Sensor Pins]
-        D2[4K Live Camera Projection Overlay: Real-Time YOLO Bounding Boxes & Optical Flow Vectors]
-        D3[Geotechnical Time-Series Panel: Live Microstrain, Pore Pressure & Crack Dilation Curves]
-        D4[Dynamic TARP Gauge: Level 1 to 4 with Sub-Second Siren & VHF Radio Dispatch Panel]
-        D5[SHAP Explainable AI Card: Real-Time Root Cause Attribution Breakdown]
-        D6[4D Temporal Replay Slider & One-Click DGMS Statutory Inspection Report Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard UI Layout
+ D1[Interactive 3D WebGPU Viewport: 3D Highwall Mesh, Deformation Heatmaps & Sensor Pins]
+ D2[4K Live Camera Projection Overlay: Real-Time YOLO Bounding Boxes & Optical Flow Vectors]
+ D3[Geotechnical Time-Series Panel: Live Microstrain, Pore Pressure & Crack Dilation Curves]
+ D4[Dynamic TARP Gauge: Level 1 to 4 with Sub-Second Siren & VHF Radio Dispatch Panel]
+ D5[SHAP Explainable AI Card: Real-Time Root Cause Attribution Breakdown]
+ D6[4D Temporal Replay Slider & One-Click DGMS Statutory Inspection Report Export]
+ end
 ```
 *Figure 13.1: Complete UI layout of the proposed SIH25071 WebGPU decision-support dashboard.*
 
@@ -293,15 +296,15 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ EXPENSIVE PROPRIETARY PLATFORMS ]   ──► High commercial licensing costs (>₹50L) restrict       |
-|                                            modern digital twins to Tier-1 mining corporations.    |
-|  [ FRAGMENTED 2D MONITORING SCREENS ]  ──► Control rooms juggle 10+ disjointed software screens,  |
-|                                            causing delayed emergency evacuations.                 |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses open-source CesiumJS / WebGL with open-standard  |
-|                                            MQTT, InfluxDB, & Edge AI into a lightweight, browser- |
-|                                            accessible 3D Digital Twin costing <₹5.0 Lakhs total!  |
+| [ EXPENSIVE PROPRIETARY PLATFORMS ] High commercial licensing costs (>₹50L) restrict |
+| modern digital twins to Tier-1 mining corporations. |
+| [ FRAGMENTED 2D MONITORING SCREENS ] Control rooms juggle 10+ disjointed software screens, |
+| causing delayed emergency evacuations. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses open-source CesiumJS / WebGL with open-standard |
+| MQTT, InfluxDB, & Edge AI into a lightweight, browser- |
+| accessible 3D Digital Twin costing <₹5.0 Lakhs total! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -322,50 +325,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[UAV Drone Photogrammetry & LiDAR 3D Point Clouds]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[UAV Drone Photogrammetry & LiDAR 3D Point Clouds]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[WebODM / PDAL: Bare-Earth DTM & 3D Tiles Generation]
-        S2 --> P2[YOLOv8 Detection, Optical Flow & 2D-to-3D Ray Casting]
-        S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P5[Rainfall Intensity, 24h Rain & Infiltration Index]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[WebODM / PDAL: Bare-Earth DTM & 3D Tiles Generation]
+ S2 --> P2[YOLOv8 Detection, Optical Flow & 2D-to-3D Ray Casting]
+ S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P5[Rainfall Intensity, 24h Rain & Infiltration Index]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_3D[3D Mesh Coordinates, Surface Deformation & Runout Geometry]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_3D[3D Mesh Coordinates, Surface Deformation & Runout Geometry]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_3D & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_3D & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 16.1: Complete end-to-end system architecture incorporating the 3D Digital Twin.*
 

@@ -1,10 +1,10 @@
 # Existing Technology 21: Manual Geological Inspection & Field Mapping
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/21_Manual_Geological_Inspection.md`
 
 ---
@@ -26,16 +26,16 @@ This report evaluates Manual Geological Inspection as an **established geotechni
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                        EXPERT HUMAN INSPECTION vs. SENSOR-ONLY AUTOMATION                         |
+| EXPERT HUMAN INSPECTION vs. SENSOR-ONLY AUTOMATION |
 +---------------------------------------------------------------------------------------------------+
-|  [ EXPERT HUMAN GEOLOGICAL INSPECTION ]  │  [ SENSOR-ONLY AUTOMATED MONITORING ]                  |
-|  - High contextual & mechanical insight  │  - High-frequency numerical streams (mm, kPa, °)     |
-|  - Identifies rock types, gouge, joints  │  - Blind to lithology, weathering & clay infill        |
-|  - Intermittent cadence (Daily / Weekly) │  - Continuous 24/7 real-time monitoring                |
-|  - Subjective & labor-intensive          │  - Objective & automated quantitative data             |
-|  - Hazardous physical access near toes   │  - Safe stand-off remote telemetry                     |
-|  ────────────────────────────────────────┴──────────────────────────────────────────────────────  |
-|  ► PROPOSED SIH SOLUTION: HYBRID FUSION (Human Expert Domain Knowledge + 24/7 AI Sensor Streams)  |
+| [ EXPERT HUMAN GEOLOGICAL INSPECTION ] [ SENSOR-ONLY AUTOMATED MONITORING ] |
+| - High contextual & mechanical insight - High-frequency numerical streams (mm, kPa, °) |
+| - Identifies rock types, gouge, joints - Blind to lithology, weathering & clay infill |
+| - Intermittent cadence (Daily / Weekly) - Continuous 24/7 real-time monitoring |
+| - Subjective & labor-intensive - Objective & automated quantitative data |
+| - Hazardous physical access near toes - Safe stand-off remote telemetry |
+| |
+| PROPOSED SIH SOLUTION: HYBRID FUSION (Human Expert Domain Knowledge + 24/7 AI Sensor Streams) |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -46,15 +46,15 @@ This report evaluates Manual Geological Inspection as an **established geotechni
 In hard rock open-pit mines, slope instability is almost entirely controlled by **geological structural discontinuities**—planes of mechanical weakness separating intact rock blocks:
 
 ```
-Planar Shear Slide                  Wedge Failure (Intersecting Joints)      Flexural / Block Toppling
-   ┌───────────────────────┐             ┌────────────────────────┐             ┌────────────────────────┐
-   │ Highwall Bench Face   │             │ Joint Plane A \ / B    │             │ Columnar Rock Blocks   │
-   │ ┌───────────────────┐ │             │ ┌────────────────────┐ │             │ ┌───┐ ┌───┐ ┌───┐ ⤹    │
-   │ │ Bedding Plane (ψp)│ │             │ │ 3D Intersecting    │ │             │ │   │ │   │ │   │      │
-   │ │ Daylighting (ψf)  │ │             │ │ Sliding Wedge Line │ │             │ └───┘ └───┘ └───┘      │
-   │ └───────────────────┘ │             │ └────────────────────┘ │             │ Steeply Dipping Joints │
-   │ (Single Planar Joint) │             │ (Tetrahedral Block)    │             │ (Forward Leaning Slabs)│
-   └───────────────────────┘             └────────────────────────┘             └────────────────────────┘
+Planar Shear Slide Wedge Failure (Intersecting Joints) Flexural / Block Toppling
+ 
+ Highwall Bench Face Joint Plane A \ / B Columnar Rock Blocks 
+ 
+ Bedding Plane (ψp) 3D Intersecting 
+ Daylighting (ψf) Sliding Wedge Line 
+ Steeply Dipping Joints 
+ (Single Planar Joint) (Tetrahedral Block) (Forward Leaning Slabs)
+ 
 ```
 *Figure 2.1: Structural comparison of the three primary discontinuity-controlled rock slope failure mechanisms.*
 
@@ -76,16 +76,16 @@ Planar Shear Slide                  Wedge Failure (Intersecting Joints)      Fle
 
 ```mermaid
 flowchart TD
-    GEO[1. Certified Geotechnical Officer / Mining Geologist] --> BRIEF[2. Pre-Shift Review: Weather History, Blast Schedules & Radar Logs]
-    BRIEF --> FIELD[3. Physical Highwall Inspection: Benches, Haul Roads & Crests]
-    FIELD --> COMPASS[4. Measure Discontinuity Orientation: Dip ψ & Dip Direction α]
-    FIELD --> HAMMER[5. Schmidt Rebound Hammer: Quantify Rock Surface Hardness JCS]
-    FIELD --> WATER[6. Map Seepage Lines, Damp Patches & Tension Crack Apertures]
-    FIELD --> PHOTO[7. Capture Geotagged DSLR / Tablet Field Photographs]
-    COMPASS & HAMMER & WATER & PHOTO --> RMR_CALC[8. Calculate Rock Mass Rating RMR & GSI Index]
-    RMR_CALC --> STEREONET[9. Stereographic Kinematic Projection in DIPS]
-    STEREONET --> LOGBOOK[10. Compile Statutory DGMS Geotechnical Inspection Register]
-    LOGBOOK --> TARP_ACTION[11. Issue Mandatory Safety Recommendations: Berms, Scaling or Evacuation]
+ GEO[1. Certified Geotechnical Officer / Mining Geologist] --> BRIEF[2. Pre-Shift Review: Weather History, Blast Schedules & Radar Logs]
+ BRIEF --> FIELD[3. Physical Highwall Inspection: Benches, Haul Roads & Crests]
+ FIELD --> COMPASS[4. Measure Discontinuity Orientation: Dip ψ & Dip Direction α]
+ FIELD --> HAMMER[5. Schmidt Rebound Hammer: Quantify Rock Surface Hardness JCS]
+ FIELD --> WATER[6. Map Seepage Lines, Damp Patches & Tension Crack Apertures]
+ FIELD --> PHOTO[7. Capture Geotagged DSLR / Tablet Field Photographs]
+ COMPASS & HAMMER & WATER & PHOTO --> RMR_CALC[8. Calculate Rock Mass Rating RMR & GSI Index]
+ RMR_CALC --> STEREONET[9. Stereographic Kinematic Projection in DIPS]
+ STEREONET --> LOGBOOK[10. Compile Statutory DGMS Geotechnical Inspection Register]
+ LOGBOOK --> TARP_ACTION[11. Issue Mandatory Safety Recommendations: Berms, Scaling or Evacuation]
 ```
 *Figure 3.1: Step-by-step statutory workflow for manual geological slope inspection.*
 
@@ -94,14 +94,14 @@ flowchart TD
 ## 4. Traditional Field Tools vs. Modern Digital Mapping
 
 ```
-Traditional Geological Kit              Modern Digital Rugged Tablet           UAV Drone Photogrammetry Rig
-  ┌─────────────────────────┐             ┌────────────────────────┐             ┌────────────────────────┐
-  │ • Brunton / Clar Compass│             │ • Rugged IP68 Tablet   │             │ • RTK Drone System     │
-  │ • Schmidt Rebound Hammer│             │ • Digital Clino App    │             │ • 4K Optical Camera    │
-  │ • Geological Pick       │ ──Upgrade──►│ • GPS Sub-Meter Sync   │ ──Upgrade──►│ • WebODM / COLMAP      │
-  │ • Steel Tape Measure    │             │ • Direct Database Sync │             │ • 3D Point Cloud Mesh  │
-  │ • Paper Field Notebook  │             │ • Cloud Photo Archive  │             │ • Automated Joints DSE │
-  └─────────────────────────┘             └────────────────────────┘             └────────────────────────┘
+Traditional Geological Kit Modern Digital Rugged Tablet UAV Drone Photogrammetry Rig
+ 
+ • Brunton / Clar Compass • Rugged IP68 Tablet • RTK Drone System 
+ • Schmidt Rebound Hammer • Digital Clino App • 4K Optical Camera 
+ • Geological Pick Upgrade • GPS Sub-Meter Sync Upgrade • WebODM / COLMAP 
+ • Steel Tape Measure • Direct Database Sync • 3D Point Cloud Mesh 
+ • Paper Field Notebook • Cloud Photo Archive • Automated Joints DSE 
+ 
 ```
 *Figure 4.1: Technological evolution from manual analog mapping to digital 3D twin inspection.*
 
@@ -123,21 +123,21 @@ Traditional Geological Kit              Modern Digital Rugged Tablet           U
 To evaluate whether a mapped joint set $(J_1)$ can physically slide out of a highwall face with slope dip ($\psi_f$) and dip direction ($\alpha_f$), the **Markland Kinematic Test** is applied:
 
 ```
-                     Kinematic Sliding Envelope (Stereonet Projection)
-                                    N
-                                    │
-                                 ┌─────┐
-                            W ───│  ★  │─── E   ★ Pole of Critical Sliding Joint
-                                 └─────┘          (Falls inside Daylighting Daylight Envelope)
-                                    │
-                                    S
+ Kinematic Sliding Envelope (Stereonet Projection)
+ N
+ 
+ 
+ W [HIGHLIGHT] E [HIGHLIGHT] Pole of Critical Sliding Joint
+ (Falls inside Daylighting Daylight Envelope)
+ 
+ S
 ```
 
 ### Planar Failure Kinematic Criteria:
 1. **Daylighting Condition:** The dip of the joint plane ($\psi_p$) must be shallower than the slope face dip ($\psi_f$), but steeper than the joint friction angle ($\phi'$):
-   $$\psi_f > \psi_p > \phi'$$
+ $$\psi_f > \psi_p > \phi'$$
 2. **Strike Parallelism:** The strike of the joint plane must be within $\pm 20^\circ$ of the highwall face strike:
-   $$|\alpha_f - \alpha_p| \le 20^\circ$$
+ $$|\alpha_f - \alpha_p| \le 20^\circ$$
 
 ---
 
@@ -162,20 +162,20 @@ In high-consequence mining environments, an AI system must never operate as an u
 
 ```mermaid
 flowchart TD
-    SENS[Multi-Modal Sensors: 4K Cameras, LoRa Tilt, Piezometers & Weather] --> AI_ENG[XGBoost & Physics-Informed Neural Network Risk Engine]
-    AI_ENG --> PRED[Predicts Highwall Instability Anomaly: Risk P_fail > 0.85]
-    PRED --> XAI[SHAP Explainability Card: Pinpoints Root Cause Features]
-    XAI --> DISPATCH[Sends Instant Priority Alert to Geotechnical Officer's Mobile App]
+ SENS[Multi-Modal Sensors: 4K Cameras, LoRa Tilt, Piezometers & Weather] --> AI_ENG[XGBoost & Physics-Informed Neural Network Risk Engine]
+ AI_ENG --> PRED[Predicts Highwall Instability Anomaly: Risk P_fail > 0.85]
+ PRED --> XAI[SHAP Explainability Card: Pinpoints Root Cause Features]
+ XAI --> DISPATCH[Sends Instant Priority Alert to Geotechnical Officer's Mobile App]
 
-    DISPATCH --> HUMAN{Geotechnical Officer Field Verification}
+ DISPATCH --> HUMAN{Geotechnical Officer Field Verification}
 
-    HUMAN -->|CONFIRM: True Hazard| ACT_TRUE[1. Authorizes Immediate Site Evacuation & TARP Action]
-    ACT_TRUE --> DB_TRUE[2. Logs Confirmed Ground-Truth Label in Geological Database]
+ HUMAN -->|CONFIRM: True Hazard| ACT_TRUE[1. Authorizes Immediate Site Evacuation & TARP Action]
+ ACT_TRUE --> DB_TRUE[2. Logs Confirmed Ground-Truth Label in Geological Database]
 
-    HUMAN -->|REJECT: False Alarm e.g., Shovel Dust| ACT_FALSE[1. Cancels Red Alert & Inputs Rejection Reason]
-    ACT_FALSE --> DB_FALSE[2. Logs Hard Negative Training Sample in Active Learning Pool]
+ HUMAN -->|REJECT: False Alarm e.g., Shovel Dust| ACT_FALSE[1. Cancels Red Alert & Inputs Rejection Reason]
+ ACT_FALSE --> DB_FALSE[2. Logs Hard Negative Training Sample in Active Learning Pool]
 
-    DB_TRUE & DB_FALSE --> RETRAIN[Automated Model Retraining: Continuously Improves AI Precision]
+ DB_TRUE & DB_FALSE --> RETRAIN[Automated Model Retraining: Continuously Improves AI Precision]
 ```
 *Figure 7.1: Human-in-the-Loop Active Learning architecture ensuring continuous model improvement.*
 
@@ -186,22 +186,22 @@ flowchart TD
 To eliminate paper notebooks and digitize field data instantly, our proposed architecture includes a dedicated **Offline-First Geotechnical Field App** for mine geologists:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  📱 SIH25071 GEOTECHNICAL FIELD INSPECTOR v2.4 (OFFLINE SYNC)   │
-├─────────────────────────────────────────────────────────────────┤
-│  📍 Location: Bench 3 - North Highwall [GPS: 23.795°N, 86.432°E]│
-│  🪨 Lithology: Sandstone / Carbonaceous Shale Seam Contact     │
-│  📐 Joint Set 1: Dip 62° | Dip Direction 185° [Daylighting! ⚠️] │
-│  💧 Seepage: Active Damp Patch (Estimated Pore Pressure: 15 kPa)│
-│  📏 Measured Tension Crack: Length 4.5 m | Aperture 22 mm       │
-│  📸 Geotagged Photo: [IMG_20260817_1422.jpg - Attached]         │
-│  -------------------------------------------------------------  │
-│  🤖 AI ASSISTANT SUGGESTION:                                    │
-│  "Camera CAM-01 Optical Flow detected 8.2 mm/hr creep here.    │
-│   Calculated Kinematic Wedge Risk: 88.4% (TARP Level 3)"        │
-│  -------------------------------------------------------------  │
-│  [ ✅ CONFIRM & SYNC TO 3D TWIN ]      [ ⚠️ OVERRIDE AI SCORE ]  │
-└─────────────────────────────────────────────────────────────────┘
+
+ SIH25071 GEOTECHNICAL FIELD INSPECTOR v2.4 (OFFLINE SYNC) 
+
+ Location: Bench 3 - North Highwall [GPS: 23.795°N, 86.432°E]
+ Lithology: Sandstone / Carbonaceous Shale Seam Contact 
+ Joint Set 1: Dip 62° | Dip Direction 185° [Daylighting! [ALERT]] 
+ Seepage: Active Damp Patch (Estimated Pore Pressure: 15 kPa)
+ Measured Tension Crack: Length 4.5 m | Aperture 22 mm 
+ Geotagged Photo: [IMG_20260817_1422.jpg - Attached] 
+ ------------------------------------------------------------- 
+ AI ASSISTANT SUGGESTION: 
+ "Camera CAM-01 Optical Flow detected 8.2 mm/hr creep here. 
+ Calculated Kinematic Wedge Risk: 88.4% (TARP Level 3)" 
+ ------------------------------------------------------------- 
+ [ [CONFIRMED] CONFIRM & SYNC TO 3D TWIN ] [ [ALERT] OVERRIDE AI SCORE ] 
+
 ```
 *Figure 8.1: UI mockup of the proposed SIH mobile field inspection and ground-truth logging application.*
 
@@ -209,7 +209,7 @@ To eliminate paper notebooks and digitize field data instantly, our proposed arc
 
 ## 9. Illustrative Synthetic Geological Inspection Dataset
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to explain how field inspection logs correlate with automated sensor metrics. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Multi-Temporal Inspection Dataset
@@ -220,23 +220,23 @@ To eliminate paper notebooks and digitize field data instantly, our proposed arc
 | **Day 5** | Bench 3 North | 64 (Good) | 60 | 0.8 | Dry | 0.4 | Minor Joint Opening |
 | **Day 10**| Bench 3 North | 55 (Fair) | 52 | 2.1 | Moist Joint | 1.2 | Active Tension Propagation |
 | **Day 15**| Bench 3 North | 42 (Fair) | 40 | 4.5 | Dripping Seepage | 5.8 | Secondary Creep Confirmed |
-| **Day 18**| Bench 3 North | **28 (Poor)** | **30** | **8.2** | **Continuous Flow**| **18.5** | 🔴 **CRITICAL COLLAPSE THREAT** |
+| **Day 18**| Bench 3 North | **28 (Poor)** | **30** | **8.2** | **Continuous Flow**| **18.5** | [CRITICAL / RED] **CRITICAL COLLAPSE THREAT** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Rock Mass Rating (RMR) Degradation vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [1, 5, 10, 15, 18]
-    y-axis "Rock Mass Rating (RMR Score)" 0 --> 80
-    line [68, 64, 55, 42, 28]
+ title "Illustrative Example: Rock Mass Rating (RMR) Degradation vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [1, 5, 10, 15, 18]
+ y-axis "Rock Mass Rating (RMR Score)" 0 --> 80
+ line [68, 64, 55, 42, 28]
 ```
 *Figure 9.1: Illustrative degradation of RMR score as joint weathering and water inflow accelerate.*
 
@@ -246,31 +246,31 @@ xychart-beta
 
 ```mermaid
 flowchart TD
-    subgraph Expert Geological Field Layer
-        A1[Geotechnical Mobile App: Mapped Joint Sets ψ & α] --> A2[Stereonet Kinematic Markland Solver]
-        A3[Field RMR & GSI Lithology Ratings] --> A4[Rock Mass Yield Strength Prior]
-        A5[Verified Field Ground-Truth Labels] --> A6[Active Learning Training Database]
-    end
+ subgraph Expert Geological Field Layer
+ A1[Geotechnical Mobile App: Mapped Joint Sets ψ & α] --> A2[Stereonet Kinematic Markland Solver]
+ A3[Field RMR & GSI Lithology Ratings] --> A4[Rock Mass Yield Strength Prior]
+ A5[Verified Field Ground-Truth Labels] --> A6[Active Learning Training Database]
+ end
 
-    subgraph Real-Time Automated Remote Sensing Layer
-        B1[Edge 4K Cameras: 30 FPS YOLOv8 & Optical Flow]
-        B2[Low-Cost Wireless LoRa MEMS Tiltmeters & Crackmeters]
-        B3[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        B4[Pit-Rim Automatic Weather Station: Rain Intensity]
-        B5[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
-    end
+ subgraph Real-Time Automated Remote Sensing Layer
+ B1[Edge 4K Cameras: 30 FPS YOLOv8 & Optical Flow]
+ B2[Low-Cost Wireless LoRa MEMS Tiltmeters & Crackmeters]
+ B3[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ B4[Pit-Rim Automatic Weather Station: Rain Intensity]
+ B5[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
+ end
 
-    A2 & A4 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 10.1: Master multi-sensor data fusion architecture incorporating geological field mapping.*
 
@@ -280,17 +280,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.8%)"]
-        B["📍 Location: Bench 3 - North Wall (Field Sector B3-N / CAM-01)"]
-        C["⏱️ Predicted Planar Failure Window: 9 ± 2 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Geologically Mapped Daylighting Joint Set (ψ=62°, α=185°): +42% contribution"]
-        D2["• Sub-Pixel Optical Flow Velocity Surge (18.5 mm/hr): +26% contribution"]
-        D3["• Active Joint Water Seepage & Hydrostatic Pressure (28 kPa): +18% contribution"]
-        D4["• Field RMR Structural Degradation (RMR dropped to 28): +9% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.8%)"]
+ B[" Location: Bench 3 - North Wall (Field Sector B3-N / CAM-01)"]
+ C[" Predicted Planar Failure Window: 9 ± 2 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Geologically Mapped Daylighting Joint Set (ψ=62°, α=185°): +42% contribution"]
+ D2["• Sub-Pixel Optical Flow Velocity Surge (18.5 mm/hr): +26% contribution"]
+ D3["• Active Joint Water Seepage & Hydrostatic Pressure (28 kPa): +18% contribution"]
+ D4["• Field RMR Structural Degradation (RMR dropped to 28): +9% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 11.1: Conceptual SHAP explainable alert diagnostic card for geologically informed alerts.*
 
@@ -300,14 +300,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with 3D Geological Discontinuity Planes & Fault Overlays]
-        D2[Interactive Stereonet Kinematic Projection Panel: Dynamic Daylight Envelope Display]
-        D3[Geotechnical Inspector Mobile Logbook Sync: One-Click Photo & Observation View]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Safety Compliance & Slope Inspection Audit Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with 3D Geological Discontinuity Planes & Fault Overlays]
+ D2[Interactive Stereonet Kinematic Projection Panel: Dynamic Daylight Envelope Display]
+ D3[Geotechnical Inspector Mobile Logbook Sync: One-Click Photo & Observation View]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Safety Compliance & Slope Inspection Audit Logbook Export]
+ end
 ```
 *Figure 12.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -317,16 +317,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ MANUAL INSPECTION LIMITATION ]      ──► High geological expertise, but severely constrained by |
-|                                            intermittent frequency (weekly) & hazardous toe access.|
-|  [ SENSOR-ONLY AUTOMATION GAP ]        ──► High-frequency numbers, but blind to lithology,        |
-|                                            weathering grade, and structural joint kinematics.     |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses mobile digital geological field mapping with     |
-|                                            24/7 Edge Computer Vision, InSAR, & IoT sensors into a |
-|                                            Human-in-the-Loop Physics-Informed AI engine that      |
-|                                            combines human geological wisdom with AI speed!        |
+| [ MANUAL INSPECTION LIMITATION ] High geological expertise, but severely constrained by |
+| intermittent frequency (weekly) & hazardous toe access.|
+| [ SENSOR-ONLY AUTOMATION GAP ] High-frequency numbers, but blind to lithology, |
+| weathering grade, and structural joint kinematics. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses mobile digital geological field mapping with |
+| 24/7 Edge Computer Vision, InSAR, & IoT sensors into a |
+| Human-in-the-Loop Physics-Informed AI engine that |
+| combines human geological wisdom with AI speed! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -347,50 +347,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Geotechnical Mobile Inspection App: Joint Sets, RMR & Seepage]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Geotechnical Mobile Inspection App: Joint Sets, RMR & Seepage]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[Stereonet Kinematic Solver, RMR & GSI Strength Calibration]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P5[Rainfall Intensity, 24h Rain & Infiltration Index]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[Stereonet Kinematic Solver, RMR & GSI Strength Calibration]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P5[Rainfall Intensity, 24h Rain & Infiltration Index]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_GEO[Discontinuity Kinematics, RMR, GSI & Friction Angle]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_HYDRO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_GEO[Discontinuity Kinematics, RMR, GSI & Friction Angle]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_HYDRO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_GEO & F_KIN & F_HYDRO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_GEO & F_KIN & F_HYDRO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 15.1: Complete end-to-end system architecture incorporating geological field mapping into the real-time AI rockfall prediction pipeline.*
 

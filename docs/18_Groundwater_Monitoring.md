@@ -1,10 +1,10 @@
 # Existing Technology 18: Groundwater Monitoring
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/18_Groundwater_Monitoring.md`
 
 ---
@@ -25,16 +25,16 @@ This report evaluates Groundwater Monitoring as an **existing hydrogeological an
 * **Pore-Water Pressure ($u$):** The hydrostatic or hydrodynamic fluid pressure exerted by water inside rock pores and joint apertures ($\text{kPa}$ or $\text{MPa}$).
 
 ```
-        Highwall Bench Surface
-             │
-             ▼
-     ┌───────────────────────┐
-     │ Unsaturated Rock Mass │  (Zero Pore Pressure: u = 0)
-     ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤ ◄─── Phreatic Water Table Level (hw)
-     │                       │
-     │ Saturated Rock Joints │  (Hydrostatic Pore Pressure: u = γw * zw > 0)
-     │                       │  [Reduces Effective Normal Clamping Stress!]
-     └───────────────────────┘
+ Highwall Bench Surface
+ 
+ 
+ 
+ Unsaturated Rock Mass (Zero Pore Pressure: u = 0)
+ Phreatic Water Table Level (hw)
+ 
+ Saturated Rock Joints (Hydrostatic Pore Pressure: u = γw * zw > 0)
+ [Reduces Effective Normal Clamping Stress!]
+ 
 ```
 *Figure 1.1: Schematic representation of the unsaturated vs. saturated zones in an open-cast highwall.*
 
@@ -50,45 +50,45 @@ This report evaluates Groundwater Monitoring as an **existing hydrogeological an
 
 ```mermaid
 flowchart TD
-    RAIN[1. Monsoon Rainfall / Regional Aquifer Recharge] --> INFILT[2. Water Infiltrates Rock Joints & Fractures]
-    INFILT --> PWP_SURGE[3. Subsurface Pore-Water Pressure u Surges Rapidly]
-    PWP_SURGE --> EFF_DROP[4. Terzaghi Effective Normal Stress Drops: σ' = σ - u]
-    EFF_DROP --> SHEAR_LOSS[5. Mohr-Coulomb Frictional Shear Resistance Collapses]
-    SHEAR_LOSS --> CLEFT_THRUST[6. Hydrostatic Cleft Pressure Pushes Rock Slab Outward]
-    CLEFT_THRUST --> STRAIN_ACC[7. Accelerating Surface Creep & Crack Dilation]
-    STRAIN_ACC --> COLLAPSE[8. Highwall Slope Failure & Bench Rockfall]
+ RAIN[1. Monsoon Rainfall / Regional Aquifer Recharge] --> INFILT[2. Water Infiltrates Rock Joints & Fractures]
+ INFILT --> PWP_SURGE[3. Subsurface Pore-Water Pressure u Surges Rapidly]
+ PWP_SURGE --> EFF_DROP[4. Terzaghi Effective Normal Stress Drops: σ' = σ - u]
+ EFF_DROP --> SHEAR_LOSS[5. Mohr-Coulomb Frictional Shear Resistance Collapses]
+ SHEAR_LOSS --> CLEFT_THRUST[6. Hydrostatic Cleft Pressure Pushes Rock Slab Outward]
+ CLEFT_THRUST --> STRAIN_ACC[7. Accelerating Surface Creep & Crack Dilation]
+ STRAIN_ACC --> COLLAPSE[8. Highwall Slope Failure & Bench Rockfall]
 ```
 *Figure 2.1: Hydro-mechanical failure progression from groundwater recharge to slope collapse.*
 
 ### The Fundamental Governing Formulations:
 1. **Terzaghi Effective Stress Principle (1943):**
-   $$\sigma' = \sigma - u$$
-   * $\sigma'$ = Effective normal stress carried by the rock-to-rock mineral contacts ($\text{kPa}$).
-   * $\sigma$ = Total overburden stress ($\sigma = \gamma_{\text{rock}} \cdot z$, $\text{kPa}$).
-   * $u$ = **Pore-water pressure ($\text{kPa}$)**.
+ $$\sigma' = \sigma - u$$
+ * $\sigma'$ = Effective normal stress carried by the rock-to-rock mineral contacts ($\text{kPa}$).
+ * $\sigma$ = Total overburden stress ($\sigma = \gamma_{\text{rock}} \cdot z$, $\text{kPa}$).
+ * $u$ = **Pore-water pressure ($\text{kPa}$)**.
 
 2. **Mohr-Coulomb Shear Strength Equation:**
-   $$\tau_f = c' + \sigma'\tan\phi' = c' + (\sigma_n - u)\tan\phi'$$
-   * As pore pressure $u \to \sigma_n$, available shear strength $\tau_f \to c'$ (friction drops to zero!).
+ $$\tau_f = c' + \sigma'\tan\phi' = c' + (\sigma_n - u)\tan\phi'$$
+ * As pore pressure $u \to \sigma_n$, available shear strength $\tau_f \to c'$ (friction drops to zero!).
 
 3. **Pore Pressure Ratio ($r_u$):**
-   $$r_u = \frac{u}{\gamma_{\text{rock}} \cdot z} \quad (\text{Dimensionless ratio: } r_u > 0.35 \text{ indicates severe instability risk})$$
+ $$r_u = \frac{u}{\gamma_{\text{rock}} \cdot z} \quad (\text{Dimensionless ratio: } r_u > 0.35 \text{ indicates severe instability risk})$$
 
 ---
 
 ## 3. Groundwater Monitoring Technologies
 
 ```
-Open Standpipe (Casagrande)         Vibrating-Wire Piezometer (VWP)     Multi-Level Piezometer String
-   ┌───────────────────────┐            ┌────────────────────────┐         ┌────────────────────────┐
-   │ Slotted PVC Pipe      │            │ Sealed Diaphragm VWP   │         │ Port 1: Perched Water  │
-   │ ┌───────────────────┐ │            │ ┌────────────────────┐ │         │ ├────────────────────┤ │
-   │ │ Dipmeter Cable    │ │            │ │ Resonant Wire (f²) │ │         │ Port 2: Main Aquifer   │
-   │ │ Buzzer Contact    │ │            │ └────────────────────┘ │         │ ├────────────────────┤ │
-   │ └───────────────────┘ │            │ Grout Annulus          │         │ Port 3: Deep Joint     │
-   │ (High Hydrodynamic    │            │ (Instant Response /    │         │ (Fully Grouted Multi-  │
-   │  Time Lag / Manual)   │            │  Automated Telemetry)  │         │  Zone Profiling)       │
-   └───────────────────────┘            └────────────────────────┘         └────────────────────────┘
+Open Standpipe (Casagrande) Vibrating-Wire Piezometer (VWP) Multi-Level Piezometer String
+ 
+ Slotted PVC Pipe Sealed Diaphragm VWP Port 1: Perched Water 
+ 
+ Dipmeter Cable Resonant Wire (f²) Port 2: Main Aquifer 
+ Buzzer Contact 
+ Grout Annulus Port 3: Deep Joint 
+ (High Hydrodynamic (Instant Response / (Fully Grouted Multi- 
+ Time Lag / Manual) Automated Telemetry) Zone Profiling) 
+ 
 ```
 *Figure 3.1: Structural comparison of common geotechnical groundwater monitoring instruments.*
 
@@ -96,10 +96,10 @@ Open Standpipe (Casagrande)         Vibrating-Wire Piezometer (VWP)     Multi-Le
 
 | Technology | Operating Principle | Measured Parameter | Hydrodynamic Time Lag | Automated Telemetry | Primary Mining Use Case |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Vibrating-Wire Piezometer (VWP)**| Water pressure deflects a diaphragm, altering the resonant frequency of a tensioned steel wire ($f^2 \propto u$).| Direct Pore-Water Pressure ($u$, $\text{kPa}$).| **Negligible ($<1\text{ second}$)**; zero fluid exchange required.| **✅ Industry Standard:** 100% automated LoRa telemetry; ideal for low-permeability shales. |
-| **Casagrande Open Standpipe** | Perforated PVC pipe in sand filter; water rises to equilibrium phreatic level.| Phreatic Water Level ($h_w$, $\text{m}$).| **High (Hours to Days)** in clays/shales due to large water volume transfer.| ❌ Primarily manual water level dipmeters; floats can jam. |
-| **Piezoresistive Pressure Sensor**| Silicon diaphragm with diffused strain gauge bridge; 4–20 mA output.| Hydrostatic Pressure ($P = \rho g h$).| Fast ($<1\text{ second}$). | ✅ Automated, but vulnerable to lightning surges and long-cable resistance drift. |
-| **Multi-Level Fully Grouted VWP**| Multiple VWPs positioned at varying depths in a single borehole, fully encapsulated in cement-bentonite grout.| Multi-Depth Vertical Pore Pressure Profile.| **Negligible ($<1\text{ second}$)**.| **✅ Premier Geotechnical Choice:** Separates perched water from deep artesian joints. |
+| **Vibrating-Wire Piezometer (VWP)**| Water pressure deflects a diaphragm, altering the resonant frequency of a tensioned steel wire ($f^2 \propto u$).| Direct Pore-Water Pressure ($u$, $\text{kPa}$).| **Negligible ($<1\text{ second}$)**; zero fluid exchange required.| **[CONFIRMED] Industry Standard:** 100% automated LoRa telemetry; ideal for low-permeability shales. |
+| **Casagrande Open Standpipe** | Perforated PVC pipe in sand filter; water rises to equilibrium phreatic level.| Phreatic Water Level ($h_w$, $\text{m}$).| **High (Hours to Days)** in clays/shales due to large water volume transfer.| [REJECTED] Primarily manual water level dipmeters; floats can jam. |
+| **Piezoresistive Pressure Sensor**| Silicon diaphragm with diffused strain gauge bridge; 4–20 mA output.| Hydrostatic Pressure ($P = \rho g h$).| Fast ($<1\text{ second}$). | [CONFIRMED] Automated, but vulnerable to lightning surges and long-cable resistance drift. |
+| **Multi-Level Fully Grouted VWP**| Multiple VWPs positioned at varying depths in a single borehole, fully encapsulated in cement-bentonite grout.| Multi-Depth Vertical Pore Pressure Profile.| **Negligible ($<1\text{ second}$)**.| **[CONFIRMED] Premier Geotechnical Choice:** Separates perched water from deep artesian joints. |
 
 ---
 
@@ -108,20 +108,20 @@ Open Standpipe (Casagrande)         Vibrating-Wire Piezometer (VWP)     Multi-Le
 A **Vibrating-Wire Piezometer (VWP)** utilizes a high-tensile steel wire clamped to a flexible stainless steel diaphragm behind a porous ceramic or stainless steel filter stone:
 
 ```
-Porous Filter Stone ──► Fluid Pressure (u) ──► Diaphragm Flexes ──► Wire Tension Changes ──► Resonant Frequency (f)
+Porous Filter Stone Fluid Pressure (u) Diaphragm Flexes Wire Tension Changes Resonant Frequency (f)
 ```
 
 ```
-                       Excitation Pluck & Pickup Coil
-                                   ▲
-                                   │
-                     ┌─────────────┴─────────────┐
-                     │                           │
-                     │  ══════ Steel Wire ═════  │ (Resonant Frequency f)
-                     │                           │
-  [Porous Filter] ──►│ ▓▓ Flexible Diaphragm ▓▓  │
-                     │                           │
-                     └───────────────────────────┘
+ Excitation Pluck & Pickup Coil
+ 
+ 
+ 
+ 
+ Steel Wire (Resonant Frequency f)
+ 
+ [Porous Filter] Flexible Diaphragm 
+ 
+ 
 ```
 *Figure 4.1: Internal operating mechanism of a hermetically sealed vibrating-wire piezometer.*
 
@@ -140,7 +140,7 @@ where:
 
 ## 5. Time-Series Groundwater & Pore-Water Pressure Data
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to demonstrate the correlation between rising water tables, pore pressure surges, and geotechnical risk. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Groundwater Dataset
@@ -151,41 +151,41 @@ where:
 | **$T_2$** | 5 | 11.8 | 135.0 | 0.20 | +3.00 | Initial Infiltration |
 | **$T_3$** | 10 | 11.4 | 160.0 | 0.24 | +5.00 | Steady Groundwater Recharge |
 | **$T_4$** | 15 | 10.9 | 190.0 | 0.29 | +6.00 | Saturated Highwall Joints |
-| **$T_5$** | 18 | 10.5 | **220.0** | **0.34 (Critical)**| **+10.00** | 🔴 **CRITICAL INSTABILITY THREAT** |
+| **$T_5$** | 18 | 10.5 | **220.0** | **0.34 (Critical)**| **+10.00** | [CRITICAL / RED] **CRITICAL INSTABILITY THREAT** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Illustrative Example: Groundwater Level vs Elapsed Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18]
-    y-axis "Water Table Depth (m below surface)" 10.0 --> 13.0
-    line [12.1, 11.8, 11.4, 10.9, 10.5]
+ title "Illustrative Example: Groundwater Level vs Elapsed Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18]
+ y-axis "Water Table Depth (m below surface)" 10.0 --> 13.0
+ line [12.1, 11.8, 11.4, 10.9, 10.5]
 ```
 *Figure 5.1: Illustrative groundwater table rising toward the highwall bench surface.*
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Subsurface Pore-Water Pressure vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18]
-    y-axis "Pore-Water Pressure (kPa)" 100 --> 250
-    line [120.0, 135.0, 160.0, 190.0, 220.0]
+ title "Illustrative Example: Subsurface Pore-Water Pressure vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18]
+ y-axis "Pore-Water Pressure (kPa)" 100 --> 250
+ line [120.0, 135.0, 160.0, 190.0, 220.0]
 ```
 *Figure 5.2: Illustrative pore-water pressure surging from 120 kPa to a critical 220 kPa.*
 
@@ -194,7 +194,7 @@ xychart-beta
 ## 6. Hydrogeological Dynamics: Rainfall-Piezometer Lag
 
 ```
-[Monsoon Cloudburst (Day 0)] ──► Infiltration Lag t_lag ──► [Piezometer Peak u_max (Day 3)] ──► [Slope Displacement Surge (Day 4)]
+[Monsoon Cloudburst (Day 0)] Infiltration Lag t_lag [Piezometer Peak u_max (Day 3)] [Slope Displacement Surge (Day 4)]
 ```
 
 ### Infiltration Lag Factors:
@@ -221,30 +221,30 @@ xychart-beta
 
 ```mermaid
 flowchart TD
-    subgraph Subsurface Hydrogeological Layer
-        A1[Multi-Level Vibrating-Wire Piezometer Strings in Highwall] --> A2[pyVWP Ingestion Engine: Computes u, du/dt & ru]
-        A3[Standpipe Observation Wells with Pressure Transducers] --> A4[Phreatic Surface Depth Profiler]
-        A5[Micro-Weather Station: Rainfall Intensity & API_7] --> A6[Antecedent Infiltration Driver]
-    end
+ subgraph Subsurface Hydrogeological Layer
+ A1[Multi-Level Vibrating-Wire Piezometer Strings in Highwall] --> A2[pyVWP Ingestion Engine: Computes u, du/dt & ru]
+ A3[Standpipe Observation Wells with Pressure Transducers] --> A4[Phreatic Surface Depth Profiler]
+ A5[Micro-Weather Station: Rainfall Intensity & API_7] --> A6[Antecedent Infiltration Driver]
+ end
 
-    subgraph Kinematic & Geodetic Telemetry Layer
-        B1[Edge PTZ CCTV Cameras: 4K Sub-Pixel Optical Flow]
-        B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        B3[Highwall GNSS RTK Stations: 3D Point Displacement]
-        B4[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
-    end
+ subgraph Kinematic & Geodetic Telemetry Layer
+ B1[Edge PTZ CCTV Cameras: 4K Sub-Pixel Optical Flow]
+ B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ B3[Highwall GNSS RTK Stations: 3D Point Displacement]
+ B4[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
+ end
 
-    A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 8.1: Master multi-sensor data fusion architecture incorporating piezometric groundwater telemetry.*
 
@@ -284,7 +284,7 @@ To build our SIH25071 prototype, we evaluated verified open-source hydrogeology 
 | **Edge Compute Core** | **ESP32-S3-WROOM-1** | Dual-core 240 MHz MCU with integrated hardware timers and sleep modes. | **₹450 – ₹650** | Edge node running digital moving-average filters and LoRa transmission. |
 | **Telemetry & Power** | **SX1262 LoRa + 10W Solar** | 868 MHz LoRa transceiver ($+22\text{ dBm}$) + 10W panel + 6Ah LiFePO4 battery. | **₹1,800 – ₹2,500** | $100\%$ autonomous solar-powered field station ($₹5,600\text{ total node cost}$). |
 
-> **Student Prototype vs. Industrial Hermetic VWP Disclaimer:**  
+> **Student Prototype vs. Industrial Hermetic VWP Disclaimer:** 
 > *While our student research prototype ($₹5,600\text{ cost}$) provides accurate research-grade hydrostatic head metrics in open standpipes, commercial hermetically sealed VWPs (e.g., Geokon 4500, ₹45,000+) are permanently cemented into solid rock boreholes, withstand $5\text{ MPa}$ pressure, and provide zero fluid displacement response.*
 
 ---
@@ -293,17 +293,17 @@ To build our SIH25071 prototype, we evaluated verified open-source hydrogeology 
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 97.9%)"]
-        B["📍 Location: Bench 4 - East Highwall Spur (Piezometer PZ-03 / CAM-02)"]
-        C["⏱️ Predicted Hydrostatic Failure Window: 16 ± 3 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Severe Subsurface Pore-Water Pressure Surge (u = 220 kPa, ru=0.34): +47% contribution"]
-        D2["• Cloudburst Rainfall Intensity Infiltration (52.0 mm/hr): +23% contribution"]
-        D3["• Sub-Pixel Optical Flow Velocity Surge (22.8 mm/hr): +16% contribution"]
-        D4["• Tensile Crest Crackmeter Dilation Acceleration: +9% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 97.9%)"]
+ B[" Location: Bench 4 - East Highwall Spur (Piezometer PZ-03 / CAM-02)"]
+ C[" Predicted Hydrostatic Failure Window: 16 ± 3 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Severe Subsurface Pore-Water Pressure Surge (u = 220 kPa, ru=0.34): +47% contribution"]
+ D2["• Cloudburst Rainfall Intensity Infiltration (52.0 mm/hr): +23% contribution"]
+ D3["• Sub-Pixel Optical Flow Velocity Surge (22.8 mm/hr): +16% contribution"]
+ D4["• Tensile Crest Crackmeter Dilation Acceleration: +9% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 12.1: Conceptual SHAP explainable alert diagnostic card for groundwater-informed alerts.*
 
@@ -313,14 +313,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with Animated 3D Phreatic Surface & Pore Pressure Isosurfaces]
-        D2[Real-Time Piezometer Panel: Pore Pressure, Rate of Rise du/dt & Pore Pressure Ratio ru]
-        D3[Cross-Sectional Highwall Seepage Vector & Effective Stress Profile View]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Crackmeters]
-        D6[One-Click DGMS Statutory Monsoon Safety Compliance & Hydrogeological Audit Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with Animated 3D Phreatic Surface & Pore Pressure Isosurfaces]
+ D2[Real-Time Piezometer Panel: Pore Pressure, Rate of Rise du/dt & Pore Pressure Ratio ru]
+ D3[Cross-Sectional Highwall Seepage Vector & Effective Stress Profile View]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Crackmeters]
+ D6[One-Click DGMS Statutory Monsoon Safety Compliance & Hydrogeological Audit Logbook Export]
+ end
 ```
 *Figure 13.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -332,7 +332,7 @@ flowchart TD
 | :--- | :--- | :--- |
 | **Operational Mode** | Manual dipmeter reading / Isolated logging | **Continuous Multi-Modal AI Fusion (Pore Pressure + 30 FPS Vision + LoRa)** |
 | **Spatial Point Sparsity** | Blind to un-instrumented bench zones | **Coupled with FloPy 3D Groundwater Flow Simulation to interpolate whole pit** |
-| **Kinematic Context** | ❌ No kinematic displacement tracking | **Directly coupled to optical flow velocity & crack dilation** |
+| **Kinematic Context** | [REJECTED] No kinematic displacement tracking | **Directly coupled to optical flow velocity & crack dilation** |
 | **Prediction Capability** | Threshold alerts only | **Predictive Time-to-Failure Horizon ($t_f \pm \sigma$) & Sub-Second TARP Dispatch** |
 | **Hardware Capital Cost** | ₹45,000 – ₹1.2 Lakh per commercial VWP hole | **₹5,600 per custom wireless LoRa piezometer node (85% cheaper)** |
 | **Regulatory Compliance** | Manual inspection registers | **Full Real-Time DGMS (Tech) Circular Compliance** |
@@ -343,16 +343,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE PIEZOMETER LIMITATION ]  ──► Measures internal pore fluid pressure ($u$), but       |
-|                                            completely blind to whether the surface is moving.     |
-|  [ REMOTE VISION / RADAR LIMITATION ]  ──► Measures surface displacement ($d$), but completely    |
-|                                            blind to internal hydrostatic driving forces.          |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses borehole piezometers with full-field Edge        |
-|                                            Computer Vision & InSAR into a unified Physics-Informed|
-|                                            AI engine that couples internal fluid pressure with    |
-|                                            external rockfall kinematics!                          |
+| [ STANDALONE PIEZOMETER LIMITATION ] Measures internal pore fluid pressure ($u$), but |
+| completely blind to whether the surface is moving. |
+| [ REMOTE VISION / RADAR LIMITATION ] Measures surface displacement ($d$), but completely |
+| blind to internal hydrostatic driving forces. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses borehole piezometers with full-field Edge |
+| Computer Vision & InSAR into a unified Physics-Informed|
+| AI engine that couples internal fluid pressure with |
+| external rockfall kinematics! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -373,50 +373,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Borehole Vibrating-Wire Piezometer Strings: Pore Pressure u]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Pit-Rim Automatic Weather Station: Rainfall Intensity]
-        S5[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Borehole Vibrating-Wire Piezometer Strings: Pore Pressure u]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Pit-Rim Automatic Weather Station: Rainfall Intensity]
+ S5[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[pyVWP Engine: Pore Pressure u, Rate du/dt & ru Ratio]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P4[Rainfall Intensity, 24h Rain & Infiltration Index]
-        S5 --> P5[Thermal Correction, Tilt Rate & Angular Acceleration]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[pyVWP Engine: Pore Pressure u, Rate du/dt & ru Ratio]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P4[Rainfall Intensity, 24h Rain & Infiltration Index]
+ S5 --> P5[Thermal Correction, Tilt Rate & Angular Acceleration]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_HYDRO[Pore Pressure, Rate du/dt, ru & Phreatic Depth]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_GEO[Crack Dilation Rate, Tilt & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_HYDRO[Pore Pressure, Rate du/dt, ru & Phreatic Depth]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_GEO[Crack Dilation Rate, Tilt & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_HYDRO & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_HYDRO & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 17.1: Complete end-to-end system architecture incorporating piezometric groundwater telemetry into the real-time AI rockfall prediction pipeline.*
 

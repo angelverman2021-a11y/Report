@@ -1,10 +1,10 @@
 # Existing Technology 9: Inclinometers
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/09_Inclinometers.md`
 
 ---
@@ -24,13 +24,13 @@ An **inclinometer** is a precision geotechnical measurement system used to deter
 
 ```mermaid
 flowchart TD
-    BORE[Vertical Borehole Drilled through Highwall ~20m-50m Depth] --> CASING[Grooved ABS Inclinometer Casing Grouted in Bedrock]
-    CASING --> SENS[Probe or In-Place Inclinometer MEMS Tilt Sensor Array]
-    SENS --> TILT[Biaxial Angular Deflection Readings: θ_A & θ_B vs Depth]
-    TILT --> CALC[Trigonometric Conversion to Incremental Deflection δ_i]
-    CALC --> PROF[Cumulative Subsurface 2D/3D Displacement Depth Profile]
-    PROF --> SHEAR[Identifies Active Subterranean Shear Slip Plane]
-    SHEAR --> RISK[Geotechnical Failure Horizon & Risk Assessment]
+ BORE[Vertical Borehole Drilled through Highwall ~20m-50m Depth] --> CASING[Grooved ABS Inclinometer Casing Grouted in Bedrock]
+ CASING --> SENS[Probe or In-Place Inclinometer MEMS Tilt Sensor Array]
+ SENS --> TILT[Biaxial Angular Deflection Readings: θ_A & θ_B vs Depth]
+ TILT --> CALC[Trigonometric Conversion to Incremental Deflection δ_i]
+ CALC --> PROF[Cumulative Subsurface 2D/3D Displacement Depth Profile]
+ PROF --> SHEAR[Identifies Active Subterranean Shear Slip Plane]
+ SHEAR --> RISK[Geotechnical Failure Horizon & Risk Assessment]
 ```
 *Figure 1.1: High-level operational pipeline of subsurface inclinometer monitoring.*
 
@@ -41,7 +41,7 @@ flowchart TD
 | **Operational Method** | Geotechnical engineer manually lowers a wheeled probe on a graduated cable, taking readings every 0.5 m. | Permanent string of automated MEMS tilt sensors fixed at discrete intervals inside the casing. |
 | **Reading Frequency** | Periodic (Weekly, monthly, or bi-weekly manual surveys). | **Continuous Real-Time (Every 1 minute to 1 hour)**. |
 | **Labor & Safety** | Requires personnel to stand near active highwall crests. | **100% Automated; zero personnel exposure**. |
-| **Immediate Life Safety**| ❌ Cannot warn against sudden progressive failures. | **✅ Automated real-time threshold and velocity alarms**. |
+| **Immediate Life Safety**| [REJECTED] Cannot warn against sudden progressive failures. | **[CONFIRMED] Automated real-time threshold and velocity alarms**. |
 | **Capital Cost** | Low upfront equipment cost; high recurring labor cost. | Higher upfront sensor string cost (₹3.0L – ₹10.0L per borehole). |
 | **Open-Cast Mine Role** | Periodic baseline compliance auditing for DGMS logs. | Critical active highwalls directly above excavators and haul roads. |
 
@@ -54,15 +54,15 @@ Surface monitoring tools (such as radar, cameras, and GNSS) only measure what ha
 
 ```mermaid
 flowchart TD
-    S1[1. Vertical Borehole Drilled into Slope Past Suspected Failure Plane] --> S2[2. Grooved ABS Casing Installed & Annulus Grouted]
-    S2 --> S3[3. Internal Wheels Track Casing Grooves Aligned Downhill A-Axis]
-    S3 --> S4[4. Internal Accelerometers Measure Local Tilt Angles θ_A and θ_B]
-    S4 --> S5[5. Reading Interval ΔL typically 0.5m along Total Depth]
-    S5 --> S6[6. Incremental Displacement Computed: δ_i = L * sin Δθ_i]
-    S6 --> S7[7. Numerical Integration from Stable Base to Surface Crest]
-    S7 --> S8[8. Cumulative Deflection vs Depth Profile Generated]
-    S8 --> S9[9. Inflection Point Detected: Identifies Active Slip Shear Zone]
-    S9 --> S10[10. Velocity Surge Triggers Automated Geotechnical TARP Alert]
+ S1[1. Vertical Borehole Drilled into Slope Past Suspected Failure Plane] --> S2[2. Grooved ABS Casing Installed & Annulus Grouted]
+ S2 --> S3[3. Internal Wheels Track Casing Grooves Aligned Downhill A-Axis]
+ S3 --> S4[4. Internal Accelerometers Measure Local Tilt Angles θ_A and θ_B]
+ S4 --> S5[5. Reading Interval ΔL typically 0.5m along Total Depth]
+ S5 --> S6[6. Incremental Displacement Computed: δ_i = L * sin Δθ_i]
+ S6 --> S7[7. Numerical Integration from Stable Base to Surface Crest]
+ S7 --> S8[8. Cumulative Deflection vs Depth Profile Generated]
+ S8 --> S9[9. Inflection Point Detected: Identifies Active Slip Shear Zone]
+ S9 --> S10[10. Velocity Surge Triggers Automated Geotechnical TARP Alert]
 ```
 *Figure 2.1: Step-by-step processing pipeline from borehole tilt measurement to shear zone identification.*
 
@@ -78,16 +78,16 @@ flowchart TD
 ## 3. Types of Inclinometers Used in Mining
 
 ```
-Manual Probe Inclinometer        In-Place Inclinometer (IPI)       ShapeAccelArray (SAA)
-   ┌─────────────────┐             ┌─────────────────┐             ┌─────────────────┐
-   │ Digital Cable   │             │ Automated Cable │             │ Continuous Joint│
-   │      │          │             │      │          │             │ Flexible Array  │
-   │ ┌────┴────┐     │             │ ┌────┴────┐     │             │ ┌─────────────┐ │
-   │ │ Torpedo │     │             │ │ Sensor 1│     │             │ │ MEMS Node 1 │ │
-   │ │  Probe  │     │             │ └────┬────┘     │             │ ├─────────────┤ │
-   │ └─────────┘     │             │ ┌────┴────┐     │             │ │ MEMS Node 2 │ │
-   │ (Manual Pull)   │             │ │ Sensor 2│     │             │ ├─────────────┤ │
-   └─────────────────┘             └─────────────────┘             └─────────────────┘
+Manual Probe Inclinometer In-Place Inclinometer (IPI) ShapeAccelArray (SAA)
+ 
+ Digital Cable Automated Cable Continuous Joint
+ Flexible Array 
+ 
+ Torpedo Sensor 1 MEMS Node 1 
+ Probe 
+ MEMS Node 2 
+ (Manual Pull) Sensor 2 
+ 
 ```
 *Figure 3.1: Structural comparison of common inclinometer instrumentation types.*
 
@@ -108,15 +108,15 @@ Manual Probe Inclinometer        In-Place Inclinometer (IPI)       ShapeAccelArr
 Inclinometer casing contains four orthogonal internal keyways (grooves). During installation, the **$A$-axis groove is aligned directly parallel to the expected downhill slope movement direction**, while the **$B$-axis groove is oriented perpendicular (cross-slope)**:
 
 ```
-                     ▲ Downhill Movement Direction (A+ Axis)
-                     │
-              Groove │ Groove
-                │    │    │
-      B- ───────┼────●────┼───────► B+ (Cross-Slope Axis)
-      (Left)    │    │    │         (Right)
-                │    │    │
-                     │
-                     ▼ Uphill Direction (A- Axis)
+ Downhill Movement Direction (A+ Axis)
+ 
+ Groove Groove
+ 
+ B- B+ (Cross-Slope Axis)
+ (Left) (Right)
+ 
+ 
+ Uphill Direction (A- Axis)
 ```
 *Figure 4.1: Cross-sectional orientation of grooved inclinometer casing aligned with downhill slope kinematics.*
 
@@ -133,32 +133,32 @@ When ground movement occurs, the casing deforms. By analyzing both the **Increme
 The basic mathematical principle converts measured angular tilt changes into lateral metric horizontal displacements:
 
 ```
-           Segment i (Length L = 0.5 m)
-                │
-                │\
-                │ \  Tilt Angle θ_i
-                │  \
-                │   \
-                └────► Incremental Displacement δ_i = L * sin(θ_i)
+ Segment i (Length L = 0.5 m)
+ 
+ \
+ \ Tilt Angle θ_i
+ \
+ \
+ Incremental Displacement δ_i = L * sin(θ_i)
 ```
 
 ### Simplified Engineering Formulations:
 
 1. **Incremental Lateral Displacement ($\delta_i$):**
-   For a casing segment of gauge length $L$ (typically $L = 0.5\text{ m}$), the horizontal displacement at depth level $i$ relative to the baseline epoch is:
-   $$\delta_i = L \cdot \sin\left(\theta_i(t) - \theta_i(t_0)\right) \approx L \cdot \Delta \theta_i$$
-   where $\Delta \theta_i$ is the change in tilt angle (in radians).
+ For a casing segment of gauge length $L$ (typically $L = 0.5\text{ m}$), the horizontal displacement at depth level $i$ relative to the baseline epoch is:
+ $$\delta_i = L \cdot \sin\left(\theta_i(t) - \theta_i(t_0)\right) \approx L \cdot \Delta \theta_i$$
+ where $\Delta \theta_i$ is the change in tilt angle (in radians).
 
 2. **Cumulative Horizontal Displacement ($D_k$):**
-   Assuming the base of the borehole ($i = 0$) is anchored firmly in stable, non-moving bedrock ($D_0 = 0$), the cumulative horizontal displacement at any depth level $k$ is calculated by integrating upwards:
-   $$D_k = \sum_{i=1}^{k} \delta_i = \sum_{i=1}^{k} L \cdot \sin(\Delta \theta_i)$$
+ Assuming the base of the borehole ($i = 0$) is anchored firmly in stable, non-moving bedrock ($D_0 = 0$), the cumulative horizontal displacement at any depth level $k$ is calculated by integrating upwards:
+ $$D_k = \sum_{i=1}^{k} \delta_i = \sum_{i=1}^{k} L \cdot \sin(\Delta \theta_i)$$
 
 3. **Total Resultant 2D Horizontal Magnitude ($D_{\text{res}}$):**
-   Combining the orthogonal $A$ and $B$ component displacements:
-   $$D_{\text{res}, k} = \sqrt{D_{A, k}^2 + D_{B, k}^2}$$
+ Combining the orthogonal $A$ and $B$ component displacements:
+ $$D_{\text{res}, k} = \sqrt{D_{A, k}^2 + D_{B, k}^2}$$
 
 4. **Resultant Azimuth of Movement ($\alpha_{\text{disp}}$):**
-   $$\alpha_{\text{disp}} = \text{atan2}(D_{A}, D_{B})$$
+ $$\alpha_{\text{disp}} = \text{atan2}(D_{A}, D_{B})$$
 
 > **Engineering Note:** *Real-world data processing also incorporates sensor calibration factors, checksum error verification ($A_0 + A_{180} \approx \text{constant}$), temperature drift compensation, and borehole spiral twist corrections.*
 
@@ -168,27 +168,27 @@ The basic mathematical principle converts measured angular tilt changes into lat
 
 ```mermaid
 flowchart TD
-    subgraph Subsurface Geotechnical In-Situ
-        BH[Borehole Casing Anchored in Stable Bedrock: 30m Depth] --> IPI_STR[In-Place Inclinometer IPI Sensor Chain]
-    end
+ subgraph Subsurface Geotechnical In-Situ
+ BH[Borehole Casing Anchored in Stable Bedrock: 30m Depth] --> IPI_STR[In-Place Inclinometer IPI Sensor Chain]
+ end
 
-    subgraph Surface Telemetry & Logging
-        IPI_STR -->|RS-485 / SDI-12 Bus Cable| LOGGER[Solar Pit-Rim Telemetry Logger]
-        LOGGER -->|Wireless LoRa Mesh / 4G LTE| GATEWAY[Mine Base Station Gateway]
-    end
+ subgraph Surface Telemetry & Logging
+ IPI_STR -->|RS-485 / SDI-12 Bus Cable| LOGGER[Solar Pit-Rim Telemetry Logger]
+ LOGGER -->|Wireless LoRa Mesh / 4G LTE| GATEWAY[Mine Base Station Gateway]
+ end
 
-    subgraph Data Processing & Analytics Core
-        GATEWAY -->|MQTT JSON Stream| SVR[Edge AI Processing Server]
-        SVR -->|Calculates Cumulative Depth Profiles| DB[(Time-Series InfluxDB)]
-        DB --> SHEAR_ENG[Automated Shear Zone Depth & Rate Extractor]
-    end
+ subgraph Data Processing & Analytics Core
+ GATEWAY -->|MQTT JSON Stream| SVR[Edge AI Processing Server]
+ SVR -->|Calculates Cumulative Depth Profiles| DB[(Time-Series InfluxDB)]
+ DB --> SHEAR_ENG[Automated Shear Zone Depth & Rate Extractor]
+ end
 
-    subgraph AI Risk & TARP Action
-        SHEAR_ENG --> FUSION[Multi-Modal Feature Synchronization Engine]
-        FUSION --> AI[XGBoost & Physics-Informed Neural Network PINN Core]
-        AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-        AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
-    end
+ subgraph AI Risk & TARP Action
+ SHEAR_ENG --> FUSION[Multi-Modal Feature Synchronization Engine]
+ FUSION --> AI[XGBoost & Physics-Informed Neural Network PINN Core]
+ AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ end
 ```
 *Figure 6.1: Hardware, telemetry, and compute architecture of an automated In-Place Inclinometer (IPI) slope monitoring system.*
 
@@ -196,7 +196,7 @@ flowchart TD
 
 ## 7. Subsurface Shear Zone & Depth Profile Identification
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to explain subsurface shear plane detection. They do not represent real-world measurements from any specific mine.*
 
 ### Illustrative Synthetic Inclinometer Depth-Displacement Dataset
@@ -207,7 +207,7 @@ flowchart TD
 | **5.0** | 0.1 | 0.2 | 0.6 | **24.5** | Overburden Moving Block |
 | **10.0** | 0.1 | 0.3 | 0.7 | **22.1** | Upper Sliding Mass |
 | **14.0** | 0.2 | 0.5 | 1.2 | **19.8** | Approaching Shear Zone |
-| **15.0** | **1.8** | **4.6** | **12.4** | **17.2** | 🔴 **PRIMARY SHEAR SLIP PLANE (Slip Horizon)** |
+| **15.0** | **1.8** | **4.6** | **12.4** | **17.2** | [CRITICAL / RED] **PRIMARY SHEAR SLIP PLANE (Slip Horizon)** |
 | **16.0** | 0.2 | 0.4 | 1.1 | **4.2** | Lower Shear Boundary |
 | **20.0** | 0.0 | 0.0 | 0.1 | **1.2** | Quasi-Stable Bedrock |
 | **25.0** | 0.0 | 0.0 | 0.0 | **0.2** | Stable Anchor Zone |
@@ -216,18 +216,18 @@ flowchart TD
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Cumulative Subsurface Displacement vs Depth (Synthetic Data)"
-    x-axis "Borehole Depth from Surface (m)" [0, 5, 10, 14, 15, 16, 20, 25, 30]
-    y-axis "Cumulative Lateral Displacement (mm)" 0 --> 30
-    line [26.8, 24.5, 22.1, 19.8, 17.2, 4.2, 1.2, 0.2, 0.0]
+ title "Illustrative Example: Cumulative Subsurface Displacement vs Depth (Synthetic Data)"
+ x-axis "Borehole Depth from Surface (m)" [0, 5, 10, 14, 15, 16, 20, 25, 30]
+ y-axis "Cumulative Lateral Displacement (mm)" 0 --> 30
+ line [26.8, 24.5, 22.1, 19.8, 17.2, 4.2, 1.2, 0.2, 0.0]
 ```
 *Figure 7.1: Illustrative cumulative displacement depth profile demonstrating a distinct shear failure plane at 15 m depth.*
 
@@ -242,18 +242,18 @@ xychart-beta
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: Shear Plane Displacement Rate Surge (Synthetic Data)"
-    x-axis "Elapsed Time (weeks)" [1, 2, 3, 4, 5, 6]
-    y-axis "Shear Plane Velocity (mm/week)" 0 --> 15
-    line [0.4, 0.5, 0.9, 2.1, 5.8, 12.4]
+ title "Illustrative Example: Shear Plane Displacement Rate Surge (Synthetic Data)"
+ x-axis "Elapsed Time (weeks)" [1, 2, 3, 4, 5, 6]
+ y-axis "Shear Plane Velocity (mm/week)" 0 --> 15
+ line [0.4, 0.5, 0.9, 2.1, 5.8, 12.4]
 ```
 *Figure 8.1: Illustrative velocity acceleration curve at the 15 m shear plane demonstrating transition to tertiary creep.*
 
@@ -273,22 +273,22 @@ xychart-beta
 
 ```mermaid
 mindmap
-  root((Inclinometer Mining Limitations))
-    Discrete Point Blindness
-      Only monitors the single borehole location
-      Completely blind to slope failures occurring 20m away
-    Casing Shearing Under Large Movement
-      When shear displacement exceeds 50-100mm, casing kinks
-      Probe cannot pass, permanently destroying the sensor hole
-    Drilling & Installation Capex
-      Borehole drilling + casing costs ₹1.5L - ₹4.0L per hole
-      Installing automated IPI strings costs ₹4.0L - ₹10.0L
-    Vulnerability to Blasting Flyrock
-      Surface telemetry boxes destroyed by blast flyrock
-      Casing severed by heavy shovel / excavator operations
-    Manual Probe Labor Overhead
-      Manual surveys take hours per hole
-      Cannot warn against sudden daytime rockfalls
+ root((Inclinometer Mining Limitations))
+ Discrete Point Blindness
+ Only monitors the single borehole location
+ Completely blind to slope failures occurring 20m away
+ Casing Shearing Under Large Movement
+ When shear displacement exceeds 50-100mm, casing kinks
+ Probe cannot pass, permanently destroying the sensor hole
+ Drilling & Installation Capex
+ Borehole drilling + casing costs ₹1.5L - ₹4.0L per hole
+ Installing automated IPI strings costs ₹4.0L - ₹10.0L
+ Vulnerability to Blasting Flyrock
+ Surface telemetry boxes destroyed by blast flyrock
+ Casing severed by heavy shovel / excavator operations
+ Manual Probe Labor Overhead
+ Manual surveys take hours per hole
+ Cannot warn against sudden daytime rockfalls
 ```
 *Figure 10.1: Structural, geometric, and operational limitations of inclinometer monitoring in open-cast mines.*
 
@@ -300,7 +300,7 @@ mindmap
 | :--- | :--- | :--- | :--- | :--- |
 | **Primary Measurement Zone**| **Subsurface Internal Rock Mass**| Surface Surface Point (Crest) | Regional Ground Surface | Highwall Bench Face Surface |
 | **Primary Data Product** | Lateral Deflection vs Depth Profile| 3D Coordinate Vector $(\Delta E,N,U)$| 1D Line-of-Sight (LOS) Phase | 1D Line-of-Sight (LOS) Phase |
-| **Slip Plane Depth Detection**| **✅ Direct & Exact (e.g., 15.0 m)** | ❌ Impossible (Surface only) | ❌ Impossible (Surface only) | ❌ Impossible (Surface only) |
+| **Slip Plane Depth Detection**| **[CONFIRMED] Direct & Exact (e.g., 15.0 m)** | [REJECTED] Impossible (Surface only) | [REJECTED] Impossible (Surface only) | [REJECTED] Impossible (Surface only) |
 | **Spatial Coverage** | Discrete Borehole Only | Discrete Installed Points | **Regional ($100+\text{ km}^2$)** | **Slope-Wide (2D Sector Heatmap)** |
 | **Sampling Frequency** | Continuous (IPI) / Periodic (Probe)| **Continuous (1 Hz to 1 min)** | Periodic (Every 6 to 12 days) | **Continuous (1 to 5 minutes)** |
 | **Failure Shear Mechanism** | **Directly Measures Shear Horizon**| Inferred from surface vectors | Inferred from surface subsidence| Inferred from face kinematics |
@@ -337,29 +337,29 @@ To build our SIH25071 prototype, we evaluated verified open-source geotechnical 
 
 ```mermaid
 flowchart TD
-    subgraph Subsurface Geotechnical Layer
-        A1[In-Place Inclinometer IPI String: Depth Profiles] --> A2[pyGeoTech Shear Plane & Velocity Extractor]
-        A3[Vibrating-Wire Piezometer: Pore-Water Pressure] --> A4[Hydrostatic Uplift Thrust Calculator]
-    end
+ subgraph Subsurface Geotechnical Layer
+ A1[In-Place Inclinometer IPI String: Depth Profiles] --> A2[pyGeoTech Shear Plane & Velocity Extractor]
+ A3[Vibrating-Wire Piezometer: Pore-Water Pressure] --> A4[Hydrostatic Uplift Thrust Calculator]
+ end
 
-    subgraph Surface Real-Time Telemetry Layer
-        B1[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        B2[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
-        B3[Micro-Weather Station: Rainfall Intensity mm/hr]
-        B4[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph Surface Real-Time Telemetry Layer
+ B1[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ B2[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
+ B3[Micro-Weather Station: Rainfall Intensity mm/hr]
+ B4[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    A2 & A4 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 14.1: Master multi-sensor data fusion architecture incorporating subsurface inclinometer metrics.*
 
@@ -383,17 +383,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 95.1%)"]
-        B["📍 Location: Bench 4 - North-East Wall (Borehole Cluster IPI-03)"]
-        C["⏱️ Predicted Collapse Window: 18 ± 4 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid Shear Plane Slip Rate at 15.0 m Depth (12.4 mm/week): +38% contribution"]
-        D2["• Piezometric Hydrostatic Pressure Spike (22 kPa): +25% contribution"]
-        D3["• Surface Optical Flow Velocity Surge (18.2 mm/hr): +18% contribution"]
-        D4["• Heavy 24-hr Monsoon Precipitation (48 mm): +12% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +7% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 95.1%)"]
+ B[" Location: Bench 4 - North-East Wall (Borehole Cluster IPI-03)"]
+ C[" Predicted Collapse Window: 18 ± 4 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid Shear Plane Slip Rate at 15.0 m Depth (12.4 mm/week): +38% contribution"]
+ D2["• Piezometric Hydrostatic Pressure Spike (22 kPa): +25% contribution"]
+ D3["• Surface Optical Flow Velocity Surge (18.2 mm/hr): +18% contribution"]
+ D4["• Heavy 24-hr Monsoon Precipitation (48 mm): +12% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +7% contribution"]
+ end
 ```
 *Figure 16.1: Conceptual SHAP explainable alert diagnostic card for inclinometer-informed alerts.*
 
@@ -403,14 +403,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with Subsurface Inclinometer Borehole 3D Vectors]
-        D2[Dynamic Subsurface Deflection Depth Profile Chart: Cumulative vs Incremental]
-        D3[Real-Time Shear Plane Velocity & Inverse Velocity Extrapolation Curves]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Compliance & Geotechnical Audit Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with Subsurface Inclinometer Borehole 3D Vectors]
+ D2[Dynamic Subsurface Deflection Depth Profile Chart: Cumulative vs Incremental]
+ D3[Real-Time Shear Plane Velocity & Inverse Velocity Extrapolation Curves]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Compliance & Geotechnical Audit Logbook Export]
+ end
 ```
 *Figure 17.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -422,8 +422,8 @@ flowchart TD
 | :--- | :--- | :--- |
 | **Operational Mode** | Manual weekly probe surveys / Standalone IPI | **Continuous Multi-Modal AI Fusion (30 FPS Vision + IPI + LoRa)** |
 | **Spatial Point Blindness** | Blind to failures between boreholes | **Eliminated:** Full-field vision & InSAR cover all spatial gaps |
-| **Immediate Life Safety Alerts**| ❌ Impossible with manual probes (days delay) | **✅ Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
-| **Subsurface Failure Plane**| **✅ Direct Depth & Thickness Measurement** | **✅ Ingested directly into PINN Geomechanical AI Models** |
+| **Immediate Life Safety Alerts**| [REJECTED] Impossible with manual probes (days delay) | **[CONFIRMED] Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
+| **Subsurface Failure Plane**| **[CONFIRMED] Direct Depth & Thickness Measurement** | **[CONFIRMED] Ingested directly into PINN Geomechanical AI Models** |
 | **Atmospheric Noise Rejection**| Unaffected by weather | **Multi-Modal Cross-Validation (Inclinometer + Vision + LoRa)** |
 | **Hardware Capital Cost** | ₹3.0 Lakh – ₹10.0 Lakh per hole | **₹2.0L – ₹5.0L Complete Full-Pit Infrastructure** |
 | **Regulatory Compliance** | Manual paper logbooks | **Full Real-Time DGMS (Tech) Circular Compliance** |
@@ -434,16 +434,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE INCLINOMETER LIMITATION ]──► Direct subsurface failure plane depth, but discrete   |
-|                                            point blindness across the highwall & high drill cost. |
-|  [ REMOTE RADAR / VISION LIMITATION ]  ──► Full-field surface coverage, but blind to subsurface   |
-|                                            shear mechanisms and hydrostatic pore pressures.       |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses strategic subsurface In-Place Inclinometers with |
-|                                            full-field Edge Computer Vision, LoRa IoT, & Satellite |
-|                                            InSAR into a unified Physics-Informed AI early-warning |
-|                                            engine with zero spatial or subsurface blind spots!    |
+| [ STANDALONE INCLINOMETER LIMITATION ] Direct subsurface failure plane depth, but discrete |
+| point blindness across the highwall & high drill cost. |
+| [ REMOTE RADAR / VISION LIMITATION ] Full-field surface coverage, but blind to subsurface |
+| shear mechanisms and hydrostatic pore pressures. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses strategic subsurface In-Place Inclinometers with |
+| full-field Edge Computer Vision, LoRa IoT, & Satellite |
+| InSAR into a unified Physics-Informed AI early-warning |
+| engine with zero spatial or subsurface blind spots! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -464,49 +464,49 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Borehole In-Place Inclinometer IPI Strings: Subsurface Tilt]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Wireless LoRa MEMS Surface Tilt & Vibration Nodes]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Micro-Weather Station: Rainfall Intensity mm/hr]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Borehole In-Place Inclinometer IPI Strings: Subsurface Tilt]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Wireless LoRa MEMS Surface Tilt & Vibration Nodes]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Micro-Weather Station: Rainfall Intensity mm/hr]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[Depth Integration & Shear Plane Depth/Rate Extraction]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 & S4 --> P3[LoRa Mesh Telemetry Parser & Kalman Filter]
-        S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
-        S6 --> P5[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[Depth Integration & Shear Plane Depth/Rate Extraction]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 & S4 --> P3[LoRa Mesh Telemetry Parser & Kalman Filter]
+ S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
+ S6 --> P5[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_SUB[Subsurface Shear Plane Depth, Slip Rate & Acceleration]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Saito Inverse Velocity]
-        FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
-    end
+ P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_SUB[Subsurface Shear Plane Depth, Slip Rate & Acceleration]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Saito Inverse Velocity]
+ FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_SUB & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_SUB & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 21.1: Complete end-to-end system architecture incorporating subsurface inclinometer metrics into the real-time AI rockfall prediction pipeline.*
 

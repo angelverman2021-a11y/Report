@@ -1,10 +1,10 @@
 # Existing Technology 14: Strain Gauges
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/14_Strain_Gauges.md`
 
 ---
@@ -31,14 +31,14 @@ $$1\,\mu\varepsilon = 10^{-6}\,\text{m/m} = 0.0001\% \text{ deformation}$$
 A **strain gauge** is a sensor whose physical or electrical properties (such as electrical resistance, natural resonant frequency, or optical wavelength) vary proportionally when subjected to mechanical strain.
 
 ```
-       Undeformed Rock Surface (L0)                      Tension Deformed Rock Surface (L0 + ΔL)
- ┌──────────────────────────────────────┐          ┌──────────────────────────────────────────────┐
- │                                      │          │                                              │
- │  ┌────────────────────────────────┐  │          │  ┌────────────────────────────────────────┐  │
- │  │ === Metallic Foil Grid ===     │  │ ──Force─►│  │ ===== Stretched Foil Grid (R + ΔR) === │  │
- │  └────────────────────────────────┘  │          │  └────────────────────────────────────────┘  │
- │                                      │          │                                              │
- └──────────────────────────────────────┘          └──────────────────────────────────────────────┘
+ Undeformed Rock Surface (L0) Tension Deformed Rock Surface (L0 + ΔL)
+ 
+ 
+ 
+ === Metallic Foil Grid === Force ===== Stretched Foil Grid (R + ΔR) === 
+ 
+ 
+ 
 ```
 *Figure 1.1: Schematic of a bonded foil strain gauge deforming under tensile rock stress.*
 
@@ -58,15 +58,15 @@ A **strain gauge** is a sensor whose physical or electrical properties (such as 
 
 ```mermaid
 flowchart TD
-    S1[1. Mining Blasting / Excavation Stress Redistribution] --> S2[2. Rock Mass & Support Elements Experience Micro-Deformation]
-    S2 --> S3[3. Bonded Strain Gauge Physically Expands or Contracts]
-    S3 --> S4[4. Electrical Resistance Shifts: ΔR / R = GF * ε]
-    S4 --> S5[5. Wheatstone Bridge Converts ΔR into Differential Voltage ΔV]
-    S5 --> S6[6. 24-Bit ADC Samples Millivolt Signal & Digitizes Telemetry]
-    S6 --> S7[7. Thermistor Data Compensates Apparent Thermal Expansion]
-    S7 --> S8[8. Computes Microstrain ε, Strain Rate dε/dt & Strain Acceleration]
-    S8 --> S9[9. Anomaly Detector Flags Yield Stress Inelastic Runaway]
-    S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
+ S1[1. Mining Blasting / Excavation Stress Redistribution] --> S2[2. Rock Mass & Support Elements Experience Micro-Deformation]
+ S2 --> S3[3. Bonded Strain Gauge Physically Expands or Contracts]
+ S3 --> S4[4. Electrical Resistance Shifts: ΔR / R = GF * ε]
+ S4 --> S5[5. Wheatstone Bridge Converts ΔR into Differential Voltage ΔV]
+ S5 --> S6[6. 24-Bit ADC Samples Millivolt Signal & Digitizes Telemetry]
+ S6 --> S7[7. Thermistor Data Compensates Apparent Thermal Expansion]
+ S7 --> S8[8. Computes Microstrain ε, Strain Rate dε/dt & Strain Acceleration]
+ S8 --> S9[9. Anomaly Detector Flags Yield Stress Inelastic Runaway]
+ S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
 ```
 *Figure 2.1: End-to-end signal processing and early-warning pipeline for geotechnical strain gauges.*
 
@@ -86,14 +86,14 @@ where:
 ## 3. Types of Strain Gauges Used in Geotechnical Engineering
 
 ```
-Bonded Foil Gauge                Vibrating-Wire Strainmeter        Fiber Bragg Grating (FBG)
-  ┌──────────────────────┐         ┌────────────────────────┐        ┌────────────────────────┐
-  │ Polyimide Carrier    │         │ Resonant Steel Wire    │        │ Core Refractive Index  │
-  │ ┌──────────────────┐ │         │ ┌────────────────────┐ │        │ ┌────────────────────┐ │
-  │ │ Constantan Grid  │ │         │ │ ─── Wire (f²) ──── │ │        │ │ ║ ║ ║ Grating ║ ║ ║│ │
-  │ └──────────────────┘ │         │ └────────────────────┘ │        │ └────────────────────┘ │
-  │ (Low Cost / Dynamic) │         │ (Zero Long-Cable Loss) │        │ (Immune to Lightning)  │
-  └──────────────────────┘         └────────────────────────┘        └────────────────────────┘
+Bonded Foil Gauge Vibrating-Wire Strainmeter Fiber Bragg Grating (FBG)
+ 
+ Polyimide Carrier Resonant Steel Wire Core Refractive Index 
+ 
+ Constantan Grid Wire (f²) Grating 
+ 
+ (Low Cost / Dynamic) (Zero Long-Cable Loss) (Immune to Lightning) 
+ 
 ```
 *Figure 3.1: Structural comparison of common geotechnical strain-sensing technologies.*
 
@@ -113,13 +113,13 @@ Bonded Foil Gauge                Vibrating-Wire Strainmeter        Fiber Bragg G
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                              STRAIN vs. STRESS vs. DISPLACEMENT                                  |
+| STRAIN vs. STRESS vs. DISPLACEMENT |
 +---------------------------------------------------------------------------------------------------+
-|  [ STRESS (σ) ]               │  [ STRAIN (ε) ]                 │  [ DISPLACEMENT (d) ]           |
-|  - Force per unit area        │  - Fractional deformation       │  - Positional distance shift    |
-|  - Unit: Pascals (Pa, MPa)    │  - Unit: Microstrain (µε)       │  - Unit: Millimeters, Meters    |
-|  - Causes internal strain     │  - Physical response to stress  │  - Kinematic end result of fail |
-|  - Inferred via Hooke's Law   │  - Directly measured by gauge   │  - Measured by Radar / GNSS     |
+| [ STRESS (σ) ] [ STRAIN (ε) ] [ DISPLACEMENT (d) ] |
+| - Force per unit area - Fractional deformation - Positional distance shift |
+| - Unit: Pascals (Pa, MPa) - Unit: Microstrain (µε) - Unit: Millimeters, Meters |
+| - Causes internal strain - Physical response to stress - Kinematic end result of fail |
+| - Inferred via Hooke's Law - Directly measured by gauge - Measured by Radar / GNSS |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -128,7 +128,7 @@ In isotropic linear-elastic rock masses, stress ($\sigma$) and strain ($\varepsi
 
 $$\sigma = E \cdot \varepsilon$$
 
-> **Crucial Geotechnical Caveat on Rock Masses:**  
+> **Crucial Geotechnical Caveat on Rock Masses:** 
 > Rock in open-pit mines is **heterogeneous, anisotropic, and jointed**. A measured strain of $200\,\mu\varepsilon$ on a competent granite block represents a massive stress of $14\,\text{MPa}$ ($E = 70\,\text{GPa}$), whereas the same $200\,\mu\varepsilon$ in weathered shale represents only $2\,\text{MPa}$ ($E = 10\,\text{GPa}$). Furthermore, when joint planes slip, strain in the adjacent rock block may suddenly drop (stress relief) while total highwall displacement surges.
 
 ---
@@ -138,16 +138,16 @@ $$\sigma = E \cdot \varepsilon$$
 In complex open-pit highwalls, the direction of maximum principal stress is rarely aligned with a single axis. To resolve the complete 2D plane strain state, a **3-Element Strain Gauge Rosette** (e.g., $45^\circ$ Rectangular or $60^\circ$ Delta rosette) is deployed:
 
 ```
-      Gauge 2 (45°)
-           ▲
-          /│
-         / │
-        /  │
-       /   │
-      ●────┼──────► Gauge 1 (0° - Horizontal)
-      │
-      ▼
-   Gauge 3 (90° - Vertical)
+ Gauge 2 (45°)
+ 
+ /
+ / 
+ / 
+ / 
+ Gauge 1 (0° - Horizontal)
+ 
+ 
+ Gauge 3 (90° - Vertical)
 ```
 *Figure 5.1: Rectangular $45^\circ$ strain gauge rosette configuration.*
 
@@ -155,16 +155,16 @@ In complex open-pit highwalls, the direction of maximum principal stress is rare
 Given measurements from the three gauges ($\varepsilon_1, \varepsilon_2, \varepsilon_3$):
 
 1. **Maximum & Minimum Principal Strains ($\varepsilon_{\text{max}}, \varepsilon_{\text{min}}$):**
-   $$\varepsilon_{1, 2} = \frac{\varepsilon_1 + \varepsilon_3}{2} \pm \frac{1}{\sqrt{2}} \sqrt{(\varepsilon_1 - \varepsilon_2)^2 + (\varepsilon_2 - \varepsilon_3)^2}$$
+ $$\varepsilon_{1, 2} = \frac{\varepsilon_1 + \varepsilon_3}{2} \pm \frac{1}{\sqrt{2}} \sqrt{(\varepsilon_1 - \varepsilon_2)^2 + (\varepsilon_2 - \varepsilon_3)^2}$$
 
 2. **Principal Stress Direction Angle ($\theta_p$):**
-   $$\theta_p = \frac{1}{2} \arctan\left(\frac{2\varepsilon_2 - \varepsilon_1 - \varepsilon_3}{\varepsilon_1 - \varepsilon_3}\right)$$
+ $$\theta_p = \frac{1}{2} \arctan\left(\frac{2\varepsilon_2 - \varepsilon_1 - \varepsilon_3}{\varepsilon_1 - \varepsilon_3}\right)$$
 
 ---
 
 ## 6. Time-Series Strain Monitoring & Kinematic Trends
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to explain progressive strain acceleration prior to rock yield. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Strain Dataset
@@ -176,41 +176,41 @@ Given measurements from the three gauges ($\varepsilon_1, \varepsilon_2, \vareps
 | **$T_3$** | 10 | 112.0 | +12.0 | 1.40 | +0.08 | Secondary Steady Creep |
 | **$T_4$** | 15 | 125.0 | +25.0 | 2.60 | +0.24 | Stress Redistribution |
 | **$T_5$** | 18 | 150.0 | +50.0 | 8.33 | +1.91 | Yield Point Inelastic Micro-Cracking |
-| **$T_6$** | 20 | 190.0 | +90.0 | **20.00** | **+5.83**| 🔴 **CRITICAL TERTIARY STRAIN RUNAWAY** |
+| **$T_6$** | 20 | 190.0 | +90.0 | **20.00** | **+5.83**| [CRITICAL / RED] **CRITICAL TERTIARY STRAIN RUNAWAY** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Rock Mass Microstrain vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
-    y-axis "Microstrain (µε)" 80 --> 200
-    line [100.0, 105.0, 112.0, 125.0, 150.0, 190.0]
+ title "Illustrative Example: Rock Mass Microstrain vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
+ y-axis "Microstrain (µε)" 80 --> 200
+ line [100.0, 105.0, 112.0, 125.0, 150.0, 190.0]
 ```
 *Figure 6.1: Illustrative microstrain curve showing exponential strain accumulation in tertiary creep.*
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: Microstrain Rate Surge vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [5, 10, 15, 18, 20]
-    y-axis "Strain Rate (µε/day)" 0.0 --> 22.0
-    line [1.00, 1.40, 2.60, 8.33, 20.00]
+ title "Illustrative Example: Microstrain Rate Surge vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [5, 10, 15, 18, 20]
+ y-axis "Strain Rate (µε/day)" 0.0 --> 22.0
+ line [1.00, 1.40, 2.60, 8.33, 20.00]
 ```
 *Figure 6.2: Illustrative strain rate surge demonstrating a 20x velocity surge prior to plastic yielding.*
 
@@ -235,9 +235,9 @@ Temperature is the largest source of error in resistive strain measurements due 
 2. **Differential Thermal Expansion ($\alpha_{\text{rock}} \ne \alpha_{\text{gauge}}$):** The rock expands at a different rate than the metallic gauge foil, generating severe **apparent thermal strain** ($\approx 10\text{ to } 30\,\mu\varepsilon/^\circ\text{C}$).
 
 ```
-Raw Bridge Strain ε_raw ──┐
-                          ├─► [ε_corr = ε_raw - S_T * (T - T_0)] ──► True Mechanical Rock Strain
-Digital Thermistor Temp T ──┘
+Raw Bridge Strain ε_raw 
+ [ε_corr = ε_raw - S_T * (T - T_0)] True Mechanical Rock Strain
+Digital Thermistor Temp T 
 ```
 
 ### Thermal Compensation Strategies:
@@ -251,21 +251,21 @@ Digital Thermistor Temp T ──┘
 Because fractional resistance changes are tiny ($\Delta R \approx 0.0002\,\Omega$ for $1000\,\mu\varepsilon$ on a $120\,\Omega$ gauge), a **Wheatstone Bridge circuit** is mandatory to convert $\Delta R$ into a measurable millivolt signal ($\Delta V$):
 
 ```
-                       Excitation Voltage (V_in)
-                                   ▲
-                                   │
-                     ┌─────────────┴─────────────┐
-                     │                           │
-                    [R1]                        [R2]
-                     │                           │
-                     ├───────────► V_out ◄───────┤
-                     │                           │
-                    [R4]                        [R3]
-                     │                           │
-                     └─────────────┬─────────────┘
-                                   │
-                                   ▼
-                                Ground
+ Excitation Voltage (V_in)
+ 
+ 
+ 
+ 
+ [R1] [R2]
+ 
+ V_out 
+ 
+ [R4] [R3]
+ 
+ 
+ 
+ 
+ Ground
 ```
 *Figure 9.1: Classical Wheatstone Bridge circuit topology for resistive strain measurement.*
 
@@ -273,9 +273,9 @@ Because fractional resistance changes are tiny ($\Delta R \approx 0.0002\,\Omega
 
 | Configuration | Active Strain Elements | Temperature Compensation | Bridge Sensitivity Output ($\Delta V_{\text{out}} / V_{\text{in}}$) | Geotechnical Suitability |
 | :--- | :--- | :--- | :--- | :--- |
-| **Quarter Bridge (1-Arm)** | 1 Active Gauge (R1), 3 Fixed Resistors. | ❌ Requires software thermal compensation. | $\frac{1}{4} \cdot \text{GF} \cdot \varepsilon$ | Low-cost prototypes; requires co-located temperature sensor. |
-| **Half Bridge (2-Arm)** | 1 Active (R1) + 1 Dummy Gauge (R2). | **✅ Automatic hardware cancellation**. | $\frac{1}{4} \cdot \text{GF} \cdot (\varepsilon_1 - \varepsilon_2) = \frac{1}{2} \cdot \text{GF} \cdot \varepsilon$ | **Recommended:** Excellent thermal stability on rock faces. |
-| **Full Bridge (4-Arm)** | 4 Active Gauges (2 tension, 2 compression).| **✅ Maximum thermal & bending rejection**.| $\text{GF} \cdot \varepsilon$ (4x sensitivity)| Load cells, vibrating-wire sensors, structural steel columns. |
+| **Quarter Bridge (1-Arm)** | 1 Active Gauge (R1), 3 Fixed Resistors. | [REJECTED] Requires software thermal compensation. | $\frac{1}{4} \cdot \text{GF} \cdot \varepsilon$ | Low-cost prototypes; requires co-located temperature sensor. |
+| **Half Bridge (2-Arm)** | 1 Active (R1) + 1 Dummy Gauge (R2). | **[CONFIRMED] Automatic hardware cancellation**. | $\frac{1}{4} \cdot \text{GF} \cdot (\varepsilon_1 - \varepsilon_2) = \frac{1}{2} \cdot \text{GF} \cdot \varepsilon$ | **Recommended:** Excellent thermal stability on rock faces. |
+| **Full Bridge (4-Arm)** | 4 Active Gauges (2 tension, 2 compression).| **[CONFIRMED] Maximum thermal & bending rejection**.| $\text{GF} \cdot \varepsilon$ (4x sensitivity)| Load cells, vibrating-wire sensors, structural steel columns. |
 
 ---
 
@@ -283,14 +283,14 @@ Because fractional resistance changes are tiny ($\Delta R \approx 0.0002\,\Omega
 
 ```mermaid
 flowchart LR
-    SENS[Bonded Strain Gauge on Rock / Rock Bolt] --> BRIDGE[Quarter/Half Wheatstone Bridge Circuit]
-    BRIDGE --> AMP[Precision Instrumentation Amplifier AD620 / INA128]
-    AMP --> ADC[24-Bit Sigma-Delta ADC: ADS1220 / HX711]
-    ADC --> MCU[ESP32-S3 Edge IoT Microcontroller]
-    TEMP[DS18B20 Digital Temperature Sensor] --> MCU
-    MCU -->|Digital Filtering & Temperature Compensation| LORA[SX1262 LoRa 868MHz Transceiver]
-    LORA -->|5 km Wireless RF Stream| GW[Solar Pit-Rim Gateway]
-    GW --> SVR[Edge AI Processing Server & Database]
+ SENS[Bonded Strain Gauge on Rock / Rock Bolt] --> BRIDGE[Quarter/Half Wheatstone Bridge Circuit]
+ BRIDGE --> AMP[Precision Instrumentation Amplifier AD620 / INA128]
+ AMP --> ADC[24-Bit Sigma-Delta ADC: ADS1220 / HX711]
+ ADC --> MCU[ESP32-S3 Edge IoT Microcontroller]
+ TEMP[DS18B20 Digital Temperature Sensor] --> MCU
+ MCU -->|Digital Filtering & Temperature Compensation| LORA[SX1262 LoRa 868MHz Transceiver]
+ LORA -->|5 km Wireless RF Stream| GW[Solar Pit-Rim Gateway]
+ GW --> SVR[Edge AI Processing Server & Database]
 ```
 *Figure 10.1: Edge IoT signal conditioning and wireless telemetry chain.*
 
@@ -301,7 +301,7 @@ flowchart LR
 * **Telemetry:** **Semtech SX1262 LoRa module ($+22\text{ dBm}$ output, 868 MHz)** streaming encrypted JSON packets.
 * **Total Prototype Unit Cost:** **₹3,500 – ₹6,500 per wireless node** ($>80\%$ cost reduction vs commercial loggers).
 
-> **Student Prototype vs. Certified Geotechnical Instrument Disclaimer:**  
+> **Student Prototype vs. Certified Geotechnical Instrument Disclaimer:** 
 > *While our low-cost ESP32/ADS1220 prototype is ideal for research validation and testing, commercial certified geotechnical systems (e.g., Geokon 4000, Tokyo Measuring Instruments TML) feature hermetically sealed stainless steel housings, laser-welded bellows, and ATEX intrinsically safe explosion-proof ratings.*
 
 ---
@@ -336,30 +336,30 @@ To build our SIH25071 prototype, we evaluated verified open-source strain and si
 
 ```mermaid
 flowchart TD
-    subgraph Micro-Scale In-Situ Strain & Stress Layer
-        A1[Wireless LoRa Bonded Foil Strain Gauges on Rock Matrix] --> A2[pyGeoTech Strain Rate & Acceleration Engine]
-        A3[Vibrating-Wire Rock Bolt Load Cells: Anchor Tensile Stress] --> A4[Yield Stress Warning Engine]
-        A5[Vibrating-Wire Piezometers: Pore-Water Pressure] --> A6[Effective Stress Calculator σ' = σ - u]
-    end
+ subgraph Micro-Scale In-Situ Strain & Stress Layer
+ A1[Wireless LoRa Bonded Foil Strain Gauges on Rock Matrix] --> A2[pyGeoTech Strain Rate & Acceleration Engine]
+ A3[Vibrating-Wire Rock Bolt Load Cells: Anchor Tensile Stress] --> A4[Yield Stress Warning Engine]
+ A5[Vibrating-Wire Piezometers: Pore-Water Pressure] --> A6[Effective Stress Calculator σ' = σ - u]
+ end
 
-    subgraph Macro-Scale Remote Sensing & Geodetic Layer
-        B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
-        B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        B3[Highwall GNSS RTK Stations: 3D Point Displacement]
-        B4[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
-    end
+ subgraph Macro-Scale Remote Sensing & Geodetic Layer
+ B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
+ B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ B3[Highwall GNSS RTK Stations: 3D Point Displacement]
+ B4[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
+ end
 
-    A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 13.1: Master multi-sensor data fusion architecture incorporating microstrain metrics.*
 
@@ -383,17 +383,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 97.2%)"]
-        B["📍 Location: Bench 3 - North Wall (Strain Gauge SG-04 / CAM-01)"]
-        C["⏱️ Predicted Yield Collapse Window: 12 ± 3 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Microstrain Rate Exponential Surge (20.0 µε/day): +43% contribution"]
-        D2["• Highwall Rock Bolt Anchor Load Yielding (>95% Ultimate Yield): +26% contribution"]
-        D3["• Sub-Pixel Optical Flow Velocity Surge (18.5 mm/hr): +15% contribution"]
-        D4["• Hydrostatic Pore Pressure Spike (26 kPa): +11% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 97.2%)"]
+ B[" Location: Bench 3 - North Wall (Strain Gauge SG-04 / CAM-01)"]
+ C[" Predicted Yield Collapse Window: 12 ± 3 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Microstrain Rate Exponential Surge (20.0 µε/day): +43% contribution"]
+ D2["• Highwall Rock Bolt Anchor Load Yielding (>95% Ultimate Yield): +26% contribution"]
+ D3["• Sub-Pixel Optical Flow Velocity Surge (18.5 mm/hr): +15% contribution"]
+ D4["• Hydrostatic Pore Pressure Spike (26 kPa): +11% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 15.1: Conceptual SHAP explainable alert diagnostic card for strain-informed alerts.*
 
@@ -403,14 +403,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with Color-Coded Strain Gauge & Rock Bolt Load Pins]
-        D2[Real-Time Microstrain Time-Series: Microstrain, Strain Rate & Strain Acceleration]
-        D3[Principal Stress Rosette Stereonet Projection Panel]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Safety Compliance & Rock Reinforcement Audit Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with Color-Coded Strain Gauge & Rock Bolt Load Pins]
+ D2[Real-Time Microstrain Time-Series: Microstrain, Strain Rate & Strain Acceleration]
+ D3[Principal Stress Rosette Stereonet Projection Panel]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Safety Compliance & Rock Reinforcement Audit Export]
+ end
 ```
 *Figure 16.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -433,16 +433,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE STRAIN GAUGE LIMITATION ]──► Measures micro-scale internal rock matrix stress/strain,|
-|                                            but highly localized & blind to whole-slope kinematics.|
-|  [ REMOTE VISION / RADAR LIMITATION ]  ──► Full-field surface tracking, but completely blind to   |
-|                                            subsurface stress build-up and rock bolt yielding.     |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses micro-scale wireless strain gauges & rock bolt   |
-|                                            sensors with full-field Edge Computer Vision & InSAR   |
-|                                            into a unified Physics-Informed AI engine that catches |
-|                                            both internal stress build-up and surface rockfalls!   |
+| [ STANDALONE STRAIN GAUGE LIMITATION ] Measures micro-scale internal rock matrix stress/strain,|
+| but highly localized & blind to whole-slope kinematics.|
+| [ REMOTE VISION / RADAR LIMITATION ] Full-field surface tracking, but completely blind to |
+| subsurface stress build-up and rock bolt yielding. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses micro-scale wireless strain gauges & rock bolt |
+| sensors with full-field Edge Computer Vision & InSAR |
+| into a unified Physics-Informed AI engine that catches |
+| both internal stress build-up and surface rockfalls! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -463,50 +463,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Wireless LoRa Bonded Foil Strain Gauges & Rock Bolt Load Cells]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Micro-Weather Station: Rainfall Intensity mm/hr]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Wireless LoRa Bonded Foil Strain Gauges & Rock Bolt Load Cells]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Micro-Weather Station: Rainfall Intensity mm/hr]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[Thermal Correction, Microstrain Rate & Strain Acceleration]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P5[Rainfall Infiltration Rate & Antecedent Moisture Index]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[Thermal Correction, Microstrain Rate & Strain Acceleration]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P5[Rainfall Infiltration Rate & Antecedent Moisture Index]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_STRAIN[Microstrain Rate, Acceleration & Rock Bolt Load]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_STRAIN[Microstrain Rate, Acceleration & Rock Bolt Load]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_STRAIN & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_STRAIN & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 20.1: Complete end-to-end system architecture incorporating microstrain kinematics into the real-time AI rockfall prediction pipeline.*
 

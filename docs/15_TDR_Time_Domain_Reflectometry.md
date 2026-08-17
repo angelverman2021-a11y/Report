@@ -1,10 +1,10 @@
 # Existing Technology 15: TDR — Time-Domain Reflectometry
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/15_TDR_Time_Domain_Reflectometry.md`
 
 ---
@@ -24,12 +24,12 @@ This report evaluates TDR as an **existing subsurface geotechnical monitoring te
 
 ```mermaid
 flowchart TD
-    TDR_UNIT[TDR Pulser / Receiver Unit at Pit Rim] -->|Transmits Fast Sub-Nanosecond Voltage Step Pulse| CABLE[Grouted Coaxial Cable in Highwall Borehole]
-    CABLE -->|Pulse Propagates at Speed of Light Fraction vp| SHEAR[Subterranean Rock Shear Zone Crimps Cable]
-    SHEAR -->|Impedance Mismatch ZL != Z0 Causes Reflection| ECHO[Reflected Waveform Echo Propagates Back Up]
-    ECHO -->|Digitized at Picosecond Resolution| SAMPLER[High-Speed Sampling Receiver]
-    SAMPLER -->|Calculates Round-Trip Travel Time Δt| DEPTH[Pinpoints Exact Shear Plane Depth: d = vp * Δt / 2]
-    DEPTH --> RISK[Geotechnical Failure Horizon Risk Assessment]
+ TDR_UNIT[TDR Pulser / Receiver Unit at Pit Rim] -->|Transmits Fast Sub-Nanosecond Voltage Step Pulse| CABLE[Grouted Coaxial Cable in Highwall Borehole]
+ CABLE -->|Pulse Propagates at Speed of Light Fraction vp| SHEAR[Subterranean Rock Shear Zone Crimps Cable]
+ SHEAR -->|Impedance Mismatch ZL != Z0 Causes Reflection| ECHO[Reflected Waveform Echo Propagates Back Up]
+ ECHO -->|Digitized at Picosecond Resolution| SAMPLER[High-Speed Sampling Receiver]
+ SAMPLER -->|Calculates Round-Trip Travel Time Δt| DEPTH[Pinpoints Exact Shear Plane Depth: d = vp * Δt / 2]
+ DEPTH --> RISK[Geotechnical Failure Horizon Risk Assessment]
 ```
 *Figure 1.1: High-level operational workflow of borehole TDR subsurface shear detection.*
 
@@ -43,15 +43,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    S1[1. Vertical or Inclined Borehole Drilled through Suspected Failure Zone] --> S2[2. Standard Coaxial Cable RG-8 / CommScope Lowered to Base]
-    S2 --> S3[3. Annulus Fully Grouted with Brittle Cement-Bentonite Grout]
-    S3 --> S4[4. TDR Instrument Injects Ultrafast Voltage Step Pulse ~200ps Rise Time]
-    S4 --> S5[5. Signal Travels down Cable at Characteristic Velocity: vp = c * Vf]
-    S5 --> S6[6. Deep Rock Slip Shears Grout Column & Crimps Coaxial Cable]
-    S6 --> S7[7. Local Capacitance C & Inductance L Change -> Characteristic Impedance ZL Drops]
-    S7 --> S8[8. Negative Voltage Reflection Spike Reflected Back to Surface Receiver]
-    S8 --> S9[9. Peak Travel Time Δt Converted into Exact Shear Depth d meters]
-    S9 --> S10[10. Peak Amplitude Growth Triggers Automated Multi-Modal TARP Alert]
+ S1[1. Vertical or Inclined Borehole Drilled through Suspected Failure Zone] --> S2[2. Standard Coaxial Cable RG-8 / CommScope Lowered to Base]
+ S2 --> S3[3. Annulus Fully Grouted with Brittle Cement-Bentonite Grout]
+ S3 --> S4[4. TDR Instrument Injects Ultrafast Voltage Step Pulse ~200ps Rise Time]
+ S4 --> S5[5. Signal Travels down Cable at Characteristic Velocity: vp = c * Vf]
+ S5 --> S6[6. Deep Rock Slip Shears Grout Column & Crimps Coaxial Cable]
+ S6 --> S7[7. Local Capacitance C & Inductance L Change -> Characteristic Impedance ZL Drops]
+ S7 --> S8[8. Negative Voltage Reflection Spike Reflected Back to Surface Receiver]
+ S8 --> S9[9. Peak Travel Time Δt Converted into Exact Shear Depth d meters]
+ S9 --> S10[10. Peak Amplitude Growth Triggers Automated Multi-Modal TARP Alert]
 ```
 *Figure 2.1: Step-by-step operational pipeline from borehole cable deformation to early-warning alert.*
 
@@ -72,12 +72,12 @@ A uniform, undeformed coaxial cable has a constant **Characteristic Impedance ($
 $$Z_0 = \sqrt{\frac{L}{C}} = \frac{138}{\sqrt{\varepsilon_r}} \log_{10}\left(\frac{D_{\text{outer}}}{d_{\text{inner}}}\right) \quad (\text{typically } 50\,\Omega \text{ or } 75\,\Omega)$$
 
 ```
-Undeformed Coaxial Cable (Uniform Z0 = 50 Ω)        Shear-Crimped Coaxial Cable (Impedance Drop ZL < 50 Ω)
-  ┌────────────────────────────────────────┐          ┌───────────────────┐    ┌───────────────────┐
-  │ ════════ Central Copper Core ═════════ │          │ ═════ Core ═════  │ \  / │ ═════ Core ═════ │
-  │ ░░░░░░░░ Polyethylene Dielectric ░░░░░ │ ──Shear─►│ ░░░░ Dielectric ░░ │  \/  │ ░░░░ Dielectric ░░ │
-  │ ──────────────── Outer Shield ──────── │          │ ──── Shield ───── │ /  \ │ ──── Shield ───── │
-  └────────────────────────────────────────┘          └───────────────────┘      └───────────────────┘
+Undeformed Coaxial Cable (Uniform Z0 = 50 Ω) Shear-Crimped Coaxial Cable (Impedance Drop ZL < 50 Ω)
+ 
+ Central Copper Core Core \ / Core 
+ Polyethylene Dielectric Shear Dielectric \/ Dielectric 
+ Outer Shield Shield / \ Shield 
+ 
 ```
 *Figure 3.1: Geometric deformation of coaxial cable under localized shear altering characteristic impedance.*
 
@@ -95,28 +95,28 @@ $$\Gamma = \frac{V_{\text{reflected}}}{V_{\text{incident}}} = \frac{Z_L - Z_0}{Z
 ## 4. TDR Cable Installation in Open-Pit Mine Slopes
 
 ```
-                Mine Highwall Crest
-             ┌────────────────────────┐
-             │ [TDR Data Logger Node] │
-             │           │            │
-             │           ▼            │
-             │   ┌────────────────┐   │
-             │   │ Borehole Collar│   │
-             │   └───────┬────────┘   │
-             │           │            │
-             │           │ ◄─── Brittle Cement-Bentonite Grout Column
-             │           │            │
-             │           │ ◄─── RG-8/U Coaxial Cable
-             │           │            │
-             │ ══════════╪═══════════ │ ◄─── Active Subsurface Shear Plane (18.2 m Depth)
-             │          / \ (Sheared) │
-             │         /   \          │
-             │        /     \         │
-             │       │       │        │
-             │       │       │        │
-             │       ▼ Base  ▼        │
-             │   (Stable Bedrock)     │
-             └────────────────────────┘
+ Mine Highwall Crest
+ 
+ [TDR Data Logger Node] 
+ 
+ 
+ 
+ Borehole Collar 
+ 
+ 
+ Brittle Cement-Bentonite Grout Column
+ 
+ RG-8/U Coaxial Cable
+ 
+ Active Subsurface Shear Plane (18.2 m Depth)
+ / \ (Sheared) 
+ / \ 
+ / \ 
+ 
+ 
+ Base 
+ (Stable Bedrock) 
+ 
 ```
 *Figure 4.1: Cross-sectional installation geometry of a fully grouted TDR borehole cable.*
 
@@ -138,8 +138,8 @@ where:
 * $V_f$ = **Velocity Factor** of the cable (typically $V_f \approx 0.66$ for solid polyethylene, $V_f \approx 0.85$ for foam dielectric).
 
 ```
-[TDR Pulser] ──► Incident Pulse (t = 0) ──────────────────────────────► [Shear Zone at Distance d]
-[TDR Receiver] ◄── Reflected Echo (t = Δt) ◄───────────────────────────┘
+[TDR Pulser] Incident Pulse (t = 0) [Shear Zone at Distance d]
+[TDR Receiver] Reflected Echo (t = Δt) 
 ```
 
 ### Exact Shear Zone Distance Equation:
@@ -157,17 +157,17 @@ where $\Delta t$ is the round-trip travel time measured in nanoseconds ($\text{n
 | :--- | :--- | :--- | :--- | :--- |
 | **Primary Measurement Zone**| **Subsurface Internal Rock Mass**| Surface Crest / Bench Surface | Regional Ground Surface | Highwall Face Surface |
 | **Primary Data Product** | Electrical Reflection Waveform ($\Gamma(d)$)| 3D Coordinate Vector $(\Delta E,N,U)$| 1D Line-of-Sight Phase | 1D Line-of-Sight Phase |
-| **Slip Plane Depth Detection**| **✅ Direct & Exact (e.g., 18.2 m)** | ❌ Impossible (Surface only) | ❌ Impossible (Surface only) | ❌ Impossible (Surface only) |
+| **Slip Plane Depth Detection**| **[CONFIRMED] Direct & Exact (e.g., 18.2 m)** | [REJECTED] Impossible (Surface only) | [REJECTED] Impossible (Surface only) | [REJECTED] Impossible (Surface only) |
 | **Spatial Coverage** | Continuous Along 1D Borehole | Discrete Installed Points | **Regional ($100+\text{ km}^2$)** | **Slope-Wide (2D Sector Heatmap)** |
 | **Sensor Cost per Hole/Point**| **₹25,000 – ₹60,000 (Very Low Cable Cost)**| ₹1.5 Lakh – ₹4.0 Lakh | Free (Sentinel) to $$ Commercial | **₹3.5 Cr – ₹8.0 Cr (Extreme)** |
-| **Durability Under Large Slip**| ❌ Cable severs at $>30\text{ mm}$ slip | Survives until block topples | Survives indefinitely | Survives indefinitely |
+| **Durability Under Large Slip**| [REJECTED] Cable severs at $>30\text{ mm}$ slip | Survives until block topples | Survives indefinitely | Survives indefinitely |
 | **SIH25071 Strategic Role** | Subsurface shear plane calibration | Geodetic 3D point ground truth | Macro regional stress prior | Real-time velocity kinematics |
 
 ---
 
 ## 7. Time-Series TDR Monitoring & Waveform Evolution
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to explain progressive TDR reflection spike growth at a subsurface shear zone. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic TDR Waveform Evolution Dataset
@@ -179,23 +179,23 @@ where $\Delta t$ is the round-trip travel time measured in nanoseconds ($\text{n
 | **$T_3$** | 10 | 18.2 | -34.0 | -17.0 | Secondary Steady Creep |
 | **$T_4$** | 15 | 18.2 | -78.0 | -39.0 | Active Shear Dilation |
 | **$T_5$** | 18 | 18.2 | -165.0 | -82.5 | Transition to Tertiary Failure |
-| **$T_6$** | 20 | 18.2 | **-350.0 (Near Cut)** | **-175.0** | 🔴 **CRITICAL IMPENDING COLLAPSE** |
+| **$T_6$** | 20 | 18.2 | **-350.0 (Near Cut)** | **-175.0** | [CRITICAL / RED] **CRITICAL IMPENDING COLLAPSE** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: TDR Reflection Spike Growth at 18.2m Depth (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
-    y-axis "Negative Reflection Amplitude (-mρ)" 0 --> 400
-    line [0.0, 12.0, 34.0, 78.0, 165.0, 350.0]
+ title "Illustrative Example: TDR Reflection Spike Growth at 18.2m Depth (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
+ y-axis "Negative Reflection Amplitude (-mρ)" 0 --> 400
+ line [0.0, 12.0, 34.0, 78.0, 165.0, 350.0]
 ```
 *Figure 7.1: Illustrative TDR reflection spike amplitude growth over time at the 18.2 m shear plane.*
 
@@ -215,22 +215,22 @@ xychart-beta
 
 ```mermaid
 mindmap
-  root((TDR Mining Limitations))
-    Cable Severance Blinds Deeper Zones
-      When shear displacement exceeds 30-50mm, the cable is severed
-      All monitoring below the cut point is permanently lost
-    Qualitative vs Quantitative Displacement
-      Accurately locates shear depth, but hard to convert
-      reflection millivolts into exact millimeters of slip
-    Grout Quality Dependency
-      Improper grout mixing causes premature cable snapping
-      Requires skilled geotechnical installation crews
-    Discrete Line Blindness
-      Only monitors the specific borehole path
-      Blind to rockfalls occurring on un-instrumented slopes
-    High Initial Drilling Capex
-      Core drilling 50m boreholes in hard rock costs ₹1.5L - ₹4.0L
-      Requires dedicated truck-mounted drilling rigs
+ root((TDR Mining Limitations))
+ Cable Severance Blinds Deeper Zones
+ When shear displacement exceeds 30-50mm, the cable is severed
+ All monitoring below the cut point is permanently lost
+ Qualitative vs Quantitative Displacement
+ Accurately locates shear depth, but hard to convert
+ reflection millivolts into exact millimeters of slip
+ Grout Quality Dependency
+ Improper grout mixing causes premature cable snapping
+ Requires skilled geotechnical installation crews
+ Discrete Line Blindness
+ Only monitors the specific borehole path
+ Blind to rockfalls occurring on un-instrumented slopes
+ High Initial Drilling Capex
+ Core drilling 50m boreholes in hard rock costs ₹1.5L - ₹4.0L
+ Requires dedicated truck-mounted drilling rigs
 ```
 *Figure 9.1: Physical, operational, and structural limitations of TDR monitoring in open-cast mines.*
 
@@ -264,13 +264,13 @@ To build our SIH25071 prototype, we evaluated verified open-source signal proces
 
 ```mermaid
 flowchart LR
-    RAW[Raw TDR Waveform: 2048 Voltage Samples] --> BASE_SUB[Baseline Subtraction: ΔV_t = V_t - V_0]
-    BASE_SUB --> CWT[Continuous Wavelet Transform CWT Noise Filter]
-    CWT --> PEAK[SciPy find_peaks: Identifies Negative Reflection Inflections]
-    PEAK --> TIME_CALC[Calculates Round-Trip Travel Time Δt in Picoseconds]
-    TIME_CALC --> DEPTH_MAP[Calculates Shear Depth: d = vp * Δt / 2]
-    DEPTH_MAP --> ANOMALY[Computes Amplitude Growth Rate: dΓ/dt]
-    ANOMALY --> AI[Multi-Modal AI Risk Core]
+ RAW[Raw TDR Waveform: 2048 Voltage Samples] --> BASE_SUB[Baseline Subtraction: ΔV_t = V_t - V_0]
+ BASE_SUB --> CWT[Continuous Wavelet Transform CWT Noise Filter]
+ CWT --> PEAK[SciPy find_peaks: Identifies Negative Reflection Inflections]
+ PEAK --> TIME_CALC[Calculates Round-Trip Travel Time Δt in Picoseconds]
+ TIME_CALC --> DEPTH_MAP[Calculates Shear Depth: d = vp * Δt / 2]
+ DEPTH_MAP --> ANOMALY[Computes Amplitude Growth Rate: dΓ/dt]
+ ANOMALY --> AI[Multi-Modal AI Risk Core]
 ```
 *Figure 12.1: Automated algorithmic pipeline for extracting shear plane depth and reflection amplitude from raw TDR waveforms.*
 
@@ -280,30 +280,30 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph Subsurface Geotechnical Layer
-        A1[Grouted Borehole Coaxial Cable: TDR Waveforms] --> A2[pyTDR Shear Depth & Reflection Engine]
-        A3[Vibrating-Wire Piezometers: Pore-Water Pressure] --> A4[Hydrostatic Thrust Calculator]
-        A5[Borehole In-Place Inclinometers IPI] --> A6[Lateral Deflection Profiler]
-    end
+ subgraph Subsurface Geotechnical Layer
+ A1[Grouted Borehole Coaxial Cable: TDR Waveforms] --> A2[pyTDR Shear Depth & Reflection Engine]
+ A3[Vibrating-Wire Piezometers: Pore-Water Pressure] --> A4[Hydrostatic Thrust Calculator]
+ A5[Borehole In-Place Inclinometers IPI] --> A6[Lateral Deflection Profiler]
+ end
 
-    subgraph Surface Optical & Remote Telemetry Layer
-        B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
-        B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        B3[Highwall GNSS RTK Stations: 3D Point Displacement]
-        B4[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph Surface Optical & Remote Telemetry Layer
+ B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
+ B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ B3[Highwall GNSS RTK Stations: 3D Point Displacement]
+ B4[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 13.1: Master multi-sensor data fusion architecture incorporating TDR subsurface shear telemetry.*
 
@@ -327,17 +327,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 97.4%)"]
-        B["📍 Location: Bench 4 - East Highwall (TDR Borehole Cable TDR-02 / CAM-03)"]
-        C["⏱️ Predicted Shear Collapse Window: 15 ± 3 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid TDR Cable Reflection Spike at 18.2 m Depth (-350 mρ): +44% contribution"]
-        D2["• Hydrostatic Pore Pressure Surge behind shear plane (32 kPa): +25% contribution"]
-        D3["• Surface Optical Flow Velocity Surge (21.2 mm/hr): +16% contribution"]
-        D4["• Tensile Crest Crackmeter Dilation Acceleration: +10% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 97.4%)"]
+ B[" Location: Bench 4 - East Highwall (TDR Borehole Cable TDR-02 / CAM-03)"]
+ C[" Predicted Shear Collapse Window: 15 ± 3 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid TDR Cable Reflection Spike at 18.2 m Depth (-350 mρ): +44% contribution"]
+ D2["• Hydrostatic Pore Pressure Surge behind shear plane (32 kPa): +25% contribution"]
+ D3["• Surface Optical Flow Velocity Surge (21.2 mm/hr): +16% contribution"]
+ D4["• Tensile Crest Crackmeter Dilation Acceleration: +10% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 15.1: Conceptual SHAP explainable alert diagnostic card for TDR-informed alerts.*
 
@@ -347,14 +347,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with Subsurface TDR Borehole 3D Path Visualizer]
-        D2[Real-Time TDR Waveform Plot: Voltage Reflection vs Depth showing Shear Inflection Spike]
-        D3[Multi-Temporal Reflection Peak Growth Rate & Acceleration Curves]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Compliance & Subsurface Shear Audit Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with Subsurface TDR Borehole 3D Path Visualizer]
+ D2[Real-Time TDR Waveform Plot: Voltage Reflection vs Depth showing Shear Inflection Spike]
+ D3[Multi-Temporal Reflection Peak Growth Rate & Acceleration Curves]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Compliance & Subsurface Shear Audit Logbook Export]
+ end
 ```
 *Figure 16.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -377,16 +377,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE TDR LIMITATION ]         ──► Pinpoints exact subsurface shear depth, but cable      |
-|                                            severs under large slip & blind to un-instrumented zone|
-|  [ REMOTE VISION / RADAR LIMITATION ]  ──► Full-field surface tracking, but completely blind to   |
-|                                            deep subterranean shear slip horizons.                 |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses low-cost borehole TDR shear cables with          |
-|                                            full-field Edge Computer Vision, Piezometers, & InSAR  |
-|                                            into a unified Physics-Informed AI engine with zero    |
-|                                            subsurface or spatial blind spots!                     |
+| [ STANDALONE TDR LIMITATION ] Pinpoints exact subsurface shear depth, but cable |
+| severs under large slip & blind to un-instrumented zone|
+| [ REMOTE VISION / RADAR LIMITATION ] Full-field surface tracking, but completely blind to |
+| deep subterranean shear slip horizons. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses low-cost borehole TDR shear cables with |
+| full-field Edge Computer Vision, Piezometers, & InSAR |
+| into a unified Physics-Informed AI engine with zero |
+| subsurface or spatial blind spots! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -407,50 +407,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Grouted Borehole Coaxial TDR Cables: Subsurface Shear]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Micro-Weather Station: Rainfall Intensity mm/hr]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Grouted Borehole Coaxial TDR Cables: Subsurface Shear]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Micro-Weather Station: Rainfall Intensity mm/hr]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[Wavelet Denoising, Travel Time & Shear Depth Extraction]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P5[Rainfall Infiltration Rate & Antecedent Moisture Index]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[Wavelet Denoising, Travel Time & Shear Depth Extraction]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P5[Rainfall Infiltration Rate & Antecedent Moisture Index]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_TDR[Subsurface Shear Depth, Reflection Amplitude & Rate]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_TDR[Subsurface Shear Depth, Reflection Amplitude & Rate]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_TDR & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_TDR & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 20.1: Complete end-to-end system architecture incorporating borehole TDR subsurface shear telemetry into the real-time AI rockfall prediction pipeline.*
 

@@ -1,10 +1,10 @@
 # Existing Technology 12: Crack / Joint Meters
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/12_Crack_Joint_Meters.md`
 
 ---
@@ -26,16 +26,16 @@ A **crack meter** is an instrument mounted across a structural fracture on a roc
 A **joint meter** is a specialized, often waterproof and multi-axial displacement transducer installed across pre-existing geological discontinuities (such as structural bedding planes, faults, or joint sets) to measure 1D, 2D, or 3D relative slip and aperture dilation.
 
 ```
-           Rock Block A (Stable Crest)              Rock Block B (Moving Slope)
-         ┌─────────────────────────────┐          ┌─────────────────────────────┐
-         │                             │          │                             │
-         │       Anchor Pin 1          │          │       Anchor Pin 2          │
-         │            ●────────────────┼──────────┼──────────────●              │
-         │                             │          │                             │
-         │                             │◄── ΔC ──►│                             │
-         │                             │  Crack / │                             │
-         │                             │  Joint   │                             │
-         └─────────────────────────────┘          └─────────────────────────────┘
+ Rock Block A (Stable Crest) Rock Block B (Moving Slope)
+ 
+ 
+ Anchor Pin 1 Anchor Pin 2 
+ 
+ 
+ ΔC 
+ Crack / 
+ Joint 
+ 
 ```
 *Figure 1.1: Schematic of an electronic crackmeter spanning across a dilating tension crack.*
 
@@ -54,15 +54,15 @@ A **joint meter** is a specialized, often waterproof and multi-axial displacemen
 
 ```mermaid
 flowchart TD
-    S1[1. Visible Tension Crack / Joint Identified on Highwall Crest] --> S2[2. High-Precision Anchor Pins Anchored into Bedrock on Both Sides]
-    S2 --> S3[3. Electronic Transducer Bridge Mounted across the Fracture]
-    S3 --> S4[4. Records Baseline Fracture Aperture Width C0 mm]
-    S4 --> S5[5. Rock Creep Causes Relative Motion between Blocks]
-    S5 --> S6[6. Transducer Measures Change in Opening: ΔC = Ct - C0 mm]
-    S6 --> S7[7. Calculates Dilation Velocity v = dC/dt & Acceleration a = dv/dt]
-    S7 --> S8[8. Saito Inverse Velocity Method Applied: IV = 1 / v]
-    S8 --> S9[9. Kinematic Threshold Surge Triggers AI Risk Engine]
-    S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
+ S1[1. Visible Tension Crack / Joint Identified on Highwall Crest] --> S2[2. High-Precision Anchor Pins Anchored into Bedrock on Both Sides]
+ S2 --> S3[3. Electronic Transducer Bridge Mounted across the Fracture]
+ S3 --> S4[4. Records Baseline Fracture Aperture Width C0 mm]
+ S4 --> S5[5. Rock Creep Causes Relative Motion between Blocks]
+ S5 --> S6[6. Transducer Measures Change in Opening: ΔC = Ct - C0 mm]
+ S6 --> S7[7. Calculates Dilation Velocity v = dC/dt & Acceleration a = dv/dt]
+ S7 --> S8[8. Saito Inverse Velocity Method Applied: IV = 1 / v]
+ S8 --> S9[9. Kinematic Threshold Surge Triggers AI Risk Engine]
+ S9 --> S10[10. Autonomous TARP Trigger: Sirens & Radio Dispatch in <1.0s]
 ```
 *Figure 2.1: Step-by-step operational workflow from physical crack dilation to autonomous early warning.*
 
@@ -78,14 +78,14 @@ flowchart TD
 ## 3. Types of Crack & Joint Monitoring Systems
 
 ```
-Mechanical Tell-Tale          Potentiometric Crackmeter         Vibrating-Wire (VWC)          Triaxial 3D Jointmeter
-  ┌─────────────────┐           ┌─────────────────┐             ┌─────────────────┐             ┌─────────────────┐
-  │ Acrylic Caliper │           │ Linear Pot. Rod │             │ Resonant Wire   │             │ X, Y, Z Biaxial │
-  │ ┌─────┬─────┐   │           │ ┌─────────────┐ │             │ ┌─────────────┐ │             │ ┌─────────────┐ │
-  │ │  X  │  Y  │   │           │ │ ═══► Rod ══ │ │             │ │ ─── Wire ── │ │             │ │ 3x LVDT/VWP │ │
-  │ └─────┴─────┘   │           │ └─────────────┘ │             │ └─────────────┘ │             │ └─────────────┘ │
-  │ (Manual Eye)    │           │ (0-5V / 4-20mA) │             │ (Frequency Hz)  │             │ (Full 3D Vector)│
-  └─────────────────┘           └─────────────────┘             └─────────────────┘             └─────────────────┘
+Mechanical Tell-Tale Potentiometric Crackmeter Vibrating-Wire (VWC) Triaxial 3D Jointmeter
+ 
+ Acrylic Caliper Linear Pot. Rod Resonant Wire X, Y, Z Biaxial 
+ 
+ X Y Rod Wire 3x LVDT/VWP 
+ 
+ (Manual Eye) (0-5V / 4-20mA) (Frequency Hz) (Full 3D Vector)
+ 
 ```
 *Figure 3.1: Structural comparison of common crack and joint monitoring instrumentation.*
 
@@ -93,11 +93,11 @@ Mechanical Tell-Tale          Potentiometric Crackmeter         Vibrating-Wire (
 
 | Instrument Type | Operating Principle | Measurement Accuracy | Stroke Range | Automated Digital Output | Primary Mining Use Case |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Mechanical Tell-Tale / Caliper** | Overlapping graduated acrylic plates; read visually with a magnifying loupe. | $\pm 0.5\text{ mm}$ | $20\text{ mm to } 50\text{ mm}$ | ❌ Manual visual check only | Low-risk quarry walls; temporary visual verification during drilling. |
-| **Potentiometric Crackmeter** | Linear conductive plastic potentiometer; voltage divider varies with rod extension. | $\pm 0.05\text{ mm}$ | $25\text{ mm to } 300\text{ mm}$ | **✅ Yes (0–5V / 4–20 mA)** | Active bench crest tension cracks; simple low-cost IoT nodes ($₹8,000/\text{unit}$). |
-| **Vibrating-Wire Crackmeter (VWC)** | Tensioned steel wire inside sealed housing; natural frequency shifts with dilation. | **$\pm 0.005\text{ mm}$** | $25\text{ mm to } 100\text{ mm}$ | **✅ Yes (SDI-12 / LoRa)** | **Gold Standard:** Long-term highwall monitoring; zero signal loss over long cables. |
-| **LVDT Displacement Sensor** | Differential transformer with movable magnetic core; zero mechanical friction. | **$\pm 0.001\text{ mm}$** | $10\text{ mm to } 50\text{ mm}$ | **✅ Yes (Analog AC/DC)** | High-precision laboratory shear box testing; micro-fracture monitoring. |
-| **Triaxial 3D Jointmeter** | Three orthogonal displacement transducers measuring $X$ (normal), $Y$ (strike-slip), $Z$ (dip-slip). | $\pm 0.01\text{ mm}$ | $25\text{ mm to } 100\text{ mm}$ per axis | **✅ Yes (Multi-Channel SDI-12)**| Complex 3D wedge failures and toppling blocks where shearing occurs in multiple directions. |
+| **Mechanical Tell-Tale / Caliper** | Overlapping graduated acrylic plates; read visually with a magnifying loupe. | $\pm 0.5\text{ mm}$ | $20\text{ mm to } 50\text{ mm}$ | [REJECTED] Manual visual check only | Low-risk quarry walls; temporary visual verification during drilling. |
+| **Potentiometric Crackmeter** | Linear conductive plastic potentiometer; voltage divider varies with rod extension. | $\pm 0.05\text{ mm}$ | $25\text{ mm to } 300\text{ mm}$ | **[CONFIRMED] Yes (0–5V / 4–20 mA)** | Active bench crest tension cracks; simple low-cost IoT nodes ($₹8,000/\text{unit}$). |
+| **Vibrating-Wire Crackmeter (VWC)** | Tensioned steel wire inside sealed housing; natural frequency shifts with dilation. | **$\pm 0.005\text{ mm}$** | $25\text{ mm to } 100\text{ mm}$ | **[CONFIRMED] Yes (SDI-12 / LoRa)** | **Gold Standard:** Long-term highwall monitoring; zero signal loss over long cables. |
+| **LVDT Displacement Sensor** | Differential transformer with movable magnetic core; zero mechanical friction. | **$\pm 0.001\text{ mm}$** | $10\text{ mm to } 50\text{ mm}$ | **[CONFIRMED] Yes (Analog AC/DC)** | High-precision laboratory shear box testing; micro-fracture monitoring. |
+| **Triaxial 3D Jointmeter** | Three orthogonal displacement transducers measuring $X$ (normal), $Y$ (strike-slip), $Z$ (dip-slip). | $\pm 0.01\text{ mm}$ | $25\text{ mm to } 100\text{ mm}$ per axis | **[CONFIRMED] Yes (Multi-Channel SDI-12)**| Complex 3D wedge failures and toppling blocks where shearing occurs in multiple directions. |
 
 ---
 
@@ -119,7 +119,7 @@ $$\text{Total 3D Joint Slip Magnitude: } D_{\text{joint}}(t) = \sqrt{\Delta u_n^
 
 ## 5. Crack Opening Kinematic Time-Series
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to explain progressive crack opening acceleration and Saito inverse velocity forecasting. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Crackmeter Time-Series Dataset
@@ -131,23 +131,23 @@ $$\text{Total 3D Joint Slip Magnitude: } D_{\text{joint}}(t) = \sqrt{\Delta u_n^
 | **$T_3$** | 10 | 2.5 | +0.5 | 0.06 | +0.004 | Secondary Steady Creep |
 | **$T_4$** | 15 | 3.1 | +1.1 | 0.12 | +0.012 | Creep Acceleration |
 | **$T_5$** | 18 | 4.3 | +2.3 | 0.40 | +0.093 | Transition to Tertiary Creep |
-| **$T_6$** | 20 | 6.0 | +4.0 | **0.85** | **+0.225** | 🔴 **CRITICAL TERTIARY FAILURE** |
+| **$T_6$** | 20 | 6.0 | +4.0 | **0.85** | **+0.225** | [CRITICAL / RED] **CRITICAL TERTIARY FAILURE** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Crack Opening Dilation vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
-    y-axis "Cumulative Crack Dilation (mm)" 0 --> 5
-    line [0.0, 0.2, 0.5, 1.1, 2.3, 4.0]
+ title "Illustrative Example: Crack Opening Dilation vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 18, 20]
+ y-axis "Cumulative Crack Dilation (mm)" 0 --> 5
+ line [0.0, 0.2, 0.5, 1.1, 2.3, 4.0]
 ```
 *Figure 5.1: Illustrative crack dilation curve demonstrating exponential acceleration in tertiary creep.*
 
@@ -162,18 +162,18 @@ $$v(t) = \frac{C(t_2) - C(t_1)}{t_2 - t_1}$$
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: Crack Opening Velocity Surge vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [5, 10, 15, 18, 20]
-    y-axis "Crack Opening Velocity (mm/day)" 0.0 --> 1.0
-    line [0.04, 0.06, 0.12, 0.40, 0.85]
+ title "Illustrative Example: Crack Opening Velocity Surge vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [5, 10, 15, 18, 20]
+ y-axis "Crack Opening Velocity (mm/day)" 0.0 --> 1.0
+ line [0.04, 0.06, 0.12, 0.40, 0.85]
 ```
 *Figure 6.1: Illustrative crack opening velocity surge demonstrating over 20x rate acceleration.*
 
@@ -193,7 +193,7 @@ $$a(t) = \frac{v(t_2) - v(t_1)}{t_2 - t_1}$$
 * **$a > 0$ (Positive Acceleration):** Tertiary creep (Internal rock cohesion is failing).
 * **$a \gg 0$ (Exponential Surge):** Dynamic failure runaway (Imminent rock block detachment).
 
-> **Scientific Caution:**  
+> **Scientific Caution:** 
 > *Thermal expansion cycles cause diurnal crack opening and closing of $\pm 0.2\text{ mm}$ between day and night. An increasing crack reading must be temperature-compensated before confirming true geotechnical tertiary acceleration.*
 
 ---
@@ -202,15 +202,15 @@ $$a(t) = \frac{v(t_2) - v(t_1)}{t_2 - t_1}$$
 
 ```mermaid
 flowchart TD
-    MINE[Open-Pit Highwall Slope] --> CREST[Identifies Active Bench Crest Tension Crack]
-    CREST --> ANCHOR[Installs Armored Expansion Anchors in Solid Rock]
-    ANCHOR --> SENS[Bolts Waterproof IP68 Crackmeter Sensor Bridge]
-    SENS --> PROT[Installs Heavy-Gauge Steel Blasting Deflection Shield]
-    PROT --> LORA[Connects to Solar-Powered Wireless LoRa 868MHz Node]
-    LORA -->|Wireless Radio Packet Stream| GW[Mine Central Base Station Gateway]
-    GW -->|MQTT JSON Stream| SVR[Edge AI Processing Server & Database]
-    SVR --> AI[XGBoost & PINN Rockfall Risk Core]
-    AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ MINE[Open-Pit Highwall Slope] --> CREST[Identifies Active Bench Crest Tension Crack]
+ CREST --> ANCHOR[Installs Armored Expansion Anchors in Solid Rock]
+ ANCHOR --> SENS[Bolts Waterproof IP68 Crackmeter Sensor Bridge]
+ SENS --> PROT[Installs Heavy-Gauge Steel Blasting Deflection Shield]
+ PROT --> LORA[Connects to Solar-Powered Wireless LoRa 868MHz Node]
+ LORA -->|Wireless Radio Packet Stream| GW[Mine Central Base Station Gateway]
+ GW -->|MQTT JSON Stream| SVR[Edge AI Processing Server & Database]
+ SVR --> AI[XGBoost & PINN Rockfall Risk Core]
+ AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 8.1: Complete field installation and telemetry architecture of a highwall crackmeter.*
 
@@ -227,8 +227,8 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | **Measurement Method** | Manual visual inspection with caliper. | Electronic logger storing readings on internal SD card. | **Automated Wireless LoRa Transceiver streaming 24/7**. |
 | **Sampling Frequency** | Weekly or monthly manual rounds. | Hourly or daily logging. | **Continuous (Every 1 minute to 1 second)**. |
-| **Personnel Safety** | ❌ High risk (Staff walk active crests). | Moderate risk (Staff visit logger to pull data). | **100% Non-Contact (Zero pit personnel risk)**. |
-| **Immediate Early Warning**| ❌ Impossible (Days to weeks delay). | ❌ Impossible (Data downloaded retrospectively). | **✅ Sub-Second Autonomous TARP Dispatch (<1.0s)**. |
+| **Personnel Safety** | [REJECTED] High risk (Staff walk active crests). | Moderate risk (Staff visit logger to pull data). | **100% Non-Contact (Zero pit personnel risk)**. |
+| **Immediate Early Warning**| [REJECTED] Impossible (Days to weeks delay). | [REJECTED] Impossible (Data downloaded retrospectively). | **[CONFIRMED] Sub-Second Autonomous TARP Dispatch (<1.0s)**. |
 | **Unit Hardware Cost** | ₹500 – ₹2,000 | ₹25,000 – ₹60,000 | **₹8,000 – ₹18,000 per wireless node (Ultra-Low Cost)**. |
 
 ---
@@ -238,14 +238,14 @@ flowchart TD
 In a real open-cast mine, multiple cracks develop across different sectors of the highwall:
 
 ```
-                      North Highwall Crest
-            [Crack C1: Stable] ══════════ [Crack C2: Slow Creep]
-                   \                               /
-                    \   UNSTABLE SHEAR SECTOR     /
-                     [Crack C3: RAPID SURGE 🔴] ──
-                                 │
-                                 ▼
-                     [Crack C4: Stable Low Wall]
+ North Highwall Crest
+ [Crack C1: Stable] [Crack C2: Slow Creep]
+ \ /
+ \ UNSTABLE SHEAR SECTOR /
+ [Crack C3: RAPID SURGE [CRITICAL / RED]] 
+ 
+ 
+ [Crack C4: Stable Low Wall]
 ```
 
 ### Spatial Cluster Analysis
@@ -268,22 +268,22 @@ In a real open-cast mine, multiple cracks develop across different sectors of th
 
 ```mermaid
 mindmap
-  root((Crackmeter Mining Limitations))
-    Discrete 1D Point Blindness
-      Only monitors the specific crack bridged by the sensor
-      Completely blind to new cracks opening 5m away
-    Physical Stroke Exhaustion
-      Standard transducers max out at 50mm - 100mm stroke
-      Once stroke ends, the sensor goes dead during critical failure
-    Blasting Flyrock Destruction
-      High-velocity flyrock snaps transducer rods
-      Requires heavy steel deflection shields
-    Thermal Expansion Noise
-      Diurnal temperature swings cause ±0.2mm false dilation
-      Requires rigorous digital temperature compensation
-    Zero Subsurface & Hydrogeological Insight
-      Measures surface aperture only
-      Blind to subsurface pore pressure and deep shear stresses
+ root((Crackmeter Mining Limitations))
+ Discrete 1D Point Blindness
+ Only monitors the specific crack bridged by the sensor
+ Completely blind to new cracks opening 5m away
+ Physical Stroke Exhaustion
+ Standard transducers max out at 50mm - 100mm stroke
+ Once stroke ends, the sensor goes dead during critical failure
+ Blasting Flyrock Destruction
+ High-velocity flyrock snaps transducer rods
+ Requires heavy steel deflection shields
+ Thermal Expansion Noise
+ Diurnal temperature swings cause ±0.2mm false dilation
+ Requires rigorous digital temperature compensation
+ Zero Subsurface & Hydrogeological Insight
+ Measures surface aperture only
+ Blind to subsurface pore pressure and deep shear stresses
 ```
 *Figure 12.1: Mechanical, operational, and environmental limitations of crackmeters in open-cast mines.*
 
@@ -319,12 +319,12 @@ To build our SIH25071 prototype, we evaluated verified open-source structural he
 
 ```mermaid
 flowchart LR
-    SENS[Linear Potentiometer Crackmeter Sensor] -->|Analog Voltage 0-3.3V| MCU[ESP32-S3 Edge IoT Node + 12-Bit ADC]
-    MCU -->|Thermal Compensation & Kalman Filter| LORA_TX[SX1262 LoRa 868MHz Radio Module]
-    LORA_TX -->|Long-Range Wireless RF Packet: 5 km Range| GW[Solar Pit-Rim LoRa Gateway]
-    GW -->|MQTT JSON Stream via 4G LTE| CLOUD[Edge AI Processing Server]
-    CLOUD -->|Time-Series InfluxDB| AI[XGBoost & PINN Rockfall Risk Model]
-    AI -->|High Risk Trigger| TARP[Autonomous Sirens, VHF Radio & SMS in <1.0s]
+ SENS[Linear Potentiometer Crackmeter Sensor] -->|Analog Voltage 0-3.3V| MCU[ESP32-S3 Edge IoT Node + 12-Bit ADC]
+ MCU -->|Thermal Compensation & Kalman Filter| LORA_TX[SX1262 LoRa 868MHz Radio Module]
+ LORA_TX -->|Long-Range Wireless RF Packet: 5 km Range| GW[Solar Pit-Rim LoRa Gateway]
+ GW -->|MQTT JSON Stream via 4G LTE| CLOUD[Edge AI Processing Server]
+ CLOUD -->|Time-Series InfluxDB| AI[XGBoost & PINN Rockfall Risk Model]
+ AI -->|High Risk Trigger| TARP[Autonomous Sirens, VHF Radio & SMS in <1.0s]
 ```
 *Figure 15.1: Edge IoT sensor-to-cloud data transmission pipeline for highwall crackmeters.*
 
@@ -334,30 +334,30 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph Mechanical In-Situ Layer
-        A1[Wireless LoRa Potentiometric Crackmeters on Crest] --> A2[Crack Opening Velocity & Saito Regression]
-        A3[Vibrating-Wire Piezometers: Pore Pressure] --> A4[Hydrostatic Uplift Thrust Calculator]
-        A5[Borehole Inclinometers IPI: Subsurface Shear] --> A6[Shear Plane Slip Rate]
-    end
+ subgraph Mechanical In-Situ Layer
+ A1[Wireless LoRa Potentiometric Crackmeters on Crest] --> A2[Crack Opening Velocity & Saito Regression]
+ A3[Vibrating-Wire Piezometers: Pore Pressure] --> A4[Hydrostatic Uplift Thrust Calculator]
+ A5[Borehole Inclinometers IPI: Subsurface Shear] --> A6[Shear Plane Slip Rate]
+ end
 
-    subgraph Surface Remote Sensing Layer
-        B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
-        B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        B3[Micro-Weather Station: Rainfall Intensity mm/hr]
-        B4[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph Surface Remote Sensing Layer
+ B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
+ B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ B3[Micro-Weather Station: Rainfall Intensity mm/hr]
+ B4[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 16.1: Master multi-sensor data fusion architecture incorporating crackmeter kinematics.*
 
@@ -382,17 +382,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 96.4%)"]
-        B["📍 Location: Bench 3 Crest - North-East Wall (Crackmeter Node CRK-03)"]
-        C["⏱️ Predicted Collapse Window (Saito Extrapolation): 16 ± 3 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid Tension Crack Opening Velocity (0.85 mm/day): +41% contribution"]
-        D2["• Saito Inverse Velocity Zero-Crossing Trajectory: +28% contribution"]
-        D3["• Hydrostatic Pore Pressure Spike in Tension Crack (24 kPa): +16% contribution"]
-        D4["• Surface Optical Flow Velocity Surge (14.8 mm/hr): +10% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 96.4%)"]
+ B[" Location: Bench 3 Crest - North-East Wall (Crackmeter Node CRK-03)"]
+ C[" Predicted Collapse Window (Saito Extrapolation): 16 ± 3 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid Tension Crack Opening Velocity (0.85 mm/day): +41% contribution"]
+ D2["• Saito Inverse Velocity Zero-Crossing Trajectory: +28% contribution"]
+ D3["• Hydrostatic Pore Pressure Spike in Tension Crack (24 kPa): +16% contribution"]
+ D4["• Surface Optical Flow Velocity Surge (14.8 mm/hr): +10% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 18.1: Conceptual SHAP explainable alert diagnostic card for crackmeter-informed alerts.*
 
@@ -402,14 +402,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with Color-Coded Crackmeter Status Pins]
-        D2[Real-Time Crack Dilation Time-Series: Displacement, Velocity & Acceleration]
-        D3[Interactive Saito Inverse Velocity Linear Regression Projection Panel]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Compliance & Crack Inspection Audit Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with Color-Coded Crackmeter Status Pins]
+ D2[Real-Time Crack Dilation Time-Series: Displacement, Velocity & Acceleration]
+ D3[Interactive Saito Inverse Velocity Linear Regression Projection Panel]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Compliance & Crack Inspection Audit Export]
+ end
 ```
 *Figure 19.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -423,7 +423,7 @@ flowchart TD
 | **Spatial Point Blindness** | Blind to cracks outside the gauge | **Eliminated:** Full-field vision & InSAR cover all spatial gaps |
 | **Failure Time Prediction** | Manual post-processing in Excel | **Automated Real-Time Saito Regression Engine ($t_f \pm \sigma$)** |
 | **Stroke Exhaustion Protection**| Sensor goes dead when stroke ends | **Seamless Failover to Sub-Pixel Computer Vision Tracking** |
-| **Subsurface Hydrogeology** | ❌ Blind to water pressure | **✅ Synchronized Vibrating-Wire Piezometer Telemetry** |
+| **Subsurface Hydrogeology** | [REJECTED] Blind to water pressure | **[CONFIRMED] Synchronized Vibrating-Wire Piezometer Telemetry** |
 | **Unit Hardware Cost** | ₹25,000 – ₹60,000 (Commercial loggers) | **₹8,000 – ₹18,000 per custom wireless LoRa node (70% cheaper)** |
 | **Regulatory Compliance** | Manual inspection registers | **Full Real-Time DGMS (Tech) Circular Compliance** |
 
@@ -433,16 +433,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE CRACKMETER LIMITATION ]  ──► Direct physical crack measurement & Saito accuracy,    |
-|                                            but spatial point blindness & mechanical stroke limits.|
-|  [ REMOTE VISION / RADAR LIMITATION ]  ──► Full-field coverage, but lacks direct physical gauge   |
-|                                            calibration on microscopic sub-millimeter cracks.      |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses low-cost LoRa wireless crackmeters with          |
-|                                            full-field Edge Computer Vision, Piezometers, & InSAR  |
-|                                            into a unified Physics-Informed AI engine with zero    |
-|                                            stroke limits and complete spatial coverage!           |
+| [ STANDALONE CRACKMETER LIMITATION ] Direct physical crack measurement & Saito accuracy, |
+| but spatial point blindness & mechanical stroke limits.|
+| [ REMOTE VISION / RADAR LIMITATION ] Full-field coverage, but lacks direct physical gauge |
+| calibration on microscopic sub-millimeter cracks. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses low-cost LoRa wireless crackmeters with |
+| full-field Edge Computer Vision, Piezometers, & InSAR |
+| into a unified Physics-Informed AI engine with zero |
+| stroke limits and complete spatial coverage! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -463,50 +463,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S4[Borehole In-Place Inclinometers IPI: Subsurface Shear]
-        S5[Micro-Weather Station: Rainfall Intensity mm/hr]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S4[Borehole In-Place Inclinometers IPI: Subsurface Shear]
+ S5[Micro-Weather Station: Rainfall Intensity mm/hr]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[Thermal Correction, Crack Velocity & Saito Regression]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S4 --> P4[Shear Plane Depth & Subsurface Slip Rate]
-        S5 --> P5[Rainfall Infiltration Rate & Antecedent Moisture Index]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[Thermal Correction, Crack Velocity & Saito Regression]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S4 --> P4[Shear Plane Depth & Subsurface Slip Rate]
+ S5 --> P5[Rainfall Infiltration Rate & Antecedent Moisture Index]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_CRACK[Crack Dilation Rate, Saito Inverse Velocity & Acceleration]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_GEO[Pore Pressure, Shear Slip Rate & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_CRACK[Crack Dilation Rate, Saito Inverse Velocity & Acceleration]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_GEO[Pore Pressure, Shear Slip Rate & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_CRACK & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_CRACK & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 23.1: Complete end-to-end system architecture incorporating crackmeter kinematics into the real-time AI rockfall prediction pipeline.*
 

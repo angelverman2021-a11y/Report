@@ -1,10 +1,10 @@
 # Existing Technology 24: IoT Sensor Networks for Open-Pit Mine Monitoring
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/24_IoT_Sensor_Networks.md`
 
 ---
@@ -26,16 +26,19 @@ An **IoT Sensor Network** is an interconnected mesh of intelligent physical devi
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                        ISOLATED SENSORS vs. UNIFIED IOT SENSOR NETWORK                            |
+| ISOLATED SENSORS vs. UNIFIED IOT SENSOR NETWORK |
 +---------------------------------------------------------------------------------------------------+
-|  [ LEGACY FRAGMENTED MONITORING ]        │  [ PROPOSED SIH25071 UNIFIED IOT MESH ]                |
-|  - Proprietary vendor data silos         │  - Open-standard MQTT / JSON unified data pipeline     |
-|  - Manual field visits with USB dongles  │  - Autonomous 24/7 wireless LoRa & 4G/5G streaming     |
-|  - Inconsistent, unsynchronized clocks   │  - Microsecond GNSS 1-PPS & NTP time synchronization   |
-|  - Data loss during network outages      │  - Store-and-forward local flash memory buffering      |
-|  - Reactive post-incident PDF reports    │  - Sub-second (<1.0s) autonomous AI TARP alert dispatch|
+| [ LEGACY FRAGMENTED MONITORING ] [ PROPOSED SIH25071 UNIFIED IOT MESH ] |
+| - Proprietary vendor data silos - Open-standard MQTT / JSON unified data pipeline |
+| - Manual field visits with USB dongles - Autonomous 24/7 wireless LoRa & 4G/5G streaming |
+| - Inconsistent, unsynchronized clocks - Microsecond GNSS 1-PPS & NTP time synchronization |
+| - Data loss during network outages - Store-and-forward local flash memory buffering |
+| - Reactive post-incident PDF reports - Sub-second (<1.0s) autonomous AI TARP alert dispatch|
 +---------------------------------------------------------------------------------------------------+
 ```
+
+![Wireless LoRa Geotechnical Sensor Node](assets/geotech_lora_sensor_node.jpg)
+*Figure 1.1: Field installation of a custom low-cost (₹5,500/node) wireless LoRa geotechnical monitoring node. Encased in an IP68 die-cast aluminum enclosure with a 5W solar panel, monitoring real-time tension crack opening via an electronic digital crackmeter transducer anchored across an active highwall fissure.*
 
 ---
 
@@ -43,47 +46,47 @@ An **IoT Sensor Network** is an interconnected mesh of intelligent physical devi
 
 ```mermaid
 flowchart TD
-    subgraph SENSING_LAYER["1. Physical Transducer Layer"]
-        S1[GNSS RTK Units]
-        S2[LoRa Potentiometric Crackmeters]
-        S3[LoRa MEMS Biaxial Tiltmeters]
-        S4[Borehole Vibrating-Wire Piezometers]
-        S5[Borehole TDR Coaxial Cables]
-        S6[Triaxial Seismic Geophones]
-        S7[Pit-Rim Automatic Weather Station]
-        S8[Edge 4K Optical PTZ CCTV Cameras]
-    end
+ subgraph SENSING_LAYER["1. Physical Transducer Layer"]
+ S1[GNSS RTK Units]
+ S2[LoRa Potentiometric Crackmeters]
+ S3[LoRa MEMS Biaxial Tiltmeters]
+ S4[Borehole Vibrating-Wire Piezometers]
+ S5[Borehole TDR Coaxial Cables]
+ S6[Triaxial Seismic Geophones]
+ S7[Pit-Rim Automatic Weather Station]
+ S8[Edge 4K Optical PTZ CCTV Cameras]
+ end
 
-    subgraph EDGE_LAYER["2. Edge Node & Compute Layer"]
-        E1[ESP32-S3 Sensor Nodes: Moving-Avg Filter & Flash Buffer]
-        E2[NVIDIA Jetson Orin Nano: 30 FPS YOLO & Optical Flow]
-    end
+ subgraph EDGE_LAYER["2. Edge Node & Compute Layer"]
+ E1[ESP32-S3 Sensor Nodes: Moving-Avg Filter & Flash Buffer]
+ E2[NVIDIA Jetson Orin Nano: 30 FPS YOLO & Optical Flow]
+ end
 
-    subgraph COMM_LAYER["3. Communication & Gateway Layer"]
-        C1[LoRa / LoRaWAN 868 MHz Mesh Radio Link: 5 km Range]
-        C2[Gigabit Industrial PoE Ethernet Switch]
-        C3[Solar Pit-Rim LoRaWAN Gateway ChirpStack]
-        C4[Private 4G LTE / 5G / Fiber-Optic Pit Backbone]
-    end
+ subgraph COMM_LAYER["3. Communication & Gateway Layer"]
+ C1[LoRa / LoRaWAN 868 MHz Mesh Radio Link: 5 km Range]
+ C2[Gigabit Industrial PoE Ethernet Switch]
+ C3[Solar Pit-Rim LoRaWAN Gateway ChirpStack]
+ C4[Private 4G LTE / 5G / Fiber-Optic Pit Backbone]
+ end
 
-    subgraph CLOUD_LAYER["4. Ingestion, Database & Analytics Layer"]
-        B1[Eclipse Mosquitto MQTT Broker: TLS 1.3 Encrypted]
-        B2[InfluxDB / TimescaleDB Time-Series Engine]
-        B3[XGBoost & Physics-Informed Neural Network PINN Core]
-        B4[WebGPU 3D Digital Twin Mine Safety Dashboard]
-        B5[Sub-Second Autonomous TARP Siren & Radio Dispatch]
-    end
+ subgraph CLOUD_LAYER["4. Ingestion, Database & Analytics Layer"]
+ B1[Eclipse Mosquitto MQTT Broker: TLS 1.3 Encrypted]
+ B2[InfluxDB / TimescaleDB Time-Series Engine]
+ B3[XGBoost & Physics-Informed Neural Network PINN Core]
+ B4[WebGPU 3D Digital Twin Mine Safety Dashboard]
+ B5[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ end
 
-    S1 & S2 & S3 & S4 & S5 & S7 --> E1
-    S6 & S8 --> E2
+ S1 & S2 & S3 & S4 & S5 & S7 --> E1
+ S6 & S8 --> E2
 
-    E1 -->|LoRa RF 868MHz| C1 --> C3
-    E2 -->|Gigabit Ethernet| C2 --> C4
-    C3 -->|4G LTE| C4
+ E1 -->|LoRa RF 868MHz| C1 --> C3
+ E2 -->|Gigabit Ethernet| C2 --> C4
+ C3 -->|4G LTE| C4
 
-    C4 -->|MQTT JSON Stream| B1
-    B1 --> B2 & B3
-    B3 --> B4 & B5
+ C4 -->|MQTT JSON Stream| B1
+ B1 --> B2 & B3
+ B3 --> B4 & B5
 ```
 *Figure 2.1: Master 4-tier edge-to-cloud IoT sensor network architecture for open-pit mine monitoring.*
 
@@ -94,15 +97,15 @@ flowchart TD
 In an open-pit mine, no single communication technology satisfies all sensor bandwidth and power requirements. A **hybrid multi-tier protocol stack** is required:
 
 ```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-| Application Layer:     MQTT (Lightweight Sensor Telemetry) / RTSP (Video) / WebSockets (3D Live) |
-├──────────────────────────────────────────────────────────────────────────────────────────────────┤
-| Security Layer:        TLS 1.3 / AES-128 Payload Encryption / mTLS Device Certificates           |
-├──────────────────────────────────────────────────────────────────────────────────────────────────┤
-| Transport Layer:       TCP (Guaranteed Delivery) / UDP (Low-Latency Video Streaming)             |
-├──────────────────────────────────────────────────────────────────────────────────────────────────┤
-| Network & Link Layer:  LoRaWAN (868MHz) / Private 4G LTE / 5G / Wi-Fi 6 / Gigabit Fiber-Optic   |
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+| Application Layer: MQTT (Lightweight Sensor Telemetry) / RTSP (Video) / WebSockets (3D Live) |
+
+| Security Layer: TLS 1.3 / AES-128 Payload Encryption / mTLS Device Certificates |
+
+| Transport Layer: TCP (Guaranteed Delivery) / UDP (Low-Latency Video Streaming) |
+
+| Network & Link Layer: LoRaWAN (868MHz) / Private 4G LTE / 5G / Wi-Fi 6 / Gigabit Fiber-Optic |
+
 ```
 
 ### Protocol Comparison Matrix
@@ -121,16 +124,16 @@ In an open-pit mine, no single communication technology satisfies all sensor ban
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                        OVERCOMING OPEN-CAST MINE ENVIRONMENTAL HAZARDS                            |
+| OVERCOMING OPEN-CAST MINE ENVIRONMENTAL HAZARDS |
 +---------------------------------------------------------------------------------------------------+
-|  1. DEEP PIT TOPOGRAPHY (FRESNEL OBSTRUCTION): Solar LoRa relay nodes deployed on intermediate    |
-|     benches bounce signals over highwall crests to the rim gateway.                               |
-|  2. PRODUCTION BLASTING FLYROCK & SHOCK: Nodes housed in ruggedized, die-cast aluminum NEMA 4X    |
-|     (IP68) enclosures with polycarbonate blast shielding hoods.                                   |
-|  3. HEAVY ELECTRICAL EMI (33kV SHOVELS & DRAGLINES): Shielded twisted-pair cabling, opto-isolated |
-|     inputs, and differential RS-485 signaling.                                                    |
-|  4. ZERO GRID POWER AT BENCHES: Autonomous 5W/10W monocrystalline solar panels paired with        |
-|     industrial LiFePO4 batteries operating reliably from -10°C to +60°C.                          |
+| 1. DEEP PIT TOPOGRAPHY (FRESNEL OBSTRUCTION): Solar LoRa relay nodes deployed on intermediate |
+| benches bounce signals over highwall crests to the rim gateway. |
+| 2. PRODUCTION BLASTING FLYROCK & SHOCK: Nodes housed in ruggedized, die-cast aluminum NEMA 4X |
+| (IP68) enclosures with polycarbonate blast shielding hoods. |
+| 3. HEAVY ELECTRICAL EMI (33kV SHOVELS & DRAGLINES): Shielded twisted-pair cabling, opto-isolated |
+| inputs, and differential RS-485 signaling. |
+| 4. ZERO GRID POWER AT BENCHES: Autonomous 5W/10W monocrystalline solar panels paired with |
+| industrial LiFePO4 batteries operating reliably from -10°C to +60°C. |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -140,20 +143,20 @@ In an open-pit mine, no single communication technology satisfies all sensor ban
 
 ```mermaid
 flowchart LR
-    SENS[Analog / Digital Sensor] --> MCU[ESP32-S3 Edge Processor]
-    MCU --> RAM[Circular Ring Buffer in SRAM]
-    RAM --> FLASH[Onboard 16MB SPI Flash Storage: 30 Days Offline Buffer]
-    RAM --> TX{LoRa Radio Link Active?}
+ SENS[Analog / Digital Sensor] --> MCU[ESP32-S3 Edge Processor]
+ MCU --> RAM[Circular Ring Buffer in SRAM]
+ RAM --> FLASH[Onboard 16MB SPI Flash Storage: 30 Days Offline Buffer]
+ RAM --> TX{LoRa Radio Link Active?}
 
-    TX -->|YES: Connected| SEND[Transmits Compressed MQTT JSON Packet to Gateway]
-    TX -->|NO: Network Outage| LOG[Saves Unacknowledged Data to Flash Memory]
+ TX -->|YES: Connected| SEND[Transmits Compressed MQTT JSON Packet to Gateway]
+ TX -->|NO: Network Outage| LOG[Saves Unacknowledged Data to Flash Memory]
 
-    SEND --> ACK{Gateway ACK Received?}
-    ACK -->|YES| CLEAR[Marks Sequence ID as Delivered]
-    ACK -->|NO| LOG
+ SEND --> ACK{Gateway ACK Received?}
+ ACK -->|YES| CLEAR[Marks Sequence ID as Delivered]
+ ACK -->|NO| LOG
 
-    LOG --> RECONNECT{Network Restored?}
-    RECONNECT -->|YES| BURST[Replays Buffered Historical Packets with Original Timestamps]
+ LOG --> RECONNECT{Network Restored?}
+ RECONNECT -->|YES| BURST[Replays Buffered Historical Packets with Original Timestamps]
 ```
 *Figure 5.1: Edge fault-tolerant store-and-forward architecture preventing data loss during network dropouts.*
 
@@ -165,33 +168,33 @@ To ensure full interoperability across all 14 multi-sensor modalities, our platf
 
 ```json
 {
-  "node_id": "TLT_NODE_04",
-  "sensor_type": "BIAXIAL_MEMS_TILTMETER",
-  "firmware_version": "v2.4.1",
-  "utc_timestamp": "2026-08-17T22:15:00.000Z",
-  "epoch_ms": 1787004900000,
-  "location": {
-    "mine_id": "JHARIA_OPENCAST_01",
-    "sector_id": "BENCH_04_EAST",
-    "latitude": 23.795412,
-    "longitude": 86.432105,
-    "elevation_m": 142.50
-  },
-  "metrics": {
-    "tilt_x_deg": 0.092,
-    "tilt_y_deg": 0.058,
-    "resultant_tilt_deg": 0.109,
-    "tilt_rate_deg_day": 0.0167,
-    "temperature_c": 31.4,
-    "battery_voltage_v": 3.28,
-    "solar_charging_ma": 420
-  },
-  "signal_quality": {
-    "rssi_dbm": -82,
-    "snr_db": 9.5,
-    "retransmission_count": 0
-  },
-  "health_status": "HEALTHY"
+ "node_id": "TLT_NODE_04",
+ "sensor_type": "BIAXIAL_MEMS_TILTMETER",
+ "firmware_version": "v2.4.1",
+ "utc_timestamp": "2026-08-17T22:15:00.000Z",
+ "epoch_ms": 1787004900000,
+ "location": {
+ "mine_id": "JHARIA_OPENCAST_01",
+ "sector_id": "BENCH_04_EAST",
+ "latitude": 23.795412,
+ "longitude": 86.432105,
+ "elevation_m": 142.50
+ },
+ "metrics": {
+ "tilt_x_deg": 0.092,
+ "tilt_y_deg": 0.058,
+ "resultant_tilt_deg": 0.109,
+ "tilt_rate_deg_day": 0.0167,
+ "temperature_c": 31.4,
+ "battery_voltage_v": 3.28,
+ "solar_charging_ma": 420
+ },
+ "signal_quality": {
+ "rssi_dbm": -82,
+ "snr_db": 9.5,
+ "retransmission_count": 0
+ },
+ "health_status": "HEALTHY"
 }
 ```
 
@@ -200,13 +203,13 @@ To ensure full interoperability across all 14 multi-sensor modalities, our platf
 ## 7. Precision Time Synchronization (PTP / NTP / GNSS 1-PPS)
 
 ```
-[Pit-Rim GNSS Receiver Master Clock] ──► 1-PPS Hardware Interrupt (<1 µs Accuracy) ──► [Edge Gateway Master NTP Daemon]
-                                                                                                  │
-┌─────────────────────────────────────────────────────────────────────────────────────────────────┴────────┐
-│ • 4K Cameras & Jetson Nodes synchronized via Precision Time Protocol (PTP IEEE 1588): <10 µs     │
-│ • Wireless LoRa Geotechnical Nodes synchronized via Gateway Downlink Epoch Beacon: <10 ms        │
-│ • Triaxial Geophone Seismographs synchronized via Direct GNSS Timing Receivers: <1 µs            │
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+[Pit-Rim GNSS Receiver Master Clock] 1-PPS Hardware Interrupt (<1 µs Accuracy) [Edge Gateway Master NTP Daemon]
+ 
+
+ • 4K Cameras & Jetson Nodes synchronized via Precision Time Protocol (PTP IEEE 1588): <10 µs 
+ • Wireless LoRa Geotechnical Nodes synchronized via Gateway Downlink Epoch Beacon: <10 ms 
+ • Triaxial Geophone Seismographs synchronized via Direct GNSS Timing Receivers: <1 µs 
+
 ```
 *Figure 7.1: Multi-tier time synchronization hierarchy ensuring millisecond event alignment across all sensors.*
 
@@ -233,19 +236,19 @@ mine/{mine_id}/{pit_id}/{sector_id}/alert
 
 ```mermaid
 flowchart TD
-    PKT[Incoming Sensor Telemetry Packet] --> V_CHK{Battery Voltage V_bat < 3.0V?}
-    V_CHK -->|YES| WARN_BAT[Flags Low Battery Warning: Schedule Solar Cleaning]
+ PKT[Incoming Sensor Telemetry Packet] --> V_CHK{Battery Voltage V_bat < 3.0V?}
+ V_CHK -->|YES| WARN_BAT[Flags Low Battery Warning: Schedule Solar Cleaning]
 
-    PKT --> RSSI_CHK{LoRa RSSI < -115 dBm or SNR < -5 dB?}
-    RSSI_CHK -->|YES| WARN_RF[Flags RF Degradation: Check Antenna / LOS Obstruction]
+ PKT --> RSSI_CHK{LoRa RSSI < -115 dBm or SNR < -5 dB?}
+ RSSI_CHK -->|YES| WARN_RF[Flags RF Degradation: Check Antenna / LOS Obstruction]
 
-    PKT --> TIMEOUT{Packet Missing for >3 Sampling Epochs?}
-    TIMEOUT -->|YES| WARN_OFFLINE[Flags Node Offline: Trigger Field Maintenance Ticket]
+ PKT --> TIMEOUT{Packet Missing for >3 Sampling Epochs?}
+ TIMEOUT -->|YES| WARN_OFFLINE[Flags Node Offline: Trigger Field Maintenance Ticket]
 
-    PKT --> DRIFT{Metric Exceeds 5-Sigma Physical Plausibility Limit?}
-    DRIFT -->|YES| WARN_DRIFT[Flags Sensor Hardware Malfunction: Re-Tare Required]
+ PKT --> DRIFT{Metric Exceeds 5-Sigma Physical Plausibility Limit?}
+ DRIFT -->|YES| WARN_DRIFT[Flags Sensor Hardware Malfunction: Re-Tare Required]
 
-    WARN_BAT & WARN_RF & WARN_OFFLINE & WARN_DRIFT --> DASH_HEALTH[Updates IoT Network Health Panel on 3D Dashboard]
+ WARN_BAT & WARN_RF & WARN_OFFLINE & WARN_DRIFT --> DASH_HEALTH[Updates IoT Network Health Panel on 3D Dashboard]
 ```
 *Figure 9.1: Automated self-diagnostic sensor health monitoring decision tree.*
 
@@ -253,7 +256,7 @@ flowchart TD
 
 ## 10. Illustrative Synthetic IoT Network Performance Data
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to demonstrate the communication and battery performance metrics of an open-pit LoRa mesh network. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic IoT Network Telemetry Dataset
@@ -269,18 +272,18 @@ flowchart TD
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Illustrative Example: LoRa Wireless Packet Delivery Ratio vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (Hours)" [0, 6, 12, 18, 24]
-    y-axis "Packet Delivery Ratio (%)" 90.0 --> 100.0
-    line [99.8, 99.5, 96.2, 99.2, 99.7]
+ title "Illustrative Example: LoRa Wireless Packet Delivery Ratio vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (Hours)" [0, 6, 12, 18, 24]
+ y-axis "Packet Delivery Ratio (%)" 90.0 --> 100.0
+ line [99.8, 99.5, 96.2, 99.2, 99.7]
 ```
 *Figure 10.1: Illustrative packet delivery ratio demonstrating $>96\%$ network reliability even during extreme rainstorms.*
 
@@ -311,7 +314,7 @@ To build our SIH25071 prototype, we evaluated verified open-source IoT repositor
 | **Solar Pit-Rim Gateway** | **Raspberry Pi 4 + SX1302 Hat**| 8-channel LoRaWAN gateway concentrator + Quectel 4G LTE cellular modem in NEMA 4X box. | **₹14,000 – ₹18,000** | Pit-rim gateway aggregating 50+ wireless sensor nodes over a 5 km radius. |
 | **Edge Vision Compute Node**| **NVIDIA Jetson Orin Nano** | 40 TOPS AI compute, Gigabit PoE, 4K Sony Starvis IP Camera in IP67 housing. | **₹25,000 – ₹32,000** | Edge computer vision node running 30 FPS YOLO and optical flow locally. |
 
-> **Student Prototype vs. Industrial ATEX Equipment Disclaimer:**  
+> **Student Prototype vs. Industrial ATEX Equipment Disclaimer:** 
 > *While our student prototype ($₹5,500\text{ per node}$) provides valid research-grade wireless telemetry, commercial certified mining instrumentation (e.g., Worldsensing Loadsensing, ₹45,000+) includes certified ATEX/IECEx explosion-proof ratings for underground methane atmospheres and military-spec potted electronics.*
 
 ---
@@ -320,13 +323,13 @@ To build our SIH25071 prototype, we evaluated verified open-source IoT repositor
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                  INDUSTRIAL CYBERSECURITY SUITE                                   |
+| INDUSTRIAL CYBERSECURITY SUITE |
 +---------------------------------------------------------------------------------------------------+
-|  1. TRANSPORT ENCRYPTION: All gateway-to-cloud backhaul streams enforced via TLS 1.3 encryption.  |
-|  2. WIRELESS PAYLOAD ENCRYPTION: LoRa radio packets encrypted end-to-end with 128-bit AES keys.   |
-|  3. DEVICE AUTHENTICATION: Mutual TLS (mTLS) with unique X.509 cryptographic hardware certs.      |
-|  4. PRIVATE APN NETWORK: Cellular modems operate on an isolated private APN isolated from the web.|
-|  5. SECURE OTA FIRMWARE: Cryptographically signed SHA-256 firmware updates over LoRa/4G.         |
+| 1. TRANSPORT ENCRYPTION: All gateway-to-cloud backhaul streams enforced via TLS 1.3 encryption. |
+| 2. WIRELESS PAYLOAD ENCRYPTION: LoRa radio packets encrypted end-to-end with 128-bit AES keys. |
+| 3. DEVICE AUTHENTICATION: Mutual TLS (mTLS) with unique X.509 cryptographic hardware certs. |
+| 4. PRIVATE APN NETWORK: Cellular modems operate on an isolated private APN isolated from the web.|
+| 5. SECURE OTA FIRMWARE: Cryptographically signed SHA-256 firmware updates over LoRa/4G. |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -336,15 +339,15 @@ To build our SIH25071 prototype, we evaluated verified open-source IoT repositor
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ PROPRIETARY VENDOR SILOS ]          ──► Most mines run isolated software from 5+ vendors,      |
-|                                            preventing cross-sensor data fusion.                   |
-|  [ UNRELIABLE WIRELESS IN DEEP PITS ]  ──► Standard Wi-Fi fails in deep excavations due to line-  |
-|                                            of-sight highwall obstruction and dust attenuation.    |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses low-cost LoRa mesh radios with open-standard     |
-|                                            MQTT and InfluxDB into a unified, fault-tolerant IoT   |
-|                                            backbone connecting all 14 sensor modalities!          |
+| [ PROPRIETARY VENDOR SILOS ] Most mines run isolated software from 5+ vendors, |
+| preventing cross-sensor data fusion. |
+| [ UNRELIABLE WIRELESS IN DEEP PITS ] Standard Wi-Fi fails in deep excavations due to line- |
+| of-sight highwall obstruction and dust attenuation. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses low-cost LoRa mesh radios with open-standard |
+| MQTT and InfluxDB into a unified, fault-tolerant IoT |
+| backbone connecting all 14 sensor modalities! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -365,50 +368,50 @@ To build our SIH25071 prototype, we evaluated verified open-source IoT repositor
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Edge 4K Optical PTZ CCTV Cameras: 30 FPS Continuous]
-        S2[Wireless LoRa Potentiometric Crackmeters & Tiltmeters]
-        S3[Vibrating-Wire Borehole Piezometers: Pore Pressure u]
-        S4[Pit-Rim Automatic Weather Station: Rainfall Intensity]
-        S5[Highwall GNSS RTK Stations: 3D Point Displacement]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Edge 4K Optical PTZ CCTV Cameras: 30 FPS Continuous]
+ S2[Wireless LoRa Potentiometric Crackmeters & Tiltmeters]
+ S3[Vibrating-Wire Borehole Piezometers: Pore Pressure u]
+ S4[Pit-Rim Automatic Weather Station: Rainfall Intensity]
+ S5[Highwall GNSS RTK Stations: 3D Point Displacement]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[YOLOv8 Object Detection, ByteTrack & Optical Flow]
-        S2 --> P2[Crack Dilation Rate & Tilt Angular Acceleration]
-        S3 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S4 --> P4[Rainfall Intensity, 24h Rain & Infiltration Index]
-        S5 --> P5[3D Geodetic Point Velocity & Acceleration Vectors]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[YOLOv8 Object Detection, ByteTrack & Optical Flow]
+ S2 --> P2[Crack Dilation Rate & Tilt Angular Acceleration]
+ S3 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S4 --> P4[Rainfall Intensity, 24h Rain & Infiltration Index]
+ S5 --> P5[3D Geodetic Point Velocity & Acceleration Vectors]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_KIN[Optical Flow Velocity, GNSS Vectors & Surface Creep]
-        FE --> F_GEO[Pore Pressure, Crack Dilation, Tilt & Hydrostatic Thrust]
-        FE --> F_ENV[Rainfall Intensity, 24h Rain, API_7, Temp & Wind]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_KIN[Optical Flow Velocity, GNSS Vectors & Surface Creep]
+ FE --> F_GEO[Pore Pressure, Crack Dilation, Tilt & Hydrostatic Thrust]
+ FE --> F_ENV[Rainfall Intensity, 24h Rain, API_7, Temp & Wind]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_KIN & F_GEO & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_KIN & F_GEO & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 16.1: Complete end-to-end system architecture incorporating the unified IoT sensor communications network.*
 

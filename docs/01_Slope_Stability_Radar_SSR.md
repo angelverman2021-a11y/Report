@@ -1,10 +1,10 @@
 # Existing Technology 1: Slope Stability Radar (SSR)
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 
 ---
 
@@ -23,10 +23,10 @@ Slope Stability Radar (SSR) is a terrestrial, ground-based radar system designed
 
 ```mermaid
 flowchart LR
-    A[Open-Pit Highwall] -- Micro-Deformation --> B[Slope Stability Radar]
-    B -- Radar Phase Returns --> C[Interferometric Processing Engine]
-    C -- Real-Time Time-Series --> D[Displacement & Velocity Curves]
-    D -- Threshold Evaluation --> E[Geotechnical Warning & Alarms]
+ A[Open-Pit Highwall] -- Micro-Deformation --> B[Slope Stability Radar]
+ B -- Radar Phase Returns --> C[Interferometric Processing Engine]
+ C -- Real-Time Time-Series --> D[Displacement & Velocity Curves]
+ D -- Threshold Evaluation --> E[Geotechnical Warning & Alarms]
 ```
 
 ### Why is it Used in Open-Pit Mines?
@@ -64,14 +64,14 @@ By comparing the exact time and wave alignment (phase) of the returning wave wit
 
 ```mermaid
 flowchart TD
-    A[Mine Slope / Highwall] -->|1. Emits Microwaves| B[SSR Radar Unit]
-    B -->|2. Reflected Microwave Return| C[Phase Difference Measurement]
-    C -->|3. Phase to Metric Conversion| D[Surface Deformation Estimation]
-    D -->|4. Time Differencing| E[Displacement Time-Series]
-    E -->|5. First Derivative| F[Velocity Calculation]
-    F -->|6. Second Derivative / Inverse Trend| G[Acceleration & Trend Analysis]
-    G -->|7. Multi-Level Criteria| H[Instability Detection]
-    H -->|8. Geotechnical Trigger| I[Warning / TARP Alert]
+ A[Mine Slope / Highwall] -->|1. Emits Microwaves| B[SSR Radar Unit]
+ B -->|2. Reflected Microwave Return| C[Phase Difference Measurement]
+ C -->|3. Phase to Metric Conversion| D[Surface Deformation Estimation]
+ D -->|4. Time Differencing| E[Displacement Time-Series]
+ E -->|5. First Derivative| F[Velocity Calculation]
+ F -->|6. Second Derivative / Inverse Trend| G[Acceleration & Trend Analysis]
+ G -->|7. Multi-Level Criteria| H[Instability Detection]
+ H -->|8. Geotechnical Trigger| I[Warning / TARP Alert]
 ```
 
 ### Detailed Technical Explanation
@@ -80,18 +80,18 @@ flowchart TD
 Slope Stability Radar employs **Differential Radar Interferometry (D-InSAR principles applied in a ground-based configuration)**. 
 
 1. The radar antenna transmits a coherent electromagnetic wave packet toward the target slope:
-   $$s(t) = A \cos(2\pi f_0 t + \phi_0)$$
-   where $f_0$ is the carrier frequency (e.g., $9.5\text{ GHz}$ for X-band, $\lambda \approx 31.5\text{ mm}$, or $17.2\text{ GHz}$ for Ku-band, $\lambda \approx 17.4\text{ mm}$).
+ $$s(t) = A \cos(2\pi f_0 t + \phi_0)$$
+ where $f_0$ is the carrier frequency (e.g., $9.5\text{ GHz}$ for X-band, $\lambda \approx 31.5\text{ mm}$, or $17.2\text{ GHz}$ for Ku-band, $\lambda \approx 17.4\text{ mm}$).
 
 2. The wave reflects off the rough rock surface and returns to the receiver with a phase $\phi$:
-   $$\phi = \frac{4\pi}{\lambda} R + \phi_{\text{scattering}}$$
-   where $R$ is the range (distance) from the radar to the rock target.
+ $$\phi = \frac{4\pi}{\lambda} R + \phi_{\text{scattering}}$$
+ where $R$ is the range (distance) from the radar to the rock target.
 
 3. Between scan epoch $t_1$ and scan epoch $t_2$, if the rock surface deforms along the radar's Line of Sight (LOS) by a distance $\Delta R$, the phase shift $\Delta \phi$ is given by:
-   $$\Delta \phi = \phi(t_2) - \phi(t_1) = \frac{4\pi}{\lambda} \Delta R + \Delta \phi_{\text{atm}} + \Delta \phi_{\text{noise}}$$
+ $$\Delta \phi = \phi(t_2) - \phi(t_1) = \frac{4\pi}{\lambda} \Delta R + \Delta \phi_{\text{atm}} + \Delta \phi_{\text{noise}}$$
 
 4. After correcting for the atmospheric phase screen ($\Delta \phi_{\text{atm}}$) caused by ambient air temperature, humidity, and pressure variations, the line-of-sight displacement $\Delta R$ is calculated:
-   $$\Delta R = \frac{\lambda}{4\pi} \Delta \phi$$
+ $$\Delta R = \frac{\lambda}{4\pi} \Delta \phi$$
 
 Because the wavelength $\lambda$ is known to high precision, phase differences as small as a few degrees can be resolved, delivering sub-millimeter displacement detection ($\pm 0.1\text{ mm}$ under optimal conditions).
 
@@ -104,18 +104,18 @@ The radar dish mechanically scans horizontally (azimuth) and vertically (elevati
 
 ```mermaid
 graph TD
-    subgraph Conceptual Mine Wall Spatial Risk Grid
-        Z1["[Pixel 1,1] 🟢 Stable (0.1 mm/day)"] --- Z2["[Pixel 1,2] 🟢 Stable (0.2 mm/day)"] --- Z3["[Pixel 1,3] 🟡 Increasing (2.5 mm/day)"]
-        Z4["[Pixel 2,1] 🟢 Stable (0.1 mm/day)"] --- Z5["[Pixel 2,2] 🟠 High (14.2 mm/day)"] --- Z6["[Pixel 2,3] 🔴 Critical (68.0 mm/day)"]
-        Z7["[Pixel 3,1] 🟢 Stable (0.0 mm/day)"] --- Z8["[Pixel 3,2] 🟡 Increasing (3.1 mm/day)"] --- Z9["[Pixel 3,3] 🟠 High (18.5 mm/day)"]
-    end
+ subgraph Conceptual Mine Wall Spatial Risk Grid
+ Z1["[Pixel 1,1] [NORMAL / GREEN] Stable (0.1 mm/day)"] --- Z2["[Pixel 1,2] [NORMAL / GREEN] Stable (0.2 mm/day)"] --- Z3["[Pixel 1,3] [ADVISORY / YELLOW] Increasing (2.5 mm/day)"]
+ Z4["[Pixel 2,1] [NORMAL / GREEN] Stable (0.1 mm/day)"] --- Z5["[Pixel 2,2] [WARNING / ORANGE] High (14.2 mm/day)"] --- Z6["[Pixel 2,3] [CRITICAL / RED] Critical (68.0 mm/day)"]
+ Z7["[Pixel 3,1] [NORMAL / GREEN] Stable (0.0 mm/day)"] --- Z8["[Pixel 3,2] [ADVISORY / YELLOW] Increasing (3.1 mm/day)"] --- Z9["[Pixel 3,3] [WARNING / ORANGE] High (18.5 mm/day)"]
+ end
 ```
 
 ### Risk Level Color Coding
-* 🟢 **Green (Stable):** Background baseline noise, seasonal thermal expansion/contraction ($\le 1.0\text{ mm/day}$).
-* 🟡 **Yellow (Increasing Movement):** Secondary creep initiation, movement above normal baseline ($1.0 - 5.0\text{ mm/day}$).
-* 🟠 **Orange (High Movement):** Accelerated deformation, tension crack dilation ($5.0 - 30.0\text{ mm/day}$).
-* 🔴 **Critical Movement:** Exponential tertiary creep, impending slope detachment ($> 30.0\text{ mm/day}$ or rapid $1/v \to 0$ convergence).
+* [NORMAL / GREEN] **Green (Stable):** Background baseline noise, seasonal thermal expansion/contraction ($\le 1.0\text{ mm/day}$).
+* [ADVISORY / YELLOW] **Yellow (Increasing Movement):** Secondary creep initiation, movement above normal baseline ($1.0 - 5.0\text{ mm/day}$).
+* [WARNING / ORANGE] **Orange (High Movement):** Accelerated deformation, tension crack dilation ($5.0 - 30.0\text{ mm/day}$).
+* [CRITICAL / RED] **Critical Movement:** Exponential tertiary creep, impending slope detachment ($> 30.0\text{ mm/day}$ or rapid $1/v \to 0$ convergence).
 
 ---
 
@@ -137,7 +137,7 @@ graph TD
 
 The following illustrative dataset demonstrates how a typical open-pit rock slope transitions from steady-state background deformation into accelerating tertiary creep prior to failure.
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The table and graphs below represent **Synthetic / Illustrative Data** designed solely to explain geomechanical creep concepts. They do not represent proprietary measurements from any specific mine.*
 
 ### Illustrative Example Dataset
@@ -156,18 +156,18 @@ The following illustrative dataset demonstrates how a typical open-pit rock slop
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Cumulative Displacement vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (minutes)" [0, 10, 20, 30, 40, 50, 55, 58]
-    y-axis "Cumulative Displacement (mm)" 0 --> 12
-    line [0, 0.5, 1.0, 1.7, 3.0, 5.5, 8.0, 11.5]
+ title "Illustrative Example: Cumulative Displacement vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (minutes)" [0, 10, 20, 30, 40, 50, 55, 58]
+ y-axis "Cumulative Displacement (mm)" 0 --> 12
+ line [0, 0.5, 1.0, 1.7, 3.0, 5.5, 8.0, 11.5]
 ```
 
 ### What This Graph Demonstrates
@@ -193,18 +193,18 @@ $$\text{Acceleration: } a(t) = \frac{\Delta v}{\Delta t} = \frac{v(t_2) - v(t_1)
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: Deformation Velocity vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (minutes)" [10, 20, 30, 40, 50, 55, 58]
-    y-axis "Velocity (mm/min)" 0.0 --> 1.2
-    line [0.05, 0.05, 0.07, 0.13, 0.25, 0.50, 1.17]
+ title "Illustrative Example: Deformation Velocity vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (minutes)" [10, 20, 30, 40, 50, 55, 58]
+ y-axis "Velocity (mm/min)" 0.0 --> 1.2
+ line [0.05, 0.05, 0.07, 0.13, 0.25, 0.50, 1.17]
 ```
 
 ### Explanation of the Velocity Curve
@@ -234,18 +234,18 @@ As the time $t$ approaches the failure time $t_f$, the velocity $v(t) \to \infty
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Conceptual Illustration: Inverse Velocity (1/v) vs Time Trending Towards Failure"
-    x-axis "Elapsed Time (minutes)" [10, 20, 30, 40, 50, 55, 58]
-    y-axis "Inverse Velocity (min/mm)" 0 --> 25
-    line [20.0, 20.0, 14.3, 7.7, 4.0, 2.0, 0.86]
+ title "Conceptual Illustration: Inverse Velocity (1/v) vs Time Trending Towards Failure"
+ x-axis "Elapsed Time (minutes)" [10, 20, 30, 40, 50, 55, 58]
+ y-axis "Inverse Velocity (min/mm)" 0 --> 25
+ line [20.0, 20.0, 14.3, 7.7, 4.0, 2.0, 0.86]
 ```
 
 ### Operational Utility and Limitations of the Inverse Velocity Method
@@ -273,23 +273,23 @@ While SSR is an exceptional engineering tool, a critical analysis reveals severa
 
 ```mermaid
 mindmap
-  root((Limitations of Existing SSR))
-    Cost & Commercial Access
-      High Initial Capex ₹3.5Cr - ₹8Cr
-      High Annual Opex Maintenance
-      Proprietary Ecosystem Lock-in
-    Physical & Environmental Limits
-      Line of Sight LOS Blindness
-      Atmospheric Phase Screen APS Noise
-      Shadowing Behind Crests and Benches
-    Geotechnical Blindness
-      Deformation Only - No Causal Insight
-      Blind to Pore-Water Pressure
-      Blind to Blast Shockwaves
-    Operational Vulnerabilities
-      Alert Fatigue from False Alarms
-      Requires Expert Geotechnical Interpretation
-      Not a Complete Predictive AI System
+ root((Limitations of Existing SSR))
+ Cost & Commercial Access
+ High Initial Capex ₹3.5Cr - ₹8Cr
+ High Annual Opex Maintenance
+ Proprietary Ecosystem Lock-in
+ Physical & Environmental Limits
+ Line of Sight LOS Blindness
+ Atmospheric Phase Screen APS Noise
+ Shadowing Behind Crests and Benches
+ Geotechnical Blindness
+ Deformation Only - No Causal Insight
+ Blind to Pore-Water Pressure
+ Blind to Blast Shockwaves
+ Operational Vulnerabilities
+ Alert Fatigue from False Alarms
+ Requires Expert Geotechnical Interpretation
+ Not a Complete Predictive AI System
 ```
 
 ### 1. High Capital and Maintenance Cost
@@ -331,39 +331,39 @@ The fundamental breakthrough of our proposed SIH25071 system is moving beyond si
 
 ```mermaid
 flowchart TD
-    subgraph Data Acquisition Layer
-        D1[SSR-Inspired Deformation & Vision Flow]
-        D2[In-Situ Geotechnical IoT: Tilt / Piezometers]
-        D3[Micro-Weather: Rainfall Intensity & Duration]
-        D4[Seismic / Blast Vibration PPV]
-        D5[Drone Photogrammetry 3D Mesh / DEM]
-    end
+ subgraph Data Acquisition Layer
+ D1[SSR-Inspired Deformation & Vision Flow]
+ D2[In-Situ Geotechnical IoT: Tilt / Piezometers]
+ D3[Micro-Weather: Rainfall Intensity & Duration]
+ D4[Seismic / Blast Vibration PPV]
+ D5[Drone Photogrammetry 3D Mesh / DEM]
+ end
 
-    subgraph Feature Engineering Layer
-        D1 & D2 & D3 & D4 & D5 --> FE[Feature Extraction & Synchronization Engine]
-        FE --> F1[Displacement, Velocity, Acceleration & 1/v]
-        FE --> F2[Rainfall Infiltration & Antecedent Moisture Index]
-        FE --> F3[Dynamic Pore-Water Pressure Surges]
-        FE --> F4[Blast PPV & Dynamic Stress Wave Loading]
-        FE --> F5[Slope Angle, Aspect, Joint Dip & Strike]
-    end
+ subgraph Feature Engineering Layer
+ D1 & D2 & D3 & D4 & D5 --> FE[Feature Extraction & Synchronization Engine]
+ FE --> F1[Displacement, Velocity, Acceleration & 1/v]
+ FE --> F2[Rainfall Infiltration & Antecedent Moisture Index]
+ FE --> F3[Dynamic Pore-Water Pressure Surges]
+ FE --> F4[Blast PPV & Dynamic Stress Wave Loading]
+ FE --> F5[Slope Angle, Aspect, Joint Dip & Strike]
+ end
 
-    subgraph AI / Machine Learning Engine
-        F1 & F2 & F3 & F4 & F5 --> ML[Multi-Modal Machine Learning & PINN Core]
-        ML --> P1[Rockfall Probability Score: 0.0 to 1.0]
-        ML --> P2[Estimated Failure Time Window: tf ± σ]
-        ML --> P3[Kinetic Rockfall Trajectory & Runout Cone]
-    end
+ subgraph AI / Machine Learning Engine
+ F1 & F2 & F3 & F4 & F5 --> ML[Multi-Modal Machine Learning & PINN Core]
+ ML --> P1[Rockfall Probability Score: 0.0 to 1.0]
+ ML --> P2[Estimated Failure Time Window: tf ± σ]
+ ML --> P3[Kinetic Rockfall Trajectory & Runout Cone]
+ end
 
-    subgraph Explainability & Decision Support
-        P1 & P2 & P3 --> XAI[SHAP Explainability Layer]
-        XAI --> EXP["Explainable Advisory: Contributing Factors Breakdown"]
-    end
+ subgraph Explainability & Decision Support
+ P1 & P2 & P3 --> XAI[SHAP Explainability Layer]
+ XAI --> EXP["Explainable Advisory: Contributing Factors Breakdown"]
+ end
 
-    subgraph Autonomous Alerting & Visualization
-        EXP --> DASH[3D WebGPU Digital Twin Dashboard]
-        EXP --> TARP[Automated Multi-Channel TARP Emergency Alert Dispatch]
-    end
+ subgraph Autonomous Alerting & Visualization
+ EXP --> DASH[3D WebGPU Digital Twin Dashboard]
+ EXP --> TARP[Automated Multi-Channel TARP Emergency Alert Dispatch]
+ end
 ```
 
 ---
@@ -402,25 +402,25 @@ To achieve high predictive accuracy, our proposed system clearly demarcates trad
 ### Model Architectures Under Evaluation
 For structured geotechnical, environmental, and time-series sensor streams, tree-based ensemble models and physics-informed architectures provide optimal performance, robustness against outliers, and high computational efficiency on edge hardware:
 
-1. **Gradient Boosted Decision Trees (XGBoost / LightGBM):**  
-   * *Strengths:* Exceptional performance on tabular sensor streams; natively handles missing sensor packets; computationally lightweight for real-time edge execution.
-2. **Random Forest Classifier & Regressor:**  
-   * *Strengths:* Robust against noise and overfitting; provides direct Gini-impurity feature importance metrics.
-3. **Temporal Convolutional Networks (TCN) / LSTM Networks:**  
-   * *Strengths:* Captures multi-scale temporal dependencies across time-series displacement and rainfall histories.
-4. **Physics-Informed Neural Networks (PINN):**  
-   * *Strengths:* Constrains neural predictions with fundamental geomechanical equilibrium equations (Mohr-Coulomb limit equilibrium and Saito inverse velocity laws).
+1. **Gradient Boosted Decision Trees (XGBoost / LightGBM):** 
+ * *Strengths:* Exceptional performance on tabular sensor streams; natively handles missing sensor packets; computationally lightweight for real-time edge execution.
+2. **Random Forest Classifier & Regressor:** 
+ * *Strengths:* Robust against noise and overfitting; provides direct Gini-impurity feature importance metrics.
+3. **Temporal Convolutional Networks (TCN) / LSTM Networks:** 
+ * *Strengths:* Captures multi-scale temporal dependencies across time-series displacement and rainfall histories.
+4. **Physics-Informed Neural Networks (PINN):** 
+ * *Strengths:* Constrains neural predictions with fundamental geomechanical equilibrium equations (Mohr-Coulomb limit equilibrium and Saito inverse velocity laws).
 
 ```mermaid
 flowchart LR
-    A[Synchronized Sensor Vector] --> B[ML Prediction Pipeline]
-    B --> C[Probability Estimation: P_failure in 0.0 - 1.0]
-    C --> D{TARP Risk Classification}
-    D -->|P < 0.30| E[🟢 LOW RISK / Green]
-    D -->|0.30 <= P < 0.65| F[🟡 MEDIUM RISK / Yellow]
-    D -->|0.65 <= P < 0.85| G[🟠 HIGH RISK / Orange]
-    D -->|P >= 0.85| H[🔴 CRITICAL RISK / Red]
-    H --> I[Automated Multi-Channel Alert]
+ A[Synchronized Sensor Vector] --> B[ML Prediction Pipeline]
+ B --> C[Probability Estimation: P_failure in 0.0 - 1.0]
+ C --> D{TARP Risk Classification}
+ D -->|P < 0.30| E[[NORMAL / GREEN] LOW RISK / Green]
+ D -->|0.30 <= P < 0.65| F[[ADVISORY / YELLOW] MEDIUM RISK / Yellow]
+ D -->|0.65 <= P < 0.85| G[[WARNING / ORANGE] HIGH RISK / Orange]
+ D -->|P >= 0.85| H[[CRITICAL / RED] CRITICAL RISK / Red]
+ H --> I[Automated Multi-Channel Alert]
 ```
 
 ---
@@ -437,16 +437,16 @@ where $\phi_0$ is the base expected risk and $\phi_i$ is the Shapley value for f
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 92%)"]
-        B["📍 Location: Bench 4 - East Highwall (Grid Sector E-12)"]
-        C["⏱️ Estimated Failure Window: 35 ± 8 minutes"]
-        D["📊 Major Contributing Factors (SHAP Breakdown):"]
-        D1["• Rapid InSAR/Vision Velocity Surge (+38% contribution)"]
-        D2["• High Antecedent Rainfall (42 mm/24hr) (+26% contribution)"]
-        D3["• Pore-Water Pressure Spike (14 kPa surge) (+19% contribution)"]
-        D4["• Tension Crack Dilation Rate > 8 mm/hr (+9% contribution)"]
-    end
+ subgraph Explainable Alert Notification
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 92%)"]
+ B[" Location: Bench 4 - East Highwall (Grid Sector E-12)"]
+ C[" Estimated Failure Window: 35 ± 8 minutes"]
+ D[" Major Contributing Factors (SHAP Breakdown):"]
+ D1["• Rapid InSAR/Vision Velocity Surge (+38% contribution)"]
+ D2["• High Antecedent Rainfall (42 mm/24hr) (+26% contribution)"]
+ D3["• Pore-Water Pressure Spike (14 kPa surge) (+19% contribution)"]
+ D4["• Tension Crack Dilation Rate > 8 mm/hr (+9% contribution)"]
+ end
 ```
 
 By providing transparent, geotechnically grounded explanations, the system builds operator trust and eliminates uncertainty during critical emergency decisions.
@@ -459,15 +459,15 @@ The proposed GeoShield AI dashboard delivers a unified operational interface:
 
 ```mermaid
 flowchart TD
-    subgraph Single Pane of Glass Dashboard
-        M1[Interactive 3D WebGPU Mine Digital Twin]
-        M2[Real-Time Displacement / Velocity / 1/v Curves]
-        M3[Zone-Wise Dynamic Risk Heatmap: Green/Yellow/Orange/Red]
-        M4[Active Rockfall Trajectory & Runout Hazard Cones]
-        M5[Multi-Sensor Telemetry: Weather, Piezometers, IoT Tilt]
-        M6[SHAP Factor Contribution Breakdown Panel]
-        M7[DGMS-Compliant Automated TARP Incident Logbook]
-    end
+ subgraph Single Pane of Glass Dashboard
+ M1[Interactive 3D WebGPU Mine Digital Twin]
+ M2[Real-Time Displacement / Velocity / 1/v Curves]
+ M3[Zone-Wise Dynamic Risk Heatmap: Green/Yellow/Orange/Red]
+ M4[Active Rockfall Trajectory & Runout Hazard Cones]
+ M5[Multi-Sensor Telemetry: Weather, Piezometers, IoT Tilt]
+ M6[SHAP Factor Contribution Breakdown Panel]
+ M7[DGMS-Compliant Automated TARP Incident Logbook]
+ end
 ```
 
 ### Key Dashboard Modules
@@ -509,14 +509,14 @@ Existing radar systems provide high-precision monitoring of **symptoms (displace
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ Traditional SSR Approach ]           [ Proposed SIH25071 Innovation ]                         |
-|  - Expensive Radar Hardware             - Affordable Edge Vision + Wireless LoRa IoT Mesh         |
-|  - Single-Sensor Displacement Only      - Multi-Source Fusion (Deformation + Weather + Geotech)   |
-|  - Manual Geotechnical Analysis         - Physics-Informed Machine Learning & Inverse Velocity    |
-|  - Rigid Threshold Alarms               - Explainable AI (SHAP) + Dynamic 3D Runout Cones         |
-|  - Manual Alert Notification            - Automated Sub-Second Multi-Channel TARP Dispatch        |
+| [ Traditional SSR Approach ] [ Proposed SIH25071 Innovation ] |
+| - Expensive Radar Hardware - Affordable Edge Vision + Wireless LoRa IoT Mesh |
+| - Single-Sensor Displacement Only - Multi-Source Fusion (Deformation + Weather + Geotech) |
+| - Manual Geotechnical Analysis - Physics-Informed Machine Learning & Inverse Velocity |
+| - Rigid Threshold Alarms - Explainable AI (SHAP) + Dynamic 3D Runout Cones |
+| - Manual Alert Notification - Automated Sub-Second Multi-Channel TARP Dispatch |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -539,48 +539,48 @@ For the Smart India Hackathon 2025, our team proposes the following concrete eng
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Sensor Ingestion"]
-        S1[Edge Optical PTZ CCTV Cameras]
-        S2[Wireless LoRa MEMS Tilt & Crack Nodes]
-        S3[Vibrating-Wire Borehole Piezometers]
-        S4[Micro-Weather Station: Rain & Humidity]
-        S5[Seismic Blast Geophone: PPV & Frequency]
-        S6[Drone Photogrammetry 3D Mesh / DEM]
-    end
+ subgraph SENSING["1. Multi-Modal Sensor Ingestion"]
+ S1[Edge Optical PTZ CCTV Cameras]
+ S2[Wireless LoRa MEMS Tilt & Crack Nodes]
+ S3[Vibrating-Wire Borehole Piezometers]
+ S4[Micro-Weather Station: Rain & Humidity]
+ S5[Seismic Blast Geophone: PPV & Frequency]
+ S6[Drone Photogrammetry 3D Mesh / DEM]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[Sub-Pixel Optical Flow & Keypoint Tracking]
-        S2 & S3 --> P2[LoRa Gateway & Telemetry Packet Filter]
-        S4 & S5 --> P3[Environmental & Blast Vibration Synchronizer]
-        S6 --> P4[3D Digital Elevation Model Voxelization]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[Sub-Pixel Optical Flow & Keypoint Tracking]
+ S2 & S3 --> P2[LoRa Gateway & Telemetry Packet Filter]
+ S4 & S5 --> P3[Environmental & Blast Vibration Synchronizer]
+ S6 --> P4[3D Digital Elevation Model Voxelization]
 
-        P1 & P2 & P3 & P4 --> FE[Unified Feature Engineering Engine]
-        FE --> F_V[Velocity, Acceleration & Saito Inverse Velocity]
-        FE --> F_W[Rainfall Infiltration & Pore Pressure Index]
-        FE --> F_G[Topographic Slope & Joint Discontinuity Vectors]
-    end
+ P1 & P2 & P3 & P4 --> FE[Unified Feature Engineering Engine]
+ FE --> F_V[Velocity, Acceleration & Saito Inverse Velocity]
+ FE --> F_W[Rainfall Infiltration & Pore Pressure Index]
+ FE --> F_G[Topographic Slope & Joint Discontinuity Vectors]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_V & F_W & F_G --> ML_ENG[Physics-Informed Neural Network & XGBoost Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability P_fail]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
-        
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Contributing Factor Breakdown]
-    end
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_V & F_W & F_G --> ML_ENG[Physics-Informed Neural Network & XGBoost Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability P_fail]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
+ 
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Contributing Factor Breakdown]
+ end
 
-    subgraph DELIVERY["4. Visualization & Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Interactive Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Automated TARP Evaluation}
-        
-        TARP_DEC -->|Level 1: Green| ACT_1[Log Baseline & Continuous Monitor]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Relocate Shovels & Haul Trucks]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
-        
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ subgraph DELIVERY["4. Visualization & Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Interactive Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Automated TARP Evaluation}
+ 
+ TARP_DEC -->|Level 1: Green| ACT_1[Log Baseline & Continuous Monitor]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Relocate Shovels & Haul Trucks]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ 
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 
 ---

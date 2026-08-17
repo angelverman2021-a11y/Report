@@ -1,10 +1,10 @@
 # Existing Technology 19: CCTV / Fixed Cameras for Mine Slope Monitoring
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/19_CCTV_Fixed_Cameras.md`
 
 ---
@@ -24,14 +24,14 @@ Fixed optical monitoring involves the permanent installation of ruggedized, high
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                            MANUAL CCTV vs. AI-ENABLED COMPUTER VISION                             |
+| MANUAL CCTV vs. AI-ENABLED COMPUTER VISION |
 +---------------------------------------------------------------------------------------------------+
-|  [ TRADITIONAL MANUAL CCTV ]             │  [ PROPOSED AI-ENABLED EDGE VISION ]                   |
-|  - Human operator watches 16+ screens    │  - Edge GPU processes 30 FPS video locally in <30 ms   |
-|  - High operator fatigue (misses events) │  - Sub-pixel optical flow tracks 0.1 mm/hr slope creep |
-|  - Reactive: Alarms raised AFTER collapse│  - Predictive: Precursory crack & velocity tracking    |
-|  - Qualitative human visual estimation   │  - Quantitative metric bounding boxes, velocity & area |
-|  - Delayed emergency siren dispatch      │  - Sub-second (<1.0s) autonomous siren & radio dispatch|
+| [ TRADITIONAL MANUAL CCTV ] [ PROPOSED AI-ENABLED EDGE VISION ] |
+| - Human operator watches 16+ screens - Edge GPU processes 30 FPS video locally in <30 ms |
+| - High operator fatigue (misses events) - Sub-pixel optical flow tracks 0.1 mm/hr slope creep |
+| - Reactive: Alarms raised AFTER collapse - Predictive: Precursory crack & velocity tracking |
+| - Qualitative human visual estimation - Quantitative metric bounding boxes, velocity & area |
+| - Delayed emergency siren dispatch - Sub-second (<1.0s) autonomous siren & radio dispatch|
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -41,21 +41,21 @@ Fixed optical monitoring involves the permanent installation of ruggedized, high
 
 ```mermaid
 mindmap
-  root((CCTV Camera Detection Capabilities))
-    Active Dynamic Events
-      Free-falling rock boulders and detached slabs
-      Bouncing and rolling trajectories down benches
-      Impact dust clouds and debris plumes
-      Haul road rockfall blockages
-    Precursory Structural Deformation
-      Tension crack propagation and aperture dilation
-      Sub-pixel highwall face bulging and creep
-      Progressive bench crest spalling and crumbling
-      Erosion gullying and mud runouts
-    Mine Operational Safety
-      Vehicle and personnel intrusion into rockfall hazard zones
-      Excavator undercut face stability auditing
-      Water accumulation and perched bench seepage lines
+ root((CCTV Camera Detection Capabilities))
+ Active Dynamic Events
+ Free-falling rock boulders and detached slabs
+ Bouncing and rolling trajectories down benches
+ Impact dust clouds and debris plumes
+ Haul road rockfall blockages
+ Precursory Structural Deformation
+ Tension crack propagation and aperture dilation
+ Sub-pixel highwall face bulging and creep
+ Progressive bench crest spalling and crumbling
+ Erosion gullying and mud runouts
+ Mine Operational Safety
+ Vehicle and personnel intrusion into rockfall hazard zones
+ Excavator undercut face stability auditing
+ Water accumulation and perched bench seepage lines
 ```
 *Figure 2.1: Key visual detection capabilities of AI-enabled mine slope cameras.*
 
@@ -65,17 +65,17 @@ mindmap
 
 ```mermaid
 flowchart TD
-    CAM[4K 30FPS Industrial IP Camera at Pit Rim] -->|RTSP H.265 Encoded Video Stream| EDGE[Edge AI Compute: NVIDIA Jetson Orin Nano]
-    EDGE --> FRAME[1. Frame Extraction & Buffer Management: 30 FPS]
-    FRAME --> PREPROC[2. Preprocessing: CLAHE Dehazing & Digital Video Stabilization]
-    PREPROC --> OBJ_DET[3. YOLOv8 TensorRT Model: Detects Detached Rocks & Overhangs]
-    PREPROC --> FLOW_ENG[4. Dense Lucas-Kanade Optical Flow: Tracks Surface Bulging Velocity]
-    PREPROC --> CRACK_SEG[5. DeepCrack Segmentation: Extracts Crack Length & Aperture]
-    OBJ_DET & FLOW_ENG & CRACK_SEG --> TRACK[6. ByteTrack Multi-Object Tracker: Computes Downhill Trajectory & Velocity]
-    TRACK --> CLASSIFY[7. Kinematic Validator: Rejects Birds, Dust & Haul Trucks]
-    CLASSIFY --> RISK_SCORE[8. Computes Visual Rockfall Hazard Index: 0.0 to 1.0]
-    RISK_SCORE --> FUSION[9. Multi-Modal Fusion Engine: Synchronizes with Weather, Tilt & Piezometers]
-    FUSION --> ALARM[10. Autonomous Sub-Second Siren, VHF Radio & TARP Alert]
+ CAM[4K 30FPS Industrial IP Camera at Pit Rim] -->|RTSP H.265 Encoded Video Stream| EDGE[Edge AI Compute: NVIDIA Jetson Orin Nano]
+ EDGE --> FRAME[1. Frame Extraction & Buffer Management: 30 FPS]
+ FRAME --> PREPROC[2. Preprocessing: CLAHE Dehazing & Digital Video Stabilization]
+ PREPROC --> OBJ_DET[3. YOLOv8 TensorRT Model: Detects Detached Rocks & Overhangs]
+ PREPROC --> FLOW_ENG[4. Dense Lucas-Kanade Optical Flow: Tracks Surface Bulging Velocity]
+ PREPROC --> CRACK_SEG[5. DeepCrack Segmentation: Extracts Crack Length & Aperture]
+ OBJ_DET & FLOW_ENG & CRACK_SEG --> TRACK[6. ByteTrack Multi-Object Tracker: Computes Downhill Trajectory & Velocity]
+ TRACK --> CLASSIFY[7. Kinematic Validator: Rejects Birds, Dust & Haul Trucks]
+ CLASSIFY --> RISK_SCORE[8. Computes Visual Rockfall Hazard Index: 0.0 to 1.0]
+ RISK_SCORE --> FUSION[9. Multi-Modal Fusion Engine: Synchronizes with Weather, Tilt & Piezometers]
+ FUSION --> ALARM[10. Autonomous Sub-Second Siren, VHF Radio & TARP Alert]
 ```
 *Figure 3.1: End-to-end computer vision processing pipeline from 4K video capture to autonomous TARP alert.*
 
@@ -84,15 +84,15 @@ flowchart TD
 ## 4. Camera Hardware Configurations
 
 ```
-Fixed High-Resolution IP Camera       Pan-Tilt-Zoom (PTZ) 40x Camera       Dual Optical / Thermal Bi-Spectrum
-   ┌───────────────────────┐            ┌────────────────────────┐            ┌────────────────────────┐
-   │ Fixed Wide-Angle Lens │            │ Motorized Optical Zoom │            │ Optical 4K Sensor      │
-   │ ┌───────────────────┐ │            │ ┌────────────────────┐ │            │ ┌────────────────────┐ │
-   │ │ 4K Sony Starvis   │ │            │ │ 40x Telephoto Lens │ │            │ │ Thermal Uncooled   │ │
-   │ └───────────────────┘ │            │ └────────────────────┘ │            │ │ Microbolometer     │ │
-   │ (Wide Pit Coverage /  │            │ (Targeted Crack Zoom / │            │ └────────────────────┘ │
-   │  Continuous Baseline) │            │  Distant Highwall)     │            │ (Night & Dust Vision)  │
-   └───────────────────────┘            └────────────────────────┘            └────────────────────────┘
+Fixed High-Resolution IP Camera Pan-Tilt-Zoom (PTZ) 40x Camera Dual Optical / Thermal Bi-Spectrum
+ 
+ Fixed Wide-Angle Lens Motorized Optical Zoom Optical 4K Sensor 
+ 
+ 4K Sony Starvis 40x Telephoto Lens Thermal Uncooled 
+ Microbolometer 
+ (Wide Pit Coverage / (Targeted Crack Zoom / 
+ Continuous Baseline) Distant Highwall) (Night & Dust Vision) 
+ 
 ```
 *Figure 4.1: Structural comparison of optical monitoring camera hardware.*
 
@@ -126,18 +126,18 @@ $$I_x u + I_y v + I_t = 0$$
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Computer Vision Tracked Crack Length vs Time (Synthetic Data)"
-    x-axis "Elapsed Days (days)" [0, 5, 10, 15, 18, 20]
-    y-axis "Visible Crack Length (meters)" 0.0 --> 12.0
-    line [0.5, 1.2, 2.4, 4.5, 7.8, 11.2]
+ title "Illustrative Example: Computer Vision Tracked Crack Length vs Time (Synthetic Data)"
+ x-axis "Elapsed Days (days)" [0, 5, 10, 15, 18, 20]
+ y-axis "Visible Crack Length (meters)" 0.0 --> 12.0
+ line [0.5, 1.2, 2.4, 4.5, 7.8, 11.2]
 ```
 *Figure 5.1: Illustrative progression of visible tension crack length segmented by computer vision over time.*
 
@@ -148,14 +148,14 @@ xychart-beta
 When a rock boulder detaches and enters free fall/rolling motion, **ByteTrack** tracks its bounding box center across consecutive frames:
 
 ```
-Frame t0: Detachment (v = 0) ──► Frame t1: Parabolic Flight ──► Frame t2: Bench Impact (Dust Plume) ──► Frame t3: Haul Road Hazard
+Frame t0: Detachment (v = 0) Frame t1: Parabolic Flight Frame t2: Bench Impact (Dust Plume) Frame t3: Haul Road Hazard
 ```
 
 ### Gravitational Kinematic Formulations:
 1. **Vertical Downward Acceleration:**
-   $$a_y = g - \frac{1}{2m} \rho_{\text{air}} C_d A v_y^2 \approx 9.81\,\text{m/s}^2$$
-2. **Trajectory Hazard Gating:**  
-   If detected object velocity $v > 5.0\text{ m/s}$ and trajectory vector points steeply downhill ($\theta_{\text{down}} > 45^\circ$), the system instantly confirms an active **Rockfall in Progress**, bypassing secondary confirmation loops to sound sirens within **$300\text{ ms}$**.
+ $$a_y = g - \frac{1}{2m} \rho_{\text{air}} C_d A v_y^2 \approx 9.81\,\text{m/s}^2$$
+2. **Trajectory Hazard Gating:** 
+ If detected object velocity $v > 5.0\text{ m/s}$ and trajectory vector points steeply downhill ($\theta_{\text{down}} > 45^\circ$), the system instantly confirms an active **Rockfall in Progress**, bypassing secondary confirmation loops to sound sirens within **$300\text{ ms}$**.
 
 ---
 
@@ -165,12 +165,12 @@ To detect long-term slope spalling across days or weeks, cameras capture baselin
 
 ```mermaid
 flowchart LR
-    BASE[Baseline Highwall Image Day 0] --> SIFT[SIFT / ORB Keypoint Feature Matching]
-    CURR[Current Highwall Image Day 10] --> SIFT
-    SIFT --> HOMOG[Homography Matrix H Alignment: Corrects Camera Wind Vibration]
-    HOMOG --> DIFF[Normalized Image Differencing: ΔI = |I_curr - H * I_base|]
-    DIFF --> MASK[Otsu Thresholding & Morphological Filtering]
-    MASK --> MAP[3D Volumetric Rockfall Scar & Debris Accumulation Map]
+ BASE[Baseline Highwall Image Day 0] --> SIFT[SIFT / ORB Keypoint Feature Matching]
+ CURR[Current Highwall Image Day 10] --> SIFT
+ SIFT --> HOMOG[Homography Matrix H Alignment: Corrects Camera Wind Vibration]
+ HOMOG --> DIFF[Normalized Image Differencing: ΔI = |I_curr - H * I_base|]
+ DIFF --> MASK[Otsu Thresholding & Morphological Filtering]
+ MASK --> MAP[3D Volumetric Rockfall Scar & Debris Accumulation Map]
 ```
 *Figure 7.1: Image registration and multi-temporal change detection workflow.*
 
@@ -178,7 +178,7 @@ flowchart LR
 
 ## 8. Time-Series Computer Vision Monitoring Data
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to demonstrate the output metrics generated by an automated edge computer vision pipeline. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Computer Vision Metrics Dataset
@@ -190,23 +190,23 @@ flowchart LR
 | **$T_3$** | 10 | 2.4 | 1.1 | 1.4 | 3 | 0.96 | Active Joint Propagation |
 | **$T_4$** | 15 | 4.5 | 3.2 | 4.8 | 8 | 0.98 | Accelerating Secondary Creep |
 | **$T_5$** | 18 | 7.8 | 8.5 | 12.4 | 22 | 0.99 | Critical Tertiary Unstable Creep |
-| **$T_6$** | 20 | **11.2** | **24.0** | **38.5** | **65** | **0.99**| 🔴 **IMMINENT BENCH COLLAPSE** |
+| **$T_6$** | 20 | **11.2** | **24.0** | **38.5** | **65** | **0.99**| [CRITICAL / RED] **IMMINENT BENCH COLLAPSE** |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: Sub-Pixel Optical Flow Velocity Surge vs Time (Synthetic Data)"
-    x-axis "Elapsed Days (days)" [0, 5, 10, 15, 18, 20]
-    y-axis "Surface Velocity (mm/hr)" 0.0 --> 45.0
-    line [0.2, 0.5, 1.4, 4.8, 12.4, 38.5]
+ title "Illustrative Example: Sub-Pixel Optical Flow Velocity Surge vs Time (Synthetic Data)"
+ x-axis "Elapsed Days (days)" [0, 5, 10, 15, 18, 20]
+ y-axis "Surface Velocity (mm/hr)" 0.0 --> 45.0
+ line [0.2, 0.5, 1.4, 4.8, 12.4, 38.5]
 ```
 *Figure 8.1: Illustrative surface creep velocity surge extracted by sub-pixel optical flow.*
 
@@ -255,12 +255,12 @@ To build our SIH25071 prototype, we evaluated verified open-source computer visi
 
 ```mermaid
 flowchart LR
-    CAM[4K IP Camera RTSP Stream] --> GIGE[Gigabit Ethernet PoE Switch]
-    GIGE --> JETSON[NVIDIA Jetson Orin Nano: 40 TOPS AI Compute]
-    JETSON --> TRT[TensorRT INT8 Optimized YOLOv8 Engine @ 45 FPS]
-    TRT --> PARSER[Sub-Pixel Optical Flow & Event Classifier]
-    PARSER -->|Event JSON Packet: <2 KB Payload| LORA[SX1262 LoRa / 4G LTE Modem]
-    LORA -->|Low-Bandwidth Telemetry| CLOUD[Central Pit AI Server & WebGPU Dashboard]
+ CAM[4K IP Camera RTSP Stream] --> GIGE[Gigabit Ethernet PoE Switch]
+ GIGE --> JETSON[NVIDIA Jetson Orin Nano: 40 TOPS AI Compute]
+ JETSON --> TRT[TensorRT INT8 Optimized YOLOv8 Engine @ 45 FPS]
+ TRT --> PARSER[Sub-Pixel Optical Flow & Event Classifier]
+ PARSER -->|Event JSON Packet: <2 KB Payload| LORA[SX1262 LoRa / 4G LTE Modem]
+ LORA -->|Low-Bandwidth Telemetry| CLOUD[Central Pit AI Server & WebGPU Dashboard]
 ```
 *Figure 12.1: Edge AI inference architecture minimizing network bandwidth consumption.*
 
@@ -282,32 +282,32 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph Real-Time Optical Computer Vision Layer
-        A1[Edge PTZ 4K Cameras: 30 FPS YOLOv8 & Optical Flow] --> A2[Vision Velocity v_vision, Crack Dilation & Boulder Mass]
-        A3[Bi-Spectrum Thermal Cameras: 24/7 Thermal Contrast] --> A4[Nighttime Rockfall Kinematics Engine]
-    end
+ subgraph Real-Time Optical Computer Vision Layer
+ A1[Edge PTZ 4K Cameras: 30 FPS YOLOv8 & Optical Flow] --> A2[Vision Velocity v_vision, Crack Dilation & Boulder Mass]
+ A3[Bi-Spectrum Thermal Cameras: 24/7 Thermal Contrast] --> A4[Nighttime Rockfall Kinematics Engine]
+ end
 
-    subgraph Dynamic Seismic & Acoustic Layer
-        B1[Triaxial Geophone Array: 1000 Hz Stream] --> B2[ObsPy Blast vs Fracture Classifier & Impact PPV]
-    end
+ subgraph Dynamic Seismic & Acoustic Layer
+ B1[Triaxial Geophone Array: 1000 Hz Stream] --> B2[ObsPy Blast vs Fracture Classifier & Impact PPV]
+ end
 
-    subgraph In-Situ Geotechnical & Weather Layer
-        C1[Wireless LoRa Digital Crackmeters & Tiltmeters]
-        C2[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        C3[Pit-Rim Automatic Weather Station: Rain Intensity]
-    end
+ subgraph In-Situ Geotechnical & Weather Layer
+ C1[Wireless LoRa Digital Crackmeters & Tiltmeters]
+ C2[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ C3[Pit-Rim Automatic Weather Station: Rain Intensity]
+ end
 
-    A2 & A4 & B2 & C1 & C2 & C3 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & B2 & C1 & C2 & C3 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 14.1: Master multi-sensor data fusion architecture incorporating real-time computer vision.*
 
@@ -317,17 +317,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.6%)"]
-        B["📍 Location: Bench 3 - North Wall (Camera Node CAM-01 / Edge Jetson)"]
-        C["⏱️ Predicted Collapse Window: 8 ± 2 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Sub-Pixel Optical Flow Velocity Surge (38.5 mm/hr): +48% contribution"]
-        D2["• Computer Vision Segmented Crack Length Extension (11.2 m): +22% contribution"]
-        D3["• Piezometric Hydrostatic Pressure Spike (32 kPa): +14% contribution"]
-        D4["• Highwall Geophone Microseismic Event Cluster: +11% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.6%)"]
+ B[" Location: Bench 3 - North Wall (Camera Node CAM-01 / Edge Jetson)"]
+ C[" Predicted Collapse Window: 8 ± 2 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Sub-Pixel Optical Flow Velocity Surge (38.5 mm/hr): +48% contribution"]
+ D2["• Computer Vision Segmented Crack Length Extension (11.2 m): +22% contribution"]
+ D3["• Piezometric Hydrostatic Pressure Spike (32 kPa): +14% contribution"]
+ D4["• Highwall Geophone Microseismic Event Cluster: +11% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 15.1: Conceptual SHAP explainable alert diagnostic card for computer-vision-informed alerts.*
 
@@ -337,14 +337,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with 4K Live Camera Video Projection Overlays]
-        D2[Real-Time YOLO Bounding Box & Trajectory Heatmaps for Falling Boulders]
-        D3[Sub-Pixel Optical Flow Vector Field & Crack Aperture Dilation Graphs]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Safety Compliance & Optical Inspection Audit Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with 4K Live Camera Video Projection Overlays]
+ D2[Real-Time YOLO Bounding Box & Trajectory Heatmaps for Falling Boulders]
+ D3[Sub-Pixel Optical Flow Vector Field & Crack Aperture Dilation Graphs]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Safety Compliance & Optical Inspection Audit Logbook Export]
+ end
 ```
 *Figure 16.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -367,16 +367,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ TRADITIONAL CCTV LIMITATION ]       ──► Generates video, but relies entirely on fallible human |
-|                                            eyes with zero automated geomechanical metrics.        |
-|  [ STANDALONE IN-SITU SENSOR GAP ]     ──► Highly accurate at single points, but leaves massive   |
-|                                            spatial blind spots across un-instrumented slopes.     |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses low-cost Edge Computer Vision (YOLO + Optical    |
-|                                            Flow) with in-situ LoRa IoT sensors & InSAR into a     |
-|                                            unified Physics-Informed AI engine with continuous     |
-|                                            spatial coverage and sub-second life-safety alarms!    |
+| [ TRADITIONAL CCTV LIMITATION ] Generates video, but relies entirely on fallible human |
+| eyes with zero automated geomechanical metrics. |
+| [ STANDALONE IN-SITU SENSOR GAP ] Highly accurate at single points, but leaves massive |
+| spatial blind spots across un-instrumented slopes. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses low-cost Edge Computer Vision (YOLO + Optical |
+| Flow) with in-situ LoRa IoT sensors & InSAR into a |
+| unified Physics-Informed AI engine with continuous |
+| spatial coverage and sub-second life-safety alarms! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -397,49 +397,49 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Edge 4K Optical PTZ CCTV Cameras: 30 FPS Continuous]
-        S2[Bi-Spectrum Thermal Infrared Cameras: 24/7 Monitoring]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Edge 4K Optical PTZ CCTV Cameras: 30 FPS Continuous]
+ S2[Bi-Spectrum Thermal Infrared Cameras: 24/7 Monitoring]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Pit-Rim Automatic Weather Station: Rainfall Intensity]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 & S2 --> P1[YOLOv8 Object Detection, ByteTrack Trajectories & Optical Flow]
-        S3 --> P2[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P4[Rainfall Intensity, 24h Rain & Infiltration Index]
-        S6 --> P5[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 & S2 --> P1[YOLOv8 Object Detection, ByteTrack Trajectories & Optical Flow]
+ S3 --> P2[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P4[Rainfall Intensity, 24h Rain & Infiltration Index]
+ S6 --> P5[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_VIS[Optical Flow Velocity, Crack Length, Dilation & Boulder Mass]
-        FE --> F_KIN[Trajectory Kinematics, Acceleration & Runout Direction]
-        FE --> F_GEO[Pore Pressure, Rainfall Intensity & Geomechanical Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_VIS[Optical Flow Velocity, Crack Length, Dilation & Boulder Mass]
+ FE --> F_KIN[Trajectory Kinematics, Acceleration & Runout Direction]
+ FE --> F_GEO[Pore Pressure, Rainfall Intensity & Geomechanical Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_VIS & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_VIS & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 20.1: Complete end-to-end system architecture incorporating edge computer vision telemetry into the real-time AI rockfall prediction pipeline.*
 

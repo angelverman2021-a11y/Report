@@ -1,10 +1,10 @@
 # Existing Technology 8: UAV LiDAR
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/08_UAV_LiDAR.md`
 
 ---
@@ -24,11 +24,11 @@ This report evaluates UAV LiDAR as an **existing advanced geometric monitoring t
 
 ```mermaid
 flowchart TD
-    UAV[Enterprise Survey Drone in Autonomous Flight] -->|Emits 240,000 to 1,000,000 Laser Pulses/sec| SCAN[Pulsed Near-Infrared LiDAR Sensor]
-    SCAN -->|Multi-Echo Reflections from Highwall| POS[Direct Georeferencing: GNSS + Tactical IMU]
-    POS -->|Real-Time Kinematic Trajectory Fusion| CALC[3D Point Calculation: X, Y, Z, Intensity, Return]
-    CALC -->|Dense Spatial Point Cloud LAS/LAZ| BARE[Ground Point Filtering & DTM Extraction]
-    BARE -->|Multi-Temporal Epoch Differencing| RISK[3D Deformation & Rockfall Scar Detection]
+ UAV[Enterprise Survey Drone in Autonomous Flight] -->|Emits 240,000 to 1,000,000 Laser Pulses/sec| SCAN[Pulsed Near-Infrared LiDAR Sensor]
+ SCAN -->|Multi-Echo Reflections from Highwall| POS[Direct Georeferencing: GNSS + Tactical IMU]
+ POS -->|Real-Time Kinematic Trajectory Fusion| CALC[3D Point Calculation: X, Y, Z, Intensity, Return]
+ CALC -->|Dense Spatial Point Cloud LAS/LAZ| BARE[Ground Point Filtering & DTM Extraction]
+ BARE -->|Multi-Temporal Epoch Differencing| RISK[3D Deformation & Rockfall Scar Detection]
 ```
 *Figure 1.1: High-level data transformation flow in UAV LiDAR slope monitoring.*
 
@@ -48,8 +48,8 @@ flowchart TD
 | Feature / Dimension | UAV LiDAR | Drone Photogrammetry |
 | :--- | :--- | :--- |
 | **Sensing Physics** | **Active Laser** (Emits own light pulses). | **Passive Optical** (Relies on ambient sunlight). |
-| **Vegetation Penetration** | **Exceptional** (Multi-echo pulses penetrate sparse brush). | ❌ Fails (Only models the top of foliage). |
-| **Lighting Independence** | **100% Day/Night Operational** (Unaffected by shadows).| ❌ Fails in deep shadows, night, and severe glare. |
+| **Vegetation Penetration** | **Exceptional** (Multi-echo pulses penetrate sparse brush). | [REJECTED] Fails (Only models the top of foliage). |
+| **Lighting Independence** | **100% Day/Night Operational** (Unaffected by shadows).| [REJECTED] Fails in deep shadows, night, and severe glare. |
 | **Direct Bare-Earth Model**| **Direct DTM Generation** via ground classification. | Requires manual vegetation and shadow masking. |
 | **Processing Time** | **Fast (15 to 30 minutes)** (Direct point calculations). | Slow (2 to 6 hours for SfM bundle adjustment). |
 | **System Capital Cost** | **High** (₹25 Lakh – ₹80 Lakh per system). | **Low** (₹1.5 Lakh – ₹8.0 Lakh per drone). |
@@ -60,15 +60,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    S1[1. Autonomous Flight Mission: Terrain-Following Waypoints] -->|Pulsed Laser Diode 905nm / 1550nm| S2[2. Laser Pulse Transmission & Highwall Interaction]
-    S2 -->|Multi-Echo Backscatter Reflection: 1st, 2nd, Last Return| S3[3. Optical Photodetector Reception]
-    S3 -->|Time-of-Flight ToF Measurement: d = c * Δt / 2| S4[4. Range Distance Calculation]
-    S4 -->|Synchronized with 200 Hz GNSS-RTK + 500 Hz Tactical IMU| S5[5. Direct Georeferencing Kinematic Inversion]
-    S5 -->|Calculates Real-World Coordinates: X, Y, Z, Intensity| S6[6. Dense 3D Point Cloud Generation]
-    S6 -->|Cloth Simulation Filter CSF: Removes Dust & Vegetation| S7[7. Bare-Earth Ground Point Classification DTM]
-    S7 -->|M3C2 Multi-Temporal Differencing: Epoch T2 vs T1| S8[8. 3D Surface Displacement & Volumetric Loss]
-    S8 -->|Structural Discontinuity & Joint Plane Extraction| S9[9. Geotechnical Kinematic Failure Evaluation]
-    S9 -->|Multi-Modal AI Engine: XGBoost & PINN| S10[10. Geotechnical Risk Assessment & TARP Alert]
+ S1[1. Autonomous Flight Mission: Terrain-Following Waypoints] -->|Pulsed Laser Diode 905nm / 1550nm| S2[2. Laser Pulse Transmission & Highwall Interaction]
+ S2 -->|Multi-Echo Backscatter Reflection: 1st, 2nd, Last Return| S3[3. Optical Photodetector Reception]
+ S3 -->|Time-of-Flight ToF Measurement: d = c * Δt / 2| S4[4. Range Distance Calculation]
+ S4 -->|Synchronized with 200 Hz GNSS-RTK + 500 Hz Tactical IMU| S5[5. Direct Georeferencing Kinematic Inversion]
+ S5 -->|Calculates Real-World Coordinates: X, Y, Z, Intensity| S6[6. Dense 3D Point Cloud Generation]
+ S6 -->|Cloth Simulation Filter CSF: Removes Dust & Vegetation| S7[7. Bare-Earth Ground Point Classification DTM]
+ S7 -->|M3C2 Multi-Temporal Differencing: Epoch T2 vs T1| S8[8. 3D Surface Displacement & Volumetric Loss]
+ S8 -->|Structural Discontinuity & Joint Plane Extraction| S9[9. Geotechnical Kinematic Failure Evaluation]
+ S9 -->|Multi-Modal AI Engine: XGBoost & PINN| S10[10. Geotechnical Risk Assessment & TARP Alert]
 ```
 *Figure 2.1: End-to-end processing pipeline of UAV LiDAR slope monitoring.*
 
@@ -84,25 +84,25 @@ flowchart TD
 ## 3. Key Hardware & Software Components of a UAV LiDAR System
 
 ```
-                     ┌──────────────────────────────────────────────┐
-                     │          UAV Multi-Rotor Platform            │
-                     └──────────────────────┬───────────────────────┘
-                                            │
-         ┌──────────────────────────────────┼──────────────────────────────────┐
-         ▼                                  ▼                                  ▼
-┌──────────────────┐               ┌──────────────────┐               ┌──────────────────┐
-│   LiDAR Sensor   │               │   GNSS/IMU POS   │               │ Co-Registered RGB│
-│ (Livox/Hesai/    │               │ (Dual-Freq RTK + │               │ Camera (4K/20MP  │
-│  RIEGL Scanner)  │               │ Tactical MEMS)   │               │ True-Color RGB)  │
-└────────┬─────────┘               └────────┬─────────┘               └────────┬─────────┘
-         │                                  │                                  │
-         └──────────────────────────────────┼──────────────────────────────────┘
-                                            │
-                                            ▼
-                     ┌──────────────────────────────────────────────┐
-                     │     Direct Georeferencing Compute Engine     │
-                     │  r_target = r_GNSS + R_IMU * (R_scan*d + l)  │
-                     └──────────────────────────────────────────────┘
+ 
+ UAV Multi-Rotor Platform 
+ 
+ 
+ 
+ 
+ 
+ LiDAR Sensor GNSS/IMU POS Co-Registered RGB
+ (Livox/Hesai/ (Dual-Freq RTK + Camera (4K/20MP 
+ RIEGL Scanner) Tactical MEMS) True-Color RGB) 
+ 
+ 
+ 
+ 
+ 
+ 
+ Direct Georeferencing Compute Engine 
+ r_target = r_GNSS + R_IMU * (R_scan*d + l) 
+ 
 ```
 *Figure 3.1: Hardware subsystem architecture of an enterprise UAV LiDAR payload.*
 
@@ -131,10 +131,10 @@ where:
 
 ```mermaid
 flowchart LR
-    A[Raw Unclassified Point Cloud LAS] --> B[Cloth Simulation Filtering CSF Algorithm]
-    B --> C[Separates Bare-Earth Rock Surface from Vegetation & Mining Dust]
-    C --> D[Digital Terrain Model DTM: True Highwall Bedrock Geometry]
-    C --> E[Digital Surface Model DSM: Machinery, Cables & Spoil Piles]
+ A[Raw Unclassified Point Cloud LAS] --> B[Cloth Simulation Filtering CSF Algorithm]
+ B --> C[Separates Bare-Earth Rock Surface from Vegetation & Mining Dust]
+ C --> D[Digital Terrain Model DTM: True Highwall Bedrock Geometry]
+ C --> E[Digital Surface Model DSM: Machinery, Cables & Spoil Piles]
 ```
 *Figure 4.1: Point cloud ground classification workflow separating bare rock from vegetation.*
 
@@ -146,13 +146,13 @@ By executing repeated, identical flight missions across the open-pit mine ($T_1,
 
 ```mermaid
 flowchart LR
-    A[UAV LiDAR Baseline Scan Epoch T1] --> C[Multi-Temporal 3D Point Cloud Comparison]
-    B[UAV LiDAR Repeated Scan Epoch T2] --> C
-    C --> D1[Pre-Failure Bench Bulging: Millimeter Outward Creep]
-    C --> D2[Rockfall Scars: Negative Volume Detachment Cavities]
-    C --> D3[Talus Deposition: Positive Volume Accumulation on Catch Benches]
-    C --> D4[Bench Undercutting & Erosion along the Toe]
-    C --> D5[Tension Crack Dilation & Crest Subsidence]
+ A[UAV LiDAR Baseline Scan Epoch T1] --> C[Multi-Temporal 3D Point Cloud Comparison]
+ B[UAV LiDAR Repeated Scan Epoch T2] --> C
+ C --> D1[Pre-Failure Bench Bulging: Millimeter Outward Creep]
+ C --> D2[Rockfall Scars: Negative Volume Detachment Cavities]
+ C --> D3[Talus Deposition: Positive Volume Accumulation on Catch Benches]
+ C --> D4[Bench Undercutting & Erosion along the Toe]
+ C --> D5[Tension Crack Dilation & Crest Subsidence]
 ```
 *Figure 5.1: Geotechnical change phenomena identified through multi-temporal UAV LiDAR surveys.*
 
@@ -162,12 +162,12 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph 3D Point Cloud Comparison Algorithms
-        A1[DEM / DTM Differencing DoD] -->|Grid Elevation Subtraction: ΔZ = Z2 - Z1| R1[2D Vertical Height Change Raster]
-        A2[Multiscale Model-to-Model M3C2] -->|Calculates True 3D Orthogonal Surface Distance| R2[3D Highwall Normal Bulging Vectors]
-        A3[Point-to-Mesh P2M Distance] -->|Measures Point Distance to Reference CAD/Mesh| R3[Signed Distance Map to As-Designed Pit Model]
-        A4[Volumetric Cluster Integration] -->|DBSCAN Point Clustering + Convex Hull Integration| R4[Exact Rockfall Detachment Volume: m³]
-    end
+ subgraph 3D Point Cloud Comparison Algorithms
+ A1[DEM / DTM Differencing DoD] -->|Grid Elevation Subtraction: ΔZ = Z2 - Z1| R1[2D Vertical Height Change Raster]
+ A2[Multiscale Model-to-Model M3C2] -->|Calculates True 3D Orthogonal Surface Distance| R2[3D Highwall Normal Bulging Vectors]
+ A3[Point-to-Mesh P2M Distance] -->|Measures Point Distance to Reference CAD/Mesh| R3[Signed Distance Map to As-Designed Pit Model]
+ A4[Volumetric Cluster Integration] -->|DBSCAN Point Clustering + Convex Hull Integration| R4[Exact Rockfall Detachment Volume: m³]
+ end
 ```
 *Figure 6.1: Comparative algorithms for multi-temporal UAV LiDAR change detection.*
 
@@ -177,28 +177,28 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Aerial Acquisition
-        UAV[Enterprise RTK LiDAR Drone: DJI M350 + Zenmuse L2] -->|Oblique Highwall Terrain-Following Passes| RAW[Raw Point Cloud LAS/LAZ + PPK Trajectory]
-    end
+ subgraph Aerial Acquisition
+ UAV[Enterprise RTK LiDAR Drone: DJI M350 + Zenmuse L2] -->|Oblique Highwall Terrain-Following Passes| RAW[Raw Point Cloud LAS/LAZ + PPK Trajectory]
+ end
 
-    subgraph Edge Preprocessing & Classification
-        RAW --> PPK_ENG[Trajectory Post-Processing Kinematic POSPAC]
-        PPK_ENG --> CLASSIFY[PDAL Ground Classification: CSF Filter]
-        CLASSIFY --> DTM[Bare-Earth Digital Terrain Model Mesh PLY/OBJ]
-    end
+ subgraph Edge Preprocessing & Classification
+ RAW --> PPK_ENG[Trajectory Post-Processing Kinematic POSPAC]
+ PPK_ENG --> CLASSIFY[PDAL Ground Classification: CSF Filter]
+ CLASSIFY --> DTM[Bare-Earth Digital Terrain Model Mesh PLY/OBJ]
+ end
 
-    subgraph Geotechnical Extraction
-        DTM --> M3C2_ENG[M3C2 Multi-Temporal 3D Differencing Engine]
-        DTM --> DSE_ENG[Automated Discontinuity & Joint Plane Extractor]
-        M3C2_ENG --> VOL_ENG[Volumetric Rockfall Scar & Deposit Engine]
-    end
+ subgraph Geotechnical Extraction
+ DTM --> M3C2_ENG[M3C2 Multi-Temporal 3D Differencing Engine]
+ DTM --> DSE_ENG[Automated Discontinuity & Joint Plane Extractor]
+ M3C2_ENG --> VOL_ENG[Volumetric Rockfall Scar & Deposit Engine]
+ end
 
-    subgraph AI Risk & TARP Dispatch
-        M3C2_ENG & DSE_ENG & VOL_ENG --> FUSION[Multi-Modal Feature Synchronization Core]
-        FUSION --> AI[XGBoost & Physics-Informed Neural Network PINN Core]
-        AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-        AI --> TARP[Sub-Second Multi-Channel Emergency Dispatch]
-    end
+ subgraph AI Risk & TARP Dispatch
+ M3C2_ENG & DSE_ENG & VOL_ENG --> FUSION[Multi-Modal Feature Synchronization Core]
+ FUSION --> AI[XGBoost & Physics-Informed Neural Network PINN Core]
+ AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ AI --> TARP[Sub-Second Multi-Channel Emergency Dispatch]
+ end
 ```
 *Figure 7.1: Hardware, processing, and AI architecture of an open-pit UAV LiDAR monitoring system.*
 
@@ -213,11 +213,11 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    A[Bare-Earth DTM Point Cloud] --> B[Local Surface Normal Vector Estimation: Nx, Ny, Nz]
-    B --> C[Density-Based Clustering: DBSCAN on Stereonet]
-    C --> D[Extracts Planar Discontinuity Sets: J1, J2, Bedding S0]
-    D --> E[Computes Structural Dip α & Dip Direction β Angles]
-    E --> F[Kinematic Failure Mode Analysis: Planar, Wedge, Toppling]
+ A[Bare-Earth DTM Point Cloud] --> B[Local Surface Normal Vector Estimation: Nx, Ny, Nz]
+ B --> C[Density-Based Clustering: DBSCAN on Stereonet]
+ C --> D[Extracts Planar Discontinuity Sets: J1, J2, Bedding S0]
+ D --> E[Computes Structural Dip α & Dip Direction β Angles]
+ E --> F[Kinematic Failure Mode Analysis: Planar, Wedge, Toppling]
 ```
 *Figure 8.1: Automated structural geological joint mapping from bare-earth UAV LiDAR point clouds.*
 
@@ -225,7 +225,7 @@ flowchart LR
 
 ## 9. Illustrative Time-Series Volumetric & Deformation Analysis
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following table and graphs represent **Synthetic / Illustrative Data** designed solely to explain progressive deformation and volumetric material loss concepts. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Multi-Temporal UAV LiDAR Dataset
@@ -241,18 +241,18 @@ flowchart LR
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: UAV LiDAR M3C2 Surface Bulging vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (weeks)" [0, 2, 4, 6, 8]
-    y-axis "M3C2 Normal Bulging (mm)" 0 --> 50
-    line [0.0, 2.8, 6.5, 16.2, 38.5]
+ title "Illustrative Example: UAV LiDAR M3C2 Surface Bulging vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (weeks)" [0, 2, 4, 6, 8]
+ y-axis "M3C2 Normal Bulging (mm)" 0 --> 50
+ line [0.0, 2.8, 6.5, 16.2, 38.5]
 ```
 *Figure 9.1: Illustrative M3C2 surface displacement bulging curve extracted from multi-temporal UAV LiDAR surveys.*
 
@@ -272,22 +272,22 @@ xychart-beta
 
 ```mermaid
 mindmap
-  root((UAV LiDAR Mining Limitations))
-    Periodic vs Continuous Monitoring
-      Requires battery swaps & flight missions
-      Cannot provide second-by-second warnings for sudden rockfalls
-    Severe Flight Time Restrictions
-      Heavy LiDAR payload limits battery flight to 25-35 mins
-      Requires multiple battery sets and field generators
-    High Capital Expenditure
-      High Capex ₹25 Lakh - ₹80 Lakh per system
-      Requires trained DGCA-certified drone pilots & geomatics staff
-    Weather & Environmental Constraints
-      Grounded during heavy monsoon cloudbursts & winds >35 km/h
-      High laser pulse scattering in thick blasting smoke
-    Zero Subsurface Awareness
-      Measures surface geometry only
-      Blind to pore-water pressure, shear stress, and blast vibrations
+ root((UAV LiDAR Mining Limitations))
+ Periodic vs Continuous Monitoring
+ Requires battery swaps & flight missions
+ Cannot provide second-by-second warnings for sudden rockfalls
+ Severe Flight Time Restrictions
+ Heavy LiDAR payload limits battery flight to 25-35 mins
+ Requires multiple battery sets and field generators
+ High Capital Expenditure
+ High Capex ₹25 Lakh - ₹80 Lakh per system
+ Requires trained DGCA-certified drone pilots & geomatics staff
+ Weather & Environmental Constraints
+ Grounded during heavy monsoon cloudbursts & winds >35 km/h
+ High laser pulse scattering in thick blasting smoke
+ Zero Subsurface Awareness
+ Measures surface geometry only
+ Blind to pore-water pressure, shear stress, and blast vibrations
 ```
 *Figure 11.1: Operational, computational, and environmental limitations of UAV LiDAR.*
 
@@ -299,7 +299,7 @@ mindmap
 | :--- | :--- | :--- | :--- | :--- |
 | **Primary Sensing Type** | **Active Near-Infrared Laser** | Passive Optical RGB Imagery | Active Near-Infrared Laser | Active Microwave Radar (Ku/X) |
 | **Point Acquisition Method**| Direct Time-of-Flight (ToF) | Structure-from-Motion (SfM) | Direct Time-of-Flight (ToF) | Differential Phase Interferometry |
-| **Vegetation Penetration** | **High (Multi-echo pulses)** | ❌ Fails (Top of canopy only) | Moderate (Scattering noise) | **Exceptional (Microwaves penetrate)**|
+| **Vegetation Penetration** | **High (Multi-echo pulses)** | [REJECTED] Fails (Top of canopy only) | Moderate (Scattering noise) | **Exceptional (Microwaves penetrate)**|
 | **Vertical Highwall Detail**| **Exceptional (Oblique view)** | High (Oblique flight paths) | Moderate (Bench shadow zones) | High (Line-of-sight view) |
 | **Measurement Update Rate** | Periodic (15–30 min processing)| Periodic (2–6 hours processing) | Periodic (Tripod setup overhead)| **Continuous (Every 1 to 5 min)** |
 | **System Capital Cost** | **₹25 Lakh – ₹80 Lakh (High)** | ₹1.5 Lakh – ₹8.0 Lakh (Low) | ₹40 Lakh – ₹1.2 Cr (High) | **₹3.5 Cr – ₹8.0 Cr (Extreme)** |
@@ -337,32 +337,32 @@ To develop our SIH25071 prototype, we evaluated verified open-source 3D point cl
 
 ```mermaid
 flowchart TD
-    subgraph 3D UAV LiDAR Geometric Baseline
-        A1[Periodic UAV LiDAR Survey: 1 flight/month] --> A2[PDAL CSF Ground Classification Filter]
-        A2 --> A3[Bare-Earth 3D Digital Terrain Mesh DTM PLY/OBJ]
-        A3 --> A4[Automated Joint Set Extractor DSE: Dip & Strike]
-        A3 --> A5[M3C2 Multi-Temporal Volumetric Loss Engine]
-    end
+ subgraph 3D UAV LiDAR Geometric Baseline
+ A1[Periodic UAV LiDAR Survey: 1 flight/month] --> A2[PDAL CSF Ground Classification Filter]
+ A2 --> A3[Bare-Earth 3D Digital Terrain Mesh DTM PLY/OBJ]
+ A3 --> A4[Automated Joint Set Extractor DSE: Dip & Strike]
+ A3 --> A5[M3C2 Multi-Temporal Volumetric Loss Engine]
+ end
 
-    subgraph Real-Time Terrestrial & Spaceborne Telemetry
-        B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
-        B2[Low-Cost Wireless LoRa MEMS Tilt & Vibration Nodes]
-        B3[Micro-Weather Station: Rainfall Intensity mm/hr]
-        B4[Vibrating-Wire Piezometer Pore-Water Pressure]
-        B5[Sentinel-1 InSAR Macro Subsidence Prior]
-    end
+ subgraph Real-Time Terrestrial & Spaceborne Telemetry
+ B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
+ B2[Low-Cost Wireless LoRa MEMS Tilt & Vibration Nodes]
+ B3[Micro-Weather Station: Rainfall Intensity mm/hr]
+ B4[Vibrating-Wire Piezometer Pore-Water Pressure]
+ B5[Sentinel-1 InSAR Macro Subsidence Prior]
+ end
 
-    A3 & A4 & A5 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Core]
+ A3 & A4 & A5 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Core]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 15.1: Master multi-sensor data fusion architecture incorporating UAV LiDAR bare-earth geometry.*
 
@@ -389,11 +389,11 @@ Our SIH25071 system uses the **bare-earth UAV LiDAR DTM mesh** as the exact phys
 
 ```mermaid
 flowchart LR
-    A[UAV LiDAR Bare-Earth DTM Triangular Mesh] --> B[WebGPU Rigid-Body Kinetic Physics Engine]
-    C[Detached Boulder Mass m & Velocity v] --> B
-    B --> D[Simulates Exact Bounce Trajectories & Flyrock Heights]
-    B --> E[Calculates Impact Envelopes on Lower Haul Roads]
-    D & E --> F[Dynamic 3D Rockfall Runout Hazard Cone Overlay]
+ A[UAV LiDAR Bare-Earth DTM Triangular Mesh] --> B[WebGPU Rigid-Body Kinetic Physics Engine]
+ C[Detached Boulder Mass m & Velocity v] --> B
+ B --> D[Simulates Exact Bounce Trajectories & Flyrock Heights]
+ B --> E[Calculates Impact Envelopes on Lower Haul Roads]
+ D & E --> F[Dynamic 3D Rockfall Runout Hazard Cone Overlay]
 ```
 *Figure 17.1: Real-time 3D rockfall kinetic bounce trajectory simulation on UAV LiDAR bare-earth meshes.*
 
@@ -405,17 +405,17 @@ flowchart LR
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 94.6%)"]
-        B["📍 Location: Bench 3 - North Wall (Grid Sector NW-14)"]
-        C["⏱️ Predicted Failure Window: 22 ± 5 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid M3C2 Surface Bulging from UAV LiDAR (+38 mm): +35% contribution"]
-        D2["• Real-Time Optical Flow Velocity Surge (16.8 mm/hr): +27% contribution"]
-        D3["• Heavy 24-hr Monsoon Precipitation (46 mm): +20% contribution"]
-        D4["• Piezometric Hydrostatic Pressure Spike (18 kPa): +11% contribution"]
-        D5["• Structural Joint Dip Overhang Factor: +7% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 94.6%)"]
+ B[" Location: Bench 3 - North Wall (Grid Sector NW-14)"]
+ C[" Predicted Failure Window: 22 ± 5 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid M3C2 Surface Bulging from UAV LiDAR (+38 mm): +35% contribution"]
+ D2["• Real-Time Optical Flow Velocity Surge (16.8 mm/hr): +27% contribution"]
+ D3["• Heavy 24-hr Monsoon Precipitation (46 mm): +20% contribution"]
+ D4["• Piezometric Hydrostatic Pressure Spike (18 kPa): +11% contribution"]
+ D5["• Structural Joint Dip Overhang Factor: +7% contribution"]
+ end
 ```
 *Figure 18.1: Conceptual SHAP explainable alert diagnostic card for UAV LiDAR-informed alerts.*
 
@@ -425,14 +425,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Photorealistic Mine Mesh with Real-Time Risk Heatmap]
-        D2[Multi-Temporal M3C2 Change Detection Volumetric Loss & Gain Overlay]
-        D3[Automated Geological Discontinuity Stereonet Projection Panel]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Compliance & Incident Audit Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Photorealistic Mine Mesh with Real-Time Risk Heatmap]
+ D2[Multi-Temporal M3C2 Change Detection Volumetric Loss & Gain Overlay]
+ D3[Automated Geological Discontinuity Stereonet Projection Panel]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Compliance & Incident Audit Logbook Export]
+ end
 ```
 *Figure 19.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -443,10 +443,10 @@ flowchart TD
 | Feature / Dimension | Traditional UAV LiDAR Surveying | Proposed SIH25071 Multi-Modal Platform |
 | :--- | :--- | :--- |
 | **Operational Frequency** | Periodic surveys (monthly / quarterly) | **Continuous 24/7 Monitoring (30 FPS Vision + IoT)** |
-| **Immediate Life Safety Alerts**| ❌ Impossible (hours/days processing lag) | **✅ Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
+| **Immediate Life Safety Alerts**| [REJECTED] Impossible (hours/days processing lag) | **[CONFIRMED] Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
 | **3D Terrain Digital Twin** | Static CAD / GIS point clouds | **Interactive 60 FPS WebGPU Dynamic Digital Twin** |
 | **Atmospheric Noise Rejection** | Manual point filtering | **Multi-Modal Cross-Validation (Vision + LoRa + InSAR)** |
-| **Subsurface Awareness** | ❌ Blind to subsurface conditions | **✅ Synchronized Vibrating-Wire Piezometer Telemetry** |
+| **Subsurface Awareness** | [REJECTED] Blind to subsurface conditions | **[CONFIRMED] Synchronized Vibrating-Wire Piezometer Telemetry** |
 | **Kinetic Trajectory Modeling** | Offline post-mortem analysis | **Real-Time 3D Rigid-Body Boulder Bounce Simulation** |
 | **System Capital Cost** | **₹25 Lakh – ₹80 Lakh (High)** | **₹2.0L – ₹5.0L Complete Full-Pit Infrastructure** |
 
@@ -456,15 +456,15 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE UAV LiDAR LIMITATION ]   ──► Millimeter geometric accuracy & vegetation penetration,|
-|                                            but constrained by battery flight limits & zero        |
-|                                            second-by-second life-safety early warning capability. |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Ingests periodic UAV LiDAR bare-earth DTM meshes to    |
-|                                            establish the master digital twin geometry & joints,    |
-|                                            then drives continuous real-time life-safety monitoring|
-|                                            via 95% cheaper Edge Computer Vision & Wireless IoT!   |
+| [ STANDALONE UAV LiDAR LIMITATION ] Millimeter geometric accuracy & vegetation penetration,|
+| but constrained by battery flight limits & zero |
+| second-by-second life-safety early warning capability. |
+| [ PROPOSED SIH25071 INNOVATION ] Ingests periodic UAV LiDAR bare-earth DTM meshes to |
+| establish the master digital twin geometry & joints, |
+| then drives continuous real-time life-safety monitoring|
+| via 95% cheaper Edge Computer Vision & Wireless IoT! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -485,49 +485,49 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Periodic UAV LiDAR Survey Archive: Monthly Point Clouds]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Wireless LoRa MEMS Tilt & Vibration Nodes]
-        S4[Vibrating-Wire Borehole Piezometers]
-        S5[Micro-Weather Station: Rain & Humidity]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Periodic UAV LiDAR Survey Archive: Monthly Point Clouds]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Wireless LoRa MEMS Tilt & Vibration Nodes]
+ S4[Vibrating-Wire Borehole Piezometers]
+ S5[Micro-Weather Station: Rain & Humidity]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[PDAL CSF Ground Classification & Bare-Earth DTM Mesh]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 & S4 --> P3[LoRa Mesh Telemetry Parser & Kalman Filter]
-        S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
-        S6 --> P5[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[PDAL CSF Ground Classification & Bare-Earth DTM Mesh]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 & S4 --> P3[LoRa Mesh Telemetry Parser & Kalman Filter]
+ S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
+ S6 --> P5[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_GEO[UAV LiDAR DTM Mesh, M3C2 Bulging & Volumetric Loss]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Saito Inverse Velocity]
-        FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
-    end
+ P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_GEO[UAV LiDAR DTM Mesh, M3C2 Bulging & Volumetric Loss]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Saito Inverse Velocity]
+ FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_GEO & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_GEO & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 23.1: Complete end-to-end system architecture incorporating UAV LiDAR bare-earth geometry into the real-time AI rockfall prediction pipeline.*
 

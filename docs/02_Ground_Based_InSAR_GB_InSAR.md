@@ -1,10 +1,10 @@
 # Existing Technology 2: Ground-Based InSAR (GB-InSAR)
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/02_Ground_Based_InSAR_GB_InSAR.md`
 
 ---
@@ -24,12 +24,12 @@ This report delivers a rigorous technical evaluation of GB-InSAR as an **existin
 
 ```mermaid
 flowchart TD
-    A[Mine Slope / Highwall] -->|Microwave Backscatter| B[Ground-Based Radar on Linear Rail]
-    B -->|Repeated Sequential Scans| C[SAR Image Synthesis & Registration]
-    C -->|Complex Phase Differencing| D[Interferogram Generation]
-    D -->|Phase Unwrapping & Calibration| E[Line-of-Sight LOS Displacement Map]
-    E -->|Time-Series Kinematics| F[Velocity & Acceleration Fields]
-    F -->|Geotechnical Evaluation| G[Slope Instability & Hazard Alert]
+ A[Mine Slope / Highwall] -->|Microwave Backscatter| B[Ground-Based Radar on Linear Rail]
+ B -->|Repeated Sequential Scans| C[SAR Image Synthesis & Registration]
+ C -->|Complex Phase Differencing| D[Interferogram Generation]
+ D -->|Phase Unwrapping & Calibration| E[Line-of-Sight LOS Displacement Map]
+ E -->|Time-Series Kinematics| F[Velocity & Acceleration Fields]
+ F -->|Geotechnical Evaluation| G[Slope Instability & Hazard Alert]
 ```
 *Figure 1.1: High-level data transformation flow in a GB-InSAR monitoring workflow.*
 
@@ -59,16 +59,16 @@ The GB-InSAR operational lifecycle follows a sequential physical and algorithmic
 
 ```mermaid
 flowchart TD
-    S1[1. Ground-Based Radar Sensor] -->|High-Frequency Microwave Pulses Ku/C-Band| S2[2. Radar Illumination of Highwall]
-    S2 -->|Coherent Backscatter Wave Return| S3[3. Complex Raw Radar Acquisition Master]
-    S3 -->|Translates Along Rail & Rescans at t2| S4[4. Repeated Complex Acquisition Slave]
-    S4 -->|Spatial Sub-Pixel Co-Registration| S5[5. Complex Interferogram Generation]
-    S5 -->|Phase Differencing: Δϕ = ϕ_slave - ϕ_master| S6[6. Differential Wrapped Phase Map]
-    S6 -->|Atmospheric Correction & Phase Unwrapping| S7[7. Absolute Line-of-Sight LOS Displacement]
-    S7 -->|2D Spatial Mapping on DEM| S8[8. Full-Field Deformation Heatmap]
-    S8 -->|Rolling Time Windows d/dt| S9[9. Velocity & Acceleration Time-Series]
-    S9 -->|Inverse Velocity & Saito Failure Law| S10[10. Geomechanical Instability Assessment]
-    S10 -->|Threshold & Multi-Criteria Evaluation| S11[11. Automated Hazard / TARP Alert]
+ S1[1. Ground-Based Radar Sensor] -->|High-Frequency Microwave Pulses Ku/C-Band| S2[2. Radar Illumination of Highwall]
+ S2 -->|Coherent Backscatter Wave Return| S3[3. Complex Raw Radar Acquisition Master]
+ S3 -->|Translates Along Rail & Rescans at t2| S4[4. Repeated Complex Acquisition Slave]
+ S4 -->|Spatial Sub-Pixel Co-Registration| S5[5. Complex Interferogram Generation]
+ S5 -->|Phase Differencing: Δϕ = ϕ_slave - ϕ_master| S6[6. Differential Wrapped Phase Map]
+ S6 -->|Atmospheric Correction & Phase Unwrapping| S7[7. Absolute Line-of-Sight LOS Displacement]
+ S7 -->|2D Spatial Mapping on DEM| S8[8. Full-Field Deformation Heatmap]
+ S8 -->|Rolling Time Windows d/dt| S9[9. Velocity & Acceleration Time-Series]
+ S9 -->|Inverse Velocity & Saito Failure Law| S10[10. Geomechanical Instability Assessment]
+ S10 -->|Threshold & Multi-Criteria Evaluation| S11[11. Automated Hazard / TARP Alert]
 ```
 *Figure 2.1: End-to-end processing pipeline of Ground-Based InSAR for slope stability assessment.*
 
@@ -89,29 +89,29 @@ Radar waves are sinusoidal electromagnetic waves characterized by **Amplitude** 
 
 ```
 Wave Cycle:
-   Peak (+)       Peak (+)
-     /\             /\
-    /  \           /  \
+ Peak (+) Peak (+)
+ /\ /\
+ / \ / \
 ---/----\---------/----\--- Baseline
-         \  /           \  /
-          \/             \/
-       Trough (-)     Trough (-)
-   |<- 1 Wavelength (λ) ->|
+ \ / \ /
+ \/ \/
+ Trough (-) Trough (-)
+ |<- 1 Wavelength (λ) ->|
 ```
 
 When a radar signal travels to a rock wall at distance $R$ and returns, it completes a huge number of full wave cycles plus a fractional cycle remaining at the end. That fractional cycle is the **Phase ($\phi$)**.
 
 ```text
 Observation 1 (Time t1):
-Radar ══════════════════════════════════════════════> Rock Wall [Distance R1]
+Radar > Rock Wall [Distance R1]
 Return Wave Phase: ϕ1 = 120°
 
 Observation 2 (Time t2 - Rock moved closer by 2 mm):
-Radar ════════════════════════════════════════> Rock Wall [Distance R2 < R1]
+Radar > Rock Wall [Distance R2 < R1]
 Return Wave Phase: ϕ2 = 75°
 
 Phase Difference: Δϕ = ϕ2 - ϕ1 = -45°
-             ↓
+ ↓
 Directly converts to metric Line-of-Sight Displacement (dLUS = -2.1 mm)
 ```
 
@@ -134,12 +134,12 @@ Where:
 
 ```mermaid
 flowchart LR
-    subgraph Phase Decomposition
-        RAW["Total Observed Phase Shift (Δϕ_total)"] --> P1["Deformation Phase (Δϕ_def) ──► Target Metric"]
-        RAW --> P2["Atmospheric Phase Screen (Δϕ_atm) ──► Weather Delay"]
-        RAW --> P3["Geometric / DEM Phase (Δϕ_geom) ──► Zero for Stationary Rail"]
-        RAW --> P4["Noise / Decorrelation (Δϕ_noise) ──► Filtered Out"]
-    end
+ subgraph Phase Decomposition
+ RAW["Total Observed Phase Shift (Δϕ_total)"] --> P1["Deformation Phase (Δϕ_def) Target Metric"]
+ RAW --> P2["Atmospheric Phase Screen (Δϕ_atm) Weather Delay"]
+ RAW --> P3["Geometric / DEM Phase (Δϕ_geom) Zero for Stationary Rail"]
+ RAW --> P4["Noise / Decorrelation (Δϕ_noise) Filtered Out"]
+ end
 ```
 *Figure 4.1: Decomposition of raw interferometric phase components.*
 
@@ -158,22 +158,22 @@ GB-InSAR provides critical safety monitoring across multiple geotechnical zones 
 
 ```mermaid
 mindmap
-  root((GB-InSAR Open-Pit Applications))
-    Highwall & Active Mining Benches
-      Detects bench crest tension crack dilation
-      Monitors active digging face undercut stability
-      Identifies progressive planar and wedge slip planes
-    Deep Pit Slopes & Fault Zones
-      Tracks structural fault reactivation
-      Identifies deep-seated rotational shear zones
-      Monitors adverse geological bedding dip slopes
-    Waste Dumps & Overburden Piles
-      Detects internal shear failure in loose dump material
-      Early warning of rainfall-triggered dump mudslides
-    Critical Mining Infrastructure
-      Monitors main haulage ramp stability
-      Protects pit drainage sumps and pump stations
-      Surveys crushing plants and conveyor foundations near pit rims
+ root((GB-InSAR Open-Pit Applications))
+ Highwall & Active Mining Benches
+ Detects bench crest tension crack dilation
+ Monitors active digging face undercut stability
+ Identifies progressive planar and wedge slip planes
+ Deep Pit Slopes & Fault Zones
+ Tracks structural fault reactivation
+ Identifies deep-seated rotational shear zones
+ Monitors adverse geological bedding dip slopes
+ Waste Dumps & Overburden Piles
+ Detects internal shear failure in loose dump material
+ Early warning of rainfall-triggered dump mudslides
+ Critical Mining Infrastructure
+ Monitors main haulage ramp stability
+ Protects pit drainage sumps and pump stations
+ Surveys crushing plants and conveyor foundations near pit rims
 ```
 *Figure 5.1: Geotechnical monitoring domains of GB-InSAR across open-pit mine operations.*
 
@@ -187,21 +187,21 @@ A primary advantage of GB-InSAR is its capability to generate dense **spatial de
 
 ```text
 +---------------------------------------------------------------+
-|                    OPEN-PIT HIGHWALL SECTOR C-4               |
+| OPEN-PIT HIGHWALL SECTOR C-4 |
 +---------------------------------------------------------------+
-| [Crest]   🟢 Stable   🟢 Stable   🟡 Creep    🟡 Creep   🟢 Stable |
-| [Bench 1] 🟢 Stable   🟡 Creep    🟠 High     🟠 High    🟡 Creep  |
-| [Bench 2] 🟢 Stable   🟠 High     🔴 CRITICAL 🔴 CRITICAL 🟠 High  |
-| [Toe]     🟢 Stable   🟢 Stable   🟠 Bulging  🟠 Bulging 🟢 Stable |
-| [Haul Rd] ─── Safe ─────────────── ⚠️ HAZARD ZONE ──────── Safe ───|
+| [Crest] [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [ADVISORY / YELLOW] Creep [ADVISORY / YELLOW] Creep [NORMAL / GREEN] Stable |
+| [Bench 1] [NORMAL / GREEN] Stable [ADVISORY / YELLOW] Creep [WARNING / ORANGE] High [WARNING / ORANGE] High [ADVISORY / YELLOW] Creep |
+| [Bench 2] [NORMAL / GREEN] Stable [WARNING / ORANGE] High [CRITICAL / RED] CRITICAL [CRITICAL / RED] CRITICAL [WARNING / ORANGE] High |
+| [Toe] [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [WARNING / ORANGE] Bulging [WARNING / ORANGE] Bulging [NORMAL / GREEN] Stable |
+| [Haul Rd] Safe [ALERT] HAZARD ZONE Safe |
 +---------------------------------------------------------------+
 ```
 
 ### Risk Level Color Legend:
-* 🟢 **Green (Stable):** Baseline background motion ($< 1.0\text{ mm/day}$).
-* 🟡 **Yellow (Low / Early Movement):** Primary to secondary creep ($1.0 - 5.0\text{ mm/day}$).
-* 🟠 **Orange (Significant Deformation):** Accelerating secondary creep / tension crack dilation ($5.0 - 25.0\text{ mm/day}$).
-* 🔴 **Red (Critical Deformation):** Rapid tertiary creep / imminent structural detachment ($> 25.0\text{ mm/day}$).
+* [NORMAL / GREEN] **Green (Stable):** Baseline background motion ($< 1.0\text{ mm/day}$).
+* [ADVISORY / YELLOW] **Yellow (Low / Early Movement):** Primary to secondary creep ($1.0 - 5.0\text{ mm/day}$).
+* [WARNING / ORANGE] **Orange (Significant Deformation):** Accelerating secondary creep / tension crack dilation ($5.0 - 25.0\text{ mm/day}$).
+* [CRITICAL / RED] **Red (Critical Deformation):** Rapid tertiary creep / imminent structural detachment ($> 25.0\text{ mm/day}$).
 
 > **Dashboard Transfer Note:** In our proposed SIH25071 platform, this spatial grid concept is mapped directly onto the 3D Digital Elevation Model (DEM) in a WebGPU canvas, color-coding mine benches dynamically.
 
@@ -211,7 +211,7 @@ A primary advantage of GB-InSAR is its capability to generate dense **spatial de
 
 Repeated GB-InSAR scans over hours, days, and weeks produce detailed deformation time-series curves that reveal the structural health of the rock mass.
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following table and graphs represent **Synthetic / Illustrative Data** designed solely to explain geotechnical time-series concepts. They do not represent real-world measurements from any specific mine.*
 
 ### Illustrative Synthetic Dataset
@@ -228,18 +228,18 @@ Repeated GB-InSAR scans over hours, days, and weeks produce detailed deformation
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Cumulative LOS Displacement vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (hours)" [0, 4, 8, 12, 16, 18]
-    y-axis "Cumulative LOS Displacement (mm)" 0 --> 10
-    line [0.0, 0.8, 1.6, 2.8, 5.2, 9.0]
+ title "Illustrative Example: Cumulative LOS Displacement vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (hours)" [0, 4, 8, 12, 16, 18]
+ y-axis "Cumulative LOS Displacement (mm)" 0 --> 10
+ line [0.0, 0.8, 1.6, 2.8, 5.2, 9.0]
 ```
 *Figure 7.1: Illustrative cumulative displacement curve showing secondary linear creep transitioning into accelerating tertiary creep.*
 
@@ -258,18 +258,18 @@ $$\text{Deformation Velocity: } v(t) = \frac{d(d_{\text{LOS}})}{dt} \approx \fra
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: Deformation Velocity vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (hours)" [4, 8, 12, 16, 18]
-    y-axis "Deformation Velocity (mm/hr)" 0.0 --> 2.0
-    line [0.20, 0.20, 0.30, 0.60, 1.90]
+ title "Illustrative Example: Deformation Velocity vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (hours)" [4, 8, 12, 16, 18]
+ y-axis "Deformation Velocity (mm/hr)" 0.0 --> 2.0
+ line [0.20, 0.20, 0.30, 0.60, 1.90]
 ```
 *Figure 8.1: Illustrative deformation velocity surge curve.*
 
@@ -294,18 +294,18 @@ As failure approaches ($t \to t_f$), velocity accelerates toward infinity ($v(t)
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Conceptual Illustration: Inverse Velocity (1/v) Trending to Zero (Synthetic Data)"
-    x-axis "Elapsed Time (hours)" [4, 8, 12, 16, 18]
-    y-axis "Inverse Velocity (hr/mm)" 0 --> 6
-    line [5.00, 5.00, 3.33, 1.67, 0.53]
+ title "Conceptual Illustration: Inverse Velocity (1/v) Trending to Zero (Synthetic Data)"
+ x-axis "Elapsed Time (hours)" [4, 8, 12, 16, 18]
+ y-axis "Inverse Velocity (hr/mm)" 0 --> 6
+ line [5.00, 5.00, 3.33, 1.67, 0.53]
 ```
 *Figure 9.1: Conceptual trajectory of inverse velocity trending toward the zero-intercept failure point.*
 
@@ -330,24 +330,24 @@ xychart-beta
 
 ```mermaid
 flowchart LR
-    subgraph Signal Processing Core
-        A[Raw Radar Scans] --> B[Image Co-Registration]
-        B --> C[Interferogram Formation]
-        C --> D[Spatial-Temporal Phase Differencing]
-        D --> E[Adaptive Goldstein Filtering]
-        E --> F[2D/3D Phase Unwrapping]
-    end
+ subgraph Signal Processing Core
+ A[Raw Radar Scans] --> B[Image Co-Registration]
+ B --> C[Interferogram Formation]
+ C --> D[Spatial-Temporal Phase Differencing]
+ D --> E[Adaptive Goldstein Filtering]
+ E --> F[2D/3D Phase Unwrapping]
+ end
 
-    subgraph Calibration & Conversion
-        F --> G[Atmospheric APS Correction via Permanent Scatterers]
-        G --> H[LOS Metric Displacement Calculation]
-    end
+ subgraph Calibration & Conversion
+ F --> G[Atmospheric APS Correction via Permanent Scatterers]
+ G --> H[LOS Metric Displacement Calculation]
+ end
 
-    subgraph Analytics & Decision Engine
-        H --> I[Time-Series Kinematic Derivative Analysis]
-        I --> J[Velocity, Acceleration & Inverse Velocity 1/v]
-        J --> K[Geotechnical Instability & TARP Alert]
-    end
+ subgraph Analytics & Decision Engine
+ H --> I[Time-Series Kinematic Derivative Analysis]
+ I --> J[Velocity, Acceleration & Inverse Velocity 1/v]
+ J --> K[Geotechnical Instability & TARP Alert]
+ end
 ```
 *Figure 11.1: Detailed algorithmic pipeline of GB-InSAR signal processing.*
 
@@ -391,22 +391,22 @@ flowchart LR
 
 ```mermaid
 mindmap
-  root((GB-InSAR Limitations))
-    Line-of-Sight LOS Constraint
-      Only measures 1D displacement along radar vector
-      Blind to perpendicular lateral shearing
-      Underestimates vertical downward toppling
-    Phase Ambiguity & Decorrelation
-      Phase unwrapping fails if movement > lambda / 4
-      Blast flyrock & loose dust destroy coherence
-      Fast brittle collapses exceed scan cycle rate
-    Atmospheric Phase Screen APS
-      Humidity and temperature shifts cause phase distortion
-      Requires complex Permanent Scatterer correction
-    Operational & Economic Friction
-      Prohibitive Capex ₹4 Cr - ₹10 Cr
-      Requires specialized geophysicists to interpret
-      Measures surface symptoms without causal awareness
+ root((GB-InSAR Limitations))
+ Line-of-Sight LOS Constraint
+ Only measures 1D displacement along radar vector
+ Blind to perpendicular lateral shearing
+ Underestimates vertical downward toppling
+ Phase Ambiguity & Decorrelation
+ Phase unwrapping fails if movement > lambda / 4
+ Blast flyrock & loose dust destroy coherence
+ Fast brittle collapses exceed scan cycle rate
+ Atmospheric Phase Screen APS
+ Humidity and temperature shifts cause phase distortion
+ Requires complex Permanent Scatterer correction
+ Operational & Economic Friction
+ Prohibitive Capex ₹4 Cr - ₹10 Cr
+ Requires specialized geophysicists to interpret
+ Measures surface symptoms without causal awareness
 ```
 *Figure 14.1: Structural, operational, and physical limitations of GB-InSAR.*
 
@@ -441,21 +441,21 @@ Our SIH25071 system adopts the following scientific and architectural principles
 
 ```mermaid
 flowchart TD
-    subgraph Adopted GB-InSAR Concepts
-        C1[Spatial Grid Deformation Heatmaps]
-        C2[Line-of-Sight Metric Velocity Vectors]
-        C3[Rolling Time-Series Kinematics]
-        C4[Saito Inverse Velocity Failure Modeling]
-        C5[Multi-Temporal Anomaly Change-Point Detection]
-    end
+ subgraph Adopted GB-InSAR Concepts
+ C1[Spatial Grid Deformation Heatmaps]
+ C2[Line-of-Sight Metric Velocity Vectors]
+ C3[Rolling Time-Series Kinematics]
+ C4[Saito Inverse Velocity Failure Modeling]
+ C5[Multi-Temporal Anomaly Change-Point Detection]
+ end
 
-    subgraph SIH25071 Software Implementation
-        C1 --> S1[WebGPU 3D Digital Elevation Model Heatmap]
-        C2 --> S2[Sub-Pixel Optical Flow & mmWave Radar Fusion]
-        C3 --> S3[Temporal Feature Engineering Pipeline]
-        C4 --> S4[Physics-Informed ML Failure Horizon Estimator]
-        C5 --> S5[Isolation Forest & Dynamic Threshold Alerting]
-    end
+ subgraph SIH25071 Software Implementation
+ C1 --> S1[WebGPU 3D Digital Elevation Model Heatmap]
+ C2 --> S2[Sub-Pixel Optical Flow & mmWave Radar Fusion]
+ C3 --> S3[Temporal Feature Engineering Pipeline]
+ C4 --> S4[Physics-Informed ML Failure Horizon Estimator]
+ C5 --> S5[Isolation Forest & Dynamic Threshold Alerting]
+ end
 ```
 *Figure 16.1: Translation of GB-InSAR concepts into SIH25071 software modules.*
 
@@ -473,35 +473,35 @@ Our SIH25071 architecture bridges the critical gap in single-sensor monitoring b
 
 ```mermaid
 flowchart TD
-    subgraph Physical Ingestion Layer
-        I1[GB-InSAR / Vision Optical Flow Displacement]
-        I2[In-Situ Wireless LoRa MEMS Tilt Nodes]
-        I3[Vibrating-Wire Piezometer Pore Pressure]
-        I4[Micro-Weather: Rainfall Rate mm/hr]
-        I5[Blast Vibration Geophone: PPV mm/s]
-        I6[Drone 3D Photogrammetry DEM Mesh]
-    end
+ subgraph Physical Ingestion Layer
+ I1[GB-InSAR / Vision Optical Flow Displacement]
+ I2[In-Situ Wireless LoRa MEMS Tilt Nodes]
+ I3[Vibrating-Wire Piezometer Pore Pressure]
+ I4[Micro-Weather: Rainfall Rate mm/hr]
+ I5[Blast Vibration Geophone: PPV mm/s]
+ I6[Drone 3D Photogrammetry DEM Mesh]
+ end
 
-    subgraph Feature Engineering Core
-        I1 & I2 & I3 & I4 & I5 & I6 --> FE[Multi-Modal Feature Engineering]
-        FE --> F1[Displacement, Velocity & Inverse Velocity 1/v]
-        FE --> F2[Rainfall Infiltration & Antecedent Moisture Index]
-        FE --> F3[Dynamic Pore-Water Pressure Surges]
-        FE --> F4[Topographic Bench Slope Angle & Joint Dip]
-    end
+ subgraph Feature Engineering Core
+ I1 & I2 & I3 & I4 & I5 & I6 --> FE[Multi-Modal Feature Engineering]
+ FE --> F1[Displacement, Velocity & Inverse Velocity 1/v]
+ FE --> F2[Rainfall Infiltration & Antecedent Moisture Index]
+ FE --> F3[Dynamic Pore-Water Pressure Surges]
+ FE --> F4[Topographic Bench Slope Angle & Joint Dip]
+ end
 
-    subgraph Multi-Modal Machine Learning Layer
-        F1 & F2 & F3 & F4 --> ML[XGBoost & Physics-Informed Neural Network PINN]
-        ML --> OUT1[Rockfall Risk Probability: 0.0 to 1.0]
-        ML --> OUT2[Estimated Time-to-Failure Window: tf ± σ]
-        ML --> OUT3[3D Kinetic Rockfall Runout Cone]
-    end
+ subgraph Multi-Modal Machine Learning Layer
+ F1 & F2 & F3 & F4 --> ML[XGBoost & Physics-Informed Neural Network PINN]
+ ML --> OUT1[Rockfall Risk Probability: 0.0 to 1.0]
+ ML --> OUT2[Estimated Time-to-Failure Window: tf ± σ]
+ ML --> OUT3[3D Kinetic Rockfall Runout Cone]
+ end
 
-    subgraph Decision Support & Life-Safety Action
-        OUT1 & OUT2 & OUT3 --> XAI[SHAP Explainability Layer]
-        XAI --> DASH[3D WebGPU Digital Twin Dashboard]
-        OUT1 --> TARP[Sub-Second Multi-Channel Emergency TARP Dispatch]
-    end
+ subgraph Decision Support & Life-Safety Action
+ OUT1 & OUT2 & OUT3 --> XAI[SHAP Explainability Layer]
+ XAI --> DASH[3D WebGPU Digital Twin Dashboard]
+ OUT1 --> TARP[Sub-Second Multi-Channel Emergency TARP Dispatch]
+ end
 ```
 *Figure 17.1: Multi-modal fusion architecture combining GB-InSAR spatial kinematics with environmental and geotechnical triggers.*
 
@@ -537,19 +537,19 @@ Before a high-level hazard model issues a red alert, an unsupervised **Anomaly D
 
 ```text
 Normal Steady-State Creep:
-1.00 mm ──► 1.10 mm ──► 1.20 mm ──► 1.30 mm  (Linear Trend: Residuals < 0.05 mm)
+1.00 mm 1.10 mm 1.20 mm 1.30 mm (Linear Trend: Residuals < 0.05 mm)
 
 Abnormal Progressive Anomaly:
-1.00 mm ──► 1.20 mm ──► 1.80 mm ──► 4.50 mm ──► 9.00 mm  (Exponential Surge: Anomaly Flagged)
+1.00 mm 1.20 mm 1.80 mm 4.50 mm 9.00 mm (Exponential Surge: Anomaly Flagged)
 ```
 
 ```mermaid
 flowchart LR
-    RAW[Raw Sensor Time-Series] --> ISO[Isolation Forest / Autoencoder]
-    ISO --> RES[Reconstruction Error / Residuals Analysis]
-    RES --> THRESH{Exceeds 3σ Threshold?}
-    THRESH -->|No| NORM[Normal Baseline Logging]
-    THRESH -->|Yes| WARN[Anomaly Flagged: Camera Zoom & High-Rate Sampling]
+ RAW[Raw Sensor Time-Series] --> ISO[Isolation Forest / Autoencoder]
+ ISO --> RES[Reconstruction Error / Residuals Analysis]
+ RES --> THRESH{Exceeds 3σ Threshold?}
+ THRESH -->|No| NORM[Normal Baseline Logging]
+ THRESH -->|Yes| WARN[Anomaly Flagged: Camera Zoom & High-Rate Sampling]
 ```
 *Figure 19.1: Unsupervised anomaly detection workflow for early creep deviation.*
 
@@ -569,17 +569,17 @@ Our system utilizes SHAP tree explainers to decompose the exact percentage contr
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 91.4%)"]
-        B["📍 Location: Bench 3 - North Wall (Grid Sector NW-08)"]
-        C["⏱️ Estimated Failure Window: 42 ± 10 minutes"]
-        D["📊 Causal Factor Breakdown (SHAP Values):"]
-        D1["• Rapid Deformation Velocity Surge (+36% contribution)"]
-        D2["• High Cumulative 24-hr Rainfall (+27% contribution)"]
-        D3["• Piezometric Pore-Water Pressure Spike (+21% contribution)"]
-        D4["• Tension Crack Opening Rate > 6 mm/hr (+11% contribution)"]
-        D5["• Baseline Topographic Slope Factor (+5% contribution)"]
-    end
+ subgraph Explainable Alert Notification
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 91.4%)"]
+ B[" Location: Bench 3 - North Wall (Grid Sector NW-08)"]
+ C[" Estimated Failure Window: 42 ± 10 minutes"]
+ D[" Causal Factor Breakdown (SHAP Values):"]
+ D1["• Rapid Deformation Velocity Surge (+36% contribution)"]
+ D2["• High Cumulative 24-hr Rainfall (+27% contribution)"]
+ D3["• Piezometric Pore-Water Pressure Spike (+21% contribution)"]
+ D4["• Tension Crack Opening Rate > 6 mm/hr (+11% contribution)"]
+ D5["• Baseline Topographic Slope Factor (+5% contribution)"]
+ end
 ```
 *Figure 20.1: Conceptual explainable alert card displaying SHAP causal factor breakdown.*
 
@@ -591,14 +591,14 @@ The proposed GeoShield AI dashboard delivers a unified operational interface:
 
 ```mermaid
 flowchart TD
-    subgraph WebGPU 3D Digital Twin Interface
-        D1[Interactive 3D Pit Model with Dynamic Color-Coded Risk Heatmap]
-        D2[Real-Time Synchronized Plots: Displacement, Velocity, Inverse Velocity]
-        D3[Simulated 3D Kinetic Rockfall Bounce & Runout Cone Hazard Envelopes]
-        D4[Live Environmental & Subsurface Telemetry Stream Panel]
-        D5[SHAP Feature Importance & Causal Explainability Window]
-        D6[Automated DGMS-Compliant Incident & TARP Audit Logbook]
-    end
+ subgraph WebGPU 3D Digital Twin Interface
+ D1[Interactive 3D Pit Model with Dynamic Color-Coded Risk Heatmap]
+ D2[Real-Time Synchronized Plots: Displacement, Velocity, Inverse Velocity]
+ D3[Simulated 3D Kinetic Rockfall Bounce & Runout Cone Hazard Envelopes]
+ D4[Live Environmental & Subsurface Telemetry Stream Panel]
+ D5[SHAP Feature Importance & Causal Explainability Window]
+ D6[Automated DGMS-Compliant Incident & TARP Audit Logbook]
+ end
 ```
 *Figure 21.1: Functional architecture of the proposed 3D decision-support dashboard.*
 
@@ -629,14 +629,14 @@ Existing GB-InSAR systems are world-class **measurement instruments**, but they 
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ Traditional GB-InSAR Paradigm ]         [ Proposed SIH25071 Innovation ]                       |
-|  - Expensive Specialized Hardware           - Accessible Edge Vision + LoRa IoT Mesh               |
-|  - Surface Kinematics Only                  - Multi-Modal Fusion (Kinematics + Rain + Piezometers) |
-|  - Manual Geotechnical Interpretation       - Physics-Informed ML (Saito + Mohr-Coulomb)           |
-|  - Rigid Threshold Alarms                   - Explainable AI (SHAP) + Dynamic 3D Runout Cones      |
-|  - Manual Human Decision Chains             - Autonomous Sub-Second TARP Evacuation Dispatch       |
+| [ Traditional GB-InSAR Paradigm ] [ Proposed SIH25071 Innovation ] |
+| - Expensive Specialized Hardware - Accessible Edge Vision + LoRa IoT Mesh |
+| - Surface Kinematics Only - Multi-Modal Fusion (Kinematics + Rain + Piezometers) |
+| - Manual Geotechnical Interpretation - Physics-Informed ML (Saito + Mohr-Coulomb) |
+| - Rigid Threshold Alarms - Explainable AI (SHAP) + Dynamic 3D Runout Cones |
+| - Manual Human Decision Chains - Autonomous Sub-Second TARP Evacuation Dispatch |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -646,48 +646,48 @@ Existing GB-InSAR systems are world-class **measurement instruments**, but they 
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Edge Optical PTZ CCTV Cameras: 4K/30FPS]
-        S2[Wireless LoRa MEMS Tilt & Crack Nodes]
-        S3[Vibrating-Wire Borehole Piezometers]
-        S4[Micro-Weather Station: Rainfall Intensity mm/hr]
-        S5[Seismic Geophone: Blast Vibration PPV]
-        S6[Drone Photogrammetry 3D DEM / Mesh]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Edge Optical PTZ CCTV Cameras: 4K/30FPS]
+ S2[Wireless LoRa MEMS Tilt & Crack Nodes]
+ S3[Vibrating-Wire Borehole Piezometers]
+ S4[Micro-Weather Station: Rainfall Intensity mm/hr]
+ S5[Seismic Geophone: Blast Vibration PPV]
+ S6[Drone Photogrammetry 3D DEM / Mesh]
+ end
 
-    subgraph PROCESSING["2. Preprocessing & Feature Extraction"]
-        S1 --> P1[Sub-Pixel Optical Flow & Keypoint Tracking]
-        S2 & S3 --> P2[LoRa Mesh Telemetry Parser & Filter]
-        S4 & S5 --> P3[Environmental & Blast Synchronizer]
-        S6 --> P4[3D Digital Elevation Voxelization]
+ subgraph PROCESSING["2. Preprocessing & Feature Extraction"]
+ S1 --> P1[Sub-Pixel Optical Flow & Keypoint Tracking]
+ S2 & S3 --> P2[LoRa Mesh Telemetry Parser & Filter]
+ S4 & S5 --> P3[Environmental & Blast Synchronizer]
+ S6 --> P4[3D Digital Elevation Voxelization]
 
-        P1 & P2 & P3 & P4 --> FE[Unified Feature Engineering Engine]
-        FE --> F_KIN[Displacement, Velocity & Saito 1/v Trend]
-        FE --> F_ENV[Rainfall Infiltration & Pore Pressure Surge]
-        FE --> F_GEO[Slope Angle, Aspect & Joint Orientation]
-    end
+ P1 & P2 & P3 & P4 --> FE[Unified Feature Engineering Engine]
+ FE --> F_KIN[Displacement, Velocity & Saito 1/v Trend]
+ FE --> F_ENV[Rainfall Infiltration & Pore Pressure Surge]
+ FE --> F_GEO[Slope Angle, Aspect & Joint Orientation]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_KIN & F_ENV & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Estimated Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
-        
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Contributing Factor Breakdown]
-    end
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_KIN & F_ENV & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Estimated Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
+ 
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Contributing Factor Breakdown]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_EVAL{Automated TARP Level Evaluation}
-        
-        TARP_EVAL -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_EVAL -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_EVAL -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_EVAL -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
-        
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_EVAL{Automated TARP Level Evaluation}
+ 
+ TARP_EVAL -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_EVAL -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_EVAL -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_EVAL -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ 
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 24.1: Comprehensive end-to-end architecture of the proposed SIH25071 Rockfall Prediction and Alert System.*
 

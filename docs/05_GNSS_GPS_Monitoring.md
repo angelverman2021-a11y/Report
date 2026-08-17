@@ -1,10 +1,10 @@
 # Existing Technology 5: GNSS / GPS Slope Monitoring
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/05_GNSS_GPS_Monitoring.md`
 
 ---
@@ -24,22 +24,22 @@ This report evaluates GNSS monitoring as an **existing geodetic technology**. It
 
 ```mermaid
 flowchart TD
-    SAT[Multi-Constellation GNSS Satellites ~20,200 km Orbit] -->|L-Band Radio Signals| ROV[Rover GNSS Receivers on Mine Highwalls]
-    SAT -->|L-Band Radio Signals| REF[Stable Base Reference Station Outside Pit]
-    REF -->|RTCM Correction Stream via LoRa / Radio| ROV
-    ROV -->|Double-Differenced Carrier Phase Processing| POS[Millimeter 3D Coordinate Solutions]
-    POS -->|Displacement Time-Series Analysis| RISK[Geotechnical Stability Assessment]
+ SAT[Multi-Constellation GNSS Satellites ~20,200 km Orbit] -->|L-Band Radio Signals| ROV[Rover GNSS Receivers on Mine Highwalls]
+ SAT -->|L-Band Radio Signals| REF[Stable Base Reference Station Outside Pit]
+ REF -->|RTCM Correction Stream via LoRa / Radio| ROV
+ ROV -->|Double-Differenced Carrier Phase Processing| POS[Millimeter 3D Coordinate Solutions]
+ POS -->|Displacement Time-Series Analysis| RISK[Geotechnical Stability Assessment]
 ```
 *Figure 1.1: High-level operational workflow of differential GNSS slope monitoring.*
 
 ### Difference Between GPS and GNSS
 * **GPS (Global Positioning System):** The specific United States satellite navigation constellation (NAVSTAR) developed by the US Department of Defense.
 * **GNSS:** The comprehensive global ecosystem comprising all operational international satellite constellations:
-  1. **GPS (USA):** ~31 active satellites (L1, L2, L5 frequencies).
-  2. **GLONASS (Russia):** ~24 satellites (G1, G2, G3 frequencies).
-  3. **Galileo (European Union):** ~30 satellites (E1, E5a, E5b, E6 frequencies).
-  4. **BeiDou (BDS, China):** ~35 satellites (B1, B2, B3 frequencies).
-  5. **NavIC / IRNSS (India):** Regional Indian constellation (L5, S-band) optimized for the Indian subcontinent.
+ 1. **GPS (USA):** ~31 active satellites (L1, L2, L5 frequencies).
+ 2. **GLONASS (Russia):** ~24 satellites (G1, G2, G3 frequencies).
+ 3. **Galileo (European Union):** ~30 satellites (E1, E5a, E5b, E6 frequencies).
+ 4. **BeiDou (BDS, China):** ~35 satellites (B1, B2, B3 frequencies).
+ 5. **NavIC / IRNSS (India):** Regional Indian constellation (L5, S-band) optimized for the Indian subcontinent.
 
 ### Why is GNSS Considered a Geodetic Technique?
 In mining geotechnical engineering, geodetic monitoring refers to techniques that measure absolute or relative geometric coordinates $(X, Y, Z)$ referenced directly to a global or local terrestrial reference frame (such as ITRF2020 or WGS84). Unlike remote sensing radars that measure 1D line-of-sight range changes, GNSS provides **unambiguous, direct 3D vector displacement components**.
@@ -52,15 +52,15 @@ The end-to-end operational pipeline of GNSS slope monitoring progresses from sat
 
 ```mermaid
 flowchart TD
-    S1[1. GNSS Satellite Constellation] -->|Carrier Phase & Pseudorange Signals| S2[2. Highwall GNSS Antenna Reception]
-    S2 -->|Raw RINEX / Binary Observations| S3[3. Base Station Differential Correction]
-    S3 -->|RTK / Post-Processed Kinematic PPK| S4[4. Precise Absolute 3D Coordinates]
-    S4 -->|Local Topocentric Conversion| S5[5. Local ENU Coordinates East, North, Up]
-    S5 -->|Baseline Coordinate Differencing: t2 - t1| S6[6. 3D Displacement Vectors ΔE, ΔN, ΔU]
-    S6 -->|First & Second Temporal Derivatives| S7[7. Velocity & Acceleration Time-Series]
-    S7 -->|Multi-Point Spatial Cluster Correlation| S8[8. Spatial Deformation Trend Analysis]
-    S8 -->|Multi-Modal AI Fusion & Thresholds| S9[9. Geotechnical Instability Risk Assessment]
-    S9 -->|Trigger Action Response Plan| S10[10. Automated Warning & Life-Safety Alert]
+ S1[1. GNSS Satellite Constellation] -->|Carrier Phase & Pseudorange Signals| S2[2. Highwall GNSS Antenna Reception]
+ S2 -->|Raw RINEX / Binary Observations| S3[3. Base Station Differential Correction]
+ S3 -->|RTK / Post-Processed Kinematic PPK| S4[4. Precise Absolute 3D Coordinates]
+ S4 -->|Local Topocentric Conversion| S5[5. Local ENU Coordinates East, North, Up]
+ S5 -->|Baseline Coordinate Differencing: t2 - t1| S6[6. 3D Displacement Vectors ΔE, ΔN, ΔU]
+ S6 -->|First & Second Temporal Derivatives| S7[7. Velocity & Acceleration Time-Series]
+ S7 -->|Multi-Point Spatial Cluster Correlation| S8[8. Spatial Deformation Trend Analysis]
+ S8 -->|Multi-Modal AI Fusion & Thresholds| S9[9. Geotechnical Instability Risk Assessment]
+ S9 -->|Trigger Action Response Plan| S10[10. Automated Warning & Life-Safety Alert]
 ```
 *Figure 2.1: Step-by-step GNSS slope monitoring and risk assessment pipeline.*
 
@@ -87,17 +87,17 @@ where $\mathbf{R}$ is the coordinate rotation matrix defined by the local latitu
 $$\mathbf{R} = \begin{bmatrix} -\sin\lambda & \cos\lambda & 0 \\ -\sin\varphi\cos\lambda & -\sin\varphi\sin\lambda & \cos\varphi \\ \cos\varphi\cos\lambda & \cos\varphi\sin\lambda & \sin\varphi \end{bmatrix}$$
 
 ```
-                ▲ Local Up (U - Vertical Axis)
-                │
-                │     ● Monitored GNSS Point (E, N, U)
-                │    /│
-                │   / │  
-                │  /  │   ▲ Local North (N)
-                │ /   │  /
-                │/    │ /
-                └─────┼──────► Local East (E)
-                     /
-                    /
+ Local Up (U - Vertical Axis)
+ 
+ Monitored GNSS Point (E, N, U)
+ /
+ / 
+ / Local North (N)
+ / /
+ / /
+ Local East (E)
+ /
+ /
 ```
 *Figure 3.1: Local Topocentric East-North-Up (ENU) coordinate frame on a mine bench.*
 
@@ -113,7 +113,7 @@ By recording ENU positions continuously over time, the system compares the curre
 
 $$\Delta E(t) = E(t) - E_0, \quad \Delta N(t) = N(t) - N_0, \quad \Delta U(t) = U(t) - U_0$$
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following table represents **Synthetic / Illustrative Data** designed solely to explain 3D coordinate displacement calculations. It does not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic GNSS Coordinate Time Series
@@ -136,22 +136,22 @@ $$\Delta \mathbf{r}(t) = \begin{pmatrix} \Delta E(t) \\ \Delta N(t) \\ \Delta U(
 
 ```mermaid
 flowchart LR
-    A[Displacement Components ΔE, ΔN, ΔU] --> B[Horizontal Displacement: D_H = sqrt ΔE² + ΔN²]
-    A --> C[Vertical Subsidence: D_V = ΔU]
-    A --> D[Total 3D Spatial Magnitude: D_3D = sqrt ΔE² + ΔN² + ΔU²]
-    B & C & D --> E[Kinematic Movement Direction Vector: Azimuth & Plunge]
+ A[Displacement Components ΔE, ΔN, ΔU] --> B[Horizontal Displacement: D_H = sqrt ΔE² + ΔN²]
+ A --> C[Vertical Subsidence: D_V = ΔU]
+ A --> D[Total 3D Spatial Magnitude: D_3D = sqrt ΔE² + ΔN² + ΔU²]
+ B & C & D --> E[Kinematic Movement Direction Vector: Azimuth & Plunge]
 ```
 *Figure 5.1: Derivation of horizontal, vertical, and total 3D scalar displacement magnitudes.*
 
 ### Mathematical Formulations:
 1. **Total 3D Spatial Displacement Magnitude ($D_{\text{3D}}$):**
-   $$D_{\text{3D}}(t) = \sqrt{(\Delta E(t))^2 + (\Delta N(t))^2 + (\Delta U(t))^2}$$
+ $$D_{\text{3D}}(t) = \sqrt{(\Delta E(t))^2 + (\Delta N(t))^2 + (\Delta U(t))^2}$$
 2. **Horizontal Displacement Magnitude ($D_{\text{H}}$):**
-   $$D_{\text{H}}(t) = \sqrt{(\Delta E(t))^2 + (\Delta N(t))^2}$$
+ $$D_{\text{H}}(t) = \sqrt{(\Delta E(t))^2 + (\Delta N(t))^2}$$
 3. **Horizontal Movement Azimuth ($\theta_{\text{azimuth}}$):**
-   $$\theta_{\text{azimuth}} = \text{atan2}(\Delta E, \Delta N) \quad (\text{indicates sliding direction in degrees from True North})$$
+ $$\theta_{\text{azimuth}} = \text{atan2}(\Delta E, \Delta N) \quad (\text{indicates sliding direction in degrees from True North})$$
 4. **Dip / Plunge Angle of Motion ($\beta_{\text{plunge}}$):**
-   $$\beta_{\text{plunge}} = \arctan\left(\frac{|\Delta U|}{D_{\text{H}}}\right) \quad (\text{identifies whether motion is toppling, planar sliding, or rotational})$$
+ $$\beta_{\text{plunge}} = \arctan\left(\frac{|\Delta U|}{D_{\text{H}}}\right) \quad (\text{identifies whether motion is toppling, planar sliding, or rotational})$$
 
 ---
 
@@ -161,29 +161,29 @@ A production-grade GNSS monitoring deployment comprises five key infrastructure 
 
 ```mermaid
 flowchart TD
-    subgraph Space Segment
-        SAT[Multi-Constellation GNSS Satellites: GPS / GLONASS / Galileo / NavIC]
-    end
+ subgraph Space Segment
+ SAT[Multi-Constellation GNSS Satellites: GPS / GLONASS / Galileo / NavIC]
+ end
 
-    subgraph Field Hardware Segment
-        SAT -->|L1/L2/L5 Signals| BASE[Reference Base Station: Solid Bedrock Outside Pit]
-        SAT -->|L1/L2/L5 Signals| ROV1[Rover Node 1: Highwall Crest]
-        SAT -->|L1/L2/L5 Signals| ROV2[Rover Node 2: Fault Shear Zone]
-        SAT -->|L1/L2/L5 Signals| ROV3[Rover Node 3: Overburden Dump]
-    end
+ subgraph Field Hardware Segment
+ SAT -->|L1/L2/L5 Signals| BASE[Reference Base Station: Solid Bedrock Outside Pit]
+ SAT -->|L1/L2/L5 Signals| ROV1[Rover Node 1: Highwall Crest]
+ SAT -->|L1/L2/L5 Signals| ROV2[Rover Node 2: Fault Shear Zone]
+ SAT -->|L1/L2/L5 Signals| ROV3[Rover Node 3: Overburden Dump]
+ end
 
-    subgraph Telemetry Network
-        BASE -->|RTCM 3.x Correction Stream via LoRa / 4G LTE| ROV1 & ROV2 & ROV3
-        ROV1 & ROV2 & ROV3 -->|Calculated 3D Position Stream NMEA/JSON| GATEWAY[Solar Pit-Rim Gateway]
-    end
+ subgraph Telemetry Network
+ BASE -->|RTCM 3.x Correction Stream via LoRa / 4G LTE| ROV1 & ROV2 & ROV3
+ ROV1 & ROV2 & ROV3 -->|Calculated 3D Position Stream NMEA/JSON| GATEWAY[Solar Pit-Rim Gateway]
+ end
 
-    subgraph Compute & Decision Core
-        GATEWAY -->|MQTT / WebSockets| SVR[Edge AI Processing Server]
-        SVR -->|Kalman Filtering & Coordinates| DB[(Time-Series InfluxDB)]
-        DB --> AI[XGBoost & PINN AI Engine]
-        AI --> DASH[3D WebGPU Digital Twin Dashboard]
-        AI --> ALARM[Autonomous Multi-Channel TARP Sirens & Radios]
-    end
+ subgraph Compute & Decision Core
+ GATEWAY -->|MQTT / WebSockets| SVR[Edge AI Processing Server]
+ SVR -->|Kalman Filtering & Coordinates| DB[(Time-Series InfluxDB)]
+ DB --> AI[XGBoost & PINN AI Engine]
+ AI --> DASH[3D WebGPU Digital Twin Dashboard]
+ AI --> ALARM[Autonomous Multi-Channel TARP Sirens & Radios]
+ end
 ```
 *Figure 6.1: End-to-end hardware, telemetry, and compute architecture of an open-pit GNSS monitoring system.*
 
@@ -203,18 +203,18 @@ Because these atmospheric and orbital errors are spatially correlated over dista
 
 ```text
 Satellite Constellation
-        │
-        ├────────────────────────────────┐
-        ▼                                ▼
-[Base Reference Station]      [Rover Monitoring Point]
-(Fixed on solid ground)       (Installed on highwall)
-        │                                │
-Calculates Real-Time Error               │
-ΔError = Position_known - Position_obs   │
-        │                                │
-        └───────► [RTCM Correction] ─────┘
-                         │
-        Eliminates 99% of atmospheric errors!
+ 
+ 
+ 
+[Base Reference Station] [Rover Monitoring Point]
+(Fixed on solid ground) (Installed on highwall)
+ 
+Calculates Real-Time Error 
+ΔError = Position_known - Position_obs 
+ 
+ [RTCM Correction] 
+ 
+ Eliminates 99% of atmospheric errors!
 ```
 
 ---
@@ -226,10 +226,10 @@ Standard GPS measures the **Pseudorange** (using the coarse C/A code, where one 
 
 ```mermaid
 flowchart LR
-    A[Satellite 1 & 2 Signals] --> B[Double-Differenced Carrier Phase Observation]
-    B --> C[Integer Ambiguity Resolution LAMBDA Method]
-    C --> D[Carrier Wave Fraction Locking: ± 1-2 mm Phase Tracking]
-    D --> E[Real-Time Sub-Centimeter 3D Position Solution]
+ A[Satellite 1 & 2 Signals] --> B[Double-Differenced Carrier Phase Observation]
+ B --> C[Integer Ambiguity Resolution LAMBDA Method]
+ C --> D[Carrier Wave Fraction Locking: ± 1-2 mm Phase Tracking]
+ D --> E[Real-Time Sub-Centimeter 3D Position Solution]
 ```
 *Figure 8.1: RTK carrier-phase double-differencing and integer ambiguity resolution.*
 
@@ -266,38 +266,38 @@ Continuous GNSS monitoring produces individual component time-series curves that
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: GNSS 3D Displacement Components vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 20]
-    y-axis "Displacement (mm)" 0 --> 30
-    line [0.0, 3.0, 6.0, 11.0, 20.0]
-    line [0.0, 2.0, 4.0, 8.0, 14.0]
-    line [0.0, 1.0, 2.0, 5.0, 9.0]
+ title "Illustrative Example: GNSS 3D Displacement Components vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 20]
+ y-axis "Displacement (mm)" 0 --> 30
+ line [0.0, 3.0, 6.0, 11.0, 20.0]
+ line [0.0, 2.0, 4.0, 8.0, 14.0]
+ line [0.0, 1.0, 2.0, 5.0, 9.0]
 ```
 *Figure 10.1: Illustrative time-series curves showing East ($\Delta E$, red), North ($\Delta N$, orange), and Vertical ($|\Delta U|$, yellow) displacement.*
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Illustrative Example: Total 3D Spatial Displacement (D_3D) vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 5, 10, 15, 20]
-    y-axis "Total 3D Displacement (mm)" 0 --> 30
-    line [0.0, 3.74, 7.48, 14.50, 26.02]
+ title "Illustrative Example: Total 3D Spatial Displacement (D_3D) vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 5, 10, 15, 20]
+ y-axis "Total 3D Displacement (mm)" 0 --> 30
+ line [0.0, 3.74, 7.48, 14.50, 26.02]
 ```
 *Figure 10.2: Illustrative total 3D scalar displacement surge.*
 
@@ -307,27 +307,27 @@ xychart-beta
 
 ### Formulations:
 1. **Component Velocity ($v_E, v_N, v_U$):**
-   $$v_E(t) = \frac{\Delta E(t_2) - \Delta E(t_1)}{t_2 - t_1}, \quad v_N(t) = \frac{\Delta N(t_2) - \Delta N(t_1)}{t_2 - t_1}, \quad v_U(t) = \frac{\Delta U(t_2) - \Delta U(t_1)}{t_2 - t_1}$$
+ $$v_E(t) = \frac{\Delta E(t_2) - \Delta E(t_1)}{t_2 - t_1}, \quad v_N(t) = \frac{\Delta N(t_2) - \Delta N(t_1)}{t_2 - t_1}, \quad v_U(t) = \frac{\Delta U(t_2) - \Delta U(t_1)}{t_2 - t_1}$$
 2. **Total 3D Velocity Magnitude ($v_{\text{3D}}$):**
-   $$v_{\text{3D}}(t) = \sqrt{v_E(t)^2 + v_N(t)^2 + v_U(t)^2}$$
+ $$v_{\text{3D}}(t) = \sqrt{v_E(t)^2 + v_N(t)^2 + v_U(t)^2}$$
 3. **Acceleration Magnitude ($a_{\text{3D}}$):**
-   $$a_{\text{3D}}(t) = \frac{v_{\text{3D}}(t_2) - v_{\text{3D}}(t_1)}{t_2 - t_1}$$
+ $$a_{\text{3D}}(t) = \frac{v_{\text{3D}}(t_2) - v_{\text{3D}}(t_1)}{t_2 - t_1}$$
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: GNSS 3D Velocity Acceleration Surge (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [5, 10, 15, 20]
-    y-axis "3D Velocity (mm/day)" 0.0 --> 2.5
-    line [0.75, 0.75, 1.40, 2.30]
+ title "Illustrative Example: GNSS 3D Velocity Acceleration Surge (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [5, 10, 15, 20]
+ y-axis "3D Velocity (mm/day)" 0.0 --> 2.5
+ line [0.75, 0.75, 1.40, 2.30]
 ```
 *Figure 11.1: Illustrative velocity curve demonstrating acceleration in tertiary creep.*
 
@@ -337,12 +337,12 @@ xychart-beta
 
 ```mermaid
 flowchart LR
-    RAW[Raw Real-Time GNSS Coordinates] --> KALMAN[Edge Adaptive Kalman Filter]
-    KALMAN --> RES[Kinematic Residuals & Velocity Calculation]
-    RES --> EVAL{Statistical Anomaly Evaluation}
-    EVAL -->|Velocity <= 1.0 mm/day| NORM[🟢 Normal State: Background Creep]
-    EVAL -->|1.0 < Velocity <= 5.0 mm/day| WATCH[🟡 Watch State: Secondary Creep]
-    EVAL -->|Velocity > 5.0 mm/day OR a > 0| WARN[🔴 Critical Anomaly: Tertiary Creep]
+ RAW[Raw Real-Time GNSS Coordinates] --> KALMAN[Edge Adaptive Kalman Filter]
+ KALMAN --> RES[Kinematic Residuals & Velocity Calculation]
+ RES --> EVAL{Statistical Anomaly Evaluation}
+ EVAL -->|Velocity <= 1.0 mm/day| NORM[[NORMAL / GREEN] Normal State: Background Creep]
+ EVAL -->|1.0 < Velocity <= 5.0 mm/day| WATCH[[ADVISORY / YELLOW] Watch State: Secondary Creep]
+ EVAL -->|Velocity > 5.0 mm/day OR a > 0| WARN[[CRITICAL / RED] Critical Anomaly: Tertiary Creep]
 ```
 *Figure 12.1: Statistical anomaly detection workflow on GNSS coordinate streams.*
 
@@ -357,26 +357,26 @@ flowchart LR
 Rather than treating GNSS receivers as isolated instruments, open-pit mines deploy a spatial cluster of points across active benches:
 
 ```
-                  North Crest
-                P1 ●──────────● P2
-                  \            /
-                   \  Fault   /
-                    \ Zone   /
-                  P3 ●──────● P4
-                     │
-                     ▼ Active Bench
-                     ● P5
+ North Crest
+ P1 P2
+ \ /
+ \ Fault /
+ \ Zone /
+ P3 P4
+ 
+ Active Bench
+ P5
 ```
 
 ### Illustrative Multi-Point Status Matrix
 
 | Monitoring Point | Target Highwall Location | East Rate ($\text{mm/day}$) | North Rate ($\text{mm/day}$) | Vertical Rate ($\text{mm/day}$) | Total 3D Rate ($\text{mm/day}$) | Active Risk Status |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
-| **$P_1$** | North-East Stable Crest | +0.2 | +0.1 | -0.1 | 0.24 | 🟢 **Low / Stable** |
-| **$P_2$** | North-East Stable Crest | +0.3 | +0.2 | -0.2 | 0.41 | 🟢 **Low / Stable** |
-| **$P_3$** | Central Bench (Near Fault) | +4.2 | +3.1 | -2.8 | 5.92 | 🟠 **High / Warning** |
-| **$P_4$** | Central Bench (Active Shear) | +12.5 | +8.9 | -6.4 | 16.63 | 🔴 **Critical / Evacuate** |
-| **$P_5$** | Lower Bench Toe | +1.8 | +1.2 | +0.8 | 2.31 | 🟡 **Medium / Watch** |
+| **$P_1$** | North-East Stable Crest | +0.2 | +0.1 | -0.1 | 0.24 | [NORMAL / GREEN] **Low / Stable** |
+| **$P_2$** | North-East Stable Crest | +0.3 | +0.2 | -0.2 | 0.41 | [NORMAL / GREEN] **Low / Stable** |
+| **$P_3$** | Central Bench (Near Fault) | +4.2 | +3.1 | -2.8 | 5.92 | [WARNING / ORANGE] **High / Warning** |
+| **$P_4$** | Central Bench (Active Shear) | +12.5 | +8.9 | -6.4 | 16.63 | [CRITICAL / RED] **Critical / Evacuate** |
+| **$P_5$** | Lower Bench Toe | +1.8 | +1.2 | +0.8 | 2.31 | [ADVISORY / YELLOW] **Medium / Watch** |
 
 ---
 
@@ -393,22 +393,22 @@ Rather than treating GNSS receivers as isolated instruments, open-pit mines depl
 
 ```mermaid
 mindmap
-  root((GNSS Mining Limitations))
-    Spatial Point Sparsity
-      Only monitors exact spots where masts are bolted
-      Completely blind to rockfalls between stations
-    Deep Pit Satellite Occlusion
-      Steep 70° highwalls block 50% of sky constellation
-      Poor Dilution of Precision DOP inside deep pits
-    Multi-Path Reflection Errors
-      Microwaves bounce off mineralized rock faces
-      Creates false displacement noise of ±20 mm
-    Operational & Blasting Hazards
-      Masts shattered by blasting flyrock
-      Heavy solar panels covered by coal / ore dust
-    High Deployment Capex
-      ₹1.5L - ₹4.0L per node
-      Deploying 20 nodes costs ₹50 Lakh+
+ root((GNSS Mining Limitations))
+ Spatial Point Sparsity
+ Only monitors exact spots where masts are bolted
+ Completely blind to rockfalls between stations
+ Deep Pit Satellite Occlusion
+ Steep 70° highwalls block 50% of sky constellation
+ Poor Dilution of Precision DOP inside deep pits
+ Multi-Path Reflection Errors
+ Microwaves bounce off mineralized rock faces
+ Creates false displacement noise of ±20 mm
+ Operational & Blasting Hazards
+ Masts shattered by blasting flyrock
+ Heavy solar panels covered by coal / ore dust
+ High Deployment Capex
+ ₹1.5L - ₹4.0L per node
+ Deploying 20 nodes costs ₹50 Lakh+
 ```
 *Figure 15.1: Structural, geometric, and operational limitations of GNSS monitoring in open-cast mines.*
 
@@ -459,14 +459,14 @@ To build our SIH25071 prototype, we evaluated verified open-source GNSS processi
 
 ```mermaid
 flowchart LR
-    A[Low-Cost Multi-Band GNSS Node] -->|NMEA $GNGGA / RTCM| B[Edge LoRa Gateway]
-    B -->|MQTT JSON Stream| C[Data Preprocessing & Kalman Filtering]
-    C -->|ECEF to Local ENU Matrix| D[Local Metric Coordinates E, N, U]
-    D -->|Coordinate Subtraction| E[Displacement Vectors ΔE, ΔN, ΔU]
-    E -->|Temporal Rolling Derivatives| F[Velocity v & Acceleration a]
-    F -->|Inter-Node Baseline Differencing| G[Relative Shear Strain ΔL_ij]
-    G --> H[Multi-Modal Feature Synchronization Engine]
-    H --> I[AI Risk Prediction & TARP Alerts]
+ A[Low-Cost Multi-Band GNSS Node] -->|NMEA $GNGGA / RTCM| B[Edge LoRa Gateway]
+ B -->|MQTT JSON Stream| C[Data Preprocessing & Kalman Filtering]
+ C -->|ECEF to Local ENU Matrix| D[Local Metric Coordinates E, N, U]
+ D -->|Coordinate Subtraction| E[Displacement Vectors ΔE, ΔN, ΔU]
+ E -->|Temporal Rolling Derivatives| F[Velocity v & Acceleration a]
+ F -->|Inter-Node Baseline Differencing| G[Relative Shear Strain ΔL_ij]
+ G --> H[Multi-Modal Feature Synchronization Engine]
+ H --> I[AI Risk Prediction & TARP Alerts]
 ```
 *Figure 19.1: Edge-to-cloud data processing pipeline for GNSS sensor streams.*
 
@@ -478,22 +478,22 @@ GNSS and Satellite InSAR have complementary physical characteristics:
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                  THE GNSS + InSAR FUSION ADVANTAGE                                |
+| THE GNSS + InSAR FUSION ADVANTAGE |
 +---------------------------------------------------------------------------------------------------+
-|  [ SATELLITE InSAR ]            +  [ FIELD GNSS NODES ]            =  [ UNIFIED GEODETIC MESH ]   |
-|  - Continuous Spatial Coverage     - Continuous Temporal Stream (1 Hz)- 24/7 Total Highwall Safety|
-|  - 1D Line-of-Sight Vector         - Direct 3D Coordinate Vector (ENU)- Multi-Vector Resolved     |
-|  - Subject to Atmospheric Delay    - Absolute Ground-Truth Anchor     - Atmospheric Calibrated    |
+| [ SATELLITE InSAR ] + [ FIELD GNSS NODES ] = [ UNIFIED GEODETIC MESH ] |
+| - Continuous Spatial Coverage - Continuous Temporal Stream (1 Hz)- 24/7 Total Highwall Safety|
+| - 1D Line-of-Sight Vector - Direct 3D Coordinate Vector (ENU)- Multi-Vector Resolved |
+| - Subject to Atmospheric Delay - Absolute Ground-Truth Anchor - Atmospheric Calibrated |
 +---------------------------------------------------------------------------------------------------+
 ```
 
 ```mermaid
 flowchart TD
-    SAT[Satellite InSAR: Regional Subsidence Raster] --> FUSE[Geodetic Fusion & Ray-Casting Core]
-    GNSS[GNSS Network: Precise 3D Point Vectors E, N, U] --> FUSE
-    FUSE -->|1. GNSS Calibrates InSAR Atmospheric Bias| CALIB[Calibrated Wide-Area Deformation Map]
-    FUSE -->|2. InSAR Interpolates Spatial Gaps Between GNSS Points| FULL[Full-Field 3D Vector Surface Mesh]
-    FULL --> AI[Physics-Informed Neural Network PINN Engine]
+ SAT[Satellite InSAR: Regional Subsidence Raster] --> FUSE[Geodetic Fusion & Ray-Casting Core]
+ GNSS[GNSS Network: Precise 3D Point Vectors E, N, U] --> FUSE
+ FUSE -->|1. GNSS Calibrates InSAR Atmospheric Bias| CALIB[Calibrated Wide-Area Deformation Map]
+ FUSE -->|2. InSAR Interpolates Spatial Gaps Between GNSS Points| FULL[Full-Field 3D Vector Surface Mesh]
+ FULL --> AI[Physics-Informed Neural Network PINN Engine]
 ```
 *Figure 20.1: Geodetic fusion workflow combining spaceborne InSAR and terrestrial GNSS.*
 
@@ -503,26 +503,26 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Multi-Modal Inputs
-        I1[GNSS Network: 3D Point Coordinates & Velocities]
-        I2[Satellite InSAR: Regional Subsidence Maps]
-        I3[Edge PTZ Cameras: Sub-Pixel Optical Flow]
-        I4[Micro-Weather Station: Rainfall Rate mm/hr]
-        I5[Vibrating-Wire Piezometer: Pore-Water Pressure]
-        I6[Blast Geophone Array: Peak Particle Velocity PPV]
-    end
+ subgraph Multi-Modal Inputs
+ I1[GNSS Network: 3D Point Coordinates & Velocities]
+ I2[Satellite InSAR: Regional Subsidence Maps]
+ I3[Edge PTZ Cameras: Sub-Pixel Optical Flow]
+ I4[Micro-Weather Station: Rainfall Rate mm/hr]
+ I5[Vibrating-Wire Piezometer: Pore-Water Pressure]
+ I6[Blast Geophone Array: Peak Particle Velocity PPV]
+ end
 
-    I1 & I2 & I3 & I4 & I5 & I6 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ I1 & I2 & I3 & I4 & I5 & I6 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[XGBoost & Physics-Informed Neural Network PINN Core]
+ FUSION --> ML[XGBoost & Physics-Informed Neural Network PINN Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Explainability Diagnostic Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Explainability Diagnostic Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 21.1: Master multi-sensor data fusion architecture for SIH25071.*
 
@@ -552,9 +552,9 @@ $$L_{ij}(t) = \sqrt{(E_j(t) - E_i(t))^2 + (N_j(t) - N_i(t))^2 + (U_j(t) - U_i(t)
 $$\Delta L_{ij}(t) = L_{ij}(t) - L_{ij}(0)$$
 
 ```
-Node P1 (Stable Crest) ═════════ Baseline L_12 ═════════► Node P2 (Moving Block)
-                        [Tension Crack Dilates]
-                        ΔL_12 increases rapidly ➔ Shear Strain Warning!
+Node P1 (Stable Crest) Baseline L_12 Node P2 (Moving Block)
+ [Tension Crack Dilates]
+ ΔL_12 increases rapidly Shear Strain Warning!
 ```
 
 * **Dilation ($\Delta L_{ij} > 0$):** Indicates opening of tension cracks between nodes.
@@ -566,12 +566,12 @@ Node P1 (Stable Crest) ═════════ Baseline L_12 ═════
 
 ```mermaid
 flowchart LR
-    RAW[Raw 3D GNSS Stream] --> KF[Adaptive Kalman Filter Residuals]
-    KF --> IF[Isolation Forest / Autoencoder Layer]
-    IF --> SCORE[Anomaly Score S_anomaly in 0.0 - 1.0]
-    SCORE --> DEC{Score > 0.75?}
-    DEC -->|No| NORM[Normal Baseline Operation]
-    DEC -->|Yes| WARN[Flag Anomaly: Trigger Camera Lock & High-Rate Sampling]
+ RAW[Raw 3D GNSS Stream] --> KF[Adaptive Kalman Filter Residuals]
+ KF --> IF[Isolation Forest / Autoencoder Layer]
+ IF --> SCORE[Anomaly Score S_anomaly in 0.0 - 1.0]
+ SCORE --> DEC{Score > 0.75?}
+ DEC -->|No| NORM[Normal Baseline Operation]
+ DEC -->|Yes| WARN[Flag Anomaly: Trigger Camera Lock & High-Rate Sampling]
 ```
 *Figure 24.1: Unsupervised anomaly detection workflow on GNSS coordinate residuals.*
 
@@ -586,17 +586,17 @@ flowchart LR
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 92.6%)"]
-        B["📍 Location: North Highwall Sector - GNSS Node Cluster P3/P4"]
-        C["⏱️ Predicted Failure Window: 32 ± 8 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid 3D GNSS Velocity Acceleration (16.6 mm/day): +35% contribution"]
-        D2["• Inter-Node Baseline Dilation (P3-P4 opening > 8 mm): +23% contribution"]
-        D3["• Heavy Antecedent Rainfall (42 mm/24hr): +20% contribution"]
-        D4["• Vibrating-Wire Piezometer Pressure Surge (15 kPa): +14% contribution"]
-        D5["• Topographic Highwall Slope Angle (72°): +8% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 92.6%)"]
+ B[" Location: North Highwall Sector - GNSS Node Cluster P3/P4"]
+ C[" Predicted Failure Window: 32 ± 8 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid 3D GNSS Velocity Acceleration (16.6 mm/day): +35% contribution"]
+ D2["• Inter-Node Baseline Dilation (P3-P4 opening > 8 mm): +23% contribution"]
+ D3["• Heavy Antecedent Rainfall (42 mm/24hr): +20% contribution"]
+ D4["• Vibrating-Wire Piezometer Pressure Surge (15 kPa): +14% contribution"]
+ D5["• Topographic Highwall Slope Angle (72°): +8% contribution"]
+ end
 ```
 *Figure 25.1: Conceptual SHAP explainable alert diagnostic card for GNSS alerts.*
 
@@ -606,14 +606,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Single-Pane-of-Glass 3D Dashboard
-        D1[Interactive WebGPU 3D Mine Canvas with Color-Coded GNSS Node Status]
-        D2[Real-Time Synchronized Coordinate Plots: East, North, Up & 3D Magnitude]
-        D3[Inter-Node Baseline Strain Vector Network Display]
-        D4[Live Sensor Telemetry Stream: Weather, Piezometers, Blast PPV]
-        D5[SHAP Feature Attribution & Geotechnical Explanation Card]
-        D6[One-Click DGMS Statutory Compliance & TARP Audit Report Generator]
-    end
+ subgraph Single-Pane-of-Glass 3D Dashboard
+ D1[Interactive WebGPU 3D Mine Canvas with Color-Coded GNSS Node Status]
+ D2[Real-Time Synchronized Coordinate Plots: East, North, Up & 3D Magnitude]
+ D3[Inter-Node Baseline Strain Vector Network Display]
+ D4[Live Sensor Telemetry Stream: Weather, Piezometers, Blast PPV]
+ D5[SHAP Feature Attribution & Geotechnical Explanation Card]
+ D6[One-Click DGMS Statutory Compliance & TARP Audit Report Generator]
+ end
 ```
 *Figure 26.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -623,18 +623,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Raw GNSS Position Solution] --> B[Coordinate Transformation to ENU]
-    B --> C[3D Displacement & Velocity Calculation]
-    C --> D{Velocity Threshold Exceeded?}
+ A[Raw GNSS Position Solution] --> B[Coordinate Transformation to ENU]
+ B --> C[3D Displacement & Velocity Calculation]
+ C --> D{Velocity Threshold Exceeded?}
 
-    D -->|v < 1.0 mm/day| T1[🟢 TARP Level 1: Normal Shift Logging]
-    D -->|1.0 <= v < 5.0 mm/day| T2[🟡 TARP Level 2: Advisory to Geotechnical Officer]
-    D -->|5.0 <= v < 20.0 mm/day| T3[🟠 TARP Level 3: Warning - Machinery Relocation]
-    D -->|v >= 20.0 mm/day OR tf < 30 min| T4[🔴 TARP Level 4: CRITICAL EMERGENCY DISPATCH]
+ D -->|v < 1.0 mm/day| T1[[NORMAL / GREEN] TARP Level 1: Normal Shift Logging]
+ D -->|1.0 <= v < 5.0 mm/day| T2[[ADVISORY / YELLOW] TARP Level 2: Advisory to Geotechnical Officer]
+ D -->|5.0 <= v < 20.0 mm/day| T3[[WARNING / ORANGE] TARP Level 3: Warning - Machinery Relocation]
+ D -->|v >= 20.0 mm/day OR tf < 30 min| T4[[CRITICAL / RED] TARP Level 4: CRITICAL EMERGENCY DISPATCH]
 
-    T4 -->|Sub-Second Trigger <1.0s| ACT1[Sound 120 dB Pit Sirens]
-    T4 -->|Sub-Second Trigger <1.0s| ACT2[Synthesized VHF Walkie-Talkie Broadcast]
-    T4 -->|Sub-Second Trigger <1.0s| ACT3[SMS / WhatsApp Push to All Personnel]
+ T4 -->|Sub-Second Trigger <1.0s| ACT1[Sound 120 dB Pit Sirens]
+ T4 -->|Sub-Second Trigger <1.0s| ACT2[Synthesized VHF Walkie-Talkie Broadcast]
+ T4 -->|Sub-Second Trigger <1.0s| ACT3[SMS / WhatsApp Push to All Personnel]
 ```
 *Figure 27.1: Automated TARP escalation logic based on GNSS kinematic velocity.*
 
@@ -644,13 +644,13 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE GNSS LIMITATION ]        ──► High precision, but discrete point blindness in gaps.  |
-|  [ REMOTE RADAR / InSAR LIMITATION ]   ──► Full coverage, but 1D line-of-sight & weather noise.   |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses low-cost LoRa RTK GNSS point anchors with        |
-|                                            Edge Computer Vision & InSAR, providing full-field 3D  |
-|                                            kinematics with zero spatial blind spots!              |
+| [ STANDALONE GNSS LIMITATION ] High precision, but discrete point blindness in gaps. |
+| [ REMOTE RADAR / InSAR LIMITATION ] Full coverage, but 1D line-of-sight & weather noise. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses low-cost LoRa RTK GNSS point anchors with |
+| Edge Computer Vision & InSAR, providing full-field 3D |
+| kinematics with zero spatial blind spots! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -685,49 +685,49 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph INGESTION["1. Multi-Modal Sensor Ingestion Layer"]
-        S1[Low-Cost LoRa Multi-Band RTK GNSS Network]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS]
-        S3[Wireless LoRa MEMS Tilt & Crack Nodes]
-        S4[Vibrating-Wire Borehole Piezometers]
-        S5[Micro-Weather Station: Rain & Humidity]
-        S6[Drone Photogrammetry 3D DEM Mesh]
-    end
+ subgraph INGESTION["1. Multi-Modal Sensor Ingestion Layer"]
+ S1[Low-Cost LoRa Multi-Band RTK GNSS Network]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS]
+ S3[Wireless LoRa MEMS Tilt & Crack Nodes]
+ S4[Vibrating-Wire Borehole Piezometers]
+ S5[Micro-Weather Station: Rain & Humidity]
+ S6[Drone Photogrammetry 3D DEM Mesh]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Calibration"]
-        S1 --> P1[RTKLIB Double-Differencing & ENU Conversion]
-        S2 --> P2[Sub-Pixel Optical Flow & Keypoint Tracking]
-        S3 & S4 --> P3[LoRa Telemetry Parsing & Filtering]
-        S5 --> P4[Rainfall Infiltration & Antecedent Moisture Index]
-        S6 --> P5[3D Voxel Coordinate Georeferencing]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Calibration"]
+ S1 --> P1[RTKLIB Double-Differencing & ENU Conversion]
+ S2 --> P2[Sub-Pixel Optical Flow & Keypoint Tracking]
+ S3 & S4 --> P3[LoRa Telemetry Parsing & Filtering]
+ S5 --> P4[Rainfall Infiltration & Antecedent Moisture Index]
+ S6 --> P5[3D Voxel Coordinate Georeferencing]
 
-        P1 & P2 & P3 & P4 & P5 --> FE[Unified Feature Engineering Pipeline]
-        FE --> F_3D[3D Displacement, Velocity, Acceleration & Strain]
-        FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
-        FE --> F_GEO[Topographic Slope Angle & Discontinuity Vectors]
-    end
+ P1 & P2 & P3 & P4 & P5 --> FE[Unified Feature Engineering Pipeline]
+ FE --> F_3D[3D Displacement, Velocity, Acceleration & Strain]
+ FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
+ FE --> F_GEO[Topographic Slope Angle & Discontinuity Vectors]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_3D & F_ENV & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_3D & F_ENV & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Breakdown Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Breakdown Card]
+ end
 
-    subgraph DELIVERY["4. Visualization & Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph DELIVERY["4. Visualization & Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 31.1: Master architecture of the proposed AI-based rockfall prediction and early-warning platform.*
 

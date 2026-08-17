@@ -1,10 +1,10 @@
 # Existing Technology 10: Extensometers
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/10_Extensometers.md`
 
 ---
@@ -24,12 +24,12 @@ An **extensometer** is a high-precision geotechnical sensor that measures the ch
 
 ```mermaid
 flowchart TD
-    ANCHOR_STABLE[Stable Anchor Fixed in Solid Rock Mass] --> SENS[Displacement Sensor: Potentiometer / LVDT / Vibrating Wire]
-    ANCHOR_MOVE[Moving Anchor Bolted on Unstable Highwall Crest] --> SENS
-    SENS --> MEAS[Measures Axial Length Change: ΔL = L_t - L_0]
-    MEAS --> RATE[Calculates Crack Dilation Velocity & Acceleration]
-    RATE --> SAITO[Saito Inverse Velocity Failure Time Extrapolation]
-    SAITO --> RISK[Geotechnical Stability Assessment & Alert]
+ ANCHOR_STABLE[Stable Anchor Fixed in Solid Rock Mass] --> SENS[Displacement Sensor: Potentiometer / LVDT / Vibrating Wire]
+ ANCHOR_MOVE[Moving Anchor Bolted on Unstable Highwall Crest] --> SENS
+ SENS --> MEAS[Measures Axial Length Change: ΔL = L_t - L_0]
+ MEAS --> RATE[Calculates Crack Dilation Velocity & Acceleration]
+ RATE --> SAITO[Saito Inverse Velocity Failure Time Extrapolation]
+ SAITO --> RISK[Geotechnical Stability Assessment & Alert]
 ```
 *Figure 1.1: High-level operational pipeline of extensometer displacement monitoring.*
 
@@ -53,15 +53,15 @@ Tensile failure at the crest is the universal precursor to open-cast slope colla
 
 ```mermaid
 flowchart TD
-    S1[1. Stable Anchor Installed on Unmoving Rock Bedrock] --> S2[2. Moving Anchor Bolted Across Tension Crack / Inactive Block]
-    S2 --> S3[3. Connecting Rod / Invar Wire / Linear Potentiometer Bridge]
-    S3 --> S4[4. Electronic Sensor Measures Physical Displacement: LVDT / Vibrating Wire]
-    S4 --> S5[5. Real-Time Dilation Value Sampled: ΔL = L_t - L_0 mm]
-    S5 --> S6[6. Wireless LoRa / SDI-12 Telemetry Streams Value to Edge Gateway]
-    S6 --> S7[7. Calculates Dilation Velocity v_ext = dL/dt & Acceleration a_ext]
-    S7 --> S8[8. Computes Saito Inverse Velocity: IV = 1 / v_ext]
-    S8 --> S9[9. Linear Regression Intercept Predicts Exact Failure Window tf]
-    S9 --> S10[10. Autonomous TARP Trigger: Sirens & Dispatch in <1.0s]
+ S1[1. Stable Anchor Installed on Unmoving Rock Bedrock] --> S2[2. Moving Anchor Bolted Across Tension Crack / Inactive Block]
+ S2 --> S3[3. Connecting Rod / Invar Wire / Linear Potentiometer Bridge]
+ S3 --> S4[4. Electronic Sensor Measures Physical Displacement: LVDT / Vibrating Wire]
+ S4 --> S5[5. Real-Time Dilation Value Sampled: ΔL = L_t - L_0 mm]
+ S5 --> S6[6. Wireless LoRa / SDI-12 Telemetry Streams Value to Edge Gateway]
+ S6 --> S7[7. Calculates Dilation Velocity v_ext = dL/dt & Acceleration a_ext]
+ S7 --> S8[8. Computes Saito Inverse Velocity: IV = 1 / v_ext]
+ S8 --> S9[9. Linear Regression Intercept Predicts Exact Failure Window tf]
+ S9 --> S10[10. Autonomous TARP Trigger: Sirens & Dispatch in <1.0s]
 ```
 *Figure 2.1: Step-by-step operational workflow from physical crack dilation to autonomous early warning.*
 
@@ -77,15 +77,15 @@ flowchart TD
 ## 3. Types of Extensometers Used in Mining
 
 ```
-Surface Crackmeter                Wire Extensometer                Multi-Point Borehole (MPBX)
-  ┌───────────────┐              ┌─────────────────┐             ┌─────────────────────────┐
-  │ [Anchor 1]    │              │ [Moving Block]  │             │ [Borehole Collar Head]  │
-  │      │        │              │       │         │             │      │                  │
-  │ [LVDT Sensor] │              │ (Stainless Wire)│             │ ├── Anchor 1 (5m Depth) │
-  │      │        │              │       ▼         │             │ ├── Anchor 2 (15m Depth)│
-  │ [Anchor 2]    │              │ [Pulley Sensor] │             │ ├── Anchor 3 (30m Depth)│
-  │ (Across Crack)│              │ (On Stable Rim) │             │ └── Deep Base (50m Deep)│
-  └───────────────┘              └─────────────────┘             └─────────────────────────┘
+Surface Crackmeter Wire Extensometer Multi-Point Borehole (MPBX)
+ 
+ [Anchor 1] [Moving Block] [Borehole Collar Head] 
+ 
+ [LVDT Sensor] (Stainless Wire) Anchor 1 (5m Depth) 
+ Anchor 2 (15m Depth)
+ [Anchor 2] [Pulley Sensor] Anchor 3 (30m Depth)
+ (Across Crack) (On Stable Rim) Deep Base (50m Deep)
+ 
 ```
 *Figure 3.1: Structural comparison of common mining extensometer configurations.*
 
@@ -109,18 +109,18 @@ When an open-cast rock slope destabilizes, it progresses through three distinct 
 
 ```
 Displacement (mm)
-      ▲
-      │                                                🔴 Failure Point (tf)
-      │                                             . '
-      │                              Tertiary     .' 
-      │                           Accelerating  .'
-      │                           Creep       .' 
-      │                     ┌────────────────'
-      │    Secondary        │
-      │  Steady Creep       │
-      │─────────────────────┘
-      │
-      └────────────────────────────────────────────────────────► Time (Days)
+ 
+ [CRITICAL / RED] Failure Point (tf)
+ . '
+ Tertiary .' 
+ Accelerating .'
+ Creep .' 
+ '
+ Secondary 
+ Steady Creep 
+ 
+ 
+ Time (Days)
 ```
 *Figure 4.1: Classic three-stage creep curve tracked by extensometers prior to slope failure.*
 
@@ -162,29 +162,29 @@ $$\varepsilon_{ij}(t) = \frac{\Delta L_j(t) - \Delta L_i(t)}{z_j - z_i}$$
 
 ```mermaid
 flowchart TD
-    subgraph Geotechnical Sensors
-        S1[Surface Wireless LoRa Crackmeter on Bench Crest]
-        S2[Multi-Point Borehole Extensometer MPBX in 50m Hole]
-        S3[Long-Span Invar Wire Extensometer across Waste Dump]
-    end
+ subgraph Geotechnical Sensors
+ S1[Surface Wireless LoRa Crackmeter on Bench Crest]
+ S2[Multi-Point Borehole Extensometer MPBX in 50m Hole]
+ S3[Long-Span Invar Wire Extensometer across Waste Dump]
+ end
 
-    subgraph Field Telemetry & Gateway
-        S1 & S2 & S3 -->|RS-485 / SDI-12 / Wireless LoRa 868MHz| GW[Solar Pit-Rim Telemetry Gateway]
-        GW -->|MQTT / 4G LTE Secure Stream| SVR[Edge AI Processing Server]
-    end
+ subgraph Field Telemetry & Gateway
+ S1 & S2 & S3 -->|RS-485 / SDI-12 / Wireless LoRa 868MHz| GW[Solar Pit-Rim Telemetry Gateway]
+ GW -->|MQTT / 4G LTE Secure Stream| SVR[Edge AI Processing Server]
+ end
 
-    subgraph Analytics Core
-        SVR --> CALC[Displacement, Velocity & Inverse Velocity Engine]
-        CALC --> SAITO_ENG[Saito Linear Regression Time-to-Failure Extrapolator]
-        CALC --> DB[(Time-Series InfluxDB)]
-    end
+ subgraph Analytics Core
+ SVR --> CALC[Displacement, Velocity & Inverse Velocity Engine]
+ CALC --> SAITO_ENG[Saito Linear Regression Time-to-Failure Extrapolator]
+ CALC --> DB[(Time-Series InfluxDB)]
+ end
 
-    subgraph Decision Support & TARP Action
-        SAITO_ENG --> FUSION[Multi-Modal Feature Synchronization Engine]
-        FUSION --> AI[XGBoost & PINN AI Risk Core]
-        AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-        AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
-    end
+ subgraph Decision Support & TARP Action
+ SAITO_ENG --> FUSION[Multi-Modal Feature Synchronization Engine]
+ FUSION --> AI[XGBoost & PINN AI Risk Core]
+ AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ AI --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ end
 ```
 *Figure 6.1: Hardware, telemetry, and compute architecture of an automated open-pit extensometer network.*
 
@@ -192,7 +192,7 @@ flowchart TD
 
 ## 7. MPBX Subsurface Anchor Settlement Profiling
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to explain multi-anchor borehole extensometer mechanics. They do not represent real-world measurements from any specific mine.*
 
 ### Illustrative Synthetic MPBX Multi-Anchor Displacement Dataset
@@ -202,25 +202,25 @@ flowchart TD
 | **Collar Head**| 0.0 | Highwall Crest Surface | 0.0 | 0.0 | 0.0 | Surface Reference |
 | **Anchor A1** | 5.0 | Shallow Tension Zone | 0.4 | 1.8 | 6.2 | Moving with Surface Block |
 | **Anchor A2** | 12.0 | Upper Sliding Mass | 0.4 | 1.7 | 6.0 | Moving with Surface Block |
-| **Anchor A3** | 20.0 | Active Shear Horizon | **1.8** | **5.4** | **18.5** | 🔴 **PRIMARY SHEAR SEPARATION HORIZON** |
+| **Anchor A3** | 20.0 | Active Shear Horizon | **1.8** | **5.4** | **18.5** | [CRITICAL / RED] **PRIMARY SHEAR SEPARATION HORIZON** |
 | **Anchor A4** | 35.0 | Sub-Shear Bedrock | 0.1 | 0.2 | 0.3 | Stable Strata |
 | **Anchor A5** | 50.0 | Deep Fixed Anchor | 0.0 | 0.0 | 0.0 | Fixed Geotechnical Datum |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: MPBX Anchor Relative Displacement vs Depth (Synthetic Data)"
-    x-axis "Borehole Anchor Depth (m)" [5, 12, 20, 35, 50]
-    y-axis "Relative Displacement (mm)" 0 --> 20
-    line [6.2, 6.0, 18.5, 0.3, 0.0]
+ title "Illustrative Example: MPBX Anchor Relative Displacement vs Depth (Synthetic Data)"
+ x-axis "Borehole Anchor Depth (m)" [5, 12, 20, 35, 50]
+ y-axis "Relative Displacement (mm)" 0 --> 20
+ line [6.2, 6.0, 18.5, 0.3, 0.0]
 ```
 *Figure 7.1: Illustrative MPBX displacement profile identifying deep tensile separation at 20 m depth.*
 
@@ -237,41 +237,41 @@ xychart-beta
 | **Day 10** | 10 | 8.5 | 3.7 | 0.74 | 1.35 | Secondary Steady Creep |
 | **Day 14** | 14 | 13.5 | 5.0 | 1.25 | 0.80 | Creep Acceleration |
 | **Day 17** | 17 | 21.0 | 7.5 | 2.50 | 0.40 | Transition to Tertiary Creep |
-| **Day 19** | 19 | 36.0 | 15.0 | 7.50 | 0.13 | 🔴 Critical Imminent Collapse |
+| **Day 19** | 19 | 36.0 | 15.0 | 7.50 | 0.13 | [CRITICAL / RED] Critical Imminent Collapse |
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Extensometer Crack Dilation vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [1, 5, 10, 14, 17, 19]
-    y-axis "Cumulative Crack Opening (mm)" 0 --> 40
-    line [2.0, 4.8, 8.5, 13.5, 21.0, 36.0]
+ title "Illustrative Example: Extensometer Crack Dilation vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [1, 5, 10, 14, 17, 19]
+ y-axis "Cumulative Crack Opening (mm)" 0 --> 40
+ line [2.0, 4.8, 8.5, 13.5, 21.0, 36.0]
 ```
 *Figure 8.1: Illustrative crack dilation curve showing exponential acceleration in tertiary creep.*
 
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Conceptual Illustration: Saito Inverse Velocity Trajectory toward Failure (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [5, 10, 14, 17, 19]
-    y-axis "Inverse Velocity (days/mm)" 0.0 --> 1.6
-    line [1.43, 1.35, 0.80, 0.40, 0.13]
+ title "Conceptual Illustration: Saito Inverse Velocity Trajectory toward Failure (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [5, 10, 14, 17, 19]
+ y-axis "Inverse Velocity (days/mm)" 0.0 --> 1.6
+ line [1.43, 1.35, 0.80, 0.40, 0.13]
 ```
 *Figure 8.2: Conceptual linear regression of inverse velocity trending toward the zero-intercept failure horizon ($t_f \approx \text{Day } 20$).*
 
@@ -291,22 +291,22 @@ xychart-beta
 
 ```mermaid
 mindmap
-  root((Extensometer Mining Limitations))
-    Discrete 1D Line Blindness
-      Only monitors the specific crack bridged by the sensor
-      Completely blind to rockfalls developing 10m away
-    Physical Stroke Limit Exhaustion
-      Standard crackmeters max out at 50mm - 150mm stroke
-      Once stroke ends, the sensor goes dead during critical failure
-    Wire & Cable Severance
-      Invar wires snapped by falling rocks & flyrock
-      Surface cables chewed by wildlife or crushed by haul trucks
-    Blasting Flyrock Vulnerability
-      Blast shockwaves destroy surface sensor brackets
-      Requires armored steel housings near active blasting benches
-    Zero Subsurface & Hydrogeological Insight
-      Surface crackmeters cannot detect pore-water pressure
-      Blind to internal rock shear stresses
+ root((Extensometer Mining Limitations))
+ Discrete 1D Line Blindness
+ Only monitors the specific crack bridged by the sensor
+ Completely blind to rockfalls developing 10m away
+ Physical Stroke Limit Exhaustion
+ Standard crackmeters max out at 50mm - 150mm stroke
+ Once stroke ends, the sensor goes dead during critical failure
+ Wire & Cable Severance
+ Invar wires snapped by falling rocks & flyrock
+ Surface cables chewed by wildlife or crushed by haul trucks
+ Blasting Flyrock Vulnerability
+ Blast shockwaves destroy surface sensor brackets
+ Requires armored steel housings near active blasting benches
+ Zero Subsurface & Hydrogeological Insight
+ Surface crackmeters cannot detect pore-water pressure
+ Blind to internal rock shear stresses
 ```
 *Figure 10.1: Mechanical, operational, and environmental limitations of extensometers in open-cast mines.*
 
@@ -354,30 +354,30 @@ To build our SIH25071 prototype, we evaluated verified open-source geotechnical 
 
 ```mermaid
 flowchart TD
-    subgraph Mechanical & In-Situ Geotechnical Layer
-        A1[Surface Wireless LoRa Crackmeters on Bench Crests] --> A2[pyGeoTech Displacement & Saito IV Engine]
-        A3[Multi-Point Borehole Extensometer MPBX] --> A4[Subsurface Tensile Strain Profiler]
-        A5[Vibrating-Wire Piezometer: Pore Pressure] --> A6[Hydrostatic Thrust Calculator]
-    end
+ subgraph Mechanical & In-Situ Geotechnical Layer
+ A1[Surface Wireless LoRa Crackmeters on Bench Crests] --> A2[pyGeoTech Displacement & Saito IV Engine]
+ A3[Multi-Point Borehole Extensometer MPBX] --> A4[Subsurface Tensile Strain Profiler]
+ A5[Vibrating-Wire Piezometer: Pore Pressure] --> A6[Hydrostatic Thrust Calculator]
+ end
 
-    subgraph Surface Optical & Remote Telemetry Layer
-        B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
-        B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        B3[Micro-Weather Station: Rainfall Intensity mm/hr]
-        B4[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph Surface Optical & Remote Telemetry Layer
+ B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
+ B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ B3[Micro-Weather Station: Rainfall Intensity mm/hr]
+ B4[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 14.1: Master multi-sensor data fusion architecture incorporating extensometer crack dilation metrics.*
 
@@ -402,17 +402,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 95.8%)"]
-        B["📍 Location: Bench 3 Crest - East Wall (Sensor Cluster EXT-02 / MPBX-01)"]
-        C["⏱️ Predicted Collapse Window (Saito Extrapolation): 21 ± 4 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid Crest Crack Dilation Acceleration (15.0 mm/day): +39% contribution"]
-        D2["• Saito Inverse Velocity Zero-Crossing Projection: +26% contribution"]
-        D3["• Piezometric Hydrostatic Pressure Surge in Tension Crack (19 kPa): +19% contribution"]
-        D4["• Sub-Pixel Optical Flow Velocity Surge: +11% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 95.8%)"]
+ B[" Location: Bench 3 Crest - East Wall (Sensor Cluster EXT-02 / MPBX-01)"]
+ C[" Predicted Collapse Window (Saito Extrapolation): 21 ± 4 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid Crest Crack Dilation Acceleration (15.0 mm/day): +39% contribution"]
+ D2["• Saito Inverse Velocity Zero-Crossing Projection: +26% contribution"]
+ D3["• Piezometric Hydrostatic Pressure Surge in Tension Crack (19 kPa): +19% contribution"]
+ D4["• Sub-Pixel Optical Flow Velocity Surge: +11% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 16.1: Conceptual SHAP explainable alert diagnostic card for extensometer-informed alerts.*
 
@@ -422,14 +422,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with Color-Coded Crackmeter & MPBX Status Pins]
-        D2[Real-Time Crack Dilation Time-Series: Displacement, Velocity & Acceleration]
-        D3[Interactive Saito Inverse Velocity Linear Regression Projection Panel]
-        D4[MPBX Multi-Anchor Subsurface Strain Profile Depth Chart]
-        D5[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D6[One-Click DGMS Statutory Safety Compliance & Incident Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with Color-Coded Crackmeter & MPBX Status Pins]
+ D2[Real-Time Crack Dilation Time-Series: Displacement, Velocity & Acceleration]
+ D3[Interactive Saito Inverse Velocity Linear Regression Projection Panel]
+ D4[MPBX Multi-Anchor Subsurface Strain Profile Depth Chart]
+ D5[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D6[One-Click DGMS Statutory Safety Compliance & Incident Logbook Export]
+ end
 ```
 *Figure 17.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -443,7 +443,7 @@ flowchart TD
 | **Spatial Point Blindness** | Blind to cracks outside the gauge | **Eliminated:** Full-field vision & InSAR cover all spatial gaps |
 | **Failure Time Prediction** | Manual Excel inverse velocity plotting | **Automated Real-Time Saito Regression Engine ($t_f \pm \sigma$)** |
 | **Stroke Exhaustion Protection**| Sensor goes dead when stroke ends | **Seamless Failover to Sub-Pixel Computer Vision Tracking** |
-| **Subsurface Hydrogeology** | ❌ Blind to water pressure | **✅ Synchronized Vibrating-Wire Piezometer Telemetry** |
+| **Subsurface Hydrogeology** | [REJECTED] Blind to water pressure | **[CONFIRMED] Synchronized Vibrating-Wire Piezometer Telemetry** |
 | **System Capital Cost** | ₹15,000 – ₹50,000 per crackmeter | **₹2.0L – ₹5.0L Complete Full-Pit Infrastructure** |
 | **Regulatory Compliance** | Paper inspection registers | **Full Real-Time DGMS (Tech) Circular Compliance** |
 
@@ -453,16 +453,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE EXTENSOMETER LIMITATION ]──► Direct physical crack measurement & Saito accuracy,    |
-|                                            but spatial point blindness & mechanical stroke limits.|
-|  [ REMOTE VISION / RADAR LIMITATION ]  ──► Full-field coverage, but lacks direct physical gauge   |
-|                                            calibration on microscopic sub-millimeter cracks.      |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Fuses low-cost LoRa wireless crackmeters with          |
-|                                            full-field Edge Computer Vision, MPBX, & InSAR into a  |
-|                                            unified Physics-Informed AI engine with zero stroke    |
-|                                            limits and complete spatial coverage!                  |
+| [ STANDALONE EXTENSOMETER LIMITATION ] Direct physical crack measurement & Saito accuracy, |
+| but spatial point blindness & mechanical stroke limits.|
+| [ REMOTE VISION / RADAR LIMITATION ] Full-field coverage, but lacks direct physical gauge |
+| calibration on microscopic sub-millimeter cracks. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses low-cost LoRa wireless crackmeters with |
+| full-field Edge Computer Vision, MPBX, & InSAR into a |
+| unified Physics-Informed AI engine with zero stroke |
+| limits and complete spatial coverage! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -483,49 +483,49 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S2[Multi-Point Borehole Extensometers MPBX in Deep Holes]
-        S3[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Micro-Weather Station: Rainfall Intensity mm/hr]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S2[Multi-Point Borehole Extensometers MPBX in Deep Holes]
+ S3[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Micro-Weather Station: Rainfall Intensity mm/hr]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 & S2 --> P1[pyGeoTech Displacement, Velocity & Saito Regression]
-        S3 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S4 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
-        S6 --> P5[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 & S2 --> P1[pyGeoTech Displacement, Velocity & Saito Regression]
+ S3 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S4 --> P3[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
+ S6 --> P5[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_EXT[Crack Dilation Rate, Saito Inverse Velocity & MPBX Strain]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_ENV[Rainfall Surge, Hydrostatic Thrust & Blast PPV]
-    end
+ P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_EXT[Crack Dilation Rate, Saito Inverse Velocity & MPBX Strain]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_ENV[Rainfall Surge, Hydrostatic Thrust & Blast PPV]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_EXT & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_EXT & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 21.1: Complete end-to-end system architecture incorporating extensometer crack kinematics into the real-time AI rockfall prediction pipeline.*
 

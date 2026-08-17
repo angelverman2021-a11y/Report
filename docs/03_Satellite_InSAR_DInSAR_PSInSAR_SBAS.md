@@ -1,10 +1,10 @@
 # Existing Technology 3: Satellite InSAR — D-InSAR, PS-InSAR and SBAS
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/03_Satellite_InSAR_DInSAR_PSInSAR_SBAS.md`
 
 ---
@@ -24,12 +24,12 @@ Synthetic Aperture Radar (SAR) is an active microwave remote sensing system. Unl
 
 ```mermaid
 flowchart TD
-    SAT[Spaceborne SAR Satellite ~700 km Altitude] -->|Transmits Microwave Pulse| GRD[Open-Pit Mining Complex]
-    GRD -->|Backscattered Wave Echo| SAT
-    SAT -->|Repeated Orbital Passes| REC[Complex Radar Image Archive SLC]
-    REC -->|Interferometric Processing| INT[Interferogram Formation]
-    INT -->|Phase Difference Analysis| DEF[Surface Deformation Map]
-    DEF -->|Spatial Risk Analysis| RISK[Regional Geotechnical Assessment]
+ SAT[Spaceborne SAR Satellite ~700 km Altitude] -->|Transmits Microwave Pulse| GRD[Open-Pit Mining Complex]
+ GRD -->|Backscattered Wave Echo| SAT
+ SAT -->|Repeated Orbital Passes| REC[Complex Radar Image Archive SLC]
+ REC -->|Interferometric Processing| INT[Interferogram Formation]
+ INT -->|Phase Difference Analysis| DEF[Surface Deformation Map]
+ DEF -->|Spatial Risk Analysis| RISK[Regional Geotechnical Assessment]
 ```
 *Figure 1.1: High-level data transformation flow in spaceborne radar interferometry.*
 
@@ -47,7 +47,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | **Sensing Type** | Passive (Sunlight reflection) | Active Terrestrial Radar | Active Spaceborne Radar |
 | **Measured Quantity** | Multi-spectral surface color / reflectance | Real-time line-of-sight displacement ($\text{mm}$) | Periodic line-of-sight displacement ($\text{mm/year}$) |
-| **Night & Cloud Capability**| ❌ Blind at night & in thick clouds | ✅ 24/7 all-weather operational | ✅ Day/night; penetrates most clouds |
+| **Night & Cloud Capability**| [REJECTED] Blind at night & in thick clouds | [CONFIRMED] 24/7 all-weather operational | [CONFIRMED] Day/night; penetrates most clouds |
 | **Spatial Resolution** | 10 m to 30 m pixels | High localized bench resolution | 5 m to 20 m spatial resolution |
 | **Temporal Revisit** | 5 to 10 days | **1 to 5 minutes (Real-Time)** | **6 to 12 days (Periodic)** |
 | **Life-Safety Alert Role** | Land-use / vegetation change | **Emergency evacuation alarms** | **Macro baseline & regional screening** |
@@ -60,14 +60,14 @@ SAR satellites operate in sun-synchronous Low Earth Orbit (LEO) at altitudes bet
 
 ```mermaid
 flowchart LR
-    A[Satellite Orbiting in Space] -->|Slant Range Path R| B[Highwall / Pit Face]
-    B -->|Backscatter Return Echo| A
-    subgraph Core Strengths of Radar
-        C1[Day and Night Operation]
-        C2[Cloud & Haze Penetration]
-        C3[Millimeter Phase Sensitivity]
-        C4[Vast Multi-Kilometer Swaths]
-    end
+ A[Satellite Orbiting in Space] -->|Slant Range Path R| B[Highwall / Pit Face]
+ B -->|Backscatter Return Echo| A
+ subgraph Core Strengths of Radar
+ C1[Day and Night Operation]
+ C2[Cloud & Haze Penetration]
+ C3[Millimeter Phase Sensitivity]
+ C4[Vast Multi-Kilometer Swaths]
+ end
 ```
 *Figure 2.1: Key operational capabilities of spaceborne radar remote sensing.*
 
@@ -83,24 +83,24 @@ flowchart LR
 Satellite InSAR does not measure 3D absolute position vectors directly; it measures **relative displacement along the radar Line of Sight (LOS)**.
 
 ```
-       Satellite Orbit Path
-          [🛰️ Satellite]
-               \
-                \
-                 \  Radar Line of Sight (LOS) Vector
-                  \
-                   \ 
-                    \ 
-                     ▼
-                 [Mine Slope / Highwall]
-               (Displacement Δd_LOS)
+ Satellite Orbit Path
+ [ Satellite]
+ \
+ \
+ \ Radar Line of Sight (LOS) Vector
+ \
+ \ 
+ \ 
+ 
+ [Mine Slope / Highwall]
+ (Displacement Δd_LOS)
 ```
 
 * **Movement Toward Satellite:** Causes a positive phase shift (decrease in sensor-to-ground distance).
 * **Movement Away from Satellite:** Causes a negative phase shift (increase in sensor-to-ground distance).
 * **Decomposing Vectors:** By combining **Ascending** (satellite traveling South to North, looking East) and **Descending** (North to South, looking West) satellite tracks, the 1D LOS measurements can be decomposed into **Vertical (subsidence/uplift)** and **East-West horizontal** displacement vectors:
-  $$d_{\text{LOS}}^{\text{asc}} = d_u \cos\theta_{\text{asc}} - d_e \sin\theta_{\text{asc}} \cos\alpha_{\text{asc}} + d_n \sin\theta_{\text{asc}} \sin\alpha_{\text{asc}}$$
-  where $\theta$ is the incidence angle and $\alpha$ is the satellite flight heading.
+ $$d_{\text{LOS}}^{\text{asc}} = d_u \cos\theta_{\text{asc}} - d_e \sin\theta_{\text{asc}} \cos\alpha_{\text{asc}} + d_n \sin\theta_{\text{asc}} \sin\alpha_{\text{asc}}$$
+ where $\theta$ is the incidence angle and $\alpha$ is the satellite flight heading.
 
 ---
 
@@ -133,17 +133,17 @@ Where:
 
 ```mermaid
 flowchart TD
-    A[Raw Satellite SAR Data: SLC Products] --> B[Orbital Correction & Preprocessing]
-    B --> C[Sub-Pixel Image Coregistration]
-    C --> D[Complex Interferogram Formation]
-    D --> E[Topographic Phase Removal using DEM]
-    E --> F[Coherence Estimation & Spatial Filtering]
-    F --> G[2D/3D Phase Unwrapping SNAPHU]
-    G --> H[Atmospheric Phase Screen APS Correction]
-    H --> I[Metric LOS Displacement Calculation]
-    I --> J[Geocoding & Projection to WGS84/UTM]
-    J --> K[Time-Series Kinematic Inversion]
-    K --> L[Geotechnical Hazard & Risk Mapping]
+ A[Raw Satellite SAR Data: SLC Products] --> B[Orbital Correction & Preprocessing]
+ B --> C[Sub-Pixel Image Coregistration]
+ C --> D[Complex Interferogram Formation]
+ D --> E[Topographic Phase Removal using DEM]
+ E --> F[Coherence Estimation & Spatial Filtering]
+ F --> G[2D/3D Phase Unwrapping SNAPHU]
+ G --> H[Atmospheric Phase Screen APS Correction]
+ H --> I[Metric LOS Displacement Calculation]
+ I --> J[Geocoding & Projection to WGS84/UTM]
+ J --> K[Time-Series Kinematic Inversion]
+ K --> L[Geotechnical Hazard & Risk Mapping]
 ```
 *Figure 5.1: End-to-end algorithmic processing pipeline for Satellite InSAR.*
 
@@ -165,9 +165,9 @@ flowchart TD
 An **interferogram** is a 2D spatial visual representation of the phase differences between two coregistered SAR acquisitions. 
 
 ```
-SAR Image A (Master at t1) ──┐
-                             ├─► [Interferometric Multiplication] ──► Differential Phase (Interferogram)
-SAR Image B (Slave at t2)  ──┘
+SAR Image A (Master at t1) 
+ [Interferometric Multiplication] Differential Phase (Interferogram)
+SAR Image B (Slave at t2) 
 ```
 
 ### Understanding Interference Fringes
@@ -175,15 +175,15 @@ In a raw wrapped interferogram, phase is displayed cyclically from $-\pi$ to $+\
 
 ```text
 Conceptual Interferogram Fringe Pattern over a Subsiding Pit:
-  +------------------------------------------------+
-  |    (  (  (  🔴 Central Subsidence  )  )  )     |
-  |   (  (   🟡 Phase Fringe 2: 28 mm   )  )       |
-  |  (   🟢 Phase Fringe 1: 56 mm         )        |
-  |   Outer Stable Highwall                        |
-  +------------------------------------------------+
+ +------------------------------------------------+
+ | ( ( ( [CRITICAL / RED] Central Subsidence ) ) ) |
+ | ( ( [ADVISORY / YELLOW] Phase Fringe 2: 28 mm ) ) |
+ | ( [NORMAL / GREEN] Phase Fringe 1: 56 mm ) |
+ | Outer Stable Highwall |
+ +------------------------------------------------+
 ```
 
-* Each full color cycle (e.g., Red ➔ Yellow ➔ Green ➔ Blue ➔ Red) corresponds to a relative ground displacement of **half a radar wavelength ($\lambda/2 \approx 2.8\text{ cm}$ for Sentinel-1)**.
+* Each full color cycle (e.g., Red Yellow Green Blue Red) corresponds to a relative ground displacement of **half a radar wavelength ($\lambda/2 \approx 2.8\text{ cm}$ for Sentinel-1)**.
 * Closely spaced fringes represent **steep deformation gradients** (rapid localized ground movement).
 * Broad, widely spaced fringes represent **gentle, regional settlement**.
 
@@ -197,12 +197,12 @@ Conceptual Interferogram Fringe Pattern over a Subsiding Pit:
 
 ```mermaid
 flowchart LR
-    A[SAR Image at Epoch T1] --> C[Interferogram Formation]
-    B[SAR Image at Epoch T2] --> C
-    D[External Reference DEM] --> E[Synthetic Topographic Phase]
-    C & E --> F[Differential Phase Subtraction]
-    F --> G[Deformation Phase Map Δϕ_def]
-    G --> H[Displacement Measurement]
+ A[SAR Image at Epoch T1] --> C[Interferogram Formation]
+ B[SAR Image at Epoch T2] --> C
+ D[External Reference DEM] --> E[Synthetic Topographic Phase]
+ C & E --> F[Differential Phase Subtraction]
+ F --> G[Deformation Phase Map Δϕ_def]
+ G --> H[Displacement Measurement]
 ```
 *Figure 7.1: D-InSAR differential subtraction workflow.*
 
@@ -225,12 +225,12 @@ D-InSAR generates an interferogram from two SAR images ($T_1$ and $T_2$) and sub
 
 ```mermaid
 flowchart TD
-    A[Time-Series of 30+ SAR Images] --> B[Identification of High-Amplitude Stability Pixels]
-    B --> C[Candidate Persistent Scatterers PS]
-    C --> D[Temporal Phase Coherence Analysis: γ_temp > 0.7]
-    D --> E[Atmospheric Phase Screen APS Estimation & Removal]
-    E --> F[Millimeter-Accuracy Linear Mean Velocity mm/yr]
-    F --> G[Long-Term Historical Deformation Curves]
+ A[Time-Series of 30+ SAR Images] --> B[Identification of High-Amplitude Stability Pixels]
+ B --> C[Candidate Persistent Scatterers PS]
+ C --> D[Temporal Phase Coherence Analysis: γ_temp > 0.7]
+ D --> E[Atmospheric Phase Screen APS Estimation & Removal]
+ E --> F[Millimeter-Accuracy Linear Mean Velocity mm/yr]
+ F --> G[Long-Term Historical Deformation Curves]
 ```
 *Figure 8.1: PS-InSAR processing workflow on stable radar targets.*
 
@@ -254,11 +254,11 @@ By tracking these stable reflectors over dozens of passes, algorithms can model 
 
 ```mermaid
 flowchart TD
-    A[SAR Acquisition Time-Series] --> B[Spatial Baseline & Temporal Baseline Graph]
-    B --> C[Selection of Small Baseline Pairs: Short Δt, Small B_perp]
-    C --> D[Multi-Look Spatial Filtering & Phase Unwrapping]
-    D --> E[Singular Value Decomposition SVD Inversion]
-    E --> F[Spatially Continuous Deformation Time-Series]
+ A[SAR Acquisition Time-Series] --> B[Spatial Baseline & Temporal Baseline Graph]
+ B --> C[Selection of Small Baseline Pairs: Short Δt, Small B_perp]
+ C --> D[Multi-Look Spatial Filtering & Phase Unwrapping]
+ D --> E[Singular Value Decomposition SVD Inversion]
+ E --> F[Spatially Continuous Deformation Time-Series]
 ```
 *Figure 9.1: SBAS small-baseline interferometric network workflow.*
 
@@ -291,22 +291,22 @@ flowchart TD
 
 ```mermaid
 mindmap
-  root((Satellite InSAR Mining Applications))
-    Highwall & Crest Monitoring
-      Detects regional highwall crest tension crack creep
-      Monitors seasonal expansion / contraction trends
-    Tailings Storage Facilities TSF
-      Continuous stability auditing of tailings dam walls
-      Early detection of embankment settlement / bulging
-    Overburden & Waste Dumps
-      Monitors internal shear settlement in loose spoil piles
-      Identifies rainfall-triggered dump slide risks
-    Regional Lease Subsidence
-      Tracks subsidence bowls over underground void workings
-      Monitors ground stability under haulage corridors
-    Environmental & Statutory Compliance
-      Provides verifiable audit records for DGMS & IBM inspections
-      Quantifies ground impact on neighboring villages
+ root((Satellite InSAR Mining Applications))
+ Highwall & Crest Monitoring
+ Detects regional highwall crest tension crack creep
+ Monitors seasonal expansion / contraction trends
+ Tailings Storage Facilities TSF
+ Continuous stability auditing of tailings dam walls
+ Early detection of embankment settlement / bulging
+ Overburden & Waste Dumps
+ Monitors internal shear settlement in loose spoil piles
+ Identifies rainfall-triggered dump slide risks
+ Regional Lease Subsidence
+ Tracks subsidence bowls over underground void workings
+ Monitors ground stability under haulage corridors
+ Environmental & Statutory Compliance
+ Provides verifiable audit records for DGMS & IBM inspections
+ Quantifies ground impact on neighboring villages
 ```
 *Figure 11.1: Core application domains of Satellite InSAR across the mining lifecycle.*
 
@@ -320,21 +320,21 @@ Satellite InSAR outputs dense georeferenced deformation velocity maps that provi
 
 ```text
 +---------------------------------------------------------------+
-|                 REGIONAL OPEN-PIT MINE LEASE MAP              |
+| REGIONAL OPEN-PIT MINE LEASE MAP |
 +---------------------------------------------------------------+
-| [North Lease]  🟢 Stable   🟢 Stable   🟢 Stable   🟡 Low Creep  🟢 Stable |
-| [East Highwall]🟢 Stable   🟡 Low Creep 🟠 Subsid.  🟠 Subsid.   🟡 Low Creep |
-| [Waste Dump]   🟡 Low Creep 🟠 Subsid.  🔴 CRITICAL 🔴 CRITICAL 🟠 Subsid.   |
-| [Tailings Dam] 🟢 Stable   🟢 Stable   🟡 Settle   🟡 Settle   🟢 Stable |
-| [Village Zone] 🟢 Stable   🟢 Stable   🟢 Stable   🟢 Stable   🟢 Stable |
+| [North Lease] [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [ADVISORY / YELLOW] Low Creep [NORMAL / GREEN] Stable |
+| [East Highwall][NORMAL / GREEN] Stable [ADVISORY / YELLOW] Low Creep [WARNING / ORANGE] Subsid. [WARNING / ORANGE] Subsid. [ADVISORY / YELLOW] Low Creep |
+| [Waste Dump] [ADVISORY / YELLOW] Low Creep [WARNING / ORANGE] Subsid. [CRITICAL / RED] CRITICAL [CRITICAL / RED] CRITICAL [WARNING / ORANGE] Subsid. |
+| [Tailings Dam] [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [ADVISORY / YELLOW] Settle [ADVISORY / YELLOW] Settle [NORMAL / GREEN] Stable |
+| [Village Zone] [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable [NORMAL / GREEN] Stable |
 +---------------------------------------------------------------+
 ```
 
 ### Risk Level Categorization:
-* 🟢 **Green (Stable):** Background ground stability ($-2.0\text{ mm/yr} \le v \le +2.0\text{ mm/yr}$).
-* 🟡 **Yellow (Low Deformation):** Slow seasonal creep / consolidation ($-5.0\text{ mm/yr} \le v < -2.0\text{ mm/yr}$).
-* 🟠 **Orange (Significant Subsidence):** Accelerated settlement / structural strain ($-15.0\text{ mm/yr} \le v < -5.0\text{ mm/yr}$).
-* 🔴 **Red (Critical Deformation):** Rapid progressive subsidence / potential failure ($v < -15.0\text{ mm/yr}$).
+* [NORMAL / GREEN] **Green (Stable):** Background ground stability ($-2.0\text{ mm/yr} \le v \le +2.0\text{ mm/yr}$).
+* [ADVISORY / YELLOW] **Yellow (Low Deformation):** Slow seasonal creep / consolidation ($-5.0\text{ mm/yr} \le v < -2.0\text{ mm/yr}$).
+* [WARNING / ORANGE] **Orange (Significant Subsidence):** Accelerated settlement / structural strain ($-15.0\text{ mm/yr} \le v < -5.0\text{ mm/yr}$).
+* [CRITICAL / RED] **Red (Critical Deformation):** Rapid progressive subsidence / potential failure ($v < -15.0\text{ mm/yr}$).
 
 > **Dashboard Integration:** In our SIH25071 platform, this spatial layer is imported via GeoTIFF / NetCDF into the 3D GIS Digital Twin, color-coding regional lease sectors automatically.
 
@@ -344,7 +344,7 @@ Satellite InSAR outputs dense georeferenced deformation velocity maps that provi
 
 Multi-temporal InSAR processing produces historical displacement time-series for every persistent scatterer or coherent grid cell.
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The dataset and graphs below represent **Synthetic / Illustrative Data** designed solely to explain multi-temporal satellite deformation trends. They do not represent real-world measurements from any specific mine.*
 
 ### Illustrative Synthetic Satellite Time-Series
@@ -361,18 +361,18 @@ Multi-temporal InSAR processing produces historical displacement time-series for
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Satellite LOS Cumulative Subsidence vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [0, 12, 24, 36, 48, 60]
-    y-axis "Cumulative LOS Displacement (mm)" -10 --> 0
-    line [0.0, -0.8, -1.5, -2.4, -4.1, -7.8]
+ title "Illustrative Example: Satellite LOS Cumulative Subsidence vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [0, 12, 24, 36, 48, 60]
+ y-axis "Cumulative LOS Displacement (mm)" -10 --> 0
+ line [0.0, -0.8, -1.5, -2.4, -4.1, -7.8]
 ```
 *Figure 13.1: Illustrative satellite InSAR time-series showing progressive acceleration.*
 
@@ -391,18 +391,18 @@ $$v(t) = \frac{\Delta d_{\text{LOS}}}{\Delta t}$$
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#f0ad4e"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#f0ad4e"
 ---
 xychart-beta
-    title "Illustrative Example: Satellite Deformation Velocity Surge (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [12, 24, 36, 48, 60]
-    y-axis "Deformation Velocity (mm/day)" 0.0 --> 0.4
-    line [0.067, 0.058, 0.075, 0.142, 0.308]
+ title "Illustrative Example: Satellite Deformation Velocity Surge (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [12, 24, 36, 48, 60]
+ y-axis "Deformation Velocity (mm/day)" 0.0 --> 0.4
+ line [0.067, 0.058, 0.075, 0.142, 0.308]
 ```
 *Figure 14.1: Illustrative velocity acceleration curve derived from multi-temporal satellite passes.*
 
@@ -419,18 +419,18 @@ Applying the **Saito Inverse Velocity concept** ($\text{IV} = 1/v$) to multi-tem
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Conceptual Illustration: Inverse Velocity Trend from Satellite InSAR (Synthetic Data)"
-    x-axis "Elapsed Time (days)" [12, 24, 36, 48, 60]
-    y-axis "Inverse Velocity (days/mm)" 0 --> 20
-    line [15.0, 17.1, 13.3, 7.1, 3.2]
+ title "Conceptual Illustration: Inverse Velocity Trend from Satellite InSAR (Synthetic Data)"
+ x-axis "Elapsed Time (days)" [12, 24, 36, 48, 60]
+ y-axis "Inverse Velocity (days/mm)" 0 --> 20
+ line [15.0, 17.1, 13.3, 7.1, 3.2]
 ```
 *Figure 15.1: Conceptual trajectory of satellite inverse velocity trending toward failure threshold.*
 
@@ -445,15 +445,15 @@ xychart-beta
 Atmospheric interference is the single largest source of error in satellite radar interferometry.
 
 ```
-       Satellite
-          \
-           \  Microwave Path
-            \
-        [☁️ Tropospheric Water Vapor Cloud] ──► Causes Phase Delay (Δϕ_atm)
-              \
-               \
-                ▼
-           [Mine Ground]
+ Satellite
+ \
+ \ Microwave Path
+ \
+ [ Tropospheric Water Vapor Cloud] Causes Phase Delay (Δϕ_atm)
+ \
+ \
+ 
+ [Mine Ground]
 ```
 
 ### Components of Atmospheric Delay:
@@ -477,14 +477,14 @@ $$\gamma = \frac{|\langle S_1 S_2^* \rangle|}{\sqrt{\langle |S_1|^2 \rangle \lan
 
 ```mermaid
 flowchart TD
-    subgraph Primary Causes of InSAR Decorrelation
-        D1[Active Mining Blasting & Excavation ──► Total Surface Change]
-        D2[Heavy Vegetation Growth & Foliage Motion]
-        D3[Rapid Highwall Movement Exceeding λ/4 in Single Pass]
-        D4[Standing Water & Pit Sump Flooding]
-    end
-    D1 & D2 & D3 & D4 --> LOSS[Coherence Loss: γ < 0.3]
-    LOSS --> NOISE[Interferometric Phase Degrades to Pure Random Noise]
+ subgraph Primary Causes of InSAR Decorrelation
+ D1[Active Mining Blasting & Excavation Total Surface Change]
+ D2[Heavy Vegetation Growth & Foliage Motion]
+ D3[Rapid Highwall Movement Exceeding λ/4 in Single Pass]
+ D4[Standing Water & Pit Sump Flooding]
+ end
+ D1 & D2 & D3 & D4 --> LOSS[Coherence Loss: γ < 0.3]
+ LOSS --> NOISE[Interferometric Phase Degrades to Pure Random Noise]
 ```
 *Figure 17.1: Primary drivers of radar decorrelation in open-pit environments.*
 
@@ -498,22 +498,22 @@ flowchart TD
 
 ```mermaid
 mindmap
-  root((Satellite InSAR Limitations))
-    Temporal Latency Revisit
-      6 to 12 days between satellite overpasses
-      Cannot provide real-time warning for sudden rockfalls
-    Line-of-Sight LOS 1D
-      Measures 1D radial displacement only
-      Blind to North-South horizontal shearing
-    Geometric Highwall Distortions
-      Layover on steep slopes
-      Radar Shadowing behind steep crests
-    Environmental Decorrelation
-      Blasting & digging destroy radar coherence
-      Monsoon cloudbursts cause heavy atmospheric delay
-    Processing Complexity
-      Gigabytes of complex data per scene
-      Requires specialized remote sensing software pipelines
+ root((Satellite InSAR Limitations))
+ Temporal Latency Revisit
+ 6 to 12 days between satellite overpasses
+ Cannot provide real-time warning for sudden rockfalls
+ Line-of-Sight LOS 1D
+ Measures 1D radial displacement only
+ Blind to North-South horizontal shearing
+ Geometric Highwall Distortions
+ Layover on steep slopes
+ Radar Shadowing behind steep crests
+ Environmental Decorrelation
+ Blasting & digging destroy radar coherence
+ Monsoon cloudbursts cause heavy atmospheric delay
+ Processing Complexity
+ Gigabytes of complex data per scene
+ Requires specialized remote sensing software pipelines
 ```
 *Figure 18.1: Structural, geometric, and operational limitations of Satellite InSAR.*
 
@@ -559,34 +559,34 @@ To develop our SIH25071 prototype, we evaluated verified open-source scientific 
 
 ```mermaid
 flowchart TD
-    subgraph Spaceborne Macro Layer
-        A1[Sentinel-1 SAR Satellite Pass] --> A2[Copernicus Open Access API]
-        A2 --> A3[MintPy SBAS Inversion Pipeline]
-        A3 --> A4[Regional Baseline Velocity & Anomaly Map]
-    end
+ subgraph Spaceborne Macro Layer
+ A1[Sentinel-1 SAR Satellite Pass] --> A2[Copernicus Open Access API]
+ A2 --> A3[MintPy SBAS Inversion Pipeline]
+ A3 --> A4[Regional Baseline Velocity & Anomaly Map]
+ end
 
-    subgraph Terrestrial Real-Time Layer
-        B1[Edge PTZ Cameras: Sub-Pixel Optical Flow]
-        B2[Wireless LoRa MEMS Tilt & Vibration Nodes]
-        B3[Micro-Weather Station: Rainfall Rate mm/hr]
-        B4[Vibrating-Wire Piezometer Pore Pressure]
-    end
+ subgraph Terrestrial Real-Time Layer
+ B1[Edge PTZ Cameras: Sub-Pixel Optical Flow]
+ B2[Wireless LoRa MEMS Tilt & Vibration Nodes]
+ B3[Micro-Weather Station: Rainfall Rate mm/hr]
+ B4[Vibrating-Wire Piezometer Pore Pressure]
+ end
 
-    subgraph Spatial Geometry Layer
-        C1[Drone Photogrammetry 3D DEM Mesh]
-    end
+ subgraph Spatial Geometry Layer
+ C1[Drone Photogrammetry 3D DEM Mesh]
+ end
 
-    A4 & B1 & B2 & B3 & B4 & C1 --> FUSION[Multi-Modal Feature Synchronization Engine]
-    
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
-    
-    ML --> OUT_P[Rockfall Risk Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
-    
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Breakdown]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ A4 & B1 & B2 & B3 & B4 & C1 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ 
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ 
+ ML --> OUT_P[Rockfall Risk Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Cone]
+ 
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Breakdown]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 21.1: Complete data flow architecture integrating satellite InSAR with real-time terrestrial monitoring.*
 
@@ -609,12 +609,12 @@ Satellite InSAR solves the **spatial blindness** of point sensors, while terrest
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                  THE HYBRID ADVANTAGE                                             |
+| THE HYBRID ADVANTAGE |
 +---------------------------------------------------------------------------------------------------+
-|  [ SATELLITE InSAR ]            +  [ TERRESTRIAL EDGE AI & IoT ]   =  [ COMPLETE GEOSHIELD AI ]   |
-|  - Broad Spatial Coverage (100km) - High-Frequency Real-Time (30 FPS)- 24/7 Total Pit Safety      |
-|  - Historical 10-Year Baseline    - Sub-Second Siren Dispatch (<1.0s)- Macro + Tactical Warning   |
-|  - Zero In-Pit Hardware Footprint - Direct Subsurface Awareness (Pore)- Physics-Grounded Accuracy  |
+| [ SATELLITE InSAR ] + [ TERRESTRIAL EDGE AI & IoT ] = [ COMPLETE GEOSHIELD AI ] |
+| - Broad Spatial Coverage (100km) - High-Frequency Real-Time (30 FPS)- 24/7 Total Pit Safety |
+| - Historical 10-Year Baseline - Sub-Second Siren Dispatch (<1.0s)- Macro + Tactical Warning |
+| - Zero In-Pit Hardware Footprint - Direct Subsurface Awareness (Pore)- Physics-Grounded Accuracy |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -624,25 +624,25 @@ Satellite InSAR solves the **spatial blindness** of point sensors, while terrest
 
 ```mermaid
 flowchart TD
-    subgraph LEVEL_1["LEVEL 1: Regional Spaceborne Screening (Sentinel-1 InSAR)"]
-        L1[Covers entire 100 km² lease every 6-12 days ──► Identifies Creeping Sectors]
-    end
+ subgraph LEVEL_1["LEVEL 1: Regional Spaceborne Screening (Sentinel-1 InSAR)"]
+ L1[Covers entire 100 km² lease every 6-12 days Identifies Creeping Sectors]
+ end
 
-    subgraph LEVEL_2["LEVEL 2: Tactical Ground IoT Monitoring (Wireless LoRa Mesh)"]
-        L2[Deploys low-cost tilt & piezometer nodes in creeping sectors ──► 24/7 Telemetry]
-    end
+ subgraph LEVEL_2["LEVEL 2: Tactical Ground IoT Monitoring (Wireless LoRa Mesh)"]
+ L2[Deploys low-cost tilt & piezometer nodes in creeping sectors 24/7 Telemetry]
+ end
 
-    subgraph LEVEL_3["LEVEL 3: High-Resolution Visual Inspection (PTZ Cameras & Drones)"]
-        L3[Sub-pixel optical flow & 3D drone point clouds ──► 30 FPS Kinematic Tracking]
-    end
+ subgraph LEVEL_3["LEVEL 3: High-Resolution Visual Inspection (PTZ Cameras & Drones)"]
+ L3[Sub-pixel optical flow & 3D drone point clouds 30 FPS Kinematic Tracking]
+ end
 
-    subgraph LEVEL_4["LEVEL 4: Autonomous AI Prediction & TARP Action Engine"]
-        L4[Fuses all layers into PINN & Saito Model ──► Sub-Second Emergency Sirens & Radios]
-    end
+ subgraph LEVEL_4["LEVEL 4: Autonomous AI Prediction & TARP Action Engine"]
+ L4[Fuses all layers into PINN & Saito Model Sub-Second Emergency Sirens & Radios]
+ end
 
-    LEVEL_1 -->|Flags High-Risk Sector| LEVEL_2
-    LEVEL_2 -->|Triggers Zoom & Framing| LEVEL_3
-    LEVEL_3 -->|Feeds Multi-Modal Stream| LEVEL_4
+ LEVEL_1 -->|Flags High-Risk Sector| LEVEL_2
+ LEVEL_2 -->|Triggers Zoom & Framing| LEVEL_3
+ LEVEL_3 -->|Feeds Multi-Modal Stream| LEVEL_4
 ```
 *Figure 24.1: 4-tier hierarchical slope stability monitoring architecture for SIH25071.*
 
@@ -674,17 +674,17 @@ To ensure DGMS regulatory compliance and operator trust, every high-risk alert g
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 93.8%)"]
-        B["📍 Target Sector: Bench 4 - East Highwall (Grid Sector E-14)"]
-        C["⏱️ Predicted Collapse Window: 28 ± 6 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid Optical Velocity Surge: +34% contribution"]
-        D2["• Heavy 24-hr Monsoon Rainfall (38 mm): +24% contribution"]
-        D3["• Piezometric Pore Pressure Surge (18 kPa): +21% contribution"]
-        D4["• Historical Satellite InSAR Subsidence Trend: +12% contribution"]
-        D5["• Topographic Highwall Overhang Angle: +9% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 93.8%)"]
+ B[" Target Sector: Bench 4 - East Highwall (Grid Sector E-14)"]
+ C[" Predicted Collapse Window: 28 ± 6 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid Optical Velocity Surge: +34% contribution"]
+ D2["• Heavy 24-hr Monsoon Rainfall (38 mm): +24% contribution"]
+ D3["• Piezometric Pore Pressure Surge (18 kPa): +21% contribution"]
+ D4["• Historical Satellite InSAR Subsidence Trend: +12% contribution"]
+ D5["• Topographic Highwall Overhang Angle: +9% contribution"]
+ end
 ```
 *Figure 26.1: Conceptual SHAP explainable alert breakdown card.*
 
@@ -694,15 +694,15 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Single-Pane-of-Glass Decision Support Dashboard
-        D1[Interactive WebGPU 3D Digital Twin with Color-Coded Risk Heatmap]
-        D2[Regional Satellite InSAR Subsidence & Coherence Layer Overlay]
-        D3[Real-Time Synchronized Time-Series: Displacement, Velocity, Inverse Velocity]
-        D4[Dynamic 3D Rockfall Kinetic Runout Cone & Haul Road Hazard Envelope]
-        D5[Live Telemetry Feed: Micro-Weather, Piezometers, IoT Tilt Mesh]
-        D6[SHAP Causal Feature Attribution & Geotechnical Diagnostic Panel]
-        D7[One-Click DGMS-Compliant Statutory Safety Audit Logbook Export]
-    end
+ subgraph Single-Pane-of-Glass Decision Support Dashboard
+ D1[Interactive WebGPU 3D Digital Twin with Color-Coded Risk Heatmap]
+ D2[Regional Satellite InSAR Subsidence & Coherence Layer Overlay]
+ D3[Real-Time Synchronized Time-Series: Displacement, Velocity, Inverse Velocity]
+ D4[Dynamic 3D Rockfall Kinetic Runout Cone & Haul Road Hazard Envelope]
+ D5[Live Telemetry Feed: Micro-Weather, Piezometers, IoT Tilt Mesh]
+ D6[SHAP Causal Feature Attribution & Geotechnical Diagnostic Panel]
+ D7[One-Click DGMS-Compliant Statutory Safety Audit Logbook Export]
+ end
 ```
 *Figure 27.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -714,10 +714,10 @@ flowchart TD
 | :--- | :--- | :--- |
 | **Spatial Coverage** | Macro Regional ($100+\text{ km}^2$) | Macro Regional (Satellite) + Highwall Tactical (Vision/IoT) |
 | **Measurement Frequency** | Periodic (Every 6 to 12 days) | **Continuous 30 FPS / Sub-Second Real-Time** |
-| **Immediate Life Safety Alerts**| ❌ Impossible due to revisit delay | **✅ Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
+| **Immediate Life Safety Alerts**| [REJECTED] Impossible due to revisit delay | **[CONFIRMED] Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
 | **Atmospheric Noise Rejection** | Multi-temporal baseline filtering | **Multi-Modal Cross-Validation (Vision + InSAR + Tilt)** |
-| **Pore Pressure & Hydrogeology**| ❌ Blind to subsurface conditions | **✅ Synchronized Vibrating-Wire Piezometer Telemetry** |
-| **3D Rockfall Runout Cones** | ❌ None | **✅ 3D Rigid-Body Physics Bouncing Trajectory Modeling** |
+| **Pore Pressure & Hydrogeology**| [REJECTED] Blind to subsurface conditions | **[CONFIRMED] Synchronized Vibrating-Wire Piezometer Telemetry** |
+| **3D Rockfall Runout Cones** | [REJECTED] None | **[CONFIRMED] 3D Rigid-Body Physics Bouncing Trajectory Modeling** |
 | **Cost Profile** | Free (Sentinel-1) to $$ Commercial | **Ultra-Low Cost (₹2.0L – ₹5.0L per pit infrastructure)** |
 | **Regulatory Compliance** | Historical auditing only | **Full Real-Time DGMS (Tech) Circular Compliance** |
 
@@ -731,13 +731,13 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ SATELLITE InSAR LIMITATION ]        ──► Multi-day latency & no real-time life safety alerts.   |
-|  [ IN-SITU POINT SENSOR LIMITATION ]   ──► High cost & spatial point blindness.                   |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Hierarchical Fusion: Satellite InSAR screens regional  |
-|                                            stress, Edge Vision & LoRa IoT monitor tactical benches|
-|                                            in real-time, and AI fuses both for sub-second TARP!   |
+| [ SATELLITE InSAR LIMITATION ] Multi-day latency & no real-time life safety alerts. |
+| [ IN-SITU POINT SENSOR LIMITATION ] High cost & spatial point blindness. |
+| [ PROPOSED SIH25071 INNOVATION ] Hierarchical Fusion: Satellite InSAR screens regional |
+| stress, Edge Vision & LoRa IoT monitor tactical benches|
+| in real-time, and AI fuses both for sub-second TARP! |
 +---------------------------------------------------------------------------------------------------+
 ```
 

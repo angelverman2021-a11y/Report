@@ -1,10 +1,10 @@
 # Existing Technology 7: Drone / UAV Photogrammetry
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/07_Drone_UAV_Photogrammetry.md`
 
 ---
@@ -24,11 +24,11 @@ This report evaluates Drone Photogrammetry as an **existing spatial monitoring t
 
 ```mermaid
 flowchart TD
-    UAV[Autonomous Survey Drone Flight] -->|Overlapping 4K/20MP Digital Photos| CAM[Multi-Angle Optical Imagery]
-    CAM -->|Structure-from-Motion SfM Algorithm| SFM[Sparse 3D Point Cloud & Camera Poses]
-    SFM -->|Multi-View Stereo MVS Dense Matching| MVS[Dense 3D Point Cloud & Textured Mesh]
-    MVS -->|Rasterization & Orthorectification| PROD[Digital Surface Model DSM & Orthomosaic]
-    PROD -->|Multi-Temporal Epoch Differencing| RISK[3D Slope Change & Rockfall Scar Detection]
+ UAV[Autonomous Survey Drone Flight] -->|Overlapping 4K/20MP Digital Photos| CAM[Multi-Angle Optical Imagery]
+ CAM -->|Structure-from-Motion SfM Algorithm| SFM[Sparse 3D Point Cloud & Camera Poses]
+ SFM -->|Multi-View Stereo MVS Dense Matching| MVS[Dense 3D Point Cloud & Textured Mesh]
+ MVS -->|Rasterization & Orthorectification| PROD[Digital Surface Model DSM & Orthomosaic]
+ PROD -->|Multi-Temporal Epoch Differencing| RISK[3D Slope Change & Rockfall Scar Detection]
 ```
 *Figure 1.1: High-level data transformation flow in drone photogrammetric monitoring.*
 
@@ -40,7 +40,7 @@ flowchart TD
 | **Sensor Hardware** | Standard high-resolution RGB camera (e.g., 20 MP to 45 MP CMOS). | Specialized pulsed laser scanner + high-grade IMU. |
 | **Point Derivation** | Algorithmic pixel matching (SfM / MVS). | Direct Time-of-Flight (ToF) laser pulse distance measurement. |
 | **Color & Texture** | **Native Photorealistic RGB Texture** on every point. | Intensity reflectivity (RGB requires co-registered camera). |
-| **Vegetation & Shadow Penetration**| ❌ Cannot see beneath dense vegetation or deep shadows. | ✅ Multiple laser pulse returns penetrate vegetation. |
+| **Vegetation & Shadow Penetration**| [REJECTED] Cannot see beneath dense vegetation or deep shadows. | [CONFIRMED] Multiple laser pulse returns penetrate vegetation. |
 | **Hardware Capital Cost** | **Low to Moderate** (₹1.5 Lakh – ₹8.0 Lakh per drone package). | **High to Extreme** (₹25 Lakh – ₹1.2 Crore per LiDAR unit). |
 | **Open-Cast Mine Role** | Topographic mapping, crack segmentation, 3D Digital Twin mesh. | Bare-earth filtering, structural penetration in heavy dust. |
 
@@ -53,15 +53,15 @@ Drone photogrammetry has democratized 3D mapping in mining because enterprise dr
 
 ```mermaid
 flowchart TD
-    S1[1. Autonomous Drone Grid Mission Planning] -->|Pre-Programmed Waypoints & Oblique Camera Angles| S2[2. Overlapping Aerial Image Capture]
-    S2 -->|75% Forward Overlap & 70% Side Overlap| S3[3. Feature Keypoint Extraction SIFT/ORB]
-    S3 -->|Matches Keypoints Across Multiple Views| S4[4. Structure-from-Motion SfM Bundle Adjustment]
-    S4 -->|Estimates 3D Coordinates & Camera Poses| S5[5. Sparse 3D Point Cloud Generation]
-    S5 -->|Multi-View Stereo MVS Depth-Map Fusion| S6[6. Dense 3D Point Cloud & Triangulated Mesh]
-    S6 -->|RTK Geotags & Ground Control Points GCPs| S7[7. Absolute Coordinate Georeferencing WGS84/UTM]
-    S7 -->|Raster Generation| S8[8. Orthomosaic & Digital Surface Model DSM]
-    S8 -->|Multi-Temporal Differencing DoD & M3C2| S9[9. Surface Displacement & Rockfall Scar Detection]
-    S9 -->|AI Multi-Modal Fusion Core| S10[10. Geotechnical Hazard Assessment & Alert]
+ S1[1. Autonomous Drone Grid Mission Planning] -->|Pre-Programmed Waypoints & Oblique Camera Angles| S2[2. Overlapping Aerial Image Capture]
+ S2 -->|75% Forward Overlap & 70% Side Overlap| S3[3. Feature Keypoint Extraction SIFT/ORB]
+ S3 -->|Matches Keypoints Across Multiple Views| S4[4. Structure-from-Motion SfM Bundle Adjustment]
+ S4 -->|Estimates 3D Coordinates & Camera Poses| S5[5. Sparse 3D Point Cloud Generation]
+ S5 -->|Multi-View Stereo MVS Depth-Map Fusion| S6[6. Dense 3D Point Cloud & Triangulated Mesh]
+ S6 -->|RTK Geotags & Ground Control Points GCPs| S7[7. Absolute Coordinate Georeferencing WGS84/UTM]
+ S7 -->|Raster Generation| S8[8. Orthomosaic & Digital Surface Model DSM]
+ S8 -->|Multi-Temporal Differencing DoD & M3C2| S9[9. Surface Displacement & Rockfall Scar Detection]
+ S9 -->|AI Multi-Modal Fusion Core| S10[10. Geotechnical Hazard Assessment & Alert]
 ```
 *Figure 2.1: End-to-end processing workflow of UAV photogrammetry for open-pit slope monitoring.*
 
@@ -77,14 +77,14 @@ flowchart TD
 ## 3. Core Photogrammetry Concepts
 
 ```
-                 Drone Camera Image 1        Drone Camera Image 2
-                         [📷]                        [📷]
-                           \                          /
-                            \  Line of Sight 1       / Line of Sight 2
-                             \                      /
-                              \                    /
-                               ▼                  ▼
-                         [● Target Rock Feature Point P(X, Y, Z)]
+ Drone Camera Image 1 Drone Camera Image 2
+ [] []
+ \ /
+ \ Line of Sight 1 / Line of Sight 2
+ \ /
+ \ /
+ 
+ [ Target Rock Feature Point P(X, Y, Z)]
 ```
 *Figure 3.1: Optical ray intersection principle in multi-view stereophotogrammetry.*
 
@@ -120,13 +120,13 @@ Repeated drone surveys of the same open-pit mine captured over time ($T_1, T_2, 
 
 ```mermaid
 flowchart LR
-    A[Drone Survey Baseline Epoch T1] --> C[Multi-Temporal 3D Model Comparison]
-    B[Drone Survey Repeated Epoch T2] --> C
-    C --> D1[Pre-Failure Bench Bulging & Shear Creep]
-    C --> D2[Rockfall Scars: Detached Volume Cavities]
-    C --> D3[Talus Accumulation on Catch Benches & Roads]
-    C --> D4[Tension Crack Propagation along Bench Crests]
-    C --> D5[Erosion & Weathering Gully Development]
+ A[Drone Survey Baseline Epoch T1] --> C[Multi-Temporal 3D Model Comparison]
+ B[Drone Survey Repeated Epoch T2] --> C
+ C --> D1[Pre-Failure Bench Bulging & Shear Creep]
+ C --> D2[Rockfall Scars: Detached Volume Cavities]
+ C --> D3[Talus Accumulation on Catch Benches & Roads]
+ C --> D4[Tension Crack Propagation along Bench Crests]
+ C --> D5[Erosion & Weathering Gully Development]
 ```
 *Figure 4.1: Geotechnical change phenomena identified through multi-temporal drone photogrammetry.*
 
@@ -136,12 +136,12 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph Photogrammetric Change Detection Approaches
-        M1[DEM / DSM Differencing DoD] -->|Grid Elevation Subtraction: ΔZ = Z2 - Z1| R1[2D Vertical Height Change Raster]
-        M2[Point Cloud Differencing M3C2] -->|Calculates True 3D Orthogonal Surface Distance| R2[3D Highwall Normal Bulging Vectors]
-        M3[Orthomosaic Visual Feature Differencing] -->|Digital Image Correlation DIC| R3[Planar Pixel Motion & Crack Tracking]
-        M4[AI Computer Vision Segmentation] -->|Mobile-SAM / YOLOv11 Semantic Segmentation| R4[Automated Crack Length & Width Growth]
-    end
+ subgraph Photogrammetric Change Detection Approaches
+ M1[DEM / DSM Differencing DoD] -->|Grid Elevation Subtraction: ΔZ = Z2 - Z1| R1[2D Vertical Height Change Raster]
+ M2[Point Cloud Differencing M3C2] -->|Calculates True 3D Orthogonal Surface Distance| R2[3D Highwall Normal Bulging Vectors]
+ M3[Orthomosaic Visual Feature Differencing] -->|Digital Image Correlation DIC| R3[Planar Pixel Motion & Crack Tracking]
+ M4[AI Computer Vision Segmentation] -->|Mobile-SAM / YOLOv11 Semantic Segmentation| R4[Automated Crack Length & Width Growth]
+ end
 ```
 *Figure 5.1: Comparative algorithms for multi-temporal photogrammetric change detection.*
 
@@ -162,28 +162,28 @@ High-resolution orthomosaics ($< 2\text{ cm/pixel}$) are fed into semantic segme
 
 ```mermaid
 flowchart TD
-    subgraph Aerial Acquisition
-        UAV[Enterprise RTK Survey Drone: DJI M300 / Mavic 3E] -->|Oblique & Nadir Grid Flight Path| IMGS[Raw 4K/20MP Geotagged Image Dataset]
-    end
+ subgraph Aerial Acquisition
+ UAV[Enterprise RTK Survey Drone: DJI M300 / Mavic 3E] -->|Oblique & Nadir Grid Flight Path| IMGS[Raw 4K/20MP Geotagged Image Dataset]
+ end
 
-    subgraph Photogrammetry Engine
-        IMGS --> SFM_MVS[Open-Source SfM/MVS Engine: WebODM / COLMAP]
-        SFM_MVS --> MESH[3D Textured Surface Mesh PLY/OBJ]
-        SFM_MVS --> DSM_RAST[High-Resolution DSM & Orthomosaic GeoTIFF]
-    end
+ subgraph Photogrammetry Engine
+ IMGS --> SFM_MVS[Open-Source SfM/MVS Engine: WebODM / COLMAP]
+ SFM_MVS --> MESH[3D Textured Surface Mesh PLY/OBJ]
+ SFM_MVS --> DSM_RAST[High-Resolution DSM & Orthomosaic GeoTIFF]
+ end
 
-    subgraph Feature Extraction & Geotechnics
-        MESH --> M3C2[M3C2 3D Change Detection Engine]
-        MESH --> STRUCT[Automated Geological Discontinuity Extractor]
-        DSM_RAST --> CRACK[AI Computer Vision Tension Crack Segmenter]
-    end
+ subgraph Feature Extraction & Geotechnics
+ MESH --> M3C2[M3C2 3D Change Detection Engine]
+ MESH --> STRUCT[Automated Geological Discontinuity Extractor]
+ DSM_RAST --> CRACK[AI Computer Vision Tension Crack Segmenter]
+ end
 
-    subgraph Decision Support & TARP
-        M3C2 & STRUCT & CRACK --> FUSION[Multi-Modal Feature Synchronization Core]
-        FUSION --> AI[XGBoost & PINN Rockfall Risk Model]
-        AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-        AI --> TARP[Sub-Second Multi-Channel Emergency Dispatch]
-    end
+ subgraph Decision Support & TARP
+ M3C2 & STRUCT & CRACK --> FUSION[Multi-Modal Feature Synchronization Core]
+ FUSION --> AI[XGBoost & PINN Rockfall Risk Model]
+ AI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ AI --> TARP[Sub-Second Multi-Channel Emergency Dispatch]
+ end
 ```
 *Figure 6.1: Hardware, processing, and AI architecture of an open-pit drone photogrammetry monitoring system.*
 
@@ -194,22 +194,22 @@ flowchart TD
 Surveying deep open-pit highwalls requires specialized multi-tier flight trajectories:
 
 ```
-                  Flight Path 1: Regional Nadir Grid (90° Camera)
-              ─────────────────────────────────────────────────────►
-                         [Topographic Context & Dumps]
-                                       │
-                                       ▼
-                  Flight Path 2: Oblique Highwall Orbit (45° Camera)
-              ═════════════════════════════════════════════════════►
-                         [Vertical Benches & Overhangs]
+ Flight Path 1: Regional Nadir Grid (90° Camera)
+ 
+ [Topographic Context & Dumps]
+ 
+ 
+ Flight Path 2: Oblique Highwall Orbit (45° Camera)
+ 
+ [Vertical Benches & Overhangs]
 ```
 
 ```mermaid
 flowchart LR
-    A[3D Terrain-Following Mission] --> B[Nadir Grid for Flat Pit Rims 90° Camera]
-    A --> C[Oblique Wall-Facing Passes 45° Camera]
-    A --> D[Automated Elevation Buffering for Deep Pits]
-    B & C & D --> E[Eliminates Occlusions & Geometric Stretching on Vertical Cliffs]
+ A[3D Terrain-Following Mission] --> B[Nadir Grid for Flat Pit Rims 90° Camera]
+ A --> C[Oblique Wall-Facing Passes 45° Camera]
+ A --> D[Automated Elevation Buffering for Deep Pits]
+ B & C & D --> E[Eliminates Occlusions & Geometric Stretching on Vertical Cliffs]
 ```
 *Figure 7.1: Multi-tiered flight trajectory planning for steep open-pit highwalls.*
 
@@ -221,11 +221,11 @@ Drone photogrammetric 3D textured meshes allow rock mechanics engineers to extra
 
 ```mermaid
 flowchart LR
-    A[3D Textured Highwall Mesh] --> B[RANSAC Structural Plane Fitting]
-    B --> C[Extracts Planar Discontinuity Clusters]
-    C --> D[Computes Joint Dip α & Dip Direction β Angles]
-    D --> E[Generates Stereonet Density Plots]
-    E --> F[Kinematic Stability Failure Evaluation: Planar, Wedge, Toppling]
+ A[3D Textured Highwall Mesh] --> B[RANSAC Structural Plane Fitting]
+ B --> C[Extracts Planar Discontinuity Clusters]
+ C --> D[Computes Joint Dip α & Dip Direction β Angles]
+ D --> E[Generates Stereonet Density Plots]
+ E --> F[Kinematic Stability Failure Evaluation: Planar, Wedge, Toppling]
 ```
 *Figure 8.1: Workflow for automated structural geological joint mapping from drone 3D meshes.*
 
@@ -233,7 +233,7 @@ flowchart LR
 
 ## 9. Illustrative Time-Series Volumetric & Deformation Analysis
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following table and graphs represent **Synthetic / Illustrative Data** designed solely to explain multi-temporal drone survey trends. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Multi-Temporal Drone Survey Dataset
@@ -249,18 +249,18 @@ flowchart LR
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Drone-Derived Tension Crack Dilation vs Time (Synthetic Data)"
-    x-axis "Elapsed Time (weeks)" [0, 2, 4, 6, 8]
-    y-axis "Crack Opening Width (mm)" 0 --> 70
-    line [5.0, 8.5, 14.0, 28.0, 65.0]
+ title "Illustrative Example: Drone-Derived Tension Crack Dilation vs Time (Synthetic Data)"
+ x-axis "Elapsed Time (weeks)" [0, 2, 4, 6, 8]
+ y-axis "Crack Opening Width (mm)" 0 --> 70
+ line [5.0, 8.5, 14.0, 28.0, 65.0]
 ```
 *Figure 9.1: Illustrative tension crack opening dilation curve extracted from multi-temporal drone surveys.*
 
@@ -280,22 +280,22 @@ xychart-beta
 
 ```mermaid
 mindmap
-  root((Drone Photogrammetry Limitations))
-    Processing Latency Bottleneck
-      SfM bundle adjustment takes 2 to 6 hours
-      Cannot provide real-time warning for sudden rockfalls
-    Weather & Atmospheric Restrictions
-      Cannot fly in high winds >35 km/h
-      Grounded during heavy monsoon cloudbursts & thick fog
-    Lighting & Deep Shadow Artifacts
-      Steep pit walls cast deep shadows causing matching failure
-      Direct midday sun causes intense glare on light rock faces
-    Regulatory & Operational Constraints
-      DGMS / DGCA flight permission requirements
-      Airspace closure during active blast windows
-    Zero Subsurface & Causal Insight
-      Measures surface color & geometry only
-      Blind to pore-water pressure, shear stress, and blast vibrations
+ root((Drone Photogrammetry Limitations))
+ Processing Latency Bottleneck
+ SfM bundle adjustment takes 2 to 6 hours
+ Cannot provide real-time warning for sudden rockfalls
+ Weather & Atmospheric Restrictions
+ Cannot fly in high winds >35 km/h
+ Grounded during heavy monsoon cloudbursts & thick fog
+ Lighting & Deep Shadow Artifacts
+ Steep pit walls cast deep shadows causing matching failure
+ Direct midday sun causes intense glare on light rock faces
+ Regulatory & Operational Constraints
+ DGMS / DGCA flight permission requirements
+ Airspace closure during active blast windows
+ Zero Subsurface & Causal Insight
+ Measures surface color & geometry only
+ Blind to pore-water pressure, shear stress, and blast vibrations
 ```
 *Figure 11.1: Environmental, computational, and operational limitations of drone photogrammetry in open-cast mines.*
 
@@ -307,8 +307,8 @@ mindmap
 | :--- | :--- | :--- | :--- | :--- |
 | **Primary Sensing Type** | **Passive Optical RGB Imagery** | Active Near-Infrared Laser | Active Near-Infrared Laser | Active Microwave Radar (Ku/X) |
 | **Point Derivation Method**| Structure-from-Motion (SfM) | Direct Time-of-Flight (ToF) | Direct Time-of-Flight (ToF) | Differential Phase Interferometry |
-| **True Photorealistic RGB**| **Native 4K / 20MP Textures** | Co-registered camera required | Co-registered camera required | ❌ None (Radar heatmap only) |
-| **Vegetation / Dust Penetration**| ❌ Fails in dust & vegetation | **High (Multi-return pulses)** | Moderate (Scattering noise) | **Exceptional (Microwaves penetrate)**|
+| **True Photorealistic RGB**| **Native 4K / 20MP Textures** | Co-registered camera required | Co-registered camera required | [REJECTED] None (Radar heatmap only) |
+| **Vegetation / Dust Penetration**| [REJECTED] Fails in dust & vegetation | **High (Multi-return pulses)** | Moderate (Scattering noise) | **Exceptional (Microwaves penetrate)**|
 | **Measurement Update Rate** | Periodic (Hours of processing lag)| Periodic (Minutes of processing)| Periodic (Setup overhead) | **Continuous (Every 1 to 5 min)** |
 | **System Capital Cost** | **₹1.5 Lakh – ₹8.0 Lakh (Low)** | ₹25 Lakh – ₹80 Lakh (High) | ₹40 Lakh – ₹1.2 Cr (High) | **₹3.5 Cr – ₹8.0 Cr (Extreme)** |
 | **SIH25071 Strategic Role** | **Master 3D Terrain Digital Twin** | Structural joint baseline | High-precision baseline mesh | Real-time velocity kinematics |
@@ -345,32 +345,32 @@ To build our SIH25071 prototype, we evaluated verified open-source photogrammetr
 
 ```mermaid
 flowchart TD
-    subgraph 3D Photogrammetric Foundation
-        A1[Periodic UAV Survey Flights: 1 flight/week] --> A2[WebODM / COLMAP SfM-MVS Pipeline]
-        A2 --> A3[Photorealistic 3D Textured Mesh OBJ/GLTF]
-        A2 --> A4[High-Resolution Orthomosaic & DSM GeoTIFF]
-        A4 --> A5[AI Computer Vision Tension Crack Segmenter]
-    end
+ subgraph 3D Photogrammetric Foundation
+ A1[Periodic UAV Survey Flights: 1 flight/week] --> A2[WebODM / COLMAP SfM-MVS Pipeline]
+ A2 --> A3[Photorealistic 3D Textured Mesh OBJ/GLTF]
+ A2 --> A4[High-Resolution Orthomosaic & DSM GeoTIFF]
+ A4 --> A5[AI Computer Vision Tension Crack Segmenter]
+ end
 
-    subgraph Real-Time Terrestrial & Spaceborne Telemetry
-        B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
-        B2[Low-Cost Wireless LoRa MEMS Tilt & Vibration Nodes]
-        B3[Micro-Weather Station: Rainfall Intensity mm/hr]
-        B4[Vibrating-Wire Piezometer Pore-Water Pressure]
-        B5[Sentinel-1 InSAR Macro Subsidence Prior]
-    end
+ subgraph Real-Time Terrestrial & Spaceborne Telemetry
+ B1[Edge PTZ Cameras: Sub-Pixel Optical Flow 30 FPS]
+ B2[Low-Cost Wireless LoRa MEMS Tilt & Vibration Nodes]
+ B3[Micro-Weather Station: Rainfall Intensity mm/hr]
+ B4[Vibrating-Wire Piezometer Pore-Water Pressure]
+ B5[Sentinel-1 InSAR Macro Subsidence Prior]
+ end
 
-    A3 & A4 & A5 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Core]
+ A3 & A4 & A5 & B1 & B2 & B3 & B4 & B5 --> FUSION[Multi-Modal Feature Synchronization Core]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 15.1: Master multi-sensor data fusion architecture incorporating drone 3D photogrammetry.*
 
@@ -396,11 +396,11 @@ A foundational innovation of our SIH25071 platform is using the **drone 3D textu
 
 ```mermaid
 flowchart LR
-    A[Drone 3D Triangular Mesh OBJ/GLTF] --> B[WebGPU Rigid-Body Physics Engine]
-    C[Detached Boulder Mass & Gravity] --> B
-    B --> D[Simulates Exact Bounce Heights & Trajectories]
-    B --> E[Calculates Impact Envelopes on Lower Benches]
-    D & E --> F[Real-Time 3D Rockfall Runout Cone on Active Haul Roads]
+ A[Drone 3D Triangular Mesh OBJ/GLTF] --> B[WebGPU Rigid-Body Physics Engine]
+ C[Detached Boulder Mass & Gravity] --> B
+ B --> D[Simulates Exact Bounce Heights & Trajectories]
+ B --> E[Calculates Impact Envelopes on Lower Benches]
+ D & E --> F[Real-Time 3D Rockfall Runout Cone on Active Haul Roads]
 ```
 *Figure 17.1: Drone 3D mesh acting as the physical collision boundary for kinetic rockfall runout modeling.*
 
@@ -412,17 +412,17 @@ flowchart LR
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 93.4%)"]
-        B["📍 Target Sector: Bench 4 - East Highwall (Grid Sector E-16)"]
-        C["⏱️ Predicted Failure Window: 26 ± 6 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Rapid Tension Crack Opening from Drone Orthophoto (42 mm): +33% contribution"]
-        D2["• Real-Time Optical Flow Velocity Surge (14.2 mm/hr): +26% contribution"]
-        D3["• Heavy 24-hr Monsoon Precipitation (39 mm): +21% contribution"]
-        D4["• Piezometric Hydrostatic Pressure Spike (14 kPa): +12% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +8% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 93.4%)"]
+ B[" Target Sector: Bench 4 - East Highwall (Grid Sector E-16)"]
+ C[" Predicted Failure Window: 26 ± 6 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Rapid Tension Crack Opening from Drone Orthophoto (42 mm): +33% contribution"]
+ D2["• Real-Time Optical Flow Velocity Surge (14.2 mm/hr): +26% contribution"]
+ D3["• Heavy 24-hr Monsoon Precipitation (39 mm): +21% contribution"]
+ D4["• Piezometric Hydrostatic Pressure Spike (14 kPa): +12% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +8% contribution"]
+ end
 ```
 *Figure 18.1: Conceptual SHAP explainable alert diagnostic card for drone-informed alerts.*
 
@@ -432,14 +432,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Photorealistic Drone Mine Mesh with Real-Time Risk Heatmap]
-        D2[High-Resolution Orthomosaic Overlay with Automated AI Crack Detections]
-        D3[Multi-Temporal DSM Differencing Volumetric Loss & Gain Map]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
-        D6[One-Click DGMS Statutory Safety Compliance & Inspection Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Photorealistic Drone Mine Mesh with Real-Time Risk Heatmap]
+ D2[High-Resolution Orthomosaic Overlay with Automated AI Crack Detections]
+ D3[Multi-Temporal DSM Differencing Volumetric Loss & Gain Map]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: Weather, LoRa Tilt, Piezometers]
+ D6[One-Click DGMS Statutory Safety Compliance & Inspection Logbook Export]
+ end
 ```
 *Figure 19.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -450,10 +450,10 @@ flowchart TD
 | Feature / Dimension | Traditional Drone Photogrammetry | Proposed SIH25071 Multi-Modal Platform |
 | :--- | :--- | :--- |
 | **Operational Frequency** | Periodic surveys (weekly / monthly) | **Continuous 24/7 Monitoring (30 FPS Vision + IoT)** |
-| **Immediate Life Safety Alerts**| ❌ Impossible (2–6 hours processing lag) | **✅ Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
+| **Immediate Life Safety Alerts**| [REJECTED] Impossible (2–6 hours processing lag) | **[CONFIRMED] Autonomous Sub-Second TARP Siren Dispatch (<1.0s)** |
 | **3D Terrain Digital Twin** | Static CAD / GIS export | **Interactive 60 FPS WebGPU Dynamic Digital Twin** |
 | **Atmospheric Noise Rejection** | Manual inspection | **Multi-Modal Cross-Validation (Vision + LoRa + InSAR)** |
-| **Subsurface Awareness** | ❌ Blind to subsurface conditions | **✅ Synchronized Vibrating-Wire Piezometer Telemetry** |
+| **Subsurface Awareness** | [REJECTED] Blind to subsurface conditions | **[CONFIRMED] Synchronized Vibrating-Wire Piezometer Telemetry** |
 | **Kinetic Trajectory Modeling** | Offline post-mortem analysis | **Real-Time 3D Rigid-Body Boulder Bounce Simulation** |
 | **System Capital Cost** | ₹3.0 Lakh – ₹12.0 Lakh (Drone rig) | **₹2.0L – ₹5.0L Complete Full-Pit Infrastructure** |
 
@@ -463,15 +463,15 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE DRONE LIMITATION ]       ──► High spatial resolution & photorealism, but            |
-|                                            constrained by 2-6 hour processing latency & no 24/7   |
-|                                            second-by-second life-safety early warning.            |
-|  [ PROPOSED SIH25071 INNOVATION ]      ──► Uses periodic drone flights to create the master 3D    |
-|                                            digital twin mesh & detect crest cracks, then drives   |
-|                                            continuous real-time alerting via low-cost fixed edge  |
-|                                            vision cameras, wireless LoRa IoT, & physics-AI!       |
+| [ STANDALONE DRONE LIMITATION ] High spatial resolution & photorealism, but |
+| constrained by 2-6 hour processing latency & no 24/7 |
+| second-by-second life-safety early warning. |
+| [ PROPOSED SIH25071 INNOVATION ] Uses periodic drone flights to create the master 3D |
+| digital twin mesh & detect crest cracks, then drives |
+| continuous real-time alerting via low-cost fixed edge |
+| vision cameras, wireless LoRa IoT, & physics-AI! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -492,49 +492,49 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Periodic UAV Survey Mission Archive: Weekly 4K Flights]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Wireless LoRa MEMS Tilt & Vibration Nodes]
-        S4[Vibrating-Wire Borehole Piezometers]
-        S5[Micro-Weather Station: Rain & Humidity]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Periodic UAV Survey Mission Archive: Weekly 4K Flights]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Wireless LoRa MEMS Tilt & Vibration Nodes]
+ S4[Vibrating-Wire Borehole Piezometers]
+ S5[Micro-Weather Station: Rain & Humidity]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[WebODM SfM Processing & 3D Mesh Generation OBJ/GLTF]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 & S4 --> P3[LoRa Mesh Telemetry Parser & Kalman Filter]
-        S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
-        S6 --> P5[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[WebODM SfM Processing & 3D Mesh Generation OBJ/GLTF]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 & S4 --> P3[LoRa Mesh Telemetry Parser & Kalman Filter]
+ S5 --> P4[Rainfall Infiltration Rate & Antecedent Moisture Index]
+ S6 --> P5[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_GEO[Drone 3D Mesh, Crest Crack Width & Volumetric Loss]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Saito Inverse Velocity]
-        FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
-    end
+ P1 & P2 & P3 & P4 & P5 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_GEO[Drone 3D Mesh, Crest Crack Width & Volumetric Loss]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Saito Inverse Velocity]
+ FE --> F_ENV[Rainfall Surge, Pore Pressure & Blast PPV]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_GEO & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_GEO & F_KIN & F_ENV --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 23.1: Complete end-to-end system architecture incorporating drone 3D photogrammetry into the real-time AI rockfall prediction pipeline.*
 

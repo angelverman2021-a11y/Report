@@ -1,10 +1,10 @@
 # Existing Technology 17: Weather Stations
 
-> **Document Type:** Research & Benchmark Analysis  
-> **Problem Statement ID:** SIH25071  
-> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines  
-> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation  
+> **Document Type:** Research & Benchmark Analysis 
+> **Problem Statement ID:** SIH25071 
+> **Problem Statement Title:** AI-Based Rockfall Prediction and Alert System for Open-Pit Mines 
+> **Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management 
+> **Prepared For:** Smart India Hackathon (SIH 2025) Research & Development Documentation 
 > **Target File:** `docs/17_Weather_Stations.md`
 
 ---
@@ -23,17 +23,17 @@ This report evaluates Weather Stations as an **existing environmental monitoring
 An **Automatic Weather Station (AWS)** is an autonomous, solar-powered field station equipped with environmental transducers, a microprocessor data logger, and wireless telemetry modems that record and transmit local atmospheric parameters at high temporal resolutions ($1\text{ to } 10\text{ minutes}$).
 
 ```
-          [Solar Panel & LiFePO4 Battery]
-                        │
-       ┌────────────────┼────────────────┐
-       ▼                ▼                ▼
+ [Solar Panel & LiFePO4 Battery]
+ 
+ 
+ 
 [Ultrasonic Wind] [Tipping Bucket] [Digital Barometer &]
-[Anemometer & Vane] [Rain Gauge]   [Temp/Humidity Probe]
-       │                │                │
-       └────────────────┬────────────────┘
-                        │
-                        ▼
-      [Central Microcontroller Logger & LoRa/4G]
+[Anemometer & Vane] [Rain Gauge] [Temp/Humidity Probe]
+ 
+ 
+ 
+ 
+ [Central Microcontroller Logger & LoRa/4G]
 ```
 *Figure 1.1: Component architecture of an autonomous open-cast mine weather station.*
 
@@ -64,13 +64,13 @@ An **Automatic Weather Station (AWS)** is an autonomous, solar-powered field sta
 
 ```mermaid
 flowchart TD
-    RAIN[1. Monsoon Rainfall / Cloudburst Event: High Intensity I mm/hr] --> INFILT[2. Rapid Infiltration into Open Tension Cracks & Joint Fractures]
-    INFILT --> PWP[3. Subsurface Pore-Water Pressure Surges: u increases rapidly]
-    PWP --> EFF_STRESS[4. Terzaghi Effective Normal Stress Drops: σ' = σ - u]
-    EFF_STRESS --> MOHR[5. Mohr-Coulomb Shear Resistance Collapses: τ_f = c' + σ' tan φ']
-    MOHR --> WT_LOAD[6. Saturation Increases Surcharge Mass: Total Driving Force Surges]
-    WT_LOAD --> CLAY_LUB[7. Moisture Softens & Lubricates Slickensided Clay Gouge Layers]
-    CLAY_LUB --> UNSTABLE[8. Highwall Slope Instability & Rockfall Triggered]
+ RAIN[1. Monsoon Rainfall / Cloudburst Event: High Intensity I mm/hr] --> INFILT[2. Rapid Infiltration into Open Tension Cracks & Joint Fractures]
+ INFILT --> PWP[3. Subsurface Pore-Water Pressure Surges: u increases rapidly]
+ PWP --> EFF_STRESS[4. Terzaghi Effective Normal Stress Drops: σ' = σ - u]
+ EFF_STRESS --> MOHR[5. Mohr-Coulomb Shear Resistance Collapses: τ_f = c' + σ' tan φ']
+ MOHR --> WT_LOAD[6. Saturation Increases Surcharge Mass: Total Driving Force Surges]
+ WT_LOAD --> CLAY_LUB[7. Moisture Softens & Lubricates Slickensided Clay Gouge Layers]
+ CLAY_LUB --> UNSTABLE[8. Highwall Slope Instability & Rockfall Triggered]
 ```
 *Figure 3.1: Hydro-mechanical failure progression from rainfall infiltration to shear collapse.*
 
@@ -104,18 +104,18 @@ For tropical and monsoon regions: $I = 14.82 \cdot D^{-0.39}$ (where $I$ is mean
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#0275d8"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#0275d8"
 ---
 xychart-beta
-    title "Illustrative Example: Cumulative Rainfall Accumulation vs Time (Synthetic Data)"
-    x-axis "Elapsed Storm Time (Hours)" [1, 3, 6, 12, 18, 24]
-    y-axis "Cumulative Rainfall (mm)" 0 --> 120
-    line [8, 22, 48, 75, 98, 115]
+ title "Illustrative Example: Cumulative Rainfall Accumulation vs Time (Synthetic Data)"
+ x-axis "Elapsed Storm Time (Hours)" [1, 3, 6, 12, 18, 24]
+ y-axis "Cumulative Rainfall (mm)" 0 --> 120
+ line [8, 22, 48, 75, 98, 115]
 ```
 *Figure 4.1: Illustrative cumulative rainfall accumulation curve during a heavy monsoon cloudburst.*
 
@@ -135,7 +135,7 @@ This daily thermo-mechanical expansion and contraction causes **thermal fatigue*
 
 ## 6. Time-Series Weather Data
 
-> **Important Data Disclaimer:**  
+> **Important Data Disclaimer:** 
 > *The following dataset and graphs represent **Synthetic / Illustrative Data** designed solely to demonstrate multi-parameter meteorological telemetry during a tropical storm event. They do not represent real measurements from any specific mine.*
 
 ### Illustrative Synthetic Meteorological Dataset
@@ -150,19 +150,19 @@ This daily thermo-mechanical expansion and contraction causes **thermal fatigue*
 ```mermaid
 ---
 config:
-  xyChart:
-    width: 700
-    height: 350
-  themeVariables:
-    xyChart:
-      plotColorPalette: "#d9534f"
+ xyChart:
+ width: 700
+ height: 350
+ themeVariables:
+ xyChart:
+ plotColorPalette: "#d9534f"
 ---
 xychart-beta
-    title "Illustrative Example: Hourly Rainfall vs Temperature Dynamics (Synthetic Data)"
-    x-axis "Storm Hours (hr)" [0, 3, 6, 9]
-    y-axis "Rain (mm) & Temp (°C)" 0 --> 70
-    line [0, 4, 28, 52]
-    line [35, 31, 25, 22]
+ title "Illustrative Example: Hourly Rainfall vs Temperature Dynamics (Synthetic Data)"
+ x-axis "Storm Hours (hr)" [0, 3, 6, 9]
+ y-axis "Rain (mm) & Temp (°C)" 0 --> 70
+ line [0, 4, 28, 52]
+ line [35, 31, 25, 22]
 ```
 *Figure 6.1: Illustrative comparison of rainfall intensity surge (red) vs. ambient temperature drop (orange).*
 
@@ -186,11 +186,11 @@ xychart-beta
 
 ```
 [Meteorological Infiltration Rate q_inf (mm/hr)] 
-                   │
-                   ▼ (1D Green-Ampt Infiltration into Soil/Fractures)
+ 
+ (1D Green-Ampt Infiltration into Soil/Fractures)
 [Piezometric Pore-Water Pressure Surge u(t) (kPa)] 
-                   │
-                   ▼ (Reduces Terzaghi Effective Stress σ')
+ 
+ (Reduces Terzaghi Effective Stress σ')
 [Accelerating Highwall Optical Flow Velocity v_vision (mm/hr)]
 ```
 *Figure 8.1: Cross-layer coupling between weather infiltration, piezometric response, and surface displacement.*
@@ -203,12 +203,12 @@ A single sensor can trigger false alarms. However, combining meteorological and 
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                 MULTI-SENSOR CORRELATION MATRIX                                   |
+| MULTI-SENSOR CORRELATION MATRIX |
 +---------------------------------------------------------------------------------------------------+
-|  [ METEOROLOGICAL TRIGGER ]     +  [ IN-SITU HYDROGEOLOGY ]       +  [ KINEMATIC DISPLACEMENT ]   |
-|  - Cloudburst: I > 40 mm/hr     - Piezometer u surges by 25 kPa   - Sub-pixel optical flow surges |
-|  - API_7 > 120 mm saturation    - Crackmeter dilates by 2.4 mm    - LoRa tiltmeter leans by 0.15° |
-|  ───────────────────────────────► RESULT: 98.4% HIGH-CONFIDENCE RED TARP DISPATCH ALARM! ◄────────|
+| [ METEOROLOGICAL TRIGGER ] + [ IN-SITU HYDROGEOLOGY ] + [ KINEMATIC DISPLACEMENT ] |
+| - Cloudburst: I > 40 mm/hr - Piezometer u surges by 25 kPa - Sub-pixel optical flow surges |
+| - API_7 > 120 mm saturation - Crackmeter dilates by 2.4 mm - LoRa tiltmeter leans by 0.15° |
+| RESULT: 98.4% HIGH-CONFIDENCE RED TARP DISPATCH ALARM! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -248,7 +248,7 @@ To build our SIH25071 prototype, we evaluated verified open-source weather proce
 | **Edge Compute Core** | **ESP32-S3-WROOM-1** | Dual-core 240 MHz MCU with integrated hardware counters and LoRa transceiver. | **₹450 – ₹650** | Edge node running pulse counters, moving-average filters, and LoRa transmission. |
 | **Telemetry & Power** | **SX1262 LoRa + 10W Solar** | 868 MHz LoRa transceiver ($+22\text{ dBm}$) + 10W panel + 6Ah LiFePO4 battery. | **₹1,800 – ₹2,500** | $100\%$ autonomous solar-powered field station ($₹5,800\text{ total node cost}$). |
 
-> **Student Prototype vs. Certified Meteorological Station Disclaimer:**  
+> **Student Prototype vs. Certified Meteorological Station Disclaimer:** 
 > *While our student research prototype ($₹5,800\text{ cost}$) provides accurate research-grade precipitation and temperature metrics, commercial certified weather stations (e.g., Campbell Scientific, ₹2.5 Lakh+) feature WMO-certified aspirated radiation shields, heated anemometers, and lightning surge arrestors.*
 
 ---
@@ -257,30 +257,30 @@ To build our SIH25071 prototype, we evaluated verified open-source weather proce
 
 ```mermaid
 flowchart TD
-    subgraph Environmental & Weather Layer
-        A1[Pit-Rim Automatic Weather Station: Rain, Temp, Wind] --> A2[WeeWX Daemon: Computes I, R24 & API_7]
-        A3[Open-Meteo 48-Hour Numerical Weather Forecast] --> A4[Predictive Rainfall Threat Index]
-        A5[Vibrating-Wire Piezometers: Pore-Water Pressure] --> A6[Effective Stress Reduction Calculator]
-    end
+ subgraph Environmental & Weather Layer
+ A1[Pit-Rim Automatic Weather Station: Rain, Temp, Wind] --> A2[WeeWX Daemon: Computes I, R24 & API_7]
+ A3[Open-Meteo 48-Hour Numerical Weather Forecast] --> A4[Predictive Rainfall Threat Index]
+ A5[Vibrating-Wire Piezometers: Pore-Water Pressure] --> A6[Effective Stress Reduction Calculator]
+ end
 
-    subgraph Kinematic & Geodetic Telemetry Layer
-        B1[Edge PTZ CCTV Cameras: 4K Sub-Pixel Optical Flow]
-        B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        B3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        B4[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
-    end
+ subgraph Kinematic & Geodetic Telemetry Layer
+ B1[Edge PTZ CCTV Cameras: 4K Sub-Pixel Optical Flow]
+ B2[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ B3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ B4[Satellite InSAR Sentinel-1 Regional Subsidence Prior]
+ end
 
-    A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
+ A2 & A4 & A6 & B1 & B2 & B3 & B4 --> FUSION[Multi-Modal Feature Synchronization Engine]
 
-    FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
+ FUSION --> ML[Physics-Informed Neural Network & XGBoost Core]
 
-    ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
-    ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
-    ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ ML --> OUT_P[Rockfall Failure Probability: 0.0 to 1.0]
+ ML --> OUT_T[Saito Inverse Velocity Failure Horizon tf ± σ]
+ ML --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-    OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
-    XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
-    OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
+ OUT_P & OUT_T & OUT_R --> XAI[SHAP Causal Factor Attribution Card]
+ XAI --> DASH[3D WebGPU Mine Digital Twin Dashboard]
+ OUT_P --> TARP[Sub-Second Autonomous TARP Siren & Radio Dispatch]
 ```
 *Figure 13.1: Master multi-sensor data fusion architecture incorporating weather telemetry.*
 
@@ -290,17 +290,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    subgraph Explainable Alert Notification Card
-        A["🔴 LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.1%)"]
-        B["📍 Location: Bench 4 - East Highwall (Weather Node AWS-01 / CAM-02)"]
-        C["⏱️ Predicted Rainfall Failure Window: 18 ± 4 minutes"]
-        D["📊 Key Contributing Factors (SHAP Feature Importance):"]
-        D1["• Extreme Cloudburst Rainfall Intensity (65.0 mm/hr): +46% contribution"]
-        D2["• Hydrostatic Pore-Water Pressure Surge (34 kPa): +25% contribution"]
-        D3["• Sub-Pixel Optical Flow Velocity Surge (24.5 mm/hr): +15% contribution"]
-        D4["• 7-Day Antecedent Precipitation Saturation (API_7 = 115 mm): +9% contribution"]
-        D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
-    end
+ subgraph Explainable Alert Notification Card
+ A["[CRITICAL / RED] LEVEL 4: CRITICAL ROCKFALL ALERT (Risk Probability: 98.1%)"]
+ B[" Location: Bench 4 - East Highwall (Weather Node AWS-01 / CAM-02)"]
+ C[" Predicted Rainfall Failure Window: 18 ± 4 minutes"]
+ D[" Key Contributing Factors (SHAP Feature Importance):"]
+ D1["• Extreme Cloudburst Rainfall Intensity (65.0 mm/hr): +46% contribution"]
+ D2["• Hydrostatic Pore-Water Pressure Surge (34 kPa): +25% contribution"]
+ D3["• Sub-Pixel Optical Flow Velocity Surge (24.5 mm/hr): +15% contribution"]
+ D4["• 7-Day Antecedent Precipitation Saturation (API_7 = 115 mm): +9% contribution"]
+ D5["• Topographic Highwall Overhang Slope Factor: +5% contribution"]
+ end
 ```
 *Figure 14.1: Conceptual SHAP explainable alert diagnostic card for weather-informed alerts.*
 
@@ -310,14 +310,14 @@ graph TD
 
 ```mermaid
 flowchart TD
-    subgraph Unified WebGPU 3D Dashboard
-        D1[Interactive 3D Mine Model with Animated Real-Time Rain Infiltration Heatmap]
-        D2[Multi-Parameter Weather Panel: Rainfall Rate, 24h Accumulation & Wind Polar Plot]
-        D3[48-Hour Predictive Weather Risk Forecast (Open-Meteo Integration)]
-        D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
-        D5[Live Multi-Sensor Telemetry Streams: LoRa Tilt, Piezometers, Crackmeters]
-        D6[One-Click DGMS Monsoon Preparedness & Environmental Audit Logbook Export]
-    end
+ subgraph Unified WebGPU 3D Dashboard
+ D1[Interactive 3D Mine Model with Animated Real-Time Rain Infiltration Heatmap]
+ D2[Multi-Parameter Weather Panel: Rainfall Rate, 24h Accumulation & Wind Polar Plot]
+ D3[48-Hour Predictive Weather Risk Forecast (Open-Meteo Integration)]
+ D4[Dynamic 3D Rockfall Kinetic Bounce Trajectory & Runout Cones]
+ D5[Live Multi-Sensor Telemetry Streams: LoRa Tilt, Piezometers, Crackmeters]
+ D6[One-Click DGMS Monsoon Preparedness & Environmental Audit Logbook Export]
+ end
 ```
 *Figure 15.1: Functional architecture of the unified 3D decision-support dashboard.*
 
@@ -328,8 +328,8 @@ flowchart TD
 | Feature / Dimension | Traditional Standalone Weather Stations | Proposed SIH25071 Multi-Modal Platform |
 | :--- | :--- | :--- |
 | **Operational Role** | Isolated meteorological recording | **Continuous Multi-Modal AI Fusion (Weather + 30 FPS Vision + LoRa)** |
-| **Kinematic Awareness** | ❌ Completely blind to rock deformation | **Directly coupled to optical flow velocity & crack dilation** |
-| **Subsurface Awareness** | ❌ No subsurface pore-water coupling | **Directly coupled to vibrating-wire piezometers ($u$)** |
+| **Kinematic Awareness** | [REJECTED] Completely blind to rock deformation | **Directly coupled to optical flow velocity & crack dilation** |
+| **Subsurface Awareness** | [REJECTED] No subsurface pore-water coupling | **Directly coupled to vibrating-wire piezometers ($u$)** |
 | **Predictive Horizon** | Historical logging only | **48-Hour Predictive Forecast + Sub-Second Life-Safety TARP Dispatch** |
 | **Hardware Capital Cost** | ₹1.5 Lakh – ₹4.5 Lakh per commercial AWS | **₹5,800 per custom wireless LoRa weather node (95% cheaper)** |
 | **Regulatory Compliance** | Manual rain gauge registers | **Full Real-Time DGMS Monsoon Action Plan Compliance** |
@@ -340,16 +340,16 @@ flowchart TD
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|                                    BRIDGING THE RESEARCH GAP                                      |
+| BRIDGING THE RESEARCH GAP |
 +---------------------------------------------------------------------------------------------------+
-|  [ STANDALONE WEATHER STATION LIMITATION ]──► Measures environmental triggers (rain, temp, wind), |
-|                                               but completely blind to physical rock movement.     |
-|  [ REMOTE VISION / RADAR LIMITATION ]     ──► Measures physical displacement, but lacks causal    |
-|                                               insight into why the slope is accelerating.         |
-|  [ PROPOSED SIH25071 INNOVATION ]         ──► Fuses low-cost LoRa weather stations with           |
-|                                               full-field Edge Computer Vision & Piezometers into  |
-|                                               a unified Physics-Informed AI engine that matches   |
-|                                               environmental triggers with mechanical responses!   |
+| [ STANDALONE WEATHER STATION LIMITATION ] Measures environmental triggers (rain, temp, wind), |
+| but completely blind to physical rock movement. |
+| [ REMOTE VISION / RADAR LIMITATION ] Measures physical displacement, but lacks causal |
+| insight into why the slope is accelerating. |
+| [ PROPOSED SIH25071 INNOVATION ] Fuses low-cost LoRa weather stations with |
+| full-field Edge Computer Vision & Piezometers into |
+| a unified Physics-Informed AI engine that matches |
+| environmental triggers with mechanical responses! |
 +---------------------------------------------------------------------------------------------------+
 ```
 
@@ -370,50 +370,50 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph SENSING["1. Multi-Modal Ingestion Layer"]
-        S1[Pit-Rim Automatic Weather Station: Rain, Temp, Wind]
-        S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
-        S3[Surface Wireless LoRa Digital Crackmeters on Crests]
-        S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
-        S5[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
-        S6[Satellite InSAR Sentinel-1 Subsidence Prior]
-    end
+ subgraph SENSING["1. Multi-Modal Ingestion Layer"]
+ S1[Pit-Rim Automatic Weather Station: Rain, Temp, Wind]
+ S2[Edge Optical PTZ CCTV Cameras: 4K/30FPS Continuous]
+ S3[Surface Wireless LoRa Digital Crackmeters on Crests]
+ S4[Vibrating-Wire Borehole Piezometers: Pore Pressure]
+ S5[Low-Cost Wireless LoRa MEMS Surface Tilt Nodes]
+ S6[Satellite InSAR Sentinel-1 Subsidence Prior]
+ end
 
-    subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
-        S1 --> P1[WeeWX Daemon: Rain Intensity I, R24 Accumulation & API_7]
-        S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
-        S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
-        S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
-        S5 --> P5[Thermal Correction, Tilt Rate & Angular Acceleration]
-        S6 --> P6[Regional Macro Velocity Inversion]
+ subgraph PREPROCESSING["2. Edge Preprocessing & Feature Extraction"]
+ S1 --> P1[WeeWX Daemon: Rain Intensity I, R24 Accumulation & API_7]
+ S2 --> P2[Sub-Pixel Optical Flow & 3D Ray-Casting]
+ S3 --> P3[Crack Dilation Rate & Saito Inverse Velocity]
+ S4 --> P4[Hydrostatic Water Pressure & Pore Pressure Ratio ru]
+ S5 --> P5[Thermal Correction, Tilt Rate & Angular Acceleration]
+ S6 --> P6[Regional Macro Velocity Inversion]
 
-        P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
-        FE --> F_ENV[Rainfall Intensity, 24h Rain, API_7, Temp & Wind]
-        FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
-        FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
-    end
+ P1 & P2 & P3 & P4 & P5 & P6 --> FE[Unified Multi-Modal Feature Pipeline]
+ FE --> F_ENV[Rainfall Intensity, 24h Rain, API_7, Temp & Wind]
+ FE --> F_KIN[Real-Time Optical Flow Velocity & Surface Bulging]
+ FE --> F_GEO[Pore Pressure, Crack Dilation Rate & Hydrostatic Thrust]
+ end
 
-    subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
-        F_ENV & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
-        ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
-        ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
-        ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
+ subgraph AI_CORE["3. Multi-Modal AI & Geomechanical Core"]
+ F_ENV & F_KIN & F_GEO --> ML_ENG[XGBoost & Physics-Informed Neural Network PINN Core]
+ ML_ENG --> OUT_P[Rockfall Failure Probability: P_fail in 0.0 - 1.0]
+ ML_ENG --> OUT_T[Predicted Time-to-Failure Window: tf ± σ]
+ ML_ENG --> OUT_R[3D Kinetic Rockfall Bounce & Runout Hazard Cone]
 
-        OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
-        XAI_ENG --> OUT_E[Causal Factor Attribution Card]
-    end
+ OUT_P & OUT_T --> XAI_ENG[SHAP Explainability Layer]
+ XAI_ENG --> OUT_E[Causal Factor Attribution Card]
+ end
 
-    subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
-        OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
-        OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
+ subgraph ACTION["4. Visualization & Autonomous Life-Safety Action"]
+ OUT_P & OUT_T & OUT_R & OUT_E --> DASH[WebGPU 3D Digital Twin Dashboard]
+ OUT_P --> TARP_DEC{Dynamic TARP Level Classifier}
 
-        TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
-        TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
-        TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
-        TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
+ TARP_DEC -->|Level 1: Green| ACT_1[Continuous Baseline Logging]
+ TARP_DEC -->|Level 2: Yellow| ACT_2[Advisory to Geotechnical Officer]
+ TARP_DEC -->|Level 3: Orange| ACT_3[Warning: Machinery Relocation]
+ TARP_DEC -->|Level 4: Red| ACT_4[CRITICAL DISPATCH: Sirens + VHF Radio + SMS <1s]
 
-        ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
-    end
+ ACT_1 & ACT_2 & ACT_3 & ACT_4 --> DASH
+ end
 ```
 *Figure 19.1: Complete end-to-end system architecture incorporating weather and environmental telemetry into the real-time AI rockfall prediction pipeline.*
 
