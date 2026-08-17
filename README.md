@@ -2,8 +2,7 @@
 
 > **Smart India Hackathon (SIH 2025) — Research & Software Engineering Proposal**  
 > **Problem Statement ID:** SIH25071  
-> **Ministry / Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management  
-> **Principal Investigator / Author:** Angel Verman & Team  
+> **Ministry / Organization:** Ministry of Mines | **Category:** Software | **Theme:** Disaster Management    
 > **Target Repository:** `https://github.com/angelverman2021-a11y/Report.git`
 
 ---
@@ -193,11 +192,3 @@ Every technology has its own dedicated research report in [`docs/technologies/`]
 
 ---
 
-## 9. Instructions to Push Updates to GitHub
-
-To push the complete, restructured repository to GitHub:
-
-```bash
-cd /Users/angle/.gemini/antigravity/scratch/SIH25071-Rockfall-Prediction-System
-git push --force https://PASTE_YOUR_TOKEN_HERE@github.com/angelverman2021-a11y/Report.git main
-```
